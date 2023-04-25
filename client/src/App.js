@@ -1,3 +1,4 @@
+import React from "react";
 import './App.css';
 import {Routes,Route} from "react-router-dom"
 import {Home} from "./Views/Home"
@@ -17,9 +18,9 @@ function App() {
         {/* -----------------Routes Users -----------------*/}
       <Route path ="/detail/:id" element={""} name="DetailProducts" key="DetailProducts"></Route>
       <Route path ="/profile" element={""} name="ProfileUser" key="ProfileUser"></Route>
-      <Route path ="/ordersUs" element={""} name="OrdersUser" key="OrdersUser"></Route>        
       <Route path ="/widget" element={""} name="Widget" key="Widget"></Route>
       {/* -----------------Routes Admins -----------------*/}
+      <Route path ="/ordersUs" element={""} name="OrdersUser" key="OrdersUser"></Route>        
       <Route path ="/products" element={""} name="products" key="products"></Route>
       <Route path ="/OrdersAdm" element={""} name="OrdersAdm" key="OrdersAdm"></Route>
       <Route path ="/Users" element={""} name="Users" key="Users"></Route>
