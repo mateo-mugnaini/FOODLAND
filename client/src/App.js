@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
+import {Routes,Route} from "react-router-dom"
+import {Home} from "./Views/Home"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <Routes>
+        {/* -----------------Routes generals -----------------*/}
+      <Route exact path="/" element={<Home/>} name="Home" key="Home"></Route>
+      <Route path ="/login" element={""} name="Login" key="Login"></Route>
+      <Route path ="/register" element={""} name="Register" key="Register"></Route>
+        {/* -----------------Routes Users -----------------*/}
+      <Route path ="/detail/:id" element={""} name="DetailProducts" key="DetailProducts"></Route>
+      <Route path ="/profile" element={""} name="ProfileUser" key="ProfileUser"></Route>
+      <Route path ="/widget" element={""} name="Widget" key="Widget"></Route>
+      {/* -----------------Routes Admins -----------------*/}
+      <Route path ="/ordersUs" element={""} name="OrdersUser" key="OrdersUser"></Route>        
+      <Route path ="/products" element={""} name="products" key="products"></Route>
+      <Route path ="/OrdersAdm" element={""} name="OrdersAdm" key="OrdersAdm"></Route>
+      <Route path ="/create" element={""} name="create" key="create"></Route>
+      <Route path ="/edit" element={""} name="edit" key="edit"></Route>
+      <Route path ="/detailOrder/:i" element={""} name="detailOrder" key="detailOrder"></Route>
+      </Routes>
     </div>
   );
 }
