@@ -1,5 +1,33 @@
-const server = require("./src/app");
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-server.listen("3001", () => {
-    console.log("server listening on port 3001");
-})
+
+import path from 'path';
+
+dotenv.config();
+
+mongoose
+	.connect(process.env.MONGODB_URI)
+	.then(() => {
+		console.log("Connected to db");
+	})
+	.catch((err) => {
+		console.log(err.message);
+	});
+
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.use((err, req, res, next) => {
+	res.status(500).send({ message: err.message });
+});
+
+//Catches errors due to express-async-handler
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+	console.log(`Server running at http://localhost:${port}`);
+});
