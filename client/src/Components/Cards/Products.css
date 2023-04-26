@@ -1,0 +1,24 @@
+.contenedorProducts{
+    display: flex;
+    flex-direction: column;
+}
+
+.productos{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px
+}
+
+.imgProducto{
+    width: 100px;
+}
+
+.producto{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 4px black solid;
+}
