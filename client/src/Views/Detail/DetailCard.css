@@ -1,0 +1,63 @@
+.DetailCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+
+}
+
+.detail-img {
+  
+width: 50%;
+
+}
+.detail-img img {
+width: 80%;
+
+
+}
+.detail-info {
+  
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.detail-info h1 {
+padding-top: 5px;
+margin-top: 0;
+
+}
+.detail-info h2{
+  color: red;
+  font-size: 30px;
+  margin-top: 7%;
+}
+.detail-info h4 {
+ 
+    margin-bottom: 0;
+}
+ 
+
+.addButton{
+    height: 35px;
+    width: 20%;
+    background-color:#54B216;
+    margin: 4% 0 7% 0;
+    border: transparent;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 7px;
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.623);
+    color: white;
+}
+
+.returnButton{
+    height: 35px;
+    width: 30%;
+    border: transparent;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 7px;
+}
