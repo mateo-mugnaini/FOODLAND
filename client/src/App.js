@@ -1,10 +1,10 @@
 import React from "react";
 import './App.css';
 import {Routes,Route} from "react-router-dom"
-import Home from "./Views/Home"
+import Home from "./Views/Home/Home"
 import NavBar from "./Components/NavBar/NavBar"
 import Footer from "./Components/Footer/Footer"
-
+import DetailCard from "./Views/Detail/DetailCard";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <Route path ="/register" element={""} name="Register" key="Register"></Route>
       <Route path ="/about" element={""} name="About" key="About"></Route>
         {/* -----------------Routes Users -----------------*/}
-      <Route path ="/detail/:id" element={""} name="DetailProducts" key="DetailProducts"></Route>
+      <Route path ="/detail/:id" element={<DetailCard/>} name="DetailCard" key="DetailCard"></Route>
       <Route path ="/profile" element={""} name="ProfileUser" key="ProfileUser"></Route>
       <Route path ="/widget" element={""} name="Widget" key="Widget"></Route>
       {/* -----------------Routes Admins -----------------*/}

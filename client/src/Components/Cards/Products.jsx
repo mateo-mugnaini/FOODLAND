@@ -1,9 +1,12 @@
+import React from "react"
+import { NavLink } from "react-router-dom"
 
 const Products = () =>{
 
     return(
-        <div>
-            <h1> I'm the list product's</h1>
+        <div className="ProductContainer">
+            <h1>Soy un map de tarjetas con link a <NavLink to="/detail/:id">detail</NavLink> </h1>
+
         </div>
     )
 }
