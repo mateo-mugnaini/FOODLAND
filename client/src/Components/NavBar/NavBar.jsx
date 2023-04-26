@@ -1,12 +1,17 @@
 import SearchBar from "./SearchBar"
-import "./NavBar.css"
 
+//IMPORT IMAGES
+import logo from "../../Imgs/LogosSVG/logo-color.png"
+
+//IMPORT ESTILOS
+import "./NavBar.css"
 const NavBar = () => {
 
+    const logoSvg = logo
 return (
     <div name="ContainerNav" key="ContainerNav" class="ContainerNav">
 
-    <a href="/" className="LinkLogo"><img src="https://tinypic.host/images/2023/04/26/Logo-removebg-preview.png" alt="LogoFoodLand" className="LogoFoodLand"/></a>
+    <a href="/" className="LinkLogo"><img src={logoSvg} alt="LogoFoodLand" className="LogoFoodLand"/></a>
 
         <SearchBar/>
 

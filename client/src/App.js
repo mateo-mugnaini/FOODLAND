@@ -14,6 +14,7 @@ function App() {
       <Routes>
         {/* -----------------Routes generals -----------------*/}
         <Route exact path="/" element={<Home />} name="Home" key="Home"></Route>
+        <Route exact path="/" element={<Home />} name="Home" key="Home"></Route>
         <Route path="/login" element={""} name="Login" key="Login"></Route>
         <Route
           path="/register"
