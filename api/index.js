@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
+import seedRouter from "./src/routes/seedRoutes.js";
 
 import path from 'path';
 
@@ -21,6 +21,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/seed", seedRouter);
 
 app.use((err, req, res, next) => {
 	res.status(500).send({ message: err.message });
