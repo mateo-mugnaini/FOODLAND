@@ -1,12 +1,12 @@
-import Products from "../../Components/Cards/Products"
-
+import Products from "../../Components/Cards/ProductCard"
+import CardContainer from "../../Components/Cards/CategoryContainer"
 const Home = () => {
 
     
     return(
         <div class="ContainerHome">
             <div className="productos">
-            <Products/>
+            <CardContainer/>
             </div>
         </div>
     )

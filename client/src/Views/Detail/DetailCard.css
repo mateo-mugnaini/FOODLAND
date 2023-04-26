@@ -12,7 +12,7 @@ width: 50%;
 
 }
 .detail-img img {
-width: 80%;
+width: 70%;
 
 
 }
@@ -61,3 +61,11 @@ margin-top: 0;
     font-weight: 500;
     border-radius: 7px;
 }
+
+.contador {
+    display: flex;
+    justify-content: space-between;
+    
+ width: 15%;
+ }
+ 

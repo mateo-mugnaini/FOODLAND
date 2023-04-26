@@ -5,7 +5,8 @@ import Home from "./Views/Home/Home";
 import NavBar from "./Components/NavBar/NavBar";
 import Footer from "./Components/Footer/Footer";
 import DetailCard from "./Views/Detail/DetailCard";
-
+import ProductsContainer from "./Components/Cards/ProductsContainer"
+import CategoryContainer from "./Components/Cards/CategoryContainer"
 function App() {
   return (
     <div className="App">
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         {/* -----------------Routes generals -----------------*/}
         <Route exact path="/" element={<Home />} name="Home" key="Home"></Route>
-        <Route exact path="/" element={<Home />} name="Home" key="Home"></Route>
+    
         <Route path="/login" element={""} name="Login" key="Login"></Route>
         <Route
           path="/register"
@@ -24,6 +25,12 @@ function App() {
         ></Route>
         <Route path="/about" element={""} name="About" key="About"></Route>
         {/* -----------------Routes Users -----------------*/}
+        <Route
+          path="/category/:categoryId"
+          element={<ProductsContainer/>}
+          name="CategoryProducts"
+          key="CategoryProducts"
+        ></Route>
         <Route
           path="/detail/:id"
           element={<DetailCard />}
