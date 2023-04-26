@@ -1,14 +1,32 @@
+/* ========================* IMPORT ACTIONS *======================== */
+import { GET_ALL_PRODUCTS, LOADING, READY } from "./action-types";
 
+/* ========================* INITIAL STATE *======================== */
 const initialState = {
- products:[]
+  products: [],
+  display: false,
 };
 
-const rootReducer = (state = initialState ,action) => {
-switch(action.type) {
-   
+const rootReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case LOADING:
+      return {
+        ...state,
+        display: true,
+      };
+    case READY:
+      return {
+        ...state,
+        display: false,
+      };
+    case GET_ALL_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload,
+      };
     default:
-        return {...state}
-}
-}
+      return { ...state };
+  }
+};
 
 export default rootReducer;
