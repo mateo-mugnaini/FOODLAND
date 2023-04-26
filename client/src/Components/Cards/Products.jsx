@@ -1,5 +1,5 @@
 
-const products = () =>{
+const Products = () =>{
 
     return(
         <div>
@@ -8,4 +8,4 @@ const products = () =>{
     )
 }
 
-export default products
+export default Products

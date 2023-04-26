@@ -1,9 +1,10 @@
 import React from "react";
 import './App.css';
 import {Routes,Route} from "react-router-dom"
-import {Home} from "./Views/Home"
-import {NavBar} from "./Components/NavBar"
-import {Footer} from "./Components/Footer"
+import Home from "./Views/Home"
+import NavBar from "./Components/NavBar/NavBar"
+import Footer from "./Components/Footer/Footer"
+
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route exact path="/" element={<Home/>} name="Home" key="Home"></Route>
       <Route path ="/login" element={""} name="Login" key="Login"></Route>
       <Route path ="/register" element={""} name="Register" key="Register"></Route>
+      <Route path ="/about" element={""} name="About" key="About"></Route>
         {/* -----------------Routes Users -----------------*/}
       <Route path ="/detail/:id" element={""} name="DetailProducts" key="DetailProducts"></Route>
       <Route path ="/profile" element={""} name="ProfileUser" key="ProfileUser"></Route>
