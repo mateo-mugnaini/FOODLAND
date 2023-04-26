@@ -1,8 +1,15 @@
 import React from "react"
+import { useSelector} from "react-redux";
+
+
+//IMPORT STYLES
 import "../Cards/Products.css"
-import {products} from "../products"
+// import {products} from "../products"
+
 import { NavLink } from "react-router-dom"
 const Products = () =>{
+
+const { products } = useSelector((state) => state)
 
 console.log(products.map(e => e.name));
     return(
