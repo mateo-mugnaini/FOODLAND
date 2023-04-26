@@ -24,17 +24,18 @@ productRouter.get(
 productRouter.post(
   "/",
   expressAsyncHandler(async (req, res) => {
+    const {name,slug,image,price,category,brand,stock,rating,numReviews,description} = req.body
     const newProduct = new Product({
-      name: "sample name " + Date.now(),
-      slug: "sample-name-" + Date.now(),
-      image: "/images/p1.jpg",
-      price: 0,
-      category: "sample category",
-      brand: "sample brand",
-      stock: 0,
-      rating: 0,
-      numReviews: 0,
-      description: "sample description",
+      name,
+      slug,
+      image: image??"https://thumbs.dreamstime.com/z/concepto-creativo-de-la-comida-abstracta-con-la-col-y-el-pe-40423196.jpg",
+      price,
+      category,
+      brand,
+      stock,
+      rating,
+      numReviews,
+      description,
     });
     const product = await newProduct.save();
     res.send({ message: "Product Created", product });
@@ -62,18 +63,20 @@ productRouter.put(
   "/:id",
   expressAsyncHandler(async (req, res) => {
     const { id } = req.params;
-    const { name, slug, price, image, images, category, brand, stock, description } = req.body;
+    const { name, slug, price, image, images, category, brand, stock, description,rating, numReviews } = req.body;
     const product = await Product.findById(id);
     if (product) {
-      product.name = name;
-      product.slug = slug;
-      product.price = price;
-      product.image = image;
-      product.images = images;
-      product.category = category;
-      product.brand = brand;
-      product.stock = stock;
-      product.description = description;
+      product.name = name??product.name;
+      product.slug = slug??product.slug;
+      product.price = price??product.price;
+      product.image = image??product.image;
+      product.images = images??product.images;
+      product.category = category??product.category;
+      product.brand = brand??product.brand;
+      product.stock = stock??product.stock;
+      product.description = description??product.description;
+      product.rating = rating??product.rating;
+      product.numReviews = numReviews??product.numReviews;
       await product.save();
       res.send({ message: "Product Updated" });
     } else {
