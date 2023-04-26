@@ -1,5 +1,5 @@
 
-const searchBar = () =>{
+const SearchBar = () =>{
 
     return (
         <div>
@@ -7,3 +7,5 @@ const searchBar = () =>{
         </div>
     )
 }
+
+export default SearchBar

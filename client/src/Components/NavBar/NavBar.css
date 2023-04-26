@@ -1,0 +1,27 @@
+.ContainerNav{
+    background-color: black;
+    width: 100%;
+}
+
+.LogoFoodLand{
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 150px;
+}
+
+.iconsNav{
+    width: 30px;
+    height: 30px;
+}
+
+.ButtonNav{
+    width: 80px;
+    height: 80px;
+    border-radius: 120px;
+    background-color: black;
+}
+
+.ButtonsNav{
+
+}
