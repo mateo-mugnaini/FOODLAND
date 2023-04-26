@@ -1,6 +1,6 @@
 export const products = [
   {
-    name: "Kiwi por Kg",
+    name: "Kiwi x Kg",
     slug: "Kiwi",
     price: 799,
     description: "Kiwi",
