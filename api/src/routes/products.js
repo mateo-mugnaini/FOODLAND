@@ -85,6 +85,18 @@ productRouter.put(
   })
 );
 
+productRouter.get(
+  "/slug/:id",
+  expressAsyncHandler(async (req, res, next) => {
+    const {id} = req.params;
+    const product = await Product.findById(id);
+    if (!product) {
+      return next({status:404,message:"No se encontro el item"})
+    }
+    res.send(product);
+  })
+);
+
 
 
 export default productRouter;
