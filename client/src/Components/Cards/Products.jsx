@@ -1,6 +1,7 @@
 import React from "react"
 import "../Cards/Products.css"
 import {products} from "../products"
+import { NavLink } from "react-router-dom"
 const Products = () =>{
 
 console.log(products.map(e => e.name));
@@ -18,6 +19,10 @@ console.log(products.map(e => e.name));
             <p>Descripcion: {e.description}</p>
           </div>
         ))}
+        
+        <div>
+            <h1> soy un map de productos que va al <NavLink to="/detail/:id">Detalle</NavLink></h1>
+        </div>
             </div>
         </div>
 
