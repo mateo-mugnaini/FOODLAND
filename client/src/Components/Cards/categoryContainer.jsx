@@ -6,7 +6,6 @@ import "./cards.css"
 
 const CategoryContainer = () => {
 
-console.log (categorys)
   return (
     <div className='CardContainer'>
       {categorys.map((e) => (
