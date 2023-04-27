@@ -31,12 +31,15 @@ function FormCreateProduct() {
 
   return (
     <div className="createProductContainer">
+      <div className="titleFormCreateProduct">
       <h1>Create your product</h1>
+      </div>
+      <div className="containerAux">
       <div className="formCreateProduct">
         <form onSubmit={handleSubmit}>
           <div className="labelContainer">
             <label className="label">
-              Name:
+              Name
               <input
                 className="input"
                 type="text"
@@ -48,7 +51,7 @@ function FormCreateProduct() {
           </div>
           <div className="labelContainer">
             <label className="label">
-              Slug:
+              Slug
               <input
               className="input"
                 type="text"
@@ -60,7 +63,7 @@ function FormCreateProduct() {
           </div>
           <div className="labelContainer">
             <label className="label">
-              Price:
+              Price
               <input
               className="input"
                 type="number"
@@ -72,7 +75,7 @@ function FormCreateProduct() {
           </div>
           <div className="labelContainer">
             <label className="label">
-              Category:
+              Category
               <input
               className="input"
                 type="text"
@@ -84,7 +87,7 @@ function FormCreateProduct() {
           </div>
           <div className="labelContainer">
             <label className="label">
-              Brand:
+              Brand
               <input
               className="input"
                 type="text"
@@ -96,7 +99,7 @@ function FormCreateProduct() {
           </div>
           <div className="labelContainer">
             <label className="label">
-              Stock:
+              Stock
               <input
               className="input"
                 type="number"
@@ -108,7 +111,7 @@ function FormCreateProduct() {
           </div>
           <div className="labelContainer">
             <label className="label">
-              Description:
+              Description
               <textarea
               className="input"
                 value={product.description}
@@ -118,9 +121,15 @@ function FormCreateProduct() {
             </label>
           </div>
           <div className="btnContainer">
-            <button type="submit">Create Product</button>
+            <button className="btn" type="submit">Create Product</button>
           </div>
         </form>
+      </div>
+      <div className="containerPreview">
+        <div>
+          <h1>{product.name}</h1>
+        </div>
+      </div>
       </div>
     </div>
   );
