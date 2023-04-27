@@ -42,7 +42,7 @@ const Products = () => {
     page.push(i);
   }
 
-
+  /* DISPATCH PARA TRAER LOS PRODUCTOS */
   const dispatch = useDispatch();
 
   useEffect(() => {
