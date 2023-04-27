@@ -20,6 +20,7 @@ const Products = () => {
 
   const allProduct = products.products // Constante para traer mas facil los productos
 
+  /* PAGINADO */
   const [numeroPagina, setNumeroPagina] = useState(1);
 
   const grupo = 3;
