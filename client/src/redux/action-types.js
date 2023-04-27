@@ -6,8 +6,7 @@ const READY = "READY";
 
 const CREATE_PRODUCT = "CREATE_PRODUCT"; // Action para crear un producto
 const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"; // Action para traer todos los productos
-const GET_PRODUCT = "GET_PRODUCT" // Action para realizar busqueda de un producto
-
+const RESULTSEARCH = "RESULTSEARCH" // Action que actualiza el estado global
 
 /* ========================* ACTIONS SUSCRIBE-FOOTER*======================== */
 // const POST_SUSCRIBE = "POST_SUSCRIBE"; //Action para suscribirse a FoodLand [REVISAR 2do STRING]
@@ -17,6 +16,5 @@ module.exports = {
   READY,
   CREATE_PRODUCT,
   GET_ALL_PRODUCTS,
-  GET_PRODUCT,
-  // POST_SUSCRIBE
+  RESULTSEARCH
 };

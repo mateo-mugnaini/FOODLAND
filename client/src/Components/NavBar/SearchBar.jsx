@@ -1,29 +1,42 @@
 //IMPORT STYLE:
 import "./SearchBar.css"
 //IMPORT LIBRERYS:
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 //IMPORT ACTION:
-import { getProduct } from "../../redux/actions";
+import { getAllProducts , resultSearch} from "../../redux/actions";
 
-const SearchBar = () =>{
+const SearchBar = () => { 
 
-const [text,setText] = useState("");
-const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
+    const [search, setSearch] = useState({
+        name:"", });
 
-const inputHandler = (e) => {
-    e.preventDefault();
-    setText(e.target.value);
-};
+    const products = useSelector((state) => state.products);
+    const aux = products.products;
 
-const onClickHandler = () => {
-    dispatch(getProduct(text));
-}
+    // Traigo los productos 
+    useEffect(() => { dispatch(getAllProducts()); 
+    }, [dispatch]);
+    
+    
+    const filteredProducts = aux?.filter((product) => product.name.includes(search.name) );
+    
+    console.log(filteredProducts, "after");
+
+    const inputHandler = (e) => { 
+        e.preventDefault(e);
+        setSearch({ name: e.target.value }); 
+    };
+    
+    const onClickHandler = () => { 
+        dispatch(resultSearch(filteredProducts)) 
+    };
 
     return (
         <div name="ContainerSearch" class="ContainerSearch">
-            <input type='search' value={text} onChange={inputHandler} class="Search" placeholder="Search products ..."></input>
-            <button onClick={() => onClickHandler(text)} class="butonSearch"><img src="https://tinypic.host/images/2023/04/27/lupa2.png" alt="iconLupa" class="Lup"/>
+            <input type='text' value={search.name} onChange={inputHandler} class="Search" placeholder="Search products ..."></input>
+            <button onClick={() => onClickHandler(search.name)} class="butonSearch"><img src="https://tinypic.host/images/2023/04/27/lupa2.png" alt="iconLupa" class="Lup"/>
             </button> 
         </div>
     )

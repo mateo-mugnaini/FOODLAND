@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-
-//IMPORT COMPONENTS
 import Loader from "../Loader/Loader";
-
-//IMPORT STYLES
-import "../Cards/Products.css";
-// import {products} from "../products"
-
+import "../Cards/cards.css";
 import { NavLink } from "react-router-dom";
+import ProductCard from "./productCard";
 
 //IMPORT ACTIONS
 import { getAllProducts } from "../../redux/actions";
+
 const Products = () => {
 
   /* IMPORT STATES */
@@ -51,29 +46,26 @@ const Products = () => {
 
   // console.log(product);
   return (
-    <div className="contenedorProducts">
-      <div>
-        <h1> Nuestros productos </h1>
-      </div>
+    <div >
+      <div className="CardContainer"> 
       {display ? (
         <Loader />
-      ) : (
-        <NavLink to= "">
-        <div className="products">
-          {Array.isArray(aux) ? (
+      ) : (        
+          Array.isArray(aux) ? (
             aux?.map((e) => (
-              <div className="product" key={e.id}>
-                <h3 className="productName">{e.name}</h3>
-                <img className="imgProduct" src={e.image} alt={e.name} />
-                <p>${e.price}</p>
-              </div>
+              <ProductCard
+              name={e.name}
+              price={e.price}
+              image={e.image}
+              />
             ))
           ) : (
             <p>Sin productos</p>
-          )}
-        </div>
-        </NavLink>
-      )}
+          )
+        
+       
+      )} 
+      </div>
     <div className="containerPaginated">
     <div>
         <button

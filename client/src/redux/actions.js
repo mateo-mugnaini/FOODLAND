@@ -2,8 +2,8 @@
 import axios from "axios";
 import * as action from "./action-types"; // Import para traer todas las actions-types
 
-const URL = "http://localhost:5000";
-// const URL = "https://foodland-back.onrender.com";
+// const URL = "http://localhost:5000";
+const URL = "https://foodland-back.onrender.com";
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -43,7 +43,6 @@ export const getAllProducts = () => {
 };
 
 /* ========================*  PRODUCT *======================== */
-
 export const getProduct = (name) => {
   return async (dispatch) => {
     try {
@@ -51,10 +50,9 @@ export const getProduct = (name) => {
       const responseBack = await axios.get(`${URL}/api/products?name=${name}`); //Corroborar Ruta cuando Back funcione!!!!
       console.log(responseBack);
       dispatch({
-        type: action.GET_PRODUCT,
-        payload: responseBack.data,
+        type: action.RESULTSEARCH,
+        payload: result,
       });
-      dispatch(ready());
     } catch (error) {
       // console.log(error);
       alert("Product no found , try again");
