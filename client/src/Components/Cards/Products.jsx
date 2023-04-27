@@ -21,7 +21,7 @@ const Products = () => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  console.log(product?.map((e) => e.name));
+  // console.log(product?.map((e) => e.name));
   return (
     <div className="contenedorProducts">
       <div>
@@ -32,14 +32,17 @@ const Products = () => {
       ) : (
         <NavLink to= "">
         <div className="products">
-          {
+          {Array.isArray(product) ? (
             product?.map((e) => (
               <div className="product" key={e.id}>
                 <h3 className="productName">{e.name}</h3>
                 <img className="imgProduct" src={e.image} alt={e.name} />
                 <p>${e.price}</p>
               </div>
-            ))}
+            ))
+          ) : (
+            <p>Sin productos</p>
+          )}
         </div>
         </NavLink>
       )}
