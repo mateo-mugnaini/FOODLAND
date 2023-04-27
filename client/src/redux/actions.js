@@ -40,45 +40,20 @@ export const getAllProducts = () => {
     }
   };
 };
+/* ===========================* Search *=========================== */
 
-
-/* ========================*  PRODUCT *======================== */
-
-export const getProduct = (name) => {
+export const resultSearch = (result) => {
   return async (dispatch) => {
     try {
-      dispatch(loading());
-      const responseBack = await axios.get(`${URL}/api/products?name=${name}`); //Corroborar Ruta cuando Back funcione!!!!
-      console.log(responseBack);
+  dispatch(loading());
       dispatch({
-        type: action.GET_PRODUCT,
-        payload: responseBack.data,
+        type: action.RESULTSEARCH,
+        payload: result,
       });
-      dispatch(ready());
+  dispatch(ready());
+    
     } catch (error) {
-      // console.log(error);
-      alert("Product no found , try again")
-      dispatch({
-        type: action.GET_PRODUCT,
-        payload: error,
-      });
-      dispatch(ready());
-    }
-  };
+    console.log (error);
+  }
+}
 };
-
-
-/* ========================*  SUSCRIBE - FOOTER*======================== */
- /// --------------------------------REVISAR!!-------------------------- 2do string!!!
-// export function postSuscribe(email) {
-//   return async function(){
-//       try {
-//           const newEmail = await axios.post(URL+"/???????",email);   /// Corroborrar ruta!!!!
-//           console.log(newEmail);
-//       } catch (error) {
-//           console.log(error)
-//           alert("Please try again")
-//       }
-//       }
-
-// };
