@@ -5,6 +5,7 @@ import Home from "./Views/Home/Home";
 import NavBar from "./Components/NavBar/NavBar";
 import Footer from "./Components/Footer/Footer";
 import DetailCard from "./Views/Detail/DetailCard";
+import FormCreateProduct from "./Components/FormCreateProduct/FormCreateProduct";
 
 function App() {
   const location = useLocation();
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         {/* -----------------Routes generals -----------------*/}
         <Route exact path="/" element={<Home />} name="Home" key="Home"></Route>
-        <Route exact path="/" element={<Home />} name="Home" key="Home"></Route>
+        {/* <Route exact path="/" element={<Home />} name="Home" key="Home"></Route> */}
         <Route path="/login" element={""} name="Login" key="Login"></Route>
         <Route
           path="/register"
@@ -58,7 +59,12 @@ function App() {
           key="OrdersAdm"
         ></Route>
         <Route path="/Users" element={""} name="Users" key="Users"></Route>
-        <Route path="/create" element={""} name="create" key="create"></Route>
+        <Route
+          path="/create"
+          element={<FormCreateProduct />}
+          name="create"
+          key="create"
+        ></Route>
         <Route path="/edit" element={""} name="edit" key="edit"></Route>
         <Route
           path="/detailOrder/:i"

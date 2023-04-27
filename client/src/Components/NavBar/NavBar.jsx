@@ -14,6 +14,7 @@ return (
         <a href="/" className="LinkLogo"><img src={logoSvg} alt="LogoFoodLand" className="LogoFoodLand"/></a>
 
         <SearchBar/>
+        <a href="/create" className="linkNavbar">Create Product</a>
 
             {/* -----------Cart & Login Icons on Nav--------------*/}
         <div id="header" class="headerNavList">
