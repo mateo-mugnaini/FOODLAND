@@ -1,9 +1,12 @@
+import "./SearchBar.css"
 
 const SearchBar = () =>{
 
     return (
-        <div>
-            <h1>Hola soy el search</h1>
+        <div name="ContainerSearch" class="ContainerSearch">
+        <input class="Search" placeholder="Search products !!"></input>
+        <button class="butoonSearch">Search</button>
+        
         </div>
     )
 }
