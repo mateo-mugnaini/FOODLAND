@@ -3,31 +3,31 @@ import logofoot from "../../Imgs/LogosSVG/logo-color.png"
 //IMPORT STYLES:
 import "./Footer.css"
 //IMPORT REACT:
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-//IMPORT ACTION:
-import {postSuscribe} from "../../redux/actions"
+// import { useState } from "react"
+// import { useDispatch } from "react-redux"
+// //IMPORT ACTION:
+// import {postSuscribe} from "../../redux/actions"
 
 const Footer = () =>{
 
     const logoPng = logofoot
-    
-    const [suscribe, setSuscribe] = useState({
-        email:"",
-    });
-    const dispatch = useDispatch();
+    //----------------------Armé esto para el form , pero no se si esta bien ------
+    // const [suscribe, setSuscribe] = useState({
+    //     email:"",
+    // });
+    // const dispatch = useDispatch();
 
-    const handleSubmit =() =>{
-        let form = true;
-        if(suscribe["email"] === null){ form = false; alert("Please complete the field")}
+    // const handleSubmit =() =>{
+    //     let form = true;
+    //     if(suscribe["email"] === null){ form = false; alert("Please complete the field")}
 
-        if(form){
-            dispatch(postSuscribe(suscribe))
-            .then(() => alert("Email added"));
-            } else {
-            return alert("Please try again");
-            }
-        }
+    //     if(form){
+    //         dispatch(postSuscribe(suscribe))
+    //         .then(() => alert("Email added"));
+    //         } else {
+    //         return alert("Please try again");
+    //         }
+    //     }
         
     return(
         <div name="ContainterFooter" class="ContainterFooter">
@@ -60,10 +60,12 @@ const Footer = () =>{
             {/* -----------Form to Suscribe --------------*/}
                 <div name="RegisterEmail">
 
-                    <form onSubmit={handleSubmit}>
+                {/* <form onSubmit={handleSubmit}> */}
+                    <form > 
                         <h2>Suscribe to Foodland ♥</h2>
                         <p>subscribe and know our offers</p>
-                        <input type="email" placeholder="Email" class="SuscribeEmail" value={suscribe.email}></input>
+                        {/* <input type="email" placeholder="Email" class="SuscribeEmail" value={suscribe.email}></input> */}
+                        <input type="email" placeholder="Email" class="SuscribeEmail"></input>
                         <button type="submit" class="SuscribeButton">Enter</button>
                     </form>
 

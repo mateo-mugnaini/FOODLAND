@@ -69,16 +69,16 @@ export const getProduct = (name) => {
 
 
 /* ========================*  SUSCRIBE - FOOTER*======================== */
+ /// --------------------------------REVISAR!!-------------------------- 2do string!!!
+// export function postSuscribe(email) {
+//   return async function(){
+//       try {
+//           const newEmail = await axios.post(URL+"/???????",email);   /// Corroborrar ruta!!!!
+//           console.log(newEmail);
+//       } catch (error) {
+//           console.log(error)
+//           alert("Please try again")
+//       }
+//       }
 
-export function postSuscribe(email) {
-  return async function(){
-      try {
-          const newEmail = await axios.post(URL+"/???????",email);   /// Corroborrar ruta!!!!
-          console.log(newEmail);
-      } catch (error) {
-          console.log(error)
-          alert("Please try again")
-      }
-      }
-
-};
+// };
