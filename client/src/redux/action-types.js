@@ -10,7 +10,7 @@ const GET_PRODUCT = "GET_PRODUCT" // Action para realizar busqueda de un product
 
 
 /* ========================* ACTIONS SUSCRIBE-FOOTER*======================== */
-const POST_SUSCRIBE = "POST_SUSCRIBE"; //Action para suscribirse a FoodLand [NO ENTRA AL REDUCER!]
+// const POST_SUSCRIBE = "POST_SUSCRIBE"; //Action para suscribirse a FoodLand [REVISAR 2do STRING]
 
 module.exports = {
   LOADING,
