@@ -8,7 +8,7 @@ import ProductCard from "./productCard";
 //IMPORT ACTIONS
 import { getAllProducts } from "../../redux/actions";
 
-const Products = () => {
+const ProductsContainer = () => {
 
   /* IMPORT STATES */
   const { products, display } = useSelector((state) => state);
@@ -97,4 +97,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductsContainer;
