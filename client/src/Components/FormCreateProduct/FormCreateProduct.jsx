@@ -32,104 +32,101 @@ function FormCreateProduct() {
   return (
     <div className="createProductContainer">
       <div className="titleFormCreateProduct">
-      <h1>Create your product</h1>
+        <h1>Create your product</h1>
       </div>
       <div className="containerAux">
-      <div className="formCreateProduct">
-        <form onSubmit={handleSubmit}>
-          <div className="labelContainer">
-            <label className="label">
-              Name
-              <input
-                className="input"
-                type="text"
-                value={product.name}
-                onChange={hadlerChange}
-                name="name"
-              />
-            </label>
-          </div>
-          <div className="labelContainer">
-            <label className="label">
-              Slug
-              <input
-              className="input"
-                type="text"
-                value={product.slug}
-                onChange={hadlerChange}
-                name="slug"
-              />
-            </label>
-          </div>
-          <div className="labelContainer">
-            <label className="label">
-              Price
-              <input
-              className="input"
-                type="number"
-                value={product.price}
-                onChange={hadlerChange}
-                name="price"
-              />
-            </label>
-          </div>
-          <div className="labelContainer">
-            <label className="label">
-              Category
-              <input
-              className="input"
-                type="text"
-                value={product.category}
-                onChange={hadlerChange}
-                name="category"
-              />
-            </label>
-          </div>
-          <div className="labelContainer">
-            <label className="label">
-              Brand
-              <input
-              className="input"
-                type="text"
-                value={product.brand}
-                onChange={hadlerChange}
-                name="brand"
-              />
-            </label>
-          </div>
-          <div className="labelContainer">
-            <label className="label">
-              Stock
-              <input
-              className="input"
-                type="number"
-                value={product.stock}
-                onChange={hadlerChange}
-                name="stock"
-              />
-            </label>
-          </div>
-          <div className="labelContainer">
-            <label className="label">
-              Description
-              <textarea
-              className="input"
-                value={product.description}
-                onChange={hadlerChange}
-                name="description"
-              />
-            </label>
-          </div>
-          <div className="btnContainer">
-            <button className="btn" type="submit">Create Product</button>
-          </div>
-        </form>
-      </div>
-      <div className="containerPreview">
-        <div>
-          <h1>{product.name}</h1>
+        <div className="formCreateProduct">
+          <form onSubmit={handleSubmit}>
+            <div className="labelContainer">
+              <label className="label">
+                Name
+                <input
+                  className="input"
+                  type="text"
+                  value={product.name}
+                  onChange={hadlerChange}
+                  name="name"
+                />
+              </label>
+            </div>
+            <div className="labelContainer">
+              <label className="label">
+                Slug
+                <input
+                  className="input"
+                  type="text"
+                  value={product.slug}
+                  onChange={hadlerChange}
+                  name="slug"
+                />
+              </label>
+            </div>
+            <div className="labelContainer">
+              <label className="label">
+                Price
+                <input
+                  className="input"
+                  type="number"
+                  value={product.price}
+                  onChange={hadlerChange}
+                  name="price"
+                />
+              </label>
+            </div>
+            <div className="labelContainer">
+              <label className="label">
+                Category
+                <input
+                  className="input"
+                  type="text"
+                  value={product.category}
+                  onChange={hadlerChange}
+                  name="category"
+                />
+              </label>
+            </div>
+            <div className="labelContainer">
+              <label className="label">
+                Brand
+                <input
+                  className="input"
+                  type="text"
+                  value={product.brand}
+                  onChange={hadlerChange}
+                  name="brand"
+                />
+              </label>
+            </div>
+            <div className="labelContainer">
+              <label className="label">
+                Stock
+                <input
+                  className="input"
+                  type="number"
+                  value={product.stock}
+                  onChange={hadlerChange}
+                  name="stock"
+                />
+              </label>
+            </div>
+            <div className="labelContainer">
+              <label className="label">
+                Description
+                <textarea
+                  className="input"
+                  value={product.description}
+                  onChange={hadlerChange}
+                  name="description"
+                />
+              </label>
+            </div>
+            <div className="btnContainer">
+              <button className="btn" type="submit">
+                Create Product
+              </button>
+            </div>
+          </form>
         </div>
-      </div>
       </div>
     </div>
   );
