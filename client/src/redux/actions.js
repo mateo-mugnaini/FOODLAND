@@ -2,7 +2,7 @@
 import axios from "axios";
 import * as action from "./action-types"; // Import para traer todas las actions-types
 
-const URL = "http://localhost:5000";
+const URL = "http://localhost:10000";
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -41,7 +41,6 @@ export const getAllProducts = () => {
   };
 };
 
-
 /* ========================*  PRODUCT *======================== */
 
 export const getProduct = (name) => {
@@ -57,7 +56,7 @@ export const getProduct = (name) => {
       dispatch(ready());
     } catch (error) {
       // console.log(error);
-      alert("Product no found , try again")
+      alert("Product no found , try again");
       dispatch({
         type: action.GET_PRODUCT,
         payload: error,
@@ -67,9 +66,8 @@ export const getProduct = (name) => {
   };
 };
 
-
 /* ========================*  SUSCRIBE - FOOTER*======================== */
- /// --------------------------------REVISAR!!-------------------------- 2do string!!!
+/// --------------------------------REVISAR!!-------------------------- 2do string!!!
 // export function postSuscribe(email) {
 //   return async function(){
 //       try {
