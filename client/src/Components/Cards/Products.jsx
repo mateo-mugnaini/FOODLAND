@@ -1,35 +1,50 @@
-import React from "react"
-import { useSelector} from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
+import Loader from "../Loader/Loader";
 
 //IMPORT STYLES
-import "../Cards/Products.css"
+import "../Cards/Products.css";
 // import {products} from "../products"
 
-import { NavLink } from "react-router-dom"
-const Products = () =>{
+import { NavLink } from "react-router-dom";
 
-const { products } = useSelector((state) => state)
+//IMPORT ACTIONS
+import { getAllProducts } from "../../redux/actions";
+const Products = () => {
+  const { products, display } = useSelector((state) => state);
 
-console.log(products.map(e => e.name));
-    return(
-        <div className="contenedorProducts">
-            <div>
-            <h1> I'm the list product's</h1>
-            </div>
-            <NavLink to="/detail/:id">
-            <div className="products">
-            {products.map(e => (
-          <div className="product" key={e.id}>
-            <h3 className="productName">{e.name}</h3>
-            <img className="imgProduct" src={e.image} alt={e.name} />
-            <p>${e.price}</p>
-          </div>
-        ))}     
-            </div>
-        </NavLink>
-        </div>            
-    )
-}
+  const dispatch = useDispatch();
 
-export default Products
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  console.log(products);
+  return (
+    <div className="contenedorProducts">
+      <div>
+        <h1> Nuestros productos </h1>
+      </div>
+      {display ? (
+        <Loader />
+      ) : (
+        <div className="products">
+          {Array.isArray(products) ? (
+            products.map((e) => (
+              <div className="product" key={e.id}>
+                <h3 className="productName">{e.name}</h3>
+                <img className="imgProduct" src={e.image} alt={e.name} />
+                <p>${e.price}</p>
+              </div>
+            ))
+          ) : (
+            <p>Sin productos</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Products;
