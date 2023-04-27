@@ -1,0 +1,26 @@
+.createProductContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.formCreateProduct{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    border: 2px black solid;
+    padding: 20px;
+}
+
+.label{
+    display: flex;
+    flex-direction: column;
+    font-size: 23px;
+}
+
+.input{
+    font-size: 20px;
+}
