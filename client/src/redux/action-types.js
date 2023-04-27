@@ -18,5 +18,5 @@ module.exports = {
   CREATE_PRODUCT,
   GET_ALL_PRODUCTS,
   GET_PRODUCT,
-  POST_SUSCRIBE
+  // POST_SUSCRIBE
 };
