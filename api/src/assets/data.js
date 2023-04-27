@@ -116,7 +116,7 @@ const data = {
 			stock: 20,
 			isDeleted: false,
 			comments: [],
-			category: "Bebida",
+			category: "Bebidas",
 			rating: 0,
 			brand: "Coca-cola",
 			numReviews: 0,

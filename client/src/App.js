@@ -32,6 +32,12 @@ function App() {
           name="DetailProducts"
           key="DetailProducts"
         ></Route>
+           <Route
+          path="/categories/:categoriesId"
+          element={<ProductsContainer />}
+          name="Products"
+          key="Products"
+        ></Route>
         <Route
           path="/profile"
           element={""}

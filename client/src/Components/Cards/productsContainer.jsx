@@ -2,18 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 import "../Cards/cards.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import ProductCard from "./productCard";
-
-//IMPORT ACTIONS
 import { getAllProducts } from "../../redux/actions";
 
-const Products = () => {
+const ProductsContainer = () => {
+
+
+  const { categoriesId } = useParams();
 
   /* IMPORT STATES */
   const { products, display } = useSelector((state) => state);
-
-  const allProduct = products.products // Constante para traer mas facil los productos
 
   /* PAGINADO */
   const [numeroPagina, setNumeroPagina] = useState(1);
@@ -23,15 +22,15 @@ const Products = () => {
   const conteoInicial = conteoFinal - grupo;
 
   const aux =
-  allProduct && allProduct.slice
-      ? allProduct.slice(conteoInicial, conteoFinal)
+  products && products.slice
+      ? products.slice(conteoInicial, conteoFinal)
       : [];
 
       
 
   const page = [];
 
-  const pageNum = Math.ceil(allProduct?.length / grupo);
+  const pageNum = Math.ceil(products?.length / grupo);
 
   for (let i = 1; i <= pageNum; i++) {
     page.push(i);
@@ -41,10 +40,10 @@ const Products = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllProducts(categoriesId));
   }, [dispatch]);
 
-  // console.log(product);
+  console.log(products);
   return (
     <div >
       <div className="CardContainer"> 
@@ -97,4 +96,5 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductsContainer;
+

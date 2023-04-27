@@ -1,10 +1,11 @@
 /* ========================* IMPORT ACTIONS *======================== */
-import { GET_ALL_PRODUCTS,  LOADING, READY , RESULTSEARCH} from "./action-types";
+import { GET_ALL_CATEGORIES, GET_ALL_PRODUCTS,  LOADING, READY , RESULTSEARCH, GET_FILTERED_CATEGORIES} from "./action-types";
 
 /* ========================* INITIAL STATE *======================== */
 const initialState = {
   products: [],
   display: false,
+  categories: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -24,6 +25,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
+      case GET_ALL_CATEGORIES:
+        return {
+          ...state,
+          categories: action.payload,
+        };
+    
       case RESULTSEARCH:
         return{
           ...state,
