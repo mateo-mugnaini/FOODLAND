@@ -1,15 +1,16 @@
 import React from "react";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./Views/Home/Home";
 import NavBar from "./Components/NavBar/NavBar";
 import Footer from "./Components/Footer/Footer";
 import DetailCard from "./Views/Detail/DetailCard";
 
 function App() {
+  const location = useLocation();
   return (
     <div className="App">
-      <NavBar />
+      {location?.pathname == "/login" ? null : <NavBar />}
 
       <Routes>
         {/* -----------------Routes generals -----------------*/}
