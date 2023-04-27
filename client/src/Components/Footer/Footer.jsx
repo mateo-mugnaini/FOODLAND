@@ -6,12 +6,12 @@ import "./Footer.css"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 //IMPORT ACTION:
-import postSucribe from ""
+import {postSuscribe} from "../../redux/actions"
 
 const Footer = () =>{
 
     const logoPng = logofoot
-
+    
     const [suscribe, setSuscribe] = useState({
         email:"",
     });
@@ -22,13 +22,13 @@ const Footer = () =>{
         if(suscribe["email"] === null){ form = false; alert("Please complete the field")}
 
         if(form){
-            dispatch(postSucribe(suscribe))
+            dispatch(postSuscribe(suscribe))
             .then(() => alert("Email added"));
             } else {
             return alert("Please try again");
             }
         }
-
+        
     return(
         <div name="ContainterFooter" class="ContainterFooter">
 

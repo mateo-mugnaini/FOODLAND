@@ -70,7 +70,7 @@ export const getProduct = (name) => {
 
 /* ========================*  SUSCRIBE - FOOTER*======================== */
 
-export function postActivity(email) {
+export function postSuscribe(email) {
   return async function(){
       try {
           const newEmail = await axios.post(URL+"/???????",email);   /// Corroborrar ruta!!!!
