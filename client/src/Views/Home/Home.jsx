@@ -1,12 +1,12 @@
-import Products from "../../Components/Cards/Products"
 
+import CategoryContainer from "../../Components/Cards/categoryContainer"
 const Home = () => {
 
     
     return(
         <div class="ContainerHome">
             <div className="productos">
-            <Products/>
+            <CategoryContainer/>
             </div>
         </div>
     )
