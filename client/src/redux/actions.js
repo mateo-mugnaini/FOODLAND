@@ -2,7 +2,8 @@
 import axios from "axios";
 import * as action from "./action-types"; // Import para traer todas las actions-types
 
-const URL = "http://localhost:5000";
+// const URL = "http://localhost:5000";
+const URL = "https://foodland-back.onrender.com";
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -43,6 +44,8 @@ export const getAllProducts = () => {
 /* ===========================* Search *=========================== */
 
 export const resultSearch = (result) => {
+
+
   return async (dispatch) => {
     try {
   dispatch(loading());
@@ -53,7 +56,9 @@ export const resultSearch = (result) => {
   dispatch(ready());
     
     } catch (error) {
+
     console.log (error);
   }
 }
 };
+
