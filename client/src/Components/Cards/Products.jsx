@@ -15,12 +15,12 @@ const Products = () => {
   const { products, display } = useSelector((state) => state);
 
   const dispatch = useDispatch();
-
+const productsAux = products.products
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  console.log(products);
+  console.log(productsAux.map(e => e.name));
   return (
     <div className="contenedorProducts">
       <div>
@@ -31,8 +31,8 @@ const Products = () => {
       ) : (
         <NavLink to="/detail/:id">
           <div className="products">
-            {Array.isArray(products) ? (
-              products.map((e) => (
+            {Array.isArray(productsAux) ? (
+              productsAux.map((e) => (
                 <div className="product" key={e.id}>
                   <h3 className="productName">{e.name}</h3>
                   <img className="imgProduct" src={e.image} alt={e.name} />
