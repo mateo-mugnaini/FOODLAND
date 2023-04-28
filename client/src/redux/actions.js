@@ -20,15 +20,22 @@ export function ready() {
 
 /* ========================*  PRODUCTS *======================== */
 
-export const getAllProducts = () => {
+export const getAllProducts = (category) => {
   return async (dispatch) => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-      console.log(response);
+    
+      const arrayProducts = response.data.products;
+      const productosFiltrados = arrayProducts.filter((producto) => {
+        return producto.category === category;
+      });
+
+    console.log ("estoy filtrado", productosFiltrados)
+
       dispatch({
         type: action.GET_ALL_PRODUCTS,
-        payload: response.data,
+        payload: productosFiltrados,
       });
       dispatch(ready());
     } catch (error) {
@@ -41,6 +48,38 @@ export const getAllProducts = () => {
     }
   };
 };
+
+/* ========================* FILTROS *======================== */
+
+export const getAllCategories = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(loading());
+      const response = await axios.get(`${URL}/api/products/categories`);
+  
+      dispatch({
+        type: action.GET_ALL_CATEGORIES,
+        payload: response.data,
+      });
+      dispatch(ready());
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: action.GET_ALL_CATEGORIES,
+        payload: error,
+      });
+      dispatch(ready());
+    }
+  };
+};
+
+export function handle_sorts(payload){
+  return ({
+      type: 'HANDLE_SORTS',
+      payload
+  })
+}
+
 
 /* ========================*  SEARCH*======================== */
 export const resultSearch = (result) => {
