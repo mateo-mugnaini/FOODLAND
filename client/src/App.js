@@ -5,14 +5,14 @@ import Home from "./Views/Home/Home";
 import NavBar from "./Components/NavBar/NavBar";
 import Footer from "./Components/Footer/Footer";
 import DetailCard from "./Views/Detail/DetailCard";
-import FormCreateProduct from "./Components/FormCreateProduct/FormCreateProduct";
+import CreateProduct from "./Views/CreateProduct/CreateProduct";
 import ProductsContainer from "./Components/Cards/productsContainer";
 
 function App() {
   const location = useLocation();
   return (
     <div className="App">
-      {location?.pathname === "/login" ? null : <NavBar />} 
+      {location?.pathname === "/login" ? null : <NavBar />}
 
       <Routes>
         {/* -----------------Routes generals -----------------*/}
@@ -32,7 +32,7 @@ function App() {
           name="DetailProducts"
           key="DetailProducts"
         ></Route>
-           <Route
+        <Route
           path="/categories/:categoriesId"
           element={<ProductsContainer />}
           name="Products"
@@ -67,7 +67,7 @@ function App() {
         <Route path="/Users" element={""} name="Users" key="Users"></Route>
         <Route
           path="/create"
-          element={<FormCreateProduct />}
+          element={<CreateProduct />}
           name="create"
           key="create"
         ></Route>

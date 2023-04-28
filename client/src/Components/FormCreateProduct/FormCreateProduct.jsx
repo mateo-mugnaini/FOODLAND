@@ -31,11 +31,6 @@ function FormCreateProduct() {
 
   return (
     <div className="createProductContainer">
-      <div className="titleFormCreateProduct">
-        <h1>Create your product</h1>
-      </div>
-      <div className="containerAux">
-        <div className="formCreateProduct">
           <form onSubmit={handleSubmit}>
             <div className="labelContainer">
               <label className="label">
@@ -126,8 +121,6 @@ function FormCreateProduct() {
               </button>
             </div>
           </form>
-        </div>
-      </div>
     </div>
   );
 }
