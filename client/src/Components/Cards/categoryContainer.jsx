@@ -21,15 +21,13 @@ const CategoryContainer = () => {
   }, [dispatch]);
 
   return (
-    <div className='CardContainer'>
-    <div className='Breadcrumb'>
-<div className='bc-item'>
-  <a href="../../dashboard/default">CATEGORIES</a>
-</div>
-
-</div>
+    <div>
+    <div className='breadcrumb'>
+    <NavLink to="/">CATEGORIES</NavLink>
+    </div>
+      <div className='CardContainer'>
       {categories.map((e) => (
-      <NavLink to={`/categories/${e}`} >  
+      <NavLink to={`/categories/${e._id}`} >  
       <CategoryCard
      key={e}
      name={e._id}
@@ -37,7 +35,7 @@ const CategoryContainer = () => {
      />  
      </NavLink>
       )
-    )}</div>
+    )}</div></div>
   )
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
 import azucar from "../../Imgs/azucar.jpg"
 import  "./DetailCard.css"
-import { useParams } from "react-router-dom"
+import { useParams, NavLink } from "react-router-dom"
 import { products } from "../../Components/products"
+
 
 
 const DetailCard = () => {
@@ -12,8 +13,21 @@ const DetailCard = () => {
 
 
   return (
+    <div>
+      <div className="breadcrumb">
+                <NavLink to="/">
+                  CATEGORIES   /
+                  </NavLink>
+
+                 <NavLink active to="/">
+                  CATEGORY NAME  / 
+                 </NavLink>    
+                 <NavLink className="active" to={`/detail/${id}`}>
+                  PRODUCT NAME 
+                 </NavLink>    
+      </div>
+    
     <div className='DetailCard'>
-      
       <div className='detail-img'>
         <img src={product.image} alt="azucar ledesma" />
       </div>
@@ -32,6 +46,7 @@ const DetailCard = () => {
       </div>
 
     </div>
+  </div>
   )
 }
 

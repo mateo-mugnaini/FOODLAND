@@ -12,7 +12,7 @@ function App() {
   const location = useLocation();
   return (
     <div className="App">
-      {location?.pathname == "/login" ? null : <NavBar />}
+      {location?.pathname === "/login" ? null : <NavBar />} 
 
       <Routes>
         {/* -----------------Routes generals -----------------*/}

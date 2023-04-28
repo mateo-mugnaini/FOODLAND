@@ -5,7 +5,11 @@ import Loader from "../Loader/Loader";
 import "../Cards/cards.css";
 import { NavLink, useParams } from "react-router-dom";
 import ProductCard from "./productCard";
-import { getAllProducts, handle_sorts } from "../../redux/actions";
+import Filters from "./Filters";
+
+//IMPORT ACTIONS
+import { getAllProducts,handle_sorts  } from "../../redux/actions";
+
 
 const ProductsContainer = () => {
 
@@ -53,8 +57,17 @@ const ProductsContainer = () => {
 
   return (
     <div className="productsContainer">
-      <div className='selectDiv'>
 
+      <div className='select_and_breadcrumb'>
+      <div className="breadcrumb">
+                <NavLink to="/">
+                  CATEGORIES   /
+                  </NavLink>
+
+                 <NavLink className="active" to={`/categories/${categoriesId}`}>
+                  CATEGORY NAME   
+                 </NavLink>        
+      </div>
      <select className="selectInput" onChange={handleSorts} >
       <option value="">Ordenar por</option>
       <option value="asc">A-Z</option>
@@ -66,7 +79,11 @@ const ProductsContainer = () => {
      </select>
 
     </div>
-      <div className="CardContainer"> 
+      <div className="filter_and_products">
+      <div className="FilterContainer"> 
+      <Filters/>
+      </div>
+      <div className="CardContainer">
       {display ? (
         <Loader />
       ) : (        
@@ -81,11 +98,11 @@ const ProductsContainer = () => {
             ))
           ) : (
             <p>Sin productos</p>
-          )
-        
-       
+          )  
       )} 
       </div>
+      </div>
+    
     <div className="containerPaginated">
     
         <button
