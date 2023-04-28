@@ -1,5 +1,5 @@
 //IMPORT STYLES:
-import "./Filters.css"
+import "./cards.css"
 //IMPORT REACTS:
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

@@ -1,14 +1,14 @@
+
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 import "../Cards/cards.css";
 import { NavLink, useParams } from "react-router-dom";
 import ProductCard from "./productCard";
-import { getAllProducts, handle_sorts } from "../../redux/actions";
 import Filters from "./Filters";
 
 //IMPORT ACTIONS
-import { getAllProducts } from "../../redux/actions";
+import { getAllProducts,handle_sorts  } from "../../redux/actions";
 
 
 const ProductsContainer = () => {
@@ -30,8 +30,7 @@ const ProductsContainer = () => {
   products && products.slice
       ? products.slice(conteoInicial, conteoFinal)
       : [];
-
-      
+   
 
   const page = [];
 
@@ -41,6 +40,7 @@ const ProductsContainer = () => {
     page.push(i);
   }
 
+  /* FUNCION DE ORDENAMIENTO  */
 
   function handleSorts(e) {
     e.preventDefault();
@@ -56,25 +56,34 @@ const ProductsContainer = () => {
   }, [dispatch]);
 
   return (
-    <div >
-    
-        <Filters/>
-        
-       <div className='selectDiv'>
+    <div className="productsContainer">
 
-<select onChange={handleSorts} >
- <option value="">Ordenar por</option>
- <option value="asc">A-Z</option>
- <option value="desc">Z-A</option>
- <option value="higher_price">Mayor precio</option>
- <option value="lower_price">Menor precio </option>
- <option value="best_score">Mayor puntuado</option>
- <option value="worst_score">Menor puntuado </option>
-</select>
+      <div className='select_and_breadcrumb'>
+      <div className="breadcrumb">
+                <NavLink to="/">
+                  CATEGORIES   /
+                  </NavLink>
+
+                 <NavLink className="active" to={`/categories/${categoriesId}`}>
+                  CATEGORY NAME   
+                 </NavLink>        
+      </div>
+     <select className="selectInput" onChange={handleSorts} >
+      <option value="">Ordenar por</option>
+      <option value="asc">A-Z</option>
+      <option value="desc">Z-A</option>
+      <option value="higher_price">Mayor precio</option>
+      <option value="lower_price">Menor precio </option>
+      <option value="best_score">Mayor puntuado</option>
+      <option value="worst_score">Menor puntuado </option>
+     </select>
 
     </div>
-
-      <div className="CardContainer"> 
+      <div className="filter_and_products">
+      <div className="FilterContainer"> 
+      <Filters/>
+      </div>
+      <div className="CardContainer">
       {display ? (
         <Loader />
       ) : (        
@@ -89,13 +98,13 @@ const ProductsContainer = () => {
             ))
           ) : (
             <p>Sin productos</p>
-          )
-        
-       
+          )  
       )} 
       </div>
+      </div>
+    
     <div className="containerPaginated">
-    <div>
+    
         <button
           className="btnPag"
           onClick={() => setNumeroPagina(numeroPagina - 1)}
@@ -121,7 +130,7 @@ const ProductsContainer = () => {
         </button>
       </div>
     </div>
-    </div>
+  
   );
 };
 
