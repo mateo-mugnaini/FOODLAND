@@ -4,7 +4,7 @@ import Loader from "../Loader/Loader";
 import "../Cards/cards.css";
 import { NavLink, useParams } from "react-router-dom";
 import ProductCard from "./productCard";
-import { getAllProducts } from "../../redux/actions";
+import { getAllProducts, handle_sorts } from "../../redux/actions";
 
 const ProductsContainer = () => {
 
@@ -36,6 +36,13 @@ const ProductsContainer = () => {
     page.push(i);
   }
 
+
+  function handleSorts(e) {
+    e.preventDefault();
+    dispatch(handle_sorts(e.target.value))
+  }
+
+
   /* DISPATCH PARA TRAER LOS PRODUCTOS */
   const dispatch = useDispatch();
 
@@ -43,9 +50,21 @@ const ProductsContainer = () => {
     dispatch(getAllProducts(categoriesId));
   }, [dispatch]);
 
-  console.log(products);
   return (
     <div >
+       <div className='selectDiv'>
+
+<select onChange={handleSorts} >
+ <option value="">Ordenar por</option>
+ <option value="asc">A-Z</option>
+ <option value="desc">Z-A</option>
+ <option value="higher_price">Mayor precio</option>
+ <option value="lower_price">Menor precio </option>
+ <option value="best_score">Mayor puntuado</option>
+ <option value="worst_score">Menor puntuado </option>
+</select>
+
+    </div>
       <div className="CardContainer"> 
       {display ? (
         <Loader />
@@ -53,6 +72,7 @@ const ProductsContainer = () => {
           Array.isArray(aux) ? (
             aux?.map((e) => (
               <ProductCard
+              key={e.id}
               name={e.name}
               price={e.price}
               image={e.image}

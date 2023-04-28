@@ -49,7 +49,7 @@ export const getAllProducts = (category) => {
   };
 };
 
-/* ========================* CATEGORIES *======================== */
+/* ========================* FILTROS *======================== */
 
 export const getAllCategories = () => {
   return async (dispatch) => {
@@ -73,6 +73,12 @@ export const getAllCategories = () => {
   };
 };
 
+export function handle_sorts(payload){
+  return ({
+      type: 'HANDLE_SORTS',
+      payload
+  })
+}
 
 
 /* ========================*  SEARCH*======================== */
