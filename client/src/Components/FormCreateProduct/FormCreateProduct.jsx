@@ -1,10 +1,12 @@
+/* ========================* IMPORT GENERALES  *======================== */
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
-//IMPORT STYLES
+/* ========================* IMPORT STYLES  *======================== */
 import "../FormCreateProduct/FormCreateProduct.css";
 
+/* ========================* ESTADO LOCAL  *======================== */
 import { getAllCategories, addCategory } from "../../redux/actions";
 
 function FormCreateProduct() {
