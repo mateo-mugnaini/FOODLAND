@@ -18,8 +18,7 @@ const SearchBar = () => {
     useEffect(() => { dispatch(getAllProducts()); 
     }, [dispatch]);
     
-    const products = useSelector((state) => state.products ? state.products : []);
-    console.log(products)
+    const products = useSelector((state) => state.products ? state.products : [])
 
     
         const inputHandler = (e) => { 
