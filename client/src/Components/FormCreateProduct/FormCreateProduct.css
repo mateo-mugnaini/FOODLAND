@@ -1,34 +1,8 @@
-.createProductContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    height: fit-content;
-    margin-bottom: 20px;
-}
-
-.containerAux{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.formCreateProduct{
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    height: fit-content;
-    border: 2px black solid;
-    padding: 20px;
-}
-
 .label{
     display: flex;
     flex-direction: column;
     font-size: 23px;
     gap: 5px;
-
 }
 
 .input{
