@@ -5,6 +5,11 @@ import "../Cards/cards.css";
 import { NavLink, useParams } from "react-router-dom";
 import ProductCard from "./productCard";
 import { getAllProducts, handle_sorts } from "../../redux/actions";
+import Filters from "./Filters";
+
+//IMPORT ACTIONS
+import { getAllProducts } from "../../redux/actions";
+
 
 const ProductsContainer = () => {
 
@@ -52,6 +57,9 @@ const ProductsContainer = () => {
 
   return (
     <div >
+    
+        <Filters/>
+        
        <div className='selectDiv'>
 
 <select onChange={handleSorts} >
@@ -65,6 +73,7 @@ const ProductsContainer = () => {
 </select>
 
     </div>
+
       <div className="CardContainer"> 
       {display ? (
         <Loader />
