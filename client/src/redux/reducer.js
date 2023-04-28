@@ -1,5 +1,6 @@
 /* ========================* IMPORT ACTIONS *======================== */
-import { GET_ALL_PRODUCTS,  LOADING, READY , RESULTSEARCH} from "./action-types";
+import { GET_ALL_PRODUCTS,  LOADING, READY , RESULTSEARCH , FILTERPRICE} from "./action-types";
+
 
 /* ========================* INITIAL STATE *======================== */
 const initialState = {
@@ -29,6 +30,11 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           products: action.payload,
         };  
+        case FILTERPRICE:
+          return{
+            ...state,
+            products: action.payload,
+          }; 
     default:
       return { ...state };
   }

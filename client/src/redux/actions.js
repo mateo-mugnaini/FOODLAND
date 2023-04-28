@@ -56,3 +56,17 @@ export const resultSearch = (result) => {
   };
 };
 
+//========================*Filtro de rango de precios*==============//
+
+export const filterPrice = (products) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: action.FILTERPRICE,
+        payload: products,
+      });
+    } catch (error) {
+    console.log(error);
+    }
+  };
+}

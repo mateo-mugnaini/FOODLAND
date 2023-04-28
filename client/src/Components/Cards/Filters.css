@@ -1,0 +1,27 @@
+fieldset{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    text-align: justify;
+    float:left;
+    height: auto;
+    border-radius: 5px;
+    background-color: rgb(211,211,211);
+    box-shadow: 3px 4px 12px rgb(0, 0 ,0,25%);
+    border: none;
+}
+
+.MinMax{
+    display: flex;
+}
+
+.Range{
+    width:50px;
+    border-radius: 5px;
+}
+
+.butonFilter{
+ background-color: #4e7d48;
+ color: white;
+ border-radius: 20px;
+}

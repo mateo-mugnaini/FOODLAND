@@ -4,6 +4,7 @@ import Loader from "../Loader/Loader";
 import "../Cards/cards.css";
 import { NavLink } from "react-router-dom";
 import ProductCard from "./productCard";
+import Filters from "./Filters";
 
 //IMPORT ACTIONS
 import { getAllProducts } from "../../redux/actions";
@@ -47,6 +48,7 @@ const ProductsContainer = () => {
   // console.log(product);
   return (
     <div >
+      <Filters/>
       <div className="CardContainer"> 
       {display ? (
         <Loader />
