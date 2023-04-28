@@ -25,13 +25,13 @@ export const getAllProducts = (category) => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-    
+
       const arrayProducts = response.data.products;
       const productosFiltrados = arrayProducts.filter((producto) => {
         return producto.category === category;
       });
 
-    console.log ("estoy filtrado", productosFiltrados)
+      console.log("estoy filtrado", productosFiltrados);
 
       dispatch({
         type: action.GET_ALL_PRODUCTS,
@@ -56,7 +56,7 @@ export const getAllCategories = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products/categories`);
-  
+
       dispatch({
         type: action.GET_ALL_CATEGORIES,
         payload: response.data,
@@ -73,13 +73,12 @@ export const getAllCategories = () => {
   };
 };
 
-export function handle_sorts(payload){
-  return ({
-      type: 'HANDLE_SORTS',
-      payload
-  })
+export function handle_sorts(payload) {
+  return {
+    type: "HANDLE_SORTS",
+    payload,
+  };
 }
-
 
 /* ========================*  SEARCH*======================== */
 export const resultSearch = (result) => {
@@ -90,7 +89,7 @@ export const resultSearch = (result) => {
         payload: result,
       });
     } catch (error) {
-    console.log(error);
+      console.log(error);
     }
   };
 };
@@ -105,7 +104,27 @@ export const filterPrice = (products) => {
         payload: products,
       });
     } catch (error) {
-    console.log(error);
+      console.log(error);
     }
   };
-}
+};
+
+//========================*Add Category*==============//
+export const addCategory = (category) => async (dispatch) => {
+  try {
+    dispatch({ type: action.ADD_CATEGORY_REQUEST });
+    const { data } = await axios.post(
+      "http://localhost:5000/api/categories",
+      category
+    );
+    dispatch({
+      type: action.ADD_CATEGORY_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: action.ADD_CATEGORY_FAILURE,
+      payload: error.message,
+    });
+  }
+};
