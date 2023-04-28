@@ -56,7 +56,7 @@ const data = {
 			image:
 				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",
 			imageCategory:
-				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",			
+				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",
 			stock: 20,
 			isDeleted: false,
 			comments: [],
@@ -91,7 +91,7 @@ const data = {
 				"https://jumboargentina.vtexassets.com/arquivos/ids/764069-800-auto?v=638084434020330000&width=800&height=auto&aspect=trueg",
 			imageCategory:
 				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",
-				stock: 20,
+			stock: 20,
 			isDeleted: false,
 			comments: [],
 			category: "Carniceria",
@@ -177,7 +177,7 @@ const data = {
 			image:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/423818-800-auto?v=636482196480430000&width=800&height=auto&aspect=true",
 			imageCategory:
-				"https://jumboargentina.vtexassets.com/arquivos/ids/423818-800-auto?v=636482196480430000&width=800&height=auto&aspect=true",				
+				"https://jumboargentina.vtexassets.com/arquivos/ids/423818-800-auto?v=636482196480430000&width=800&height=auto&aspect=true",
 			stock: 20,
 			isDeleted: false,
 			comments: [],

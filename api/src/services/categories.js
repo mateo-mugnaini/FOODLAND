@@ -1,7 +1,7 @@
 const Product = require('../models/product');
 
 const getCategoriesDb = () => {
-  return Product.find().distinct('category');
+  return Product.aggregate([{ $group: { _id: "$category", imageCategory: { $first: "$imageCategory" } } }])
 };
 
 module.exports = {

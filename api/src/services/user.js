@@ -39,9 +39,19 @@ const putUserDb = (id, dataUpdate) => {
     })
 }
 
+const putAdminUser = (id, dataUpdate) => {
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = Boolean(req.body.isAdmin);
+    user.save();
+  }
+};
 
 module.exports = {
   allUserDb,
   getUserIdDb,
   putUserDb,
+  putAdminUser
 }
