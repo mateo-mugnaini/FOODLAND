@@ -15,10 +15,13 @@ productRouter.get("/", async (req, res) => {
 productRouter.get(
   "/categories",
   expressAsyncHandler(async (req, res) => {
-    const categories = await Product.find().distinct("category");
+    //const categories = await Product.find().distinct("category"); -->solo trae categorías
+    const categories =  await Product.aggregate([{ $group: { _id: "$category", imageCategory: { $first: "$imageCategory" } } }])
     res.send(categories);
+    
   })
 );
+
 
 productRouter.post(
   "/",
