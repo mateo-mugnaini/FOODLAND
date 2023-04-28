@@ -23,6 +23,7 @@ const data = {
 			description: "Kiwi",
 			image:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/537347-800-auto?v=636972888517500000&width=800&height=auto&aspect=true",
+			imageCategory: "https://jumboargentina.vtexassets.com/arquivos/ids/537347-800-auto?v=636972888517500000&width=800&height=auto&aspect=true",
 			stock: 20,
 			isDeleted: false,
 			comments: [],
@@ -38,6 +39,7 @@ const data = {
 			description: "Cartonde huevos blancos 12 unidades",
 			image:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/677925-800-auto?v=637734621757330000&width=800&height=auto&aspect=true",
+			imageCategory: "https://jumboargentina.vtexassets.com/arquivos/ids/537347-800-auto?v=636972888517500000&width=800&height=auto&aspect=true",
 			stock: 40,
 			isDeleted: false,
 			comments: [],
@@ -53,6 +55,8 @@ const data = {
 			description: "Carne picada especial.",
 			image:
 				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",
+			imageCategory:
+				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",			
 			stock: 20,
 			isDeleted: false,
 			comments: [],
@@ -68,6 +72,8 @@ const data = {
 			description: "Milanesa de Nalga Casera.",
 			image:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/676761-800-auto?v=637728575944500000&width=800&height=auto&aspect=true",
+			imageCategory:
+				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",
 			stock: 20,
 			isDeleted: false,
 			comments: [],
@@ -83,7 +89,9 @@ const data = {
 			description: "Cuarto de pollo trasero fresco",
 			image:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/764069-800-auto?v=638084434020330000&width=800&height=auto&aspect=trueg",
-			stock: 20,
+			imageCategory:
+				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",
+				stock: 20,
 			isDeleted: false,
 			comments: [],
 			category: "Carniceria",
@@ -97,6 +105,8 @@ const data = {
 			price: 399,
 			description: "Botella de Pepsi de 2.25 litros",
 			image:
+				"https://jumboargentina.vtexassets.com/arquivos/ids/769353-800-auto?v=638120073784130000&width=800&height=auto&aspect=true",
+			imageCategory:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/769353-800-auto?v=638120073784130000&width=800&height=auto&aspect=true",
 			stock: 20,
 			isDeleted: false,
@@ -113,6 +123,8 @@ const data = {
 			description: "Botella de Coca-cola sabor Original de 2.25 litros",
 			image:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/770903-800-auto?v=638128606670570000&width=800&height=auto&aspect=true",
+			imageCategory:
+				"https://jumboargentina.vtexassets.com/arquivos/ids/769353-800-auto?v=638120073784130000&width=800&height=auto&aspect=true",
 			stock: 20,
 			isDeleted: false,
 			comments: [],
@@ -128,6 +140,8 @@ const data = {
 			description:
 				"Nutrí tu pelo desde la raíz para que crezca largo y fuerte hasta las puntas con la fórmula multivitaminas de Pantene.El shampoo Restauración de Pantene Pro-V Essentials está formulado con omega 9, óleo de argán, antioxidante y Pro-Vitaminas, ayuda a reducir la pérdida de proteínas** y a reparar las cutículas para prevenir las puntas abiertas. Para mejores resultados usá el sistema de shampoo y acondicionador Pantene Pro-V Essentials. **Pérdida de proteína debido al quiebre usando el sistema Pantene versus shampoo sin ingredientes acondicionadores",
 			image:
+				"https://jumboargentina.vtexassets.com/arquivos/ids/706107-800-auto?v=637909043246300000&width=800&height=auto&aspect=true",
+			imageCategory:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/706107-800-auto?v=637909043246300000&width=800&height=auto&aspect=true",
 			stock: 20,
 			isDeleted: false,
@@ -145,6 +159,8 @@ const data = {
 				"Nutrí tu pelo desde la raíz para que crezca largo y fuerte hasta las puntas con la fórmula multivitaminas de Pantene.El shampoo Restauración de Pantene Pro-V Essentials está formulado con omega 9, óleo de argán, antioxidante y Pro-Vitaminas, ayuda a reducir la pérdida de proteínas y a reparar las cutículas para prevenir las puntas abiertas.",
 			image:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/712670-800-auto?v=637945333124200000&width=800&height=auto&aspect=true",
+			imageCategory:
+				"https://jumboargentina.vtexassets.com/arquivos/ids/712670-800-auto?v=637945333124200000&width=800&height=auto&aspect=true",
 			stock: 20,
 			isDeleted: false,
 			comments: [],
@@ -160,6 +176,8 @@ const data = {
 			description: "Prepizza con base de salsa de tomate congelada",
 			image:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/423818-800-auto?v=636482196480430000&width=800&height=auto&aspect=true",
+			imageCategory:
+				"https://jumboargentina.vtexassets.com/arquivos/ids/423818-800-auto?v=636482196480430000&width=800&height=auto&aspect=true",				
 			stock: 20,
 			isDeleted: false,
 			comments: [],
@@ -172,9 +190,11 @@ const data = {
 			name: "Baguette Artesanal 1u",
 			slug: "Baguette Artesanal",
 			price: 139,
-			description: "Cuarto de pollo trasero fresco",
+			description: "Baguette hecha en casa",
 			image:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/423862-800-auto?v=636482196748900000&width=800&height=auto&aspect=true",
+			imageCategory:
+				"https://jumboargentina.vtexassets.com/arquivos/ids/423818-800-auto?v=636482196480430000&width=800&height=auto&aspect=true",
 			stock: 20,
 			isDeleted: false,
 			comments: [],

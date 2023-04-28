@@ -13,6 +13,96 @@ width: 15%;
 margin: 2%;
 text-decoration: none;
 }
+
+/* ------- PRODUCTS CONTAINER -------- */
+.productsContainer {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.breadcrumb{
+    display: flex;
+    margin-left: 5%;
+    width: 35%;
+}
+.breadcrumb a {
+    font-size: 16px;
+    text-decoration: none;
+  
+    width: 35%;
+    margin-left: -10%;
+    display: flex;
+    color: black;
+   
+}
+.breadcrumb a:hover{
+    color: greenyellow;
+}
+.select_and_breadcrumb {
+display: flex;
+
+justify-content: space-between;
+align-items: flex-end;
+margin-top: 2%;
+margin-bottom: 2%;
+
+}
+
+.selectInput {
+height: 35px;
+width: 15%;
+margin-right:5%;
+border-radius: 7px;
+border: 3px solid rgb(5, 184, 5);
+box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.247);
+background-color: rgb(255, 244, 244);
+font-size: 15px;
+}
+
+
+/* ---------- FILTROS ---------*/
+fieldset{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    text-align: justify;
+    float:left;
+    height: auto;
+    border-radius: 5px;
+    background-color: rgb(211,211,211);
+    box-shadow: 3px 4px 12px rgb(0, 0 ,0,25%);
+    border: none;
+    margin-left: 5%;
+}
+
+.MinMax{
+    display: flex;
+}
+
+.Range{
+    width:50px;
+    border-radius: 5px;
+}
+
+.butonFilter{
+ background-color: #4e7d48;
+ color: white;
+ border-radius: 20px;
+}
+.filterContainer{
+background-color: aqua;
+}
+
+/* ------- PAGINADO ------------ */
+
+.btnPag{ height: 40px; width: 3.5%; border-radius: 7px; margin: 0 2px 0 2px}
+
+.containerPaginated{
+    margin-bottom: 5%;
+    margin-top: 2%;
+}
+
 /* ---- CATEGORY CARD  ------ */
 
 .CategoryCard{
@@ -48,9 +138,15 @@ text-decoration: none;
     align-items:center;
     color: black;
     height: 100%;
-   
 }
 
+.product:hover, .selectInput:hover, .product .addButton:hover {
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.589);
+}
+
+.addButton:hover {
+    box-shadow: 3px 4px 18px rgba(0, 0, 0, 0.774);
+}
 .product .addButton {
     width: 70%;
 }
@@ -72,3 +168,5 @@ text-decoration: none;
     width: 130px;
   
 }
+
+
