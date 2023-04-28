@@ -1,7 +1,7 @@
 
 import React from "react";
 import CategoryContainer from "../../Components/Cards/categoryContainer"
-
+import "./Home.css"
 
 const Home = () => {
 

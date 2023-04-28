@@ -7,6 +7,7 @@ import Footer from "./Components/Footer/Footer";
 import DetailCard from "./Views/Detail/DetailCard";
 import CreateProduct from "./Views/CreateProduct/CreateProduct";
 import ProductsContainer from "./Components/Cards/productsContainer";
+import About from "./Views/About/About";
 
 function App() {
   const location = useLocation();
@@ -24,7 +25,12 @@ function App() {
           name="Register"
           key="Register"
         ></Route>
-        <Route path="/about" element={""} name="About" key="About"></Route>
+        <Route
+          path="/about"
+          element={<About />}
+          name="About"
+          key="About"
+        ></Route>
         {/* -----------------Routes Users -----------------*/}
         <Route
           path="/detail/:id"

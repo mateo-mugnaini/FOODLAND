@@ -37,6 +37,7 @@ productRouter.post(
       rating,
       numReviews,
       description,
+      imageCategory,
     } = req.body;
     const newProduct = new Product({
       name,
@@ -51,6 +52,7 @@ productRouter.post(
       rating: rating ?? 0,
       numReviews: numReviews ?? 0,
       description,
+      imageCategory: imageCategory??"https://jumboargentina.vtexassets.com/arquivos/ids/537347-800-auto?v=636972888517500000&width=800&height=auto&aspect=true",
     });
     const product = await newProduct.save();
     res.send({ message: "Product Created", product });
@@ -90,6 +92,7 @@ productRouter.put(
       description,
       rating,
       numReviews,
+      imageCategory
     } = req.body;
     const product = await Product.findById(id);
     if (product) {
@@ -104,6 +107,7 @@ productRouter.put(
       product.description = description ?? product.description;
       product.rating = rating ?? product.rating;
       product.numReviews = numReviews ?? product.numReviews;
+      product.imageCategory = imageCategory??product.imageCategory
       await product.save();
       res.send({ message: "Product Updated" });
     } else {
