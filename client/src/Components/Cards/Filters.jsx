@@ -18,6 +18,13 @@ useEffect(() => {
 
 const products = useSelector(state => state.products ? state.products : []);
 
+const editedProducts = products.map(product => {
+    return {
+      ...product,
+      price: parseFloat(product.price.toString().replace('.', ''))
+    }
+  });
+
 const inputHandler = (e) => {
     e.preventDefault();
     if(price.min ==="") price.min = 0;
@@ -28,7 +35,7 @@ const inputHandler = (e) => {
     });
 };
 
-const priceProducts = products?.filter(product => {
+const priceProducts = editedProducts?.filter(product => {
     return (
         product.price >= parseFloat(price.min) &&
         product.price <= parseFloat(price.max)
