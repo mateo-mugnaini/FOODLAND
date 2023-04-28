@@ -1,7 +1,7 @@
-import express from 'express';
-import Product from '../models/product.js';
-import User from '../models/user.js';
-import data from '../assets/data.js';
+const express = require('express');
+const Product = require('../models/product.js');
+const User = require ('../models/user.js');
+const data = require ('../assets/data.js');
 
 const seedRouter = express.Router();
 
@@ -15,4 +15,4 @@ seedRouter.get('/', async (req, res) => {
 
 
 
-export default seedRouter;
+module.exports = seedRouter;

@@ -1,11 +1,7 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import seedRouter from "./src/routes/seedRoutes.js";
-import userRouter from "./src/routes/userRoutes.js";
-import Product from "./src/routes/products.js";
-
-import path from "path";
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const routes = require('./src/routes');
 
 dotenv.config();
 
@@ -33,9 +29,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/products", Product);
-app.use("/api/seed", seedRouter);
-app.use("/api/users", userRouter);
+app.use('/api',routes);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
