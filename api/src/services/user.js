@@ -40,18 +40,53 @@ const putUserDb = (id, dataUpdate) => {
 }
 
 const putAdminUser = (id, dataUpdate) => {
-
-  if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    user.isAdmin = Boolean(req.body.isAdmin);
-    user.save();
+  const { name, email, isAdmin } = dataUpdate;
+  return getUserIdDb(id)
+  .then(user=>{
+    if (user) {
+    user.name = name ?? user.name;
+    user.email = email ?? user.email;
+    user.isAdmin = Boolean(isAdmin)??user.isAdmin;
   }
+  return user.save();
+  })
+  .catch(error=>error);
+};
+
+const postLoginDb = (dataUser) => {
+  const {email,password} = dataUser;
+  return User.findOne({email:email})
+  .then(user=>{
+    if(!user || !bcrypt.compare(password,user.password)) throw {status:401,message:"Invalid email or password"};
+    const token = generateToken(user);
+    return {
+      ...user['_doc'],
+      token
+    }
+  })
+};
+
+const createUser = (data)=>{
+  const {name,email,password} = data;
+  if(!name || !email || !password) throw {status:404,message:"Faltan Datos"};
+  const newUser = new User({
+    name,email,password:bcrypt.hashSync(password)
+  })
+  return newUser.save()
+  .then(user=>{
+    token = generateToken(user);
+    return {
+      ...user['_doc'],
+      token,
+    }
+  })
 };
 
 module.exports = {
   allUserDb,
   getUserIdDb,
   putUserDb,
-  putAdminUser
+  putAdminUser,
+  postLoginDb,
+  createUser
 }
