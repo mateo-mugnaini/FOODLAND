@@ -6,14 +6,17 @@ const READY = "READY";
 
 const CREATE_PRODUCT = "CREATE_PRODUCT"; // Action para crear un producto
 const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"; // Action para traer todos los productos
-const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"; 
-const HANDLE_SORTS = "HANDLE_SORTS"
+const HANDLE_SORTS = "HANDLE_SORTS";
 const RESULTSEARCH = "RESULTSEARCH"; // Action que actualiza el estado global
-
 
 /* ======================= FILTER ==========================*/
 const FILTERPRICE = "FILTERPRICE"; //Action que filtra por precio
 
+/* ======================= CATEGORIES ==========================*/
+const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
+const ADD_CATEGORY_REQUEST = "ADD_CATEGORY_REQUEST";
+const ADD_CATEGORY_SUCCESS = "ADD_CATEGORY_SUCCESS";
+const ADD_CATEGORY_FAILURE = "ADD_CATEGORY_FAILURE";
 
 module.exports = {
   LOADING,
@@ -24,4 +27,7 @@ module.exports = {
   RESULTSEARCH,
   HANDLE_SORTS,
   FILTERPRICE,
+  ADD_CATEGORY_REQUEST,
+  ADD_CATEGORY_SUCCESS,
+  ADD_CATEGORY_FAILURE,
 };
