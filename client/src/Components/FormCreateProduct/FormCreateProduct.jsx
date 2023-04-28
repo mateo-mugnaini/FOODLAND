@@ -8,6 +8,8 @@ import "../FormCreateProduct/FormCreateProduct.css";
 import { getAllCategories, addCategory } from "../../redux/actions";
 
 function FormCreateProduct() {
+
+/* ========================* ESTADO LOCAL  *======================== */
   const [product, setProduct] = useState({
     name: "",
     slug: "",
@@ -20,6 +22,7 @@ function FormCreateProduct() {
   const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
   const [newCategoryInputValue, setNewCategoryInputValue] = useState("");
   
+/* ========================* FUNCION PARA QUE CAMBIEN EL VALUE *======================== */
   const handleChange = (event) => {
     const { name, value } = event.target;
     setProduct({ ...product, [name]: value });
@@ -35,7 +38,8 @@ function FormCreateProduct() {
     setNewCategoryInputValue(event.target.value);
     setProduct({ ...product, category: event.target.value });
   };
-  
+
+/* ========================* FUNCION PARA QUE SE ENVIEN *======================== */
   async function handleSubmit(event) {
     event.preventDefault();
     if (product.category === "New category" && product.category !== "") {
@@ -60,8 +64,11 @@ function FormCreateProduct() {
   }, [dispatch]);
 
   return (
+/* ================== * CONTENEDOR GENERAL * ================== */
     <div className="createProductContainer">
+{/* ================== * CONTENEDOR FORMULARIO * ================== */}
       <form onSubmit={handleSubmit}>
+{/* ================== * NOMBRE * ================== */}
         <div className="labelContainer">
           <label className="label">
             Name
@@ -74,6 +81,7 @@ function FormCreateProduct() {
             />
           </label>
         </div>
+{/* ================== * SLUG * ================== */}
         <div className="labelContainer">
           <label className="label">
             Slug
@@ -86,6 +94,7 @@ function FormCreateProduct() {
             />
           </label>
         </div>
+{/* ================== * PRECIO * ================== */}
         <div className="labelContainer">
           <label className="label">
             Price
@@ -98,6 +107,7 @@ function FormCreateProduct() {
             />
           </label>
         </div>
+{/* ================== * CATEGORIA * ================== */}
         <div className="labelContainer">
     <label className="label">
       Category
@@ -125,6 +135,7 @@ function FormCreateProduct() {
       )}
     </label>
   </div>
+{/* ================== * MARCA * ================== */}
         <div className="labelContainer">
           <label className="label">
             Brand
@@ -137,6 +148,7 @@ function FormCreateProduct() {
             />
           </label>
         </div>
+{/* ================== * STOCK * ================== */}
         <div className="labelContainer">
           <label className="label">
             Stock
@@ -149,6 +161,7 @@ function FormCreateProduct() {
             />
           </label>
         </div>
+{/* ================== * DESCRIPCION * ================== */}
         <div className="labelContainer">
           <label className="label">
             Description
@@ -160,6 +173,7 @@ function FormCreateProduct() {
             />
           </label>
         </div>
+{/* ================== * BOTON DE CREAR * ================== */}
         <div className="btnContainer">
           <button className="btn" type="submit">
             Create Product
