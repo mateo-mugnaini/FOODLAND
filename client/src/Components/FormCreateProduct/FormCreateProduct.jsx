@@ -71,13 +71,16 @@ function FormCreateProduct() {
             <div className="labelContainer">
               <label className="label">
                 Category
-                <input
+                <select name="category">
+                  <option value=""></option>
+                </select>
+                {/* <input
                   className="input"
                   type="text"
                   value={product.category}
                   onChange={hadlerChange}
                   name="category"
-                />
+                /> */}
               </label>
             </div>
             <div className="labelContainer">
