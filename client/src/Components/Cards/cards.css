@@ -35,12 +35,9 @@ text-decoration: none;
 
 
 
-/* ---- PRODUCTS ----- */
+/* ---- PRODUCTS CARDS ----- */
 
-.cardContainer {
-    display: flex;
-background-color: aqua;
-}
+
 .product {
     box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.247);
     border-radius: 10px;
@@ -50,6 +47,7 @@ background-color: aqua;
     justify-content:space-between;
     align-items:center;
     color: black;
+    height: 100%;
    
 }
 
