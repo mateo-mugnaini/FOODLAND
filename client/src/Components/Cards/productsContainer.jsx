@@ -2,19 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 import "../Cards/cards.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import ProductCard from "./productCard";
+import { getAllProducts, handle_sorts } from "../../redux/actions";
 import Filters from "./Filters";
 
 //IMPORT ACTIONS
 import { getAllProducts } from "../../redux/actions";
 
+
 const ProductsContainer = () => {
+
+
+  const { categoriesId } = useParams();
 
   /* IMPORT STATES */
   const { products, display } = useSelector((state) => state);
-
-  const allProduct = products.products // Constante para traer mas facil los productos
 
   /* PAGINADO */
   const [numeroPagina, setNumeroPagina] = useState(1);
@@ -24,31 +27,53 @@ const ProductsContainer = () => {
   const conteoInicial = conteoFinal - grupo;
 
   const aux =
-  allProduct && allProduct.slice
-      ? allProduct.slice(conteoInicial, conteoFinal)
+  products && products.slice
+      ? products.slice(conteoInicial, conteoFinal)
       : [];
 
       
 
   const page = [];
 
-  const pageNum = Math.ceil(allProduct?.length / grupo);
+  const pageNum = Math.ceil(products?.length / grupo);
 
   for (let i = 1; i <= pageNum; i++) {
     page.push(i);
   }
 
+
+  function handleSorts(e) {
+    e.preventDefault();
+    dispatch(handle_sorts(e.target.value))
+  }
+
+
   /* DISPATCH PARA TRAER LOS PRODUCTOS */
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllProducts(categoriesId));
   }, [dispatch]);
 
-  // console.log(product);
   return (
     <div >
-      <Filters/>
+    
+        <Filters/>
+        
+       <div className='selectDiv'>
+
+<select onChange={handleSorts} >
+ <option value="">Ordenar por</option>
+ <option value="asc">A-Z</option>
+ <option value="desc">Z-A</option>
+ <option value="higher_price">Mayor precio</option>
+ <option value="lower_price">Menor precio </option>
+ <option value="best_score">Mayor puntuado</option>
+ <option value="worst_score">Menor puntuado </option>
+</select>
+
+    </div>
+
       <div className="CardContainer"> 
       {display ? (
         <Loader />
@@ -56,6 +81,7 @@ const ProductsContainer = () => {
           Array.isArray(aux) ? (
             aux?.map((e) => (
               <ProductCard
+              key={e.id}
               name={e.name}
               price={e.price}
               image={e.image}
@@ -100,3 +126,4 @@ const ProductsContainer = () => {
 };
 
 export default ProductsContainer;
+

@@ -33,7 +33,7 @@ function App() {
           key="DetailProducts"
         ></Route>
            <Route
-          path="/categorys/:categoryId"
+          path="/categories/:categoriesId"
           element={<ProductsContainer />}
           name="Products"
           key="Products"

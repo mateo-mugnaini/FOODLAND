@@ -22,7 +22,9 @@ const SearchBar = () => {
     
     const filteredProducts = aux?.filter((product) => product.name.includes(search.name) );
     
+
     // console.log(filteredProducts);
+
 
     const inputHandler = (e) => { 
         e.preventDefault(e);
