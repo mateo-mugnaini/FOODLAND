@@ -34,9 +34,9 @@ const SearchBar = () => {
     };
 
     return (
-        <div name="ContainerSearch" class="ContainerSearch">
-            <input type='text' value={search.name} onChange={inputHandler} class="Search" placeholder="Search products ..."></input>
-            <button onClick={() => onClickHandler(search.name)} class="butonSearch"><img src="https://tinypic.host/images/2023/04/27/lupa2.png" alt="iconLupa" class="Lup"/>
+        <div name="ContainerSearch" className="ContainerSearch">
+            <input type='text' value={search.name} onChange={inputHandler} className="Search" placeholder="Search products ..."></input>
+            <button onClick={() => onClickHandler(search.name)} className="butonSearch"><img src="https://tinypic.host/images/2023/04/27/lupa2.png" alt="iconLupa" className="Lup"/>
             </button> 
         </div>
     )

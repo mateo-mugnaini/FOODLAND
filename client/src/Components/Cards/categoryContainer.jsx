@@ -22,12 +22,18 @@ const CategoryContainer = () => {
 
   return (
     <div className='CardContainer'>
+    <div className='Breadcrumb'>
+<div className='bc-item'>
+  <a href="../../dashboard/default">CATEGORIES</a>
+</div>
+
+</div>
       {categories.map((e) => (
       <NavLink to={`/categories/${e}`} >  
       <CategoryCard
      key={e}
-     name={e}
-     image={e.image}
+     name={e._id}
+     image={e.imageCategory}
      />  
      </NavLink>
       )

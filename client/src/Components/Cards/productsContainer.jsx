@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
@@ -25,8 +26,7 @@ const ProductsContainer = () => {
   products && products.slice
       ? products.slice(conteoInicial, conteoFinal)
       : [];
-
-      
+   
 
   const page = [];
 
@@ -36,6 +36,7 @@ const ProductsContainer = () => {
     page.push(i);
   }
 
+  /* FUNCION DE ORDENAMIENTO  */
 
   function handleSorts(e) {
     e.preventDefault();
@@ -51,18 +52,18 @@ const ProductsContainer = () => {
   }, [dispatch]);
 
   return (
-    <div >
-       <div className='selectDiv'>
+    <div className="productsContainer">
+      <div className='selectDiv'>
 
-<select onChange={handleSorts} >
- <option value="">Ordenar por</option>
- <option value="asc">A-Z</option>
- <option value="desc">Z-A</option>
- <option value="higher_price">Mayor precio</option>
- <option value="lower_price">Menor precio </option>
- <option value="best_score">Mayor puntuado</option>
- <option value="worst_score">Menor puntuado </option>
-</select>
+     <select className="selectInput" onChange={handleSorts} >
+      <option value="">Ordenar por</option>
+      <option value="asc">A-Z</option>
+      <option value="desc">Z-A</option>
+      <option value="higher_price">Mayor precio</option>
+      <option value="lower_price">Menor precio </option>
+      <option value="best_score">Mayor puntuado</option>
+      <option value="worst_score">Menor puntuado </option>
+     </select>
 
     </div>
       <div className="CardContainer"> 
@@ -86,7 +87,7 @@ const ProductsContainer = () => {
       )} 
       </div>
     <div className="containerPaginated">
-    <div>
+    
         <button
           className="btnPag"
           onClick={() => setNumeroPagina(numeroPagina - 1)}
@@ -112,7 +113,7 @@ const ProductsContainer = () => {
         </button>
       </div>
     </div>
-    </div>
+  
   );
 };
 
