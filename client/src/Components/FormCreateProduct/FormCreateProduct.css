@@ -1,20 +1,66 @@
-.label{
+.formProductContainer {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.247);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 60px;
+  }
+  
+  .formCreate {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .labelContainer {
     display: flex;
     flex-direction: column;
     font-size: 23px;
+    gap: 10px;
+  }
+  
+  .label {
+    display: flex;
+    flex-direction: column;
     gap: 5px;
-}
-
-.input{
+    font-size: 20px;
+  }
+  
+  .input {
     font-size: 20px;
     border: 2px black solid;
     border-radius: 20px;
+    width: 300px;
     text-align: center;
     gap: 5px;
-}
+  }
 
-.btn{
+  .inputDescription{
+    font-size: 20px;
+    border: 2px black solid;
+    border-radius: 20px;
+    width: 940px;
+    height: 200px;
+    text-align: center;
+    gap: 5px;
+  }
+  
+  .btnContainer {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .btn {
     font-size: 20px;
     border: none;
     border-radius: 20px;
@@ -22,15 +68,5 @@
     height: 40px;
     color: aliceblue;
     background-color: black;
-}
-
-.containerPreview{
-    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.247);
-    border-radius: 10px;
-    padding:10px 0 10px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content:space-between;
-    align-items:center;
-    color: black;
-}
+  }
+  
