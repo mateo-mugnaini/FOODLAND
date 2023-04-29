@@ -6,42 +6,46 @@ import { useDispatch, useSelector } from "react-redux";
 //IMPORT ACTION:
 import { getAllProducts , resultSearch} from "../../redux/actions";
 
-const SearchBar = () => { 
-
-    const dispatch = useDispatch(); 
+const SearchBar = () => {
+    const dispatch = useDispatch();
     const [search, setSearch] = useState({
-        name:"", });
-
-    const products = useSelector((state) => state.products);
-    const aux = products.products;
-
-    // Traigo los productos 
-    useEffect(() => { dispatch(getAllProducts()); 
+      name: "",
+    });
+    const [filtered, setfiltered] = useState([]);
+  
+    useEffect(() => {
+      dispatch(getAllProducts());
     }, [dispatch]);
-    
-    
-    const filteredProducts = aux?.filter((product) => product.name.includes(search.name) );
-    
-
-    // console.log(filteredProducts);
-
-
-    const inputHandler = (e) => { 
-        e.preventDefault(e);
-        setSearch({ name: e.target.value }); 
+  
+    const products = useSelector((state) => state.products ? state.products : [])
+  
+    const inputHandler = (e) => {
+      e.preventDefault(e);
+      setSearch({ ...search, name: e.target.value });
     };
-    
-    const onClickHandler = () => { 
-        dispatch(resultSearch(filteredProducts)) 
+  
+    const filteredProducts = products?.filter((product) => 
+      product.name.toLowerCase().includes(search.name.toLowerCase())
+    );
+  
+    const onClickHandler = () => {
+      setfiltered(filteredProducts);
+      dispatch(resultSearch(filteredProducts));
     };
-
+  
     return (
-        <div name="ContainerSearch" className="ContainerSearch">
-            <input type='text' value={search.name} onChange={inputHandler} className="Search" placeholder="Search products ..."></input>
-            <button onClick={() => onClickHandler(search.name)} className="butonSearch"><img src="https://tinypic.host/images/2023/04/27/lupa2.png" alt="iconLupa" className="Lup"/>
-            </button> 
-        </div>
-    )
-}
-
+      <div name="ContainerSearch" className="ContainerSearch">
+        <input
+          type="text"
+          value={search.name}
+          onChange={inputHandler}
+          className="Search"
+          placeholder="Search products ..."
+        ></input>
+        <button onClick={onClickHandler} className="butonSearch">
+          <img src="https://tinypic.host/images/2023/04/27/lupa2.png" alt="iconLupa" className="Lup" />
+        </button>
+      </div>
+    );
+  }
 export default SearchBar

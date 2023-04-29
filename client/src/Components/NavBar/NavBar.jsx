@@ -23,9 +23,9 @@ return (
                         {/* -----------Cart list--------------*/}
                     <li ><img src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png" alt="iconsWidget" className="iconsNav1"/>
                             <ul className="ulNav">
-                                <li><a href="/">My cart:</a></li>
+                                <li><a href="/MyCart">My cart:</a></li>
                                 <li><a href="/"><span>Products</span></a></li>
-                                <li><a href="/"><span> My cart</span></a></li>
+                                <li><a href="/MyCart"><span> My cart</span></a></li>
                             </ul>
                     </li>
                         {/* -----------Login list --------------*/}
