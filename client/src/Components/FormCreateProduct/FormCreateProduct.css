@@ -68,5 +68,11 @@
     height: 40px;
     color: aliceblue;
     background-color: black;
+    cursor: pointer;
   }
+
+.btn:hover{
+    color: black;
+    background-color: #30925E;
+}
   
