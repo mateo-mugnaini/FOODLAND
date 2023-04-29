@@ -1,5 +1,6 @@
 .formProductContainer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     width: 80%;
     margin: 0 auto;
@@ -75,4 +76,18 @@
     color: black;
     background-color: #30925E;
 }
-  
+
+.vistaPrevia{
+    width: 100%;
+}
+
+.vsContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.vsImg{
+    width: 400px;
+}
