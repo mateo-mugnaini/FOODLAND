@@ -3,7 +3,8 @@ import azucar from "../../Imgs/azucar.jpg"
 import  "./DetailCard.css"
 import { useParams, NavLink } from "react-router-dom"
 import { products } from "../../Components/products"
-
+import Rating from '../../Components/Rating/rating'
+import "../Detail/DetailCard.css"
 
 
 const DetailCard = () => {
@@ -36,6 +37,7 @@ const DetailCard = () => {
         <h1>{product.name}</h1>
         <h4>({product.price} x 1K )</h4>
         <h2>${product.price}</h2>
+        <span ><Rating rating={product.rating} numReviews={product.numReviews}/></span>
         <div className="contador">
                 <button>-</button>
                 1

@@ -94,6 +94,8 @@ const ProductsContainer = () => {
               name={e.name}
               price={e.price}
               image={e.image}
+              rating={e.rating}
+              numReviews={e.numReviews}
               />
             ))
           ) : (
