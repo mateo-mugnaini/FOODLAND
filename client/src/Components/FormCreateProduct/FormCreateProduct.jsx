@@ -67,9 +67,9 @@ function FormCreateProduct() {
 
   return (
 /* ================== * CONTENEDOR GENERAL * ================== */
-    <div className="createProductContainer">
+    <div className="formProductContainer">
 {/* ================== * CONTENEDOR FORMULARIO * ================== */}
-      <form onSubmit={handleSubmit}>
+      <form className="formCreate" onSubmit={handleSubmit}>
 {/* ================== * NOMBRE * ================== */}
         <div className="labelContainer">
           <label className="label">
@@ -114,6 +114,7 @@ function FormCreateProduct() {
     <label className="label">
       Category
       <select
+      className="input"
         name="category"
         value={product.category}
         onChange={handleChange}
@@ -168,7 +169,7 @@ function FormCreateProduct() {
           <label className="label">
             Description
             <textarea
-              className="input"
+              className="inputDescription"
               value={product.description}
               onChange={handleChange}
               name="description"

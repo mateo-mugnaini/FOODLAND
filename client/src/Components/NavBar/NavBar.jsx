@@ -1,7 +1,7 @@
 import SearchBar from "./SearchBar"
 
 //IMPORT IMAGES
-import logo from "../../Imgs/LogosSVG/logo-color.png"
+import logo from "../../Imgs/LogosSVG/logo-no-background.png"
 
 //IMPORT ESTILOS
 import "./NavBar.css"
