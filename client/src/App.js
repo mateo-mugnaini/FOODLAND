@@ -8,6 +8,7 @@ import DetailCard from "./Views/Detail/DetailCard";
 import CreateProduct from "./Views/CreateProduct/CreateProduct";
 import ProductsContainer from "./Components/Cards/productsContainer";
 import About from "./Views/About/About";
+import MyCart from "./Views/MyCart/MyCart";
 
 function App() {
   const location = useLocation();
@@ -50,7 +51,7 @@ function App() {
           name="ProfileUser"
           key="ProfileUser"
         ></Route>
-        <Route path="/widget" element={""} name="Widget" key="Widget"></Route>
+        <Route path="/MyCart" element={<MyCart/>} name="MyCart" key="MyCart"></Route>
         {/* -----------------Routes Admins -----------------*/}
         <Route
           path="/ordersUs"
