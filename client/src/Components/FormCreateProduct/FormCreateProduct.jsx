@@ -20,39 +20,39 @@ function FormCreateProduct() {
     stock: 0,
     description: "",
   });
-  const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
-  const [newCategoryInputValue, setNewCategoryInputValue] = useState("");
+  // const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
+  // const [newCategoryInputValue, setNewCategoryInputValue] = useState("");
 
   /* ========================* FUNCION PARA QUE CAMBIEN EL VALUE *======================== */
   const handleChange = (event) => {
     const { name, value } = event.target;
     setProduct({ ...product, [name]: value });
 
-    if (value === "New category") {
-      setShowNewCategoryInput(true);
-    } else {
-      setShowNewCategoryInput(false);
-    }
+    // if (value === "New category") {
+    //   setShowNewCategoryInput(true);
+    // } else {
+    //   setShowNewCategoryInput(false);
+    // }
   };
 
-  const handleNewCategoryInputChange = (event) => {
-    setNewCategoryInputValue(event.target.value);
-    setProduct({ ...product, category: event.target.value });
-  };
+  // const handleNewCategoryInputChange = (event) => {
+  //   setNewCategoryInputValue(event.target.value);
+  //   setProduct({ ...product, category: event.target.value });
+  // };
 
   /* ========================* FUNCION PARA QUE SE ENVIEN *======================== */
   async function handleSubmit(event) {
     event.preventDefault();
-    if (product.category === "New category" && product.category !== "") {
-      await axios.post("http://localhost:5000/api/categories", {
-        name: product.category,
-      });
-      dispatch(addCategory({ name: product.category }));
-      setProduct({
-        ...product,
-        category: product.category,
-      });
-    }
+    // if (product.category === "New category" && product.category !== "") {
+    //   await axios.post("http://localhost:5000/api/categories", {
+    //     name: product.category,
+    //   });
+    //   dispatch(addCategory({ name: product.category }));
+    //   setProduct({
+    //     ...product,
+    //     category: product.category,
+    //   });
+    // }
     await axios.post("http://localhost:5000/api/products", product);
     window.alert("El producto ha sido creado con éxito!!");
   }
@@ -124,17 +124,7 @@ function FormCreateProduct() {
                   {category._id}
                 </option>
               ))}
-              <option value="New category">New category</option>
             </select>
-            {showNewCategoryInput && (
-              <input
-                className="input"
-                type="text"
-                value={newCategoryInputValue}
-                onChange={handleNewCategoryInputChange}
-                name="category"
-              />
-            )}
           </label>
         </div>
         {/* ================== * MARCA * ================== */}
@@ -195,10 +185,10 @@ function FormCreateProduct() {
           </div>
           <div className="vsContent">
             <div>
-            <h2>{product.name}</h2>
-            <h2>${product.price}</h2>
-            <h2>{product.category}</h2>
-            <h2>{product.brand}</h2>
+              <h2>{product.name}</h2>
+              <h2>${product.price}</h2>
+              <h2>{product.category}</h2>
+              <h2>{product.brand}</h2>
             </div>
             <img className="vsImg" src={product.image} />
           </div>
