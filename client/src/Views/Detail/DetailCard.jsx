@@ -32,8 +32,8 @@ const DetailCard = () => {
                   {product.category}   
                  </NavLink>
                  <p>/</p>    
-                 <NavLink className="active" to={`/detail/${id}`}>
-                  {id}
+                 <NavLink className="active" to={`/detail/${product["_id"]}`}>
+                  {product.name}
                  </NavLink>    
       </div>
     
