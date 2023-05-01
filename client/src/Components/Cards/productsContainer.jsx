@@ -92,6 +92,7 @@ const ProductsContainer = () => {
             aux?.map((e) => (
               <ProductCard
               key={e.id}
+              id={e.id}
               name={e.name}
               price={e.price}
               image={e.image}

@@ -2,10 +2,10 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 import Rating from "../Rating/rating"
 
-const ProductCard = ({name,price,image, rating, numReviews}) =>{
+const ProductCard = ({id,name,price,image, rating, numReviews}) =>{
 
     return(
-      <NavLink className="productCard" to={`/detail/${encodeURI(name)}`}> 
+      <NavLink className="productCard" to={`/detail/${encodeURI(id)}`}> 
       <div 
       className="product" 
         >

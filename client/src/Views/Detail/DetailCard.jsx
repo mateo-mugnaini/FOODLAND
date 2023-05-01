@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import  "./DetailCard.css"
 import { useParams, NavLink } from "react-router-dom"
-import { products } from "../../Components/products"
+// import { products } from "../../Components/products"
 import Rating from '../../Components/Rating/rating'
 import "../Detail/DetailCard.css"
 
@@ -20,8 +20,8 @@ const DetailCard = () => {
 
 
   useEffect(() => {
-    dispatch(getDetail("123"));
-  }, [dispatch]);
+    dispatch(getDetail(decodedName));
+  }, [dispatch,decodedName]);
 
   return (
     <div className='DetailCardCont'>

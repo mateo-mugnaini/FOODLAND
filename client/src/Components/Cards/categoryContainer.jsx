@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {categorys} from "../categorys.js"
+// import {categorys} from "../categorys.js"
 import CategoryCard from './categoryCard'
 import { NavLink } from 'react-router-dom'
 import "./cards.css"
