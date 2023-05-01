@@ -18,6 +18,13 @@ export function ready() {
   };
 }
 
+function getProducts(data) {
+  return {
+    type: action.GET_PRODUCTS,
+    payload: data,
+  };
+}
+
 /* ========================*  PRODUCTS *======================== */
 
 export const getAllProducts = (category) => {
@@ -25,7 +32,6 @@ export const getAllProducts = (category) => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-
       const arrayProducts = response.data.products;
       const productosFiltrados = arrayProducts.filter((producto) => {
         return producto.category === category;
@@ -80,7 +86,8 @@ export const getAllCategories = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products/categories`);
-
+      const products = await axios.get(`${URL}/api/products`);
+      dispatch(getProducts(products.data.products));
       dispatch({
         type: action.GET_ALL_CATEGORIES,
         payload: response.data,

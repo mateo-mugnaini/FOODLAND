@@ -178,7 +178,9 @@ const rootReducer = (state = initialState, action) => {
     case RESULTSEARCH:
       return {
         ...state,
-        products: action.payload,
+        products: state.AllProducts.filter((product) =>
+          product.name.toLowerCase().includes(action.payload.toLowerCase())
+        ),
       };
     case RESULTSEARCH2: //>>>> EN HOME Y EN PRODUCTS
       return {
@@ -197,7 +199,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_PRODUCTS:
       return {
         ...state,
-        Allproducts: action.payload,
+        AllProducts: action.payload,
       };
     default:
       return { ...state };
