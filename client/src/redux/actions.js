@@ -110,6 +110,12 @@ export function handle_sorts(payload) {
     payload,
   };
 }
+export function handle_sorts2(payload) {
+  return {
+    type: "HANDLE_SORTS",
+    payload,
+  };
+}
 
 /* ========================*  SEARCH*======================== */
 export const resultSearch = (result) => {
