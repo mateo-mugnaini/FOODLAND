@@ -9,6 +9,7 @@ import CreateProduct from "./Views/CreateProduct/CreateProduct";
 import ProductsContainer from "./Components/Cards/productsContainer";
 import About from "./Views/About/About";
 import MyCart from "./Views/MyCart/MyCart";
+import SigninScreen from "./Views/Login/signinScreen";
 
 function App() {
   const location = useLocation();
@@ -19,7 +20,7 @@ function App() {
       <Routes>
         {/* -----------------Routes generals -----------------*/}
         <Route exact path="/" element={<Home />} name="Home" key="Home"></Route>
-        <Route path="/login" element={""} name="Login" key="Login"></Route>
+        <Route path="/login" element={<SigninScreen/>} name="Login" key="Login"></Route>
         <Route
           path="/register"
           element={""}
