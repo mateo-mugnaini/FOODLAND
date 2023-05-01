@@ -31,7 +31,8 @@ export const getAllProducts = (category) => {
         return producto.category === category;
       });
 
-      console.log("estoy filtrado", productosFiltrados);
+      // console.log("estoy filtrado", productosFiltrados);
+      // console.log("aaaa", response.data.products);
 
       dispatch({
         type: action.GET_ALL_PRODUCTS,
@@ -42,6 +43,29 @@ export const getAllProducts = (category) => {
       console.log(error);
       dispatch({
         type: action.GET_ALL_PRODUCTS,
+        payload: error,
+      });
+      dispatch(ready());
+    }
+  };
+};
+
+export const getDetail = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(loading());
+      const response = await axios.get(`${URL}/api/products/slug/${id}`);
+
+      console.log(response.data);
+      dispatch({
+        type: action.DETAIL_PRODUCT,
+        payload: response.data,
+      });
+      dispatch(ready());
+    } catch (error) {
+      console.log(error, "WWWW");
+      dispatch({
+        type: action.DETAIL_PRODUCT,
         payload: error,
       });
       dispatch(ready());

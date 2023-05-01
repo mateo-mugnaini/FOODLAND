@@ -1,17 +1,27 @@
-import React from 'react'
-import azucar from "../../Imgs/azucar.jpg"
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import  "./DetailCard.css"
 import { useParams, NavLink } from "react-router-dom"
 import { products } from "../../Components/products"
 import Rating from '../../Components/Rating/rating'
 import "../Detail/DetailCard.css"
 
+import {getDetail} from "../../redux/actions"
 
 const DetailCard = () => {
   const { id } = useParams();
   const decodedName = decodeURI(id);
-  const product = products.find((product) => product.name === decodedName);
+  const {product} = useSelector((state) => state)
+  
+  // const product = products.find((product) => product.name === decodedName);
+  const dispatch = useDispatch();
 
+  console.log(product);
+
+
+  useEffect(() => {
+    dispatch(getDetail("123"));
+  }, [dispatch]);
 
   return (
     <div className='DetailCardCont'>
