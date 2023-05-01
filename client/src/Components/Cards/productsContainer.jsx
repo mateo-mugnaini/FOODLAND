@@ -61,11 +61,11 @@ const ProductsContainer = () => {
       <div className='select_and_breadcrumb'>
       <div className="breadcrumb">
                 <NavLink to="/">
-                  CATEGORIES   /
+                  Categories  
                   </NavLink>
-
-                 <NavLink className="active" to={`/categories/${categoriesId}`}>
-                  CATEGORY NAME   
+                  <p>/</p>
+                 <NavLink to={`/categories/${categoriesId}`}>
+                  {categoriesId} 
                  </NavLink>        
       </div>
      <select className="selectInput" onChange={handleSorts} >
@@ -80,10 +80,11 @@ const ProductsContainer = () => {
 
     </div>
       <div className="filter_and_products">
-      <div className="FilterContainer"> 
+      <div className="sidebar"> 
       <Filters/>
       </div>
-      <div className="CardContainer">
+      <div className="CardContainerProd">
+      <div className="products">
       {display ? (
         <Loader />
       ) : (        
@@ -103,33 +104,33 @@ const ProductsContainer = () => {
           )  
       )} 
       </div>
+      <div className="containerPaginated">
+    
+    <button
+      className="btnPag"
+      onClick={() => setNumeroPagina(numeroPagina - 1)}
+      disabled={numeroPagina === 1}
+    >
+      Back
+    </button>
+    {page.map((page) => (
+      <button
+        key={page}
+        className={`btnPag ${page === numeroPagina ? "active" : ""}`}
+        onClick={() => setNumeroPagina(page)}
+      >
+        {page}
+      </button>
+    ))}
+    <button
+      className="btnPag"
+      onClick={() => setNumeroPagina(numeroPagina + 1)}
+      disabled={numeroPagina === pageNum}
+    >
+      Next
+    </button>
+    </div>
       </div>
-    
-    <div className="containerPaginated">
-    
-        <button
-          className="btnPag"
-          onClick={() => setNumeroPagina(numeroPagina - 1)}
-          disabled={numeroPagina === 1}
-        >
-          Back
-        </button>
-        {page.map((page) => (
-          <button
-            key={page}
-            className={`btnPag ${page === numeroPagina ? "active" : ""}`}
-            onClick={() => setNumeroPagina(page)}
-          >
-            {page}
-          </button>
-        ))}
-        <button
-          className="btnPag"
-          onClick={() => setNumeroPagina(numeroPagina + 1)}
-          disabled={numeroPagina === pageNum}
-        >
-          Next
-        </button>
       </div>
     </div>
   

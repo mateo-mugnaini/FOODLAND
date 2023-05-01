@@ -5,7 +5,7 @@ import Rating from "../Rating/rating"
 const ProductCard = ({name,price,image, rating, numReviews}) =>{
 
     return(
-      <NavLink to={`/detail/${encodeURI(name)}`}> 
+      <NavLink className="productCard" to={`/detail/${encodeURI(name)}`}> 
       <div 
       className="product" 
         >

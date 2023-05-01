@@ -2,10 +2,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    align-items: flex-start;
     height: 600px;
+    margin-top: 3%;
 
 }
 
+
+.DetailCardCont .breadcrumb {
+    margin-left: 2%;
+    display: flex;
+    width: 51%;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 2%;}
+
+.DetailCardCont .breadcrumb p {
+    margin-left: 1%;
+    margin-right: 1%;
+    color: green;
+}
 .detail-img {
   
 width: 50%;
@@ -22,8 +38,9 @@ width: 70%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 5%;
+    padding-left: 6%;
 }
+
 
 .detail-info h1 {
 padding-top: 5px;
@@ -39,13 +56,16 @@ margin-top: 0;
  
     margin-bottom: 0;
 }
- 
+
+.detail-info span {
+    margin-bottom: 3%;
+}
 
 .addButton{
     height: 35px;
-    width: 20%;
-    background-color:#54B216;
-    margin: 4% 0 7% 0;
+    width: 26%;
+    background-color: #54B216;
+    margin: 4% 0 5% ;
     border: transparent;
     font-size: 15px;
     font-weight: 500;
@@ -56,39 +76,39 @@ margin-top: 0;
 
 .returnButton{
     height: 35px;
-    width: 30%;
+    width: 37%;
     border: transparent;
     font-size: 15px;
     font-weight: 500;
     border-radius: 7px;
 }
-
+.returnButton:hover {
+    background-color: rgba(95, 95, 95, 0.226);
+}
 .contador {
     display: flex;
     justify-content: space-between;
-    
- width: 15%;
+    align-items: center;
+    width: 18%;
+    margin-top: 2%;
+    margin-bottom: 2%;
  }
 
- /* --- BREADCRUMB ---- */
-
- .breadcrumb{
+ .contador button {
+    width: 35px;
+    height: 35px;
     display: flex;
-    margin-left: 5%;
-    width: 35%;
-    margin-top: 3%;
-}
-.breadcrumb a {
-    font-size: 16px;
-    text-decoration: none;
-  
-    width: 35%;
-    margin-left: -10%;
-    display: flex;
-    color: black;
-   
-}
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    color: rgb(51, 51, 51);
+    background-color: rgba(146, 146, 146, 0.096);
+    border: transparent;
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.623);
 
-.breadcrumb a:hover{
-    color: greenyellow;
-}
+ }
+
+ .contador button:hover {
+    background-color:#54B216
+ }
