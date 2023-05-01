@@ -3,6 +3,17 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
+/* ========================* IMPORT VALIDACIONES  *======================== */
+import {
+  ValidateName,
+  ValidateBrand,
+  ValidateCategory,
+  ValidateDescription,
+  ValidatePrice,
+  ValidateSlug,
+  ValidateStock,
+} from "./Validations";
+
 /* ========================* IMPORT STYLES  *======================== */
 import "../FormCreateProduct/FormCreateProduct.css";
 
@@ -90,7 +101,7 @@ function FormCreateProduct() {
               className="input"
               type="text"
               value={product.name}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidateName)}
               name="name"
             />
           </label>
