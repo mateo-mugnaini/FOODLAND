@@ -12,10 +12,10 @@ const NavBar = () => {
 return (
     <div name="ContainerNav" key="ContainerNav" className="ContainerNav">
             {/* -------------------Logo FootLand --------------*/}
-        <Link href="/" className="LinkLogo"><img src={logoSvg} alt="LogoFoodLand" className="LogoFoodLand"/></Link>
+        <Link to="/" className="LinkLogo"><img src={logoSvg} alt="LogoFoodLand" className="LogoFoodLand"/></Link>
 
         <SearchBar/>
-        <Link href="/create" className="linkNavbar">Create Product</Link>
+        <Link to="/create" className="linkNavbar">Create Product</Link>
 
             {/* -----------Cart & Login Icons on Nav--------------*/}
         <div id="header" className="headerNavList">
