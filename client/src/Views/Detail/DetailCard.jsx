@@ -16,8 +16,6 @@ const DetailCard = () => {
   // const product = products.find((product) => product.name === decodedName);
   const dispatch = useDispatch();
 
-  console.log(product);
-
 
   useEffect(() => {
     dispatch(getDetail(decodedName));

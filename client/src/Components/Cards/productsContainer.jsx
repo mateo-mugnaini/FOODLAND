@@ -18,7 +18,6 @@ const ProductsContainer = () => {
 
   /* IMPORT STATES */
   const { products, display } = useSelector((state) => state);
-
   /* PAGINADO */
   const [numeroPagina, setNumeroPagina] = useState(1);
 
@@ -53,7 +52,7 @@ const ProductsContainer = () => {
 
   useEffect(() => {
     dispatch(getAllProducts(categoriesId));
-  }, [dispatch]);
+  }, [dispatch,categoriesId]);
 
   return (
     <div className="productsContainer">
@@ -89,17 +88,19 @@ const ProductsContainer = () => {
         <Loader />
       ) : (        
           Array.isArray(aux) ? (
-            aux?.map((e) => (
+            aux?.map((e) => {
+              const id= e['_id'];
+              return(
               <ProductCard
-              key={e.id}
-              id={e.id}
+              key={id}
+              id={id}
               name={e.name}
               price={e.price}
               image={e.image}
               rating={e.rating}
               numReviews={e.numReviews}
               />
-            ))
+            )})
           ) : (
             <p>Sin productos</p>
           )  
