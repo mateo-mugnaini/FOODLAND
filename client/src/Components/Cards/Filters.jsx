@@ -71,7 +71,7 @@ return (
                 min="1"
             />
         </div>
-        <br />
+      
         <button
             type="submit"
             className="butonFilter"

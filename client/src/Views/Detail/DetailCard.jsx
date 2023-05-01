@@ -14,17 +14,18 @@ const DetailCard = () => {
 
 
   return (
-    <div>
+    <div className='DetailCardCont'>
       <div className="breadcrumb">
                 <NavLink to="/">
-                  CATEGORIES   /
+                  Categories
                   </NavLink>
-
-                 <NavLink active to="/">
-                  CATEGORY NAME  / 
-                 </NavLink>    
+                  <p>/</p>
+                 <NavLink active to={`/categories/${product.category}`}>
+                  {product.category}   
+                 </NavLink>
+                 <p>/</p>    
                  <NavLink className="active" to={`/detail/${id}`}>
-                  PRODUCT NAME 
+                  {id}
                  </NavLink>    
       </div>
     

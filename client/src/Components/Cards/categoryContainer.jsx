@@ -21,11 +21,18 @@ const CategoryContainer = () => {
   }, [dispatch]);
 
   return (
-    <div>
-    <div className='breadcrumb'>
-    <NavLink to="/">CATEGORIES</NavLink>
+    <div className='categoryContainer'>
+      <div className='carrousel'>
+        
+        aca va el carrousel de ofertas
+
+      </div>
+    <div className='breadcrumbContainer'>
+      <div className='breadcrumb'>
+        <NavLink to="/">Categories</NavLink>
+      </div>
     </div>
-      <div className='CardContainer'>
+      <div className='CardContainerCat'>
       {categories.map((e) => (
       <NavLink to={`/categories/${e._id}`} >  
       <CategoryCard
