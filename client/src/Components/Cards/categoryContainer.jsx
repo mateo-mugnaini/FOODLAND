@@ -20,7 +20,7 @@ const CategoryContainer = () => {
 
   return (
     <div className="categoryContainer">
-      <div className="carrousel">aca va el carrousel de ofertas</div>
+      <h1>Recorre nuestros productos</h1>
       <div className="breadcrumbContainer">
         <div className="breadcrumb">
           <NavLink to="/">Categories</NavLink>

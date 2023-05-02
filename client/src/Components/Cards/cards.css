@@ -6,8 +6,18 @@ flex-direction: column;
 align-items: center;
 }
 
-.carrousel {background-color: rgba(95, 110, 110, 0.445);
-    
+.categoryContainer h1{
+    font-family: "Yanone Kaffeesatz";
+    margin-bottom: 0;
+    font-size: 40px;
+    color: white;
+  background-color: #4848487e; 
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
 }
 
 /* ----- CARD CONTAINER ------ */

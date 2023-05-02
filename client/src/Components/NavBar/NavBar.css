@@ -133,6 +133,7 @@ ul, ol {
 .nav li ul {
     display:none;  
     position: fixed;
+    z-index: 50;
     min-width: 140px;
     padding: 0px;
     margin-left: -166px;
