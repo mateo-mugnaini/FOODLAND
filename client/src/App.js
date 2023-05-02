@@ -10,6 +10,8 @@ import ProductsContainer from "./Components/Cards/productsContainer";
 import About from "./Views/About/About";
 import MyCart from "./Views/MyCart/MyCart";
 import SigninScreen from "./Views/Login/signinScreen";
+import ProductsSearch from "./Views/Products/ProductsSearch";
+
 
 function App() {
   const location = useLocation();
@@ -33,6 +35,12 @@ function App() {
           name="About"
           key="About"
         ></Route>
+        <Route
+          path="/productSearch"
+          element={<ProductsSearch />}
+          name="ResultSearchBarHome"
+          key="ResultSearchBarHome"
+        ></Route>
         {/* -----------------Routes Users -----------------*/}
         <Route
           path="/detail/:id"
@@ -52,7 +60,12 @@ function App() {
           name="ProfileUser"
           key="ProfileUser"
         ></Route>
-        <Route path="/MyCart" element={<MyCart/>} name="MyCart" key="MyCart"></Route>
+        <Route
+          path="/MyCart"
+          element={<MyCart />}
+          name="MyCart"
+          key="MyCart"
+        ></Route>
         {/* -----------------Routes Admins -----------------*/}
         <Route
           path="/ordersUs"

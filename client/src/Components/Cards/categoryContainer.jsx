@@ -1,15 +1,13 @@
-import React, {useEffect} from 'react'
-import {categorys} from "../categorys.js"
-import CategoryCard from './categoryCard'
-import { NavLink } from 'react-router-dom'
-import "./cards.css"
+import React, { useEffect } from "react";
+// import {categorys} from "../categorys.js"
+import CategoryCard from "./categoryCard";
+import { NavLink } from "react-router-dom";
+import "./cards.css";
 import { getAllCategories } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 
-
 const CategoryContainer = () => {
-
-    /* IMPORT STATES */
+  /* IMPORT STATES */
 
   const { categories } = useSelector((state) => state);
 
@@ -21,29 +19,22 @@ const CategoryContainer = () => {
   }, [dispatch]);
 
   return (
-    <div className='categoryContainer'>
-      <div className='carrousel'>
-        
-        aca va el carrousel de ofertas
-
+    <div className="categoryContainer">
+      <h1>Recorre nuestros productos</h1>
+      <div className="breadcrumbContainer">
+        <div className="breadcrumb">
+          <NavLink to="/">Categories</NavLink>
+        </div>
       </div>
-    <div className='breadcrumbContainer'>
-      <div className='breadcrumb'>
-        <NavLink to="/">Categories</NavLink>
+      <div className="CardContainerCat">
+        {categories.map((e) => (
+          <NavLink to={`/categories/${e._id}`}>
+            <CategoryCard key={e} name={e._id} image={e.imageCategory} />
+          </NavLink>
+        ))}
       </div>
     </div>
-      <div className='CardContainerCat'>
-      {categories.map((e) => (
-      <NavLink to={`/categories/${e._id}`} >  
-      <CategoryCard
-     key={e}
-     name={e._id}
-     image={e.imageCategory}
-     />  
-     </NavLink>
-      )
-    )}</div></div>
-  )
-}
+  );
+};
 
-export default CategoryContainer
+export default CategoryContainer;

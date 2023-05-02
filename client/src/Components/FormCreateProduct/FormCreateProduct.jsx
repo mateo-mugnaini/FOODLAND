@@ -1,7 +1,19 @@
 /* ========================* IMPORT GENERALES  *======================== */
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import {Link} from "react-router-dom"
 import axios from "axios";
+
+/* ========================* IMPORT VALIDACIONES  *======================== */
+import {
+  ValidateName,
+  ValidateBrand,
+  ValidateCategory,
+  ValidateDescription,
+  ValidatePrice,
+  ValidateSlug,
+  ValidateStock,
+} from "./Validations";
 
 /* ========================* IMPORT STYLES  *======================== */
 import "../FormCreateProduct/FormCreateProduct.css";
@@ -20,14 +32,27 @@ function FormCreateProduct() {
     stock: 0,
     description: "",
   });
+
+  const [errors, setErrors] = useState({});
+
   // const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
   // const [newCategoryInputValue, setNewCategoryInputValue] = useState("");
 
   /* ========================* FUNCION PARA QUE CAMBIEN EL VALUE *======================== */
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = (event, cb) => {
+    const { name, slug, price, category, brand, stock, description, value } =
+      event.target;
     setProduct({ ...product, [name]: value });
-
+    setErrors({
+      ...errors,
+      [name]: cb(value),
+      [slug]: cb(value),
+      [price]: cb(value),
+      [category]: cb(value),
+      [brand]: cb(value),
+      [stock]: cb(value),
+      [description]: cb(value),
+    });
     // if (value === "New category") {
     //   setShowNewCategoryInput(true);
     // } else {
@@ -67,6 +92,9 @@ function FormCreateProduct() {
   return (
     /* ================== * CONTENEDOR GENERAL * ================== */
     <div className="formProductContainer">
+      <Link to="/">
+      <button >HOME</button>
+      </Link>
       {/* ================== * CONTENEDOR FORMULARIO * ================== */}
       <form className="formCreate" onSubmit={handleSubmit}>
         {/* ================== * NOMBRE * ================== */}
@@ -77,10 +105,11 @@ function FormCreateProduct() {
               className="input"
               type="text"
               value={product.name}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidateName)}
               name="name"
             />
           </label>
+          {errors["name"]?.isValidation ? null : <p  className="errorFormCP">{errors?.name?.message}</p>}
         </div>
         {/* ================== * SLUG * ================== */}
         <div className="labelContainer">
@@ -90,10 +119,11 @@ function FormCreateProduct() {
               className="input"
               type="text"
               value={product.slug}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidateSlug)}
               name="slug"
             />
           </label>
+          {errors["slug"]?.isValidation ? null : <p  className="errorFormCP">{errors?.slug?.message}</p>}
         </div>
         {/* ================== * PRECIO * ================== */}
         <div className="labelContainer">
@@ -103,10 +133,12 @@ function FormCreateProduct() {
               className="input"
               type="number"
               value={product.price}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidatePrice)}
               name="price"
             />
           </label>
+          {errors["price"]?.isValidation ? null : (
+            <p  className="errorFormCP">{errors?.price?.message}</p>)}
         </div>
         {/* ================== * CATEGORIA * ================== */}
         <div className="labelContainer">
@@ -116,7 +148,7 @@ function FormCreateProduct() {
               className="input"
               name="category"
               value={product.category}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidateCategory)}
             >
               <option value="0">Select a category</option>
               {categories.map((category) => (
@@ -126,6 +158,9 @@ function FormCreateProduct() {
               ))}
             </select>
           </label>
+          {errors["category"]?.isValidation ? null : (
+            <p  className="errorFormCP">{errors?.category?.message}</p>
+          )}
         </div>
         {/* ================== * MARCA * ================== */}
         <div className="labelContainer">
@@ -135,10 +170,13 @@ function FormCreateProduct() {
               className="input"
               type="text"
               value={product.brand}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidateBrand)}
               name="brand"
             />
           </label>
+          {errors["brand"]?.isValidation ? null : (
+            <p  className="errorFormCP">{errors?.brand?.message}</p>
+          )}
         </div>
         {/* ================== * IMAGEN * ================== */}
         <div className="labelContainer">
@@ -148,10 +186,13 @@ function FormCreateProduct() {
               className="input"
               type="text"
               value={product.image}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ()=> ({isValidation: true, message: "",}))}
               name="image"
             />
           </label>
+          {errors["image"]?.isValidation ? null : (
+            <p className="errorFormCP">{errors?.image?.message}</p>
+          )}
         </div>
         {/* ================== * STOCK * ================== */}
         <div className="labelContainer">
@@ -161,10 +202,13 @@ function FormCreateProduct() {
               className="input"
               type="number"
               value={product.stock}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidateStock)}
               name="stock"
             />
           </label>
+          {errors["stock"]?.isValidation ? null : (
+            <p  className="errorFormCP">{errors?.stock?.message}</p>
+          )}
         </div>
         {/* ================== * DESCRIPCION * ================== */}
         <div className="labelContainer">
@@ -173,10 +217,13 @@ function FormCreateProduct() {
             <textarea
               className="inputDescription"
               value={product.description}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidateDescription)}
               name="description"
             />
           </label>
+          {errors["description"]?.isValidation ? null : (
+            <p  className="errorFormCP">{errors?.description?.message}</p>
+          )}
         </div>
         {/* ================== * Vista Previa * ================== */}
         <div className="vistaPrevia">

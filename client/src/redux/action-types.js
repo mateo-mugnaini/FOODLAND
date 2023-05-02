@@ -8,6 +8,8 @@ const CREATE_PRODUCT = "CREATE_PRODUCT"; // Action para crear un producto
 const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"; // Action para traer todos los productos
 const HANDLE_SORTS = "HANDLE_SORTS";
 const RESULTSEARCH = "RESULTSEARCH"; // Action que actualiza el estado global
+const DETAIL_PRODUCT = "DETAIL_PRODUCT"; // Action para traer el detalle
+const GET_PRODUCTS = "GET_PRODUCTS";
 
 /* ======================= FILTER ==========================*/
 const FILTERPRICE = "FILTERPRICE"; //Action que filtra por precio
@@ -30,4 +32,6 @@ module.exports = {
   ADD_CATEGORY_REQUEST,
   ADD_CATEGORY_SUCCESS,
   ADD_CATEGORY_FAILURE,
+  DETAIL_PRODUCT,
+  GET_PRODUCTS,
 };

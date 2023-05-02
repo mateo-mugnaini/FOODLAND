@@ -91,3 +91,10 @@
 .vsImg{
     width: 400px;
 }
+
+.errorFormCP{
+  color: red;
+  font-size: 15px;
+  margin-top: -10px;
+  margin-bottom: -20px;
+}

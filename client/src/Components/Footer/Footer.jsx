@@ -1,4 +1,5 @@
 //IMPORT IMAGES
+import { Link } from "react-router-dom"
 import logofoot from "../../Imgs/LogosSVG/logo-color.png"
 //IMPORT STYLES:
 import "./Footer.css"
@@ -51,10 +52,10 @@ const Footer = () =>{
                 </div>
                 <div name="Menupages" className="menuPages">
                 <h2>Menu</h2>
-                    <a href="/" name=""  className="linksMenu">Home</a>
-                    <a href="/products" name=""  className="linksMenu">Products</a>
-                    <a href="/" name=""  className="linksMenu">Contacs us</a>
-                    <a href="/about" name=""   className="linksMenu">About</a>
+                    <Link to="/" name=""  className="linksMenu">Home</Link>
+                    <Link to="/productSearch" name=""  className="linksMenu">Products</Link>
+                    <Link to="/" name=""  className="linksMenu">Contacs us</Link>
+                    <Link to="/about" name=""   className="linksMenu">About</Link>
                 </div>
 
             {/* -----------Form to Suscribe --------------*/}
