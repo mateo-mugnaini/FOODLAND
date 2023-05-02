@@ -56,7 +56,7 @@ const data = {
 			image:
 				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",
 			imageCategory:
-				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",			
+				"https://w7.pngwing.com/pngs/476/430/png-transparent-red-meat-bresaola-beef-lobster-meat-food-seafood-beef.png",			
 			stock: 20,
 			isDeleted: false,
 			comments: [],
@@ -73,7 +73,7 @@ const data = {
 			image:
 				"https://jumboargentina.vtexassets.com/arquivos/ids/676761-800-auto?v=637728575944500000&width=800&height=auto&aspect=true",
 			imageCategory:
-				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",
+				"https://w7.pngwing.com/pngs/476/430/png-transparent-red-meat-bresaola-beef-lobster-meat-food-seafood-beef.png",
 			stock: 20,
 			isDeleted: false,
 			comments: [],
@@ -88,9 +88,9 @@ const data = {
 			price: 669,
 			description: "Cuarto de pollo trasero fresco",
 			image:
-				"https://jumboargentina.vtexassets.com/arquivos/ids/764069-800-auto?v=638084434020330000&width=800&height=auto&aspect=trueg",
+				"https://angellinares.es/127713-thickbox_default/cuartos-traseros-pollo-congelado-300-400.jpg",
 			imageCategory:
-				"https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png",
+				"https://w7.pngwing.com/pngs/476/430/png-transparent-red-meat-bresaola-beef-lobster-meat-food-seafood-beef.png",
 				stock: 20,
 			isDeleted: false,
 			comments: [],
@@ -201,6 +201,186 @@ const data = {
 			category: "Panaderia",
 			rating: 4,
 			brand: "Fresh MP",
+			numReviews: 0,
+		},
+
+		{
+			name: "Televisor",
+			slug: "TV",
+			price: 80000,
+			description: "Televisor 40'",
+			image:
+			"https://w7.pngwing.com/pngs/70/42/png-transparent-led-backlit-lcd-high-definition-television-bravia-smart-tv-television-set-tivi-television-electronics-computer-wallpaper.png",
+			imageCategory:
+			"https://w7.pngwing.com/pngs/85/798/png-transparent-home-appliance-consumer-electronics-washing-machines-refrigerator-refrigerator-kitchen-electronics-computer.png",
+			stock: 15,
+			isDeleted: false,
+			comments: [],
+			category: "Electrodomesticos",
+			rating: 4,
+			brand: "Samsung",
+			numReviews: 0,
+		},
+
+		{
+			name: "Celular",
+			slug: "Cel",
+			price: 40000,
+			description: "Smarth phone",
+			image:
+			"https://w7.pngwing.com/pngs/462/672/png-transparent-feature-phone-smartphone-cellular-network-phone-gadget-phone-icon-mobile-phone-thumbnail.png",
+			imageCategory:
+			"https://w7.pngwing.com/pngs/85/798/png-transparent-home-appliance-consumer-electronics-washing-machines-refrigerator-refrigerator-kitchen-electronics-computer.png",
+			stock: 12,
+			isDeleted: false,
+			comments: [],
+			category: "Electrodomesticos",
+			rating: 4,
+			brand: "Samsung",
+			numReviews: 0,
+		},
+
+		{
+			name: "Clorox",
+			slug: "Clorox",
+			price: 2000,
+			description: "Clorox pisos",
+			image:
+			"https://e1.pngegg.com/pngimages/624/178/png-clipart-aesthetic-clorox-plastic-bottle-thumbnail.png",
+			imageCategory:
+			"https://e7.pngegg.com/pngimages/306/621/png-clipart-computer-icons-data-limpieza-cleaning-data.png",
+			stock: 10,
+			isDeleted: false,
+			comments: [],
+			category: "Limpieza",
+			rating: 3,
+			brand: "JGB",
+			numReviews: 0,
+		},
+
+		{
+			name: "Sampic",
+			slug: "Sampic",
+			price: 2500,
+			description: "Sampic pisos",
+			image:
+			"https://www.corbeta.com.co/media/catalog/product/7/7/7702626216782_1.png",
+			imageCategory:
+			"https://e7.pngegg.com/pngimages/306/621/png-clipart-computer-icons-data-limpieza-cleaning-data.png",
+			stock: 8,
+			isDeleted: false,
+			comments: [],
+			category: "Limpieza",
+			rating: 4,
+			brand: "Corveta",
+			numReviews: 0,
+		},
+
+		{
+			name: "Empandas",
+			slug: "Empanadas",
+			price: 1500,
+			description: "Empanadas precocidas",
+			image:
+			"https://w7.pngwing.com/pngs/540/915/png-transparent-empanada-chilean-cuisine-roast-chicken-calzone-stuffing-empanada-baked-goods-food-recipe-thumbnail.png",
+			imageCategory:
+			"https://w7.pngwing.com/pngs/779/96/png-transparent-natural-foods-vegetarian-cuisine-frozen-food-fresh-produce-natural-foods-food-fruit.png",
+			stock: 6,
+			isDeleted: false,
+			comments: [],
+			category: "Congelados",
+			rating: 4,
+			brand: "Corveta",
+			numReviews: 0,
+		},
+
+		{
+			name: "Nugets",
+			slug: "Nugets de pollo",
+			price: 2500,
+			description: "Nugets precocidos",
+			image:
+			"https://static.vecteezy.com/system/resources/previews/013/391/799/original/fried-chicken-nuggets-on-a-transparent-background-free-png.png",
+			imageCategory:
+			"https://w7.pngwing.com/pngs/779/96/png-transparent-natural-foods-vegetarian-cuisine-frozen-food-fresh-produce-natural-foods-food-fruit.png",
+			stock: 6,
+			isDeleted: false,
+			comments: [],
+			category: "Congelados",
+			rating: 4,
+			brand: "Corveta",
+			numReviews: 0,
+		},
+
+		{
+			name: "Cuchara",
+			slug: "Cuchara",
+			price: 5500,
+			description: "Cuchara de peltre",
+			image:
+			"https://png.pngtree.com/element_pic/00/16/07/07577e015055b55.jpg",
+			imageCategory:
+			"https://e7.pngegg.com/pngimages/953/151/png-clipart-recipe-cookbook-bolinhos-de-bacalhau-computer-icons-book-angle-kitchen-thumbnail.png",
+			stock: 15,
+			isDeleted: false,
+			comments: [],
+			category: "Cocina",
+			rating: 4,
+			brand: "Peltre",
+			numReviews: 0,
+		},
+
+		{
+			name: "Cepillo para quitar pelo",
+			slug: "Cepillo",
+			price: 3500,
+			description: "Cepillo quita pelos perros y gatos",
+			image:
+			"https://w7.pngwing.com/pngs/936/648/png-transparent-comb-brush-hair-clipper-andis-dog-dog-animals-pet-brush.png",
+			imageCategory:
+			"https://png.pngtree.com/png-vector/20210131/ourmid/pngtree-pets-character-cat-and-dog-png-image_2877091.jpg",
+			stock: 15,
+			isDeleted: false,
+			comments: [],
+			category: "Mascotas",
+			rating: 4,
+			brand: "Pet and frienly",
+			numReviews: 0,
+		},
+
+		{
+			name: "jugete antiestres",
+			slug: "juguete",
+			price: 8500,
+			description: "Juegete antiestres perros y gatos",
+			image:
+			"https://e7.pngegg.com/pngimages/503/643/png-clipart-pet-toy-product-kind-dogs.png",
+			imageCategory:
+			"https://png.pngtree.com/png-vector/20210131/ourmid/pngtree-pets-character-cat-and-dog-png-image_2877091.jpg",
+			stock: 13,
+			isDeleted: false,
+			comments: [],
+			category: "Mascotas",
+			rating: 4,
+			brand: "Pet and frienly",
+			numReviews: 0,
+		},
+
+		{
+			name: "Galleta de avena",
+			slug: "Galleta",
+			price: 500,
+			description: "Galletas de avena",
+			image:
+			"https://e7.pngegg.com/pngimages/824/478/png-clipart-biscuit-biscuit-thumbnail.png",
+			imageCategory:
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTv8h5DSMjIej-Zt_A9zKOKeKTWNlwCgOQGw&usqp=CAU",
+			stock: 100,
+			isDeleted: false,
+			comments: [],
+			category: "Galletas",
+			rating: 4,
+			brand: "Quaker",
 			numReviews: 0,
 		},
 	],
