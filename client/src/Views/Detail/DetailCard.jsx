@@ -1,17 +1,25 @@
-import React from 'react'
-import azucar from "../../Imgs/azucar.jpg"
+import React, {  useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import  "./DetailCard.css"
 import { useParams, NavLink } from "react-router-dom"
-import { products } from "../../Components/products"
+// import { products } from "../../Components/products"
 import Rating from '../../Components/Rating/rating'
 import "../Detail/DetailCard.css"
 
+import {getDetail} from "../../redux/actions"
 
 const DetailCard = () => {
   const { id } = useParams();
   const decodedName = decodeURI(id);
-  const product = products.find((product) => product.name === decodedName);
+  const {product} = useSelector((state) => state)
+  
+  // const product = products.find((product) => product.name === decodedName);
+  const dispatch = useDispatch();
 
+
+  useEffect(() => {
+    dispatch(getDetail(decodedName));
+  }, [dispatch,decodedName]);
 
   return (
     <div className='DetailCardCont'>
@@ -24,8 +32,8 @@ const DetailCard = () => {
                   {product.category}   
                  </NavLink>
                  <p>/</p>    
-                 <NavLink className="active" to={`/detail/${id}`}>
-                  {id}
+                 <NavLink className="active" to={`/detail/${product["_id"]}`}>
+                  {product.name}
                  </NavLink>    
       </div>
     
