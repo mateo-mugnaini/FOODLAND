@@ -18,6 +18,13 @@ export function ready() {
   };
 }
 
+function getProducts(data) {
+  return {
+    type: action.GET_PRODUCTS,
+    payload: data,
+  };
+}
+
 /* ========================*  PRODUCTS *======================== */
 
 export const getAllProducts = (category) => {
@@ -25,13 +32,13 @@ export const getAllProducts = (category) => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-
       const arrayProducts = response.data.products;
       const productosFiltrados = arrayProducts.filter((producto) => {
         return producto.category === category;
       });
 
-      console.log("estoy filtrado", productosFiltrados);
+      // console.log("estoy filtrado", productosFiltrados);
+      // console.log("aaaa", response.data.products);
 
       dispatch({
         type: action.GET_ALL_PRODUCTS,
@@ -49,6 +56,29 @@ export const getAllProducts = (category) => {
   };
 };
 
+export const getDetail = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(loading());
+      const response = await axios.get(`${URL}/api/products/slug/${id}`);
+
+      console.log(response.data);
+      dispatch({
+        type: action.DETAIL_PRODUCT,
+        payload: response.data,
+      });
+      dispatch(ready());
+    } catch (error) {
+      console.log(error, "WWWW");
+      dispatch({
+        type: action.DETAIL_PRODUCT,
+        payload: error,
+      });
+      dispatch(ready());
+    }
+  };
+};
+
 /* ========================* FILTROS *======================== */
 
 export const getAllCategories = () => {
@@ -56,7 +86,8 @@ export const getAllCategories = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products/categories`);
-
+      const products = await axios.get(`${URL}/api/products`);
+      dispatch(getProducts(products.data.products));
       dispatch({
         type: action.GET_ALL_CATEGORIES,
         payload: response.data,
@@ -74,6 +105,12 @@ export const getAllCategories = () => {
 };
 
 export function handle_sorts(payload) {
+  return {
+    type: "HANDLE_SORTS",
+    payload,
+  };
+}
+export function handle_sorts2(payload) {
   return {
     type: "HANDLE_SORTS",
     payload,

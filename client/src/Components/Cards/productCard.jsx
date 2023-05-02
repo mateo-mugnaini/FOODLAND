@@ -1,11 +1,10 @@
 import React from "react"
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import Rating from "../Rating/rating"
 
-const ProductCard = ({name,price,image, rating, numReviews}) =>{
-
+const ProductCard = ({id,name,price,image, rating, numReviews}) =>{
     return(
-      <NavLink className="productCard" to={`/detail/${encodeURI(name)}`}> 
+      <Link className="productCard" to={`/detail/${encodeURI(id)}`}> 
       <div 
       className="product" 
         >
@@ -15,7 +14,7 @@ const ProductCard = ({name,price,image, rating, numReviews}) =>{
         <Rating rating={rating} numReviews={numReviews} />
         <button className='addButton'>ADD TO CART</button>
       </div>   
-      </NavLink>
+      </Link>
     )
 }
 
