@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../Components/Loader/Loader";
-import "../../Components/Cards/cards.css";
+import "../../Components/Cards/cards.css"
 import { NavLink } from "react-router-dom";
 import ProductCard from "../../Components/Cards/productCard";
 import Filters from "../../Components/Cards/Filters";
@@ -47,7 +47,7 @@ const ProductsSearch = () => {
     <div className="productsContainer">
       <div className="select_and_breadcrumb">
         <div className="breadcrumb">
-          <NavLink to="/">CATEGORIES /</NavLink>
+          <NavLink to="/">Categories</NavLink>
           {/*   
                   <NavLink className="active" to={`/categories/${categoriesId}`}>
                     CATEGORY NAME   
@@ -64,10 +64,11 @@ const ProductsSearch = () => {
         </select>
       </div>
       <div className="filter_and_products">
-        <div className="FilterContainer">
-          <Filters />
-        </div>
-        <div className="CardContainer">
+      <div className="sidebar"> 
+      <Filters/>
+      </div>
+        <div className="CardContainerProd">
+        <div className="products">
           {display ? (
             <Loader />
           ) : Array.isArray(aux) ? (
@@ -86,33 +87,36 @@ const ProductsSearch = () => {
             <p>Sin productos</p>
           )}
         </div>
-      </div>
 
       <div className="containerPaginated">
-        <button
-          className="btnPag"
-          onClick={() => setNumeroPagina(numeroPagina - 1)}
-          disabled={numeroPagina === 1}
-        >
-          Back
-        </button>
-        {page.map((page) => (
-          <button
-            key={page}
-            className={`btnPag ${page === numeroPagina ? "active" : ""}`}
-            onClick={() => setNumeroPagina(page)}
-          >
-            {page}
-          </button>
-        ))}
-        <button
-          className="btnPag"
-          onClick={() => setNumeroPagina(numeroPagina + 1)}
-          disabled={numeroPagina === pageNum}
-        >
-          Next
-        </button>
+    
+    <button
+      className="btnPag"
+      onClick={() => setNumeroPagina(numeroPagina - 1)}
+      disabled={numeroPagina === 1}
+    >
+      Back
+    </button>
+    {page.map((page) => (
+      <button
+        key={page}
+        className={`btnPag ${page === numeroPagina ? "active" : ""}`}
+        onClick={() => setNumeroPagina(page)}
+      >
+        {page}
+      </button>
+    ))}
+    <button
+      className="btnPag"
+      onClick={() => setNumeroPagina(numeroPagina + 1)}
+      disabled={numeroPagina === pageNum}
+    >
+      Next
+    </button>
+    </div>
+
       </div>
+    </div>
     </div>
   );
 };
