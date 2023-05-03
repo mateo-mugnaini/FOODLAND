@@ -1,44 +1,57 @@
 import React, { useState } from "react";
-import axios from "axios"
-/* ----------------------- STYLES -----------------------*/
-import "./FormRegister.css"
+import axios from "axios";
+import swal from "sweetalert"
+import "./FormRegister.css";
 
 const FormRegister = () => {
 
-    const [user, setUser] = useState({
-      name: "",
-      // lastName: "",
-      // phone: "",
-      email: "",
-      // address: "",
-      password: "",
-    });
-  
-    const handleChange = (e) => {
-      setUser({ ...user, [e.target.name]: e.target.value });
-    };
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        const res = await axios.post(
-          "http://localhost:5000/api/users/signup",
-          user
-        );
-        alert("Registro exitoso");
-        setUser({
-          name: "",
-          lastName: "",
-          phone: "",
-          email: "",
-          address: "",
-          password: "",
-        });
-        console.log(res.data, "Registro Exitoso");
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const [user, setUser] = useState({
+    name: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    address: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/users/signup",
+        user
+      );
+      setUser({
+        name: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        address: "",
+        password: "",
+      });
+      swal({
+        title: "Registro exitoso",
+        icon: "success",
+        confirmButtonText: "OK",
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+      
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
     
 
   return (
@@ -131,3 +144,4 @@ const FormRegister = () => {
 };
 
 export default FormRegister
+

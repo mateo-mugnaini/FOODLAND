@@ -1,0 +1,6 @@
+.registerContainer{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(216, 216, 216, 0.748);
+}
