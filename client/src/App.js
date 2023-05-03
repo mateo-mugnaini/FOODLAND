@@ -11,7 +11,7 @@ import About from "./Views/About/About";
 import MyCart from "./Views/MyCart/MyCart";
 import SigninScreen from "./Views/Login/signinScreen";
 import ProductsSearch from "./Views/Products/ProductsSearch";
-
+import UserRegister from "./Views/Register/Register";
 
 function App() {
   const location = useLocation();
@@ -22,10 +22,15 @@ function App() {
       <Routes>
         {/* -----------------Routes generals -----------------*/}
         <Route exact path="/" element={<Home />} name="Home" key="Home"></Route>
-        <Route path="/login" element={<SigninScreen/>} name="Login" key="Login"></Route>
+        <Route
+          path="/login"
+          element={<SigninScreen />}
+          name="Login"
+          key="Login"
+        ></Route>
         <Route
           path="/register"
-          element={""}
+          element={<UserRegister />}
           name="Register"
           key="Register"
         ></Route>
