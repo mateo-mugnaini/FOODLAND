@@ -7,10 +7,10 @@ const FormRegister = () => {
 
     const [user, setUser] = useState({
       name: "",
-      lastName: "",
-      phone: "",
+      // lastName: "",
+      // phone: "",
       email: "",
-      address: "",
+      // address: "",
       password: "",
     });
   
@@ -25,12 +25,21 @@ const FormRegister = () => {
           "http://localhost:5000/api/users/signup",
           user
         );
-        alert("Registro exitoso")
+        alert("Registro exitoso");
+        setUser({
+          name: "",
+          lastName: "",
+          phone: "",
+          email: "",
+          address: "",
+          password: "",
+        });
         console.log(res.data, "Registro Exitoso");
       } catch (err) {
         console.log(err);
       }
     };
+    
 
   return (
     <div className="formRegisterContainer">
