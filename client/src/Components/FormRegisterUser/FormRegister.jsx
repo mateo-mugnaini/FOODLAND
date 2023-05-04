@@ -3,8 +3,18 @@ import axios from "axios";
 //import swal from "sweetalert"
 import "./FormRegister.css";
 
+import {
+  ValidateName,
+  ValidateLastName,
+  ValidatePhone,
+  ValidateEmail,
+  ValidatePassword,
+} from "./ValidationsRegister";
+
+
 const FormRegister = () => {
 
+  
   const [user, setUser] = useState({
     name: "",
     lastName: "",
@@ -13,10 +23,22 @@ const FormRegister = () => {
     address: "",
     password: "",
   });
-
-  const handleChange = (e) => {
+  
+  const [errors, setErrors] = useState({});
+  
+  const handleChange = (e, cb) => {
+    const {name, lastName, phone, email, password,value} = e.target
     setUser({ ...user, [e.target.name]: e.target.value });
+    setErrors({
+      ...errors,
+      [name]: cb(value),
+      [lastName]: cb(value),
+      [phone]: cb(value),
+      [email]: cb(value),
+      [password]: cb(value),
+    });
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,13 +60,13 @@ const FormRegister = () => {
         icon: "success",
         confirmButtonText: "OK",
         showClass: {
-          popup: 'animate__animated animate__fadeInDown'
+          popup: "animate__animated animate__fadeInDown",
         },
         hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      }); */
-      
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+ 
       setTimeout(() => {
         window.location.replace("/");
       }, 2000);
@@ -52,6 +74,7 @@ const FormRegister = () => {
       console.log(err);
     }
   };
+  
     
 
   return (
@@ -67,9 +90,10 @@ const FormRegister = () => {
               type="text"
               name="name"
               value={user.name}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidateName)}
               className="inputCreateUser"
             />
+            {errors["name"]?.isValidation ? null : <p  className="errorFormCP">{errors?.lastName?.message}</p>}
           </div>
           {/* ----------------------- APELLIDO -----------------------*/}
           <div className="labelCreateUser">
@@ -80,9 +104,11 @@ const FormRegister = () => {
               type="text"
               name="lastName"
               value={user.lastName}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidateLastName)}
+
               className="inputCreateUser"
             />
+            {errors["lastName"]?.isValidation ? null : <p  className="errorFormCP">{errors?.lastName?.message}</p>}
           </div>
           {/* ----------------------- PHONE -----------------------*/}
           <div className="labelCreateUser">
@@ -93,22 +119,10 @@ const FormRegister = () => {
               type="text"
               name="phone"
               value={user.phone}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidatePhone)}
               className="inputCreateUser"
             />
-          </div>
-          {/* ----------------------- EMAIL -----------------------*/}
-          <div className="labelCreateUser">
-            <label htmlFor="email" className="labelCreateUser">
-              Email:
-            </label>
-            <input
-              type="text"
-              name="email"
-              value={user.email}
-              onChange={handleChange}
-              className="inputCreateUser"
-            />
+            {errors["phone"]?.isValidation ? null : <p  className="errorFormCP">{errors?.phone?.message}</p>}
           </div>
           {/* ----------------------- DIRECCION -----------------------*/}
           <div className="labelCreateUser">
@@ -119,9 +133,24 @@ const FormRegister = () => {
               type="text"
               name="address"
               value={user.address}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ()=> ({isValidation: true, message: "",}))}
               className="inputCreateUser"
             />
+            {errors["address"]?.isValidation ? null : <p  className="errorFormCP">{errors?.address?.message}</p>}
+          </div>
+          {/* ----------------------- EMAIL -----------------------*/}
+          <div className="labelCreateUser">
+            <label htmlFor="email" className="labelCreateUser">
+              Email:
+            </label>
+            <input
+              type="text"
+              name="email"
+              value={user.email}
+              onChange={(e) => handleChange(e, ValidateEmail)}
+              className="inputCreateUser"
+            />
+            {errors["email"]?.isValidation ? null : <p  className="errorFormCP">{errors?.email?.message}</p>}
           </div>
           {/* ----------------------- PASSWORD -----------------------*/}
           <div className="labelCreateUser">
@@ -132,9 +161,10 @@ const FormRegister = () => {
               type="password"
               name="password"
               value={user.password}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, ValidatePassword)}
               className="inputCreateUser"
             />
+            {errors["password"]?.isValidation ? null : <p  className="errorFormCP">{errors?.password?.message}</p>}
           </div>
         </div>
         <button type="submit">Submit</button>
