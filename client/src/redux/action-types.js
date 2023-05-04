@@ -1,3 +1,5 @@
+/*TODAS ESTAS CONSTANTES AHORA ESTAN EN productConstants.js*/
+
 /* ========================* ACTIONS LOADER *======================== */
 const LOADING = "LOADING";
 const READY = "READY";

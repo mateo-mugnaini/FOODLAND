@@ -12,7 +12,7 @@ import oferta1 from "../../Imgs/oferta1.jpeg"
 const CategoryContainer = () => {
   /* IMPORT STATES */
 
-  const { categories } = useSelector((state) => state);
+  const { categories } = useSelector((state) => state.products);
 
   /* DISPATCH PARA TRAER LAS CATEGORIAS */
   const dispatch = useDispatch();
