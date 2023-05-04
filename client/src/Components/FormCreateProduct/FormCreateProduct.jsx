@@ -94,9 +94,11 @@ function FormCreateProduct() {
   return (
     /* ================== * CONTENEDOR GENERAL * ================== */
     <div className="formProductContainer">
+      <div className="btnHomeContainer">
       <Link to="/">
-      <button >HOME</button>
+      <button className="btnHome" >HOME</button>
       </Link>
+      </div>
       {/* ================== * CONTENEDOR FORMULARIO * ================== */}
       <form className="formCreate" onSubmit={handleSubmit}>
         {/* ================== * NOMBRE * ================== */}
