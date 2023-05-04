@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&family=Yanone+Kaffeesatz:wght@300;400;700&display=swap ');
+
 .formProductContainer {
     display: flex;
     flex-direction: column;
@@ -97,4 +99,22 @@
   font-size: 15px;
   margin-top: -10px;
   margin-bottom: -20px;
+}
+
+.btnHomeContainer{
+  display: flex;
+  position: relative;
+  top: -110px;
+  left: -172px;
+  /* text-decoration: none; */
+}
+
+.btnHome{
+  background-color: #30925E;
+  border: none;
+  width: 200px;
+  height: 50px;
+  font-size: 30px;
+  font-family: "Yanone Kaffeesatz";
+  color: white;
 }
