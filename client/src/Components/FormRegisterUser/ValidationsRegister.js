@@ -89,7 +89,7 @@ export function ValidateEmail(user) {
 
 /* ================== * PASSWORD * ================== */
 export function ValidatePassword(password) {
-  const regex = /^(?=.\d)(?=.[a-z])(?=.[A-Z])[a-zA-Z\d]{6,}$/; // accepts passwords with at least one number, one uppercase letter, one lowercase letter, and at least 6 characters
+  const regex = /^(?=.\d)(?=.[a-z])(?=.[A-Z])[a-zA-Z\d]{6,10}$/; // accepts passwords with at least one number, one uppercase letter, one lowercase letter, and at least 6 characters
   if (!password || password.trim().length === 0) {
     return {
       isValidation: false,
