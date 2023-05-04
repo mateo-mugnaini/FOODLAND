@@ -7,7 +7,7 @@ import FormRegister from "../../Components/FormRegisterUser/FormRegister";
 const UserRegister = () => {
 
     return (
-        <div>
+        <div className="registerContainer">
             <FormRegister/>
         </div>
     )
