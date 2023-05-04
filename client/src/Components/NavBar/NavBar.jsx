@@ -32,9 +32,10 @@ return (
                         {/* -----------Login list --------------*/}
                     <li ><img src="https://tinypic.host/images/2023/04/27/People-removebg-preview.png" alt="iconsLogin" className="iconsNav2"/>
                             <ul className="ulNav">
-                                <li><Link to="/"><span><p>My Profile</p></span></Link></li>
+                            <li><Link to="/login"><span><p>Log In</p></span></Link></li>
+                                {/* <li><Link to="/"><span><p>My Profile</p></span></Link></li>
                                 <li><Link to="/"><span><p>My Orders</p></span></Link></li>
-                                <li><Link to="/"><span><p>Log out</p></span></Link></li>
+                                <li><Link to="/"><span><p>Log out</p></span></Link></li> */}
                             </ul>
                     </li>
 

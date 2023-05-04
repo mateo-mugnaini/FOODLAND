@@ -1,16 +1,33 @@
 import React from "react";
-        /* ----------------------- STYLES -----------------------*/
-import "../Register/Register.css"
-        /* ----------------------- COMPONENTS -----------------------*/
+import { Link } from 'react-router-dom';
+import img1 from "../../Imgs/LogIn-Registro/Img1.png"
+import img2 from "../../Imgs/LogIn-Registro/Img2.png"
+
+      
+/* ----------------------- STYLES -----------------------*/
+import "../Register/Register.css";
+/* ----------------------- COMPONENTS -----------------------*/
 import FormRegister from "../../Components/FormRegisterUser/FormRegister";
 
 const UserRegister = () => {
+  const imgA = img1
+  const imgB = img2
+  return (
+    <div className="registerContainer">
+      <div className="btnHomeRegisterContainer">
+        <Link to="/login">
+          <button className="btnHome">BACK</button>
+        </Link>
+      </div>
+      <div>
+      <FormRegister />
+      </div>
+      <div>
+        <img className='imgARegister' src={imgA} alt="" />
+        <img className='imgBRegister'  src={imgB} alt="" />
+      </div>
+    </div>
+  );
+};
 
-    return (
-        <div className="registerContainer">
-            <FormRegister/>
-        </div>
-    )
-}
-
-export default UserRegister
+export default UserRegister;

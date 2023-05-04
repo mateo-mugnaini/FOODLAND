@@ -43,10 +43,11 @@ const FormRegister = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
+      await axios.post(
         "http://localhost:5000/api/users/signup",
         user
-      );
+      )
+      .then(res => console.log(res,'marcos'))
       setUser({
         name: "",
         lastName: "",
@@ -161,7 +162,8 @@ const FormRegister = () => {
               type="password"
               name="password"
               value={user.password}
-              onChange={(e) => handleChange(e, ValidatePassword)}
+              // onChange={(e) => handleChange(e)}
+              onChange={(e) => handleChange(e, ()=> ({isValidation: true, message: "",}))}
               className="inputCreateUser"
             />
             {errors["password"]?.isValidation ? null : <p  className="errorFormCP">{errors?.password?.message}</p>}
