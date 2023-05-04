@@ -1,3 +1,4 @@
+/*TODAS ESTAS ACCIONES AHORA ESTAN EN productActions.js*/
 //IMPORTS
 import axios from "axios";
 import * as action from "./action-types"; // Import para traer todas las actions-types
