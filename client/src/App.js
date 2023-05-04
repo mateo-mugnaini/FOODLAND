@@ -10,7 +10,6 @@ import ProductsContainer from "./Components/Cards/productsContainer";
 import About from "./Views/About/About";
 import MyCart from "./Views/MyCart/MyCart";
 import SigninScreen from "./Views/Login/signinScreen";
-import ProductsSearch from "./Views/Products/ProductsSearch";
 import UserRegister from "./Views/Register/Register";
 
 function App() {
@@ -40,12 +39,7 @@ function App() {
           name="About"
           key="About"
         ></Route>
-        <Route
-          path="/productSearch"
-          element={<ProductsSearch />}
-          name="ResultSearchBarHome"
-          key="ResultSearchBarHome"
-        ></Route>
+      
         {/* -----------------Routes Users -----------------*/}
         <Route
           path="/detail/:id"

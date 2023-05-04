@@ -28,11 +28,11 @@ const DetailCard = () => {
                   Categories
                   </NavLink>
                   <p>/</p>
-                 <NavLink active to={`/categories/${product.category}`}>
+                 <NavLink  to={`/categories/${product.category}`}>
                   {product.category}   
                  </NavLink>
                  <p>/</p>    
-                 <NavLink className="active" to={`/detail/${product["_id"]}`}>
+                 <NavLink active="true" to={`/detail/${product["_id"]}`}>
                   {product.name}
                  </NavLink>    
       </div>

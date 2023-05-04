@@ -1,14 +1,13 @@
-
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Loader from "../Loader/Loader";
-import "../Cards/cards.css";
-import { NavLink, useParams } from "react-router-dom";
-import ProductCard from "./productCard";
-import Filters from "./Filters";
+import React, {useState, useEffect} from "react";
+import {useParams, NavLink} from "react-router-dom"
+import {useSelector, useDispatch} from "react-redux"
+import Filters from "./Filters"
+import Loader from "../Loader/Loader"
+import ProductCard from "./productCard"
 
 //IMPORT ACTIONS
-import { getAllProducts,handle_sorts  } from "../../redux/actions";
+import { handle_sorts, getByCategory  } from "../../redux/actions";
+
 
 
 const ProductsContainer = () => {
@@ -25,11 +24,12 @@ const ProductsContainer = () => {
   const conteoFinal = numeroPagina * grupo;
   const conteoInicial = conteoFinal - grupo;
 
+
   const aux =
   products && products.slice
       ? products.slice(conteoInicial, conteoFinal)
       : [];
-   
+
 
   const page = [];
 
@@ -50,20 +50,26 @@ const ProductsContainer = () => {
   /* DISPATCH PARA TRAER LOS PRODUCTOS */
   const dispatch = useDispatch();
 
+
+
   useEffect(() => {
-    dispatch(getAllProducts(categoriesId));
-  }, [dispatch,categoriesId]);
+    // Si el estado global de productos está vacío, obtén los productos según la categoría
+    if (products.length === 0) {
+      dispatch(getByCategory(categoriesId));
+    }
+    
+
+  }, [dispatch]);
 
   return (
     <div className="productsContainer">
-
       <div className='select_and_breadcrumb'>
       <div className="breadcrumb">
                 <NavLink to="/">
                   Categories  
                   </NavLink>
                   <p>/</p>
-                 <NavLink to={`/categories/${categoriesId}`}>
+                 <NavLink active="true" onClick={() => dispatch(getByCategory(categoriesId))} to={`/categories/${categoriesId}`}>
                   {categoriesId} 
                  </NavLink>        
       </div>
@@ -80,7 +86,7 @@ const ProductsContainer = () => {
     </div>
       <div className="filter_and_products">
       <div className="sidebar"> 
-      <Filters/>
+     <Filters/> 
       </div>
       <div className="CardContainerProd">
       <div className="products">
@@ -140,4 +146,3 @@ const ProductsContainer = () => {
 };
 
 export default ProductsContainer;
-

@@ -14,6 +14,8 @@ import {
   ADD_CATEGORY_FAILURE,
   GET_PRODUCTS,
   DETAIL_PRODUCT,
+  GET_BY_CATEGORY,
+  SET_PRODUCT,
 } from "./action-types";
 
 /* ========================* INITIAL STATE *======================== */
@@ -40,13 +42,23 @@ const rootReducer = (state = initialState, action) => {
     case GET_ALL_PRODUCTS:
       return {
         ...state,
-        products: action.payload,
+        AllProducts: action.payload,
       };
+    case GET_BY_CATEGORY:
+      return {
+        ...state,
+        products:action.payload
+      }
     case GET_ALL_CATEGORIES:
       return {
         ...state,
         categories: action.payload,
       };
+    case SET_PRODUCT:
+      return {
+        ...state,
+        products:action.payload
+      }
     case DETAIL_PRODUCT:
       return {
         ...state,
