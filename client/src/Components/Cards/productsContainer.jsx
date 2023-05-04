@@ -20,7 +20,7 @@ const ProductsContainer = () => {
   /* PAGINADO */
   const [numeroPagina, setNumeroPagina] = useState(1);
 
-  const grupo = 3;
+  const grupo = 6;
   const conteoFinal = numeroPagina * grupo;
   const conteoInicial = conteoFinal - grupo;
 
