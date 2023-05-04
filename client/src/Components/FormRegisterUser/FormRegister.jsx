@@ -56,7 +56,7 @@ const FormRegister = () => {
         address: "",
         password: "",
       });
-      /* swal({
+       swal({
         title: "Registro exitoso",
         icon: "success",
         confirmButtonText: "OK",
