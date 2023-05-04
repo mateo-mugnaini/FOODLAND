@@ -3,6 +3,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 import productsReducer from "./reducers/productReducers"; 
+import { userSigninReducer } from "./reducers/userReducers";
+
 //import { ..., ... } from "./reducers/cartReducers";
 //import { ..., ... } from "./reducers/userReducers";
 //import { ..., ... } from "./reducers/orderReducers";
@@ -10,12 +12,12 @@ import productsReducer from "./reducers/productReducers";
 
 //Esto es para que si el usuario estuvo loguado tenga guardados los datos en local storage (usuario, carrito, dirección) y sino arranca sin nada
 const initialState = {
-	/* userSignin: {
+	 userSignin: {
 		userInfo: localStorage.getItem("userInfo")
 			? JSON.parse(localStorage.getItem("userInfo"))
 			: null,
 	},
-	cart: {
+	/*cart: {
 		cartItems: localStorage.getItem("cartItems")
 			? JSON.parse(localStorage.getItem("cartItems"))
 			: [],
@@ -29,7 +31,7 @@ const initialState = {
 //Aca van todos los reducers
 const reducer = combineReducers({
 	products: productsReducer, 
-	
+	userSignin: userSigninReducer,	
 });
 
 export const store2 = createStore(

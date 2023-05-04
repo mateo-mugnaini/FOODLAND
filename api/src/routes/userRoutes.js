@@ -2,14 +2,15 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
 import User from "../models/user.js";
+import { generateToken, isAdmin, isAuth } from "../middlewares/middlewares.js";
 
 const userRouter = express.Router();
 
 //Ruta para que el Admin pueda traer todos los usuarios
 userRouter.get(
   "/",
-  //isAuth,
-  //isAdmin,
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const users = await User.find({});
     res.send(users);
@@ -19,8 +20,8 @@ userRouter.get(
 //Ruta para que el Admin pueda traer un usuario
 userRouter.get(
   "/:id",
-  //isAuth,
-  //isAdmin,
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -34,7 +35,7 @@ userRouter.get(
 //Ruta para que el usuario actualice sus datos
 userRouter.put(
   "/profile",
-  //isAuth,
+  isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
@@ -63,8 +64,8 @@ userRouter.put(
 //Ruta para que el admin actualice un usuario
 userRouter.put(
   "/:id",
-  //isAuth,
-  //isAdmin,
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -91,7 +92,7 @@ userRouter.post(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
-          //token: generateToken(user),
+          token: generateToken(user),
         });
         return;
       }
@@ -123,8 +124,8 @@ userRouter.post(
 //Ruta para que el admin borre usuario
 userRouter.delete(
   "/:id",
-  //isAuth,
-  //isAdmin,
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
