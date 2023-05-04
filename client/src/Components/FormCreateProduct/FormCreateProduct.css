@@ -37,21 +37,23 @@
   }
   
   .input {
-    font-size: 20px;
-    border: 2px black solid;
-    border-radius: 20px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
     width: 300px;
-    text-align: center;
-    gap: 5px;
+    max-width: 100%;
+    margin-bottom: 10px;
   }
 
   .inputDescription{
-    font-size: 20px;
-    border: 2px black solid;
-    border-radius: 20px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
     width: 940px;
     height: 200px;
-    text-align: center;
+    text-align: justify;
     gap: 5px;
   }
   
@@ -94,11 +96,12 @@
     width: 400px;
 }
 
-.errorFormCP{
+.errorFormCP {
+  position: fixed ;
   color: red;
   font-size: 15px;
-  margin-top: -10px;
-  margin-bottom: -20px;
+  text-align: center;
+  margin-top: 72px;
 }
 
 .btnHomeContainer{
@@ -106,7 +109,6 @@
   position: relative;
   top: -110px;
   left: -172px;
-  /* text-decoration: none; */
 }
 
 .btnHome{
@@ -117,4 +119,9 @@
   font-size: 30px;
   font-family: "Yanone Kaffeesatz";
   color: white;
+  cursor: pointer;
+}
+
+.btnHome:hover {
+  background-color: #29b66b;
 }

@@ -16,7 +16,10 @@ function App() {
   const location = useLocation();
   return (
     <div className="App">
-      {location?.pathname === "/login" ? null : <NavBar />}
+      {location?.pathname === "/login" ||
+      location?.pathname === "/register" ? null : (
+        <NavBar />
+      )}
 
       <Routes>
         {/* -----------------Routes generals -----------------*/}
@@ -39,7 +42,7 @@ function App() {
           name="About"
           key="About"
         ></Route>
-      
+
         {/* -----------------Routes Users -----------------*/}
         <Route
           path="/detail/:id"

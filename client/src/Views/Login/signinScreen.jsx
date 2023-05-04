@@ -17,6 +17,11 @@ export default function SigninScreen() {
   
   return (
     <div className='loginContasiner'>
+            <div className="btnHomeRegisterContainer">
+        <Link to="/">
+          <button className="btnHome">HOME</button>
+        </Link>
+      </div>
       <form className="formLogin" onSubmit={submitHandler}>
         <div>
           <h1>Sign In</h1>
