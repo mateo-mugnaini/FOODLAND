@@ -19,7 +19,9 @@ import {
 import "../FormCreateProduct/FormCreateProduct.css";
 
 /* ========================* ESTADO LOCAL  *======================== */
-import { getAllCategories, addCategory } from "../../redux/actions";
+//import { getAllCategories, addCategory } from "../../redux/actions";
+//nueva importación con store2. AddCategory no se está usando
+import { getAllCategories } from "../../redux/actions/productActions";
 
 function FormCreateProduct() {
   /* ========================* ESTADO LOCAL  *======================== */
@@ -83,7 +85,7 @@ function FormCreateProduct() {
   }
 
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
+  const categories = useSelector((state) => state.products.categories);
 
   useEffect(() => {
     dispatch(getAllCategories());

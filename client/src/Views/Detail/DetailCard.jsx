@@ -11,7 +11,7 @@ import {getDetail} from "../../redux/actions"
 const DetailCard = () => {
   const { id } = useParams();
   const decodedName = decodeURI(id);
-  const {product} = useSelector((state) => state)
+  const {product} = useSelector((state) => state.products)
   
   // const product = products.find((product) => product.name === decodedName);
   const dispatch = useDispatch();

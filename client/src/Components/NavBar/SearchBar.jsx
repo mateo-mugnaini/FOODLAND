@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
-  const AllProducts = useSelector(state => state.AllProducts.products);
+  const AllProducts = useSelector(state => state.products.AllProducts.products);
 
   
   const dispatch = useDispatch();

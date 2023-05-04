@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import swal from "sweetalert"
+//import swal from "sweetalert"
 import "./FormRegister.css";
 
 const FormRegister = () => {
@@ -33,7 +33,7 @@ const FormRegister = () => {
         address: "",
         password: "",
       });
-      swal({
+      /* swal({
         title: "Registro exitoso",
         icon: "success",
         confirmButtonText: "OK",
@@ -43,7 +43,7 @@ const FormRegister = () => {
         hideClass: {
           popup: 'animate__animated animate__fadeOutUp'
         }
-      });
+      }); */
       
       setTimeout(() => {
         window.location.replace("/");
