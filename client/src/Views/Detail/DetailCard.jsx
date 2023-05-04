@@ -5,8 +5,9 @@ import { useParams, NavLink } from "react-router-dom"
 // import { products } from "../../Components/products"
 import Rating from '../../Components/Rating/rating'
 import "../Detail/DetailCard.css"
-
 import {getDetail} from "../../redux/actions"
+//IMPORT LOCALSTORE 
+// import useLocalStore from "../../hooks/useLocalStore";
 
 const DetailCard = () => {
   const { id } = useParams();
@@ -16,6 +17,12 @@ const DetailCard = () => {
   // const product = products.find((product) => product.name === decodedName);
   const dispatch = useDispatch();
 
+    // // ======== Traigo el LocalStore ====
+    // const [Cart, setCart] = useLocalStore( "Carrito Nº1", []);
+ 
+    // // ======= funcion add product =====
+    // const AddProductoToCart = (id)=>{
+    //   setCart([...Cart, id])
 
   useEffect(() => {
     dispatch(getDetail(decodedName));
@@ -39,7 +46,7 @@ const DetailCard = () => {
     
     <div className='DetailCard'>
       <div className='detail-img'>
-        <img src={product.image} alt="azucar ledesma" />
+        <img src={product.image} alt={product.name} />
       </div>
       <div className='detail-info'>
         <h4>{product.brand}</h4>
@@ -53,6 +60,8 @@ const DetailCard = () => {
                 <button>+</button>
             </div>
         <button className='addButton'>ADD TO CART</button>
+
+        {/* <button className='addButton' onclick={()=>AddProductoToCart(id)}>ADD TO CART</button> */}
         <button className='returnButton'>Cambios y devoluciones →</button>
       </div>
 

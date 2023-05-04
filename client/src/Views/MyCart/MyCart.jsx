@@ -1,108 +1,85 @@
 //IMPORT STYLE:
-import "./MyCart.css"
+import "./MyCart.css";
+import {Link} from "react-router-dom";
+import useLocalStore from "../../hooks/useLocalStore";
+import Payment from "../../Components/Payment/Payment";
 
-const MyCart = () =>{
+function CartItem({product}) {
 
-    return(
-    <div name="MyCart" class="MyCart">
-<buton class="butonBack"><a href="/">Back to home</a></buton>
-        <div class="page">
-	<div id="store_cart">
-		<ul class="cart_head">
-			<li class="cart_head_title">
-            <img src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png" alt="Mycart" class="logoCart"/>
-			</li>
-			<li class="cart_head_product">
-				Product
-			</li>
-			<li class="cart_head_options">
-				Edit
-			</li>
-			<li class="cart_head_price">
-				Price
-			</li>
-		</ul>
+	let quantity; // Cantidad de productos
 
-		<ul class="cart_item">
-
-			<li class="cart_img_col">
-				<img src="https://jumboargentina.vtexassets.com/arquivos/ids/537347-800-auto?v=636972888517500000&width=800&height=auto&aspect=true"/>
-			</li>
-
-			<li class="cart_product_col">
-				<p>Kiwi x Kg</p>
-				<span>Kiwi</span>
-			</li>
-			 
-      		<li class="cart_options_col">
-				<span>Quantity: </span>
-        <input type="number" min="1" value="1"/>
-			</li>
-
-			<li class="cart_price_col">
-				<h2>$799</h2>
-			</li>
-			<li class="cart_del_col">
-        <img src="https://i.imgur.com/bI4oD5C.png"/>
-			</li>
-		</ul>
-
-		<ul class="cart_item">
-
-			<li class="cart_img_col">
-				<img src="https://veaargentina.vtexassets.com/assets/vtex.file-manager-graphql/images/9a7a2287-3dc5-438d-b555-a94951d0c9be___2cea52dd3f65e4b81c8a464b4143400d.png"/>
-			</li>
-
-			<li class="cart_product_col">
-				<p>Carne Picada Esp x Kilo</p>
-				<span>Carne Picada Especial</span>
-			</li>
-			 
-      		<li class="cart_options_col">
-				<span>Quantity: </span>
-				<input type="number" min="1" value="1"/>
-			</li>
-
-			<li class="cart_price_col">
-				<h2>$1.455</h2>
-			</li>
-			<li class="cart_del_col">
-        <img src="https://i.imgur.com/bI4oD5C.png"/>
-			</li>
-		</ul>
-        <ul class="cart_foot">
-            <li class="cart_head_title">
-                Total
-            </li>
-            <li>$</li>
-        </ul>
-
-	</div>
-</div> 
-    <div name="ContainerPaiment">
-        <h2>Payment: </h2>
-        <h2>Tarjet</h2>
-        </div>
-    </div>
-    )
-
+  return (
+    <ul class="cart_item">
+      <li class="cart_img_col">
+        <img src={product.image} alt={product.name} />
+      </li>
+      <li class="cart_product_col">
+        <p>{product.name}</p>
+        <span>{product.description}</span>
+      </li>
+      <li class="cart_options_col">
+        <span>Quantity: </span>
+        <input type="number" min="1" max="20" value={quantity} />
+      </li>
+      <li class="cart_price_col">
+        <h2>${product.price * quantity}</h2>
+      </li>
+      <li class="cart_del_col">
+        <img src="https://tinypic.host/images/2023/05/05/butonDelete.png" alt="deleteButton" />
+      </li>
+    </ul>
+  );
 }
 
-export default MyCart
+function MyCart() {
+	
+  const [cart, setCart] = useLocalStore("Carrito Nº1", []);
 
-//  {/* ----------------- title--------- */}
-//  <label name="productslist" class="productList">
-//  <img></img> 
-//  <h3>Detail products</h3>
-//  <h3>Unit</h3>
-//  <h3>Price</h3>   
-//  <h3>SubTotal</h3>   
-// </label>
-//           {/* --------------- ProductsList--------- */}
-// <label name="productslist" class="productList">
-//  <img src="https://jumboargentina.vtexassets.com/arquivos/ids/537347-800-auto?v=636972888517500000&width=800&height=auto&aspect=true" alt="kiwi" class="detail"></img> 
-//  <h4>Kiwi x Kg</h4>
-//  <h4>4</h4>
-//  <h4>$300</h4>
-//  <h4>$1.200</h4>
-// </label>
+  return (
+    <div name="MyCart" class="MyCart">
+      {/* ==========boton para seguir comprando==============  */}
+      <div name="Container Button back" class="ButonReturn">
+        <p>Did you forget something?...</p>
+        <buton class="butonBack"><Link to="/">keep buying</Link></buton>
+      </div>
+
+      {/* ============ Contenedor de carrito y forma de pago ======== */}
+      <div name="Container My cart && Payment " class="ContainerPage">
+        {/* <<<<<< Carritoo>>>>>> */}
+        <div class="page">
+          <div id="store_cart">
+            {/* <<<<<<Encabezado>>>> */}
+            <ul class="cart_head">
+              <li class="cart_head_title">
+                <img src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png" alt="Mycart" class="logoCart" />
+              </li>
+              <li class="cart_head_product">Product</li>
+              <li class="cart_head_options">Edit</li>
+              <li class="cart_head_price">Price</li>
+            </ul>
+
+            {/* Productos del carrito: */}
+            {cart.map((product) => (
+              <CartItem key={product.id} product={product} />
+            ))}
+
+            {/* <<<<<<<<< Totales  >>>>>>>>*/}
+            <ul class="cart_foot">
+              <li class="cart_head_title">Total</li>
+              <li>
+                <p>${cart.reduce((total, product) => total + product.price * product.quantity, 0)}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* ==================Container Payment=============== */}
+        <div name="ContainerPayment">
+          <Payment />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default MyCart;
