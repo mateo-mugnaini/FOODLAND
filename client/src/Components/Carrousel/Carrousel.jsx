@@ -2,8 +2,9 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import "./Carrousel.css";
+import oferta1 from "../../Imgs/oferta1.jpeg"
+import oferta2 from "../../Imgs/oferta2.png"
 
 const Carrousel = () => {
   const settings = {
@@ -23,22 +24,22 @@ const Carrousel = () => {
    
       <Slider {...settings}>
         <div>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1b5_s5G5SIFZFOEFGNKiiSx-DJBkMqwx2SQ&usqp=CAU" alt="" />
+          <img src={oferta1} alt="" />
         </div>
         <div>
-          <img src="https://productosyofertas.com/wp-content/uploads/logo-productos-ofertas.png" />
+          <img src={oferta2} />
         </div>
         <div>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1b5_s5G5SIFZFOEFGNKiiSx-DJBkMqwx2SQ&usqp=CAU" alt="" />
+          <img src={oferta1} alt="" />
         </div>
         <div>
-          <img src="https://productosyofertas.com/wp-content/uploads/logo-productos-ofertas.png" alt="" />
+          <img src={oferta2} alt="" />
         </div>
         <div>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1b5_s5G5SIFZFOEFGNKiiSx-DJBkMqwx2SQ&usqp=CAU" alt="" />
+          <img src={oferta1} alt="" />
         </div>
         <div>
-          <img src="https://productosyofertas.com/wp-content/uploads/logo-productos-ofertas.png" alt="" />
+          <img src={oferta2} alt="" />
         </div>
       </Slider>
     </div>
