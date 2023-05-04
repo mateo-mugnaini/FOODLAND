@@ -16,7 +16,7 @@ const ProductsContainer = () => {
   const { categoriesId } = useParams();
 
   /* IMPORT STATES */
-  const { products, display } = useSelector((state) => state);
+  const { products, display } = useSelector((state) => state.products);
   /* PAGINADO */
   const [numeroPagina, setNumeroPagina] = useState(1);
 
