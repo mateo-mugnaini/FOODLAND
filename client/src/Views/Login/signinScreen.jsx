@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "./signinScreen.css"
+import img1 from "../../Imgs/LogIn-Registro/Img1.png"
+import img2 from "../../Imgs/LogIn-Registro/Img2.png"
 
 export default function SigninScreen() {
   const [email, setEmail] = useState('');
@@ -9,10 +11,13 @@ export default function SigninScreen() {
     e.preventDefault();
     // hacer la action
   };
+
+  const imgA = img1
+  const imgB = img2
   
   return (
-    <div>
-      <form className="form" onSubmit={submitHandler}>
+    <div className='loginContasiner'>
+      <form className="formLogin" onSubmit={submitHandler}>
         <div>
           <h1>Sign In</h1>
         </div>
@@ -49,6 +54,10 @@ export default function SigninScreen() {
           </div>
         </div>
       </form>
+      <div>
+        <img className='imgALogin' src={imgA} alt="" />
+        <img className='imgBLogin'  src={imgB} alt="" />
+      </div>
     </div>
   );
 }
