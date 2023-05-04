@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
 import { useSelector } from "react-redux";
-//IMPORT IMAGES
+//IMPORT IMAGES  
 import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 
 //IMPORT ESTILOS
