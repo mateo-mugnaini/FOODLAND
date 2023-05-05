@@ -205,7 +205,7 @@
     text-align: center;
   }
   .cart_del_col img {
-    max-width: 25px;
+    max-width: 40px;
     cursor: pointer;
   }
   .cart_del_col img:hover {
