@@ -66,6 +66,8 @@ const NavBar = () => {
               alt="iconsLogin"
               className="iconsNav2"
             />
+            {userInfo &&<span className="userName">{userInfo.name}</span>  }
+            
             <ul className="ulNav">
               {userInfo ? (
                 userInfo.isAdmin ? (
