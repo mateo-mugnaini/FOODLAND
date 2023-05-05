@@ -9,6 +9,11 @@
     box-shadow: 3px 4px 12px rgb(0, 0 ,0,25%);
 }
 
+.ContainerPage{
+  display: flex;
+  justify-content: space-around;
+}
+
 .productList{
   display: inline-flex;
 }
@@ -53,7 +58,7 @@
    /*  outline: 1px grey solid; */
   }
   
-  a{
+  .ButonReturn a{
     color: white;
     font-weight: bolder;
     text-decoration:none;
@@ -64,11 +69,13 @@
     max-width: 53%;
     margin:20px;
     border-radius: 20px;
+    text-decoration:none;
   }
   
   .page * {
     padding: 0;
     margin: 0;
+    
   }
   
   /* Mobile */
@@ -212,6 +219,7 @@
   .cart_item li:first-child {}
   .cart_item li:last-child {
     background: rgb(213, 213, 213,0.2);
+    color:black;
   }
   
   
@@ -302,6 +310,11 @@
       background: rgb(213, 213, 213,0.2);
   
   }
+
+  .cart_item li a{
+    color:black;
+
+}
   
   .cart_head li:nth-child(odd) {
     background: rgba(161, 14, 14, 0.1);

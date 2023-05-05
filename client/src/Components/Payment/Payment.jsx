@@ -1,9 +1,11 @@
+//IMPORT STYLE:
+import "./Payment.css"
 
 const Payment = () =>{
 
     return(
-        <div>
-            <h1>Hola soy el payment</h1>
+        <div name="ContainerPayment" className="ContainerPayment">
+            <h1>Check out</h1>
         </div>
     )
 }

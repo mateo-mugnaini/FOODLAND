@@ -2,19 +2,27 @@ import React from "react"
 import { Link } from "react-router-dom"
 import Rating from "../Rating/rating"
 //IMPORT LOCALSTORE
-// import useLocalStore from "../../hooks/useLocalStore"
+import useLocalStore from "../../hooks/useLocalStore"
 
-const ProductCard = ({id,name,price,image, rating, numReviews}) =>{
+const ProductCard = ({id,name,price,image, rating,description, numReviews}) =>{
 
-  // // ======== Traigo el LocalStore ====
-  // const [Cart, setCart] = useLocalStore( "Carrito Nº1", []);
+  // ======== Traigo el LocalStore ====
+  const [Cart, setCart] = useLocalStore( "Carrito", []);
  
-  // // ======= funcion add product =====
-  // const AddProductoToCart = (id)=>{
-  //   setCart([...Cart, id])
-  // }
+  // ======= funcion add product =====
+  const AddProductoToCart = ()=>{
+    const existingItem = Cart.find((item) => item.id === id);
+    // =============== Verifico si existe previamente ========
+    if (existingItem) {
+      // =========== Si existe sumo 1 a la cantidad pero no lo agrego al carrito =====
+      const updatedCart = Cart.filter((item) => item.id !== id);
+      const updatedQuantity = existingItem.quantity + 1;
 
-  // console.log(Cart)
+      setCart([...updatedCart, { ...existingItem, quantity: updatedQuantity }]);
+    } else {
+      setCart([...Cart, { id, name, price, image, description, quantity: 1 }]);
+    }
+  };
 
     return(
       <div  className="productCard">
@@ -27,8 +35,8 @@ const ProductCard = ({id,name,price,image, rating, numReviews}) =>{
             <p>${price}</p>
             <Rating rating={rating} numReviews={numReviews} />
           </Link>
-          <button className='addButton'>ADD TO CART</button>
-                  {/*<button className='addButton' onClick={() => AddProductoToCart(id)}>ADD TO CART</button> */}
+          {/* <button className='addButton'>ADD TO CART</button> */}
+                  <button className='addButton' onClick={() => AddProductoToCart(id)}>ADD TO CART</button>
         </div>   
       </div>
     )
