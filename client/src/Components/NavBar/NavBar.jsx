@@ -18,6 +18,12 @@ const NavBar = () => {
 
   console.log(userInfo);
   const logoSvg = logo;
+  
+  const signOutHandler = () => {
+		dispatch(signout());
+    window.location.href = "/"
+	};
+  
   return (
     <div name="ContainerNav" key="ContainerNav" className="ContainerNav">
       {/* -------------------Logo FootLand --------------*/}
@@ -93,7 +99,7 @@ const NavBar = () => {
                     </li>
                     <li>
                       <span>
-                        <p onClick={() => dispatch(signout())}>Log out</p>
+                          <p onClick={signOutHandler}>Log out</p>
                       </span>
                     </li>
                   </div>
@@ -115,7 +121,8 @@ const NavBar = () => {
                     </li>
                     <li>
                       <span>
-                        <p onClick={() => dispatch(signout())}>Log out</p>
+                        {/* <p onClick={() => dispatch(signout())}>Log out</p> */}
+                        <p onClick={signOutHandler}>Log out</p>
                       </span>
                     </li>
                   </div>
