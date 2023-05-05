@@ -11,7 +11,7 @@ import About from "./Views/About/About";
 import MyCart from "./Views/MyCart/MyCart";
 import SigninScreen from "./Views/Login/signinScreen";
 import UserRegister from "./Views/Register/Register";
-
+import StockViews from "./Views/Stock/StockViews";
 function App() {
   const location = useLocation();
   return (
@@ -77,7 +77,7 @@ function App() {
         ></Route>
         <Route
           path="/products"
-          element={""}
+          element={<StockViews />}
           name="products"
           key="products"
         ></Route>
