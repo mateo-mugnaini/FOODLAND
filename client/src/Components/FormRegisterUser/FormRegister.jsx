@@ -69,7 +69,7 @@ const FormRegister = () => {
       }); 
  
       setTimeout(() => {
-        window.location.replace("/");
+        window.location.replace("/login");
       }, 2000);
     } catch (err) {
       console.log(err);
