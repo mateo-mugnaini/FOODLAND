@@ -103,6 +103,7 @@ const ProductsContainer = () => {
               name={e.name}
               price={e.price}
               image={e.image}
+              description={e.description}
               rating={e.rating}
               numReviews={e.numReviews}
               />
