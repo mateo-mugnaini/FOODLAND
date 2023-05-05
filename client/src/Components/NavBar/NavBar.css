@@ -122,6 +122,7 @@ ul, ol {
     width: 180px;
     border-radius: 5px;
     margin: 0px 6px 3px 6px;
+    cursor: pointer;
 }
 .nav li span p:hover {
     background-color:#434343;
@@ -143,4 +144,3 @@ ul, ol {
 .nav li:hover > ul {
     display:block;
 }
-
