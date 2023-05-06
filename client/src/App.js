@@ -13,6 +13,7 @@ import SigninScreen from "./Views/Login/signinScreen";
 import UserRegister from "./Views/Register/Register";
 import StockViews from "./Views/Stock/StockViews";
 import PlaceOrderScreen from "./Views/Order/placeOrderScreen";
+import UserProfile from "./Views/UserProfile/UserProfile.jsx"
 function App() {
 	const location = useLocation();
 	return (
@@ -59,7 +60,7 @@ function App() {
 				></Route>
 				<Route
 					path="/profile"
-					element={""}
+					element={<UserProfile/>}
 					name="ProfileUser"
 					key="ProfileUser"
 				></Route>
