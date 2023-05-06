@@ -3,7 +3,8 @@ import "./MyCart.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useLocalStore from "../../hooks/useLocalStore";
-import Payment from "../../Components/Payment/Payment";
+//IMPORT COMPONENTS:
+import CheckOut from "../../Components/Checkout/CheckOut"
 import CartItem from "../../Components/CartItem/CartItem";
 
 function MyCart() {
@@ -62,13 +63,16 @@ function MyCart() {
             </ul>
           </div>
         </div>
-        <Payment />
+
+        {/* ==================Container CheckOut=============== */}
+          <CheckOut total={total}/>
       </div>
       <div name="Container Button back" className="ButonReturn">
         <p>Did you forget something?...</p>
         <button className="butonBack">
           <Link to="/">keep buying</Link>
         </button>
+
       </div>
     </div>
   );
