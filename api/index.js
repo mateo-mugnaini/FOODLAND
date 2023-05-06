@@ -36,6 +36,9 @@ app.use((req, res, next) => {
 app.use("/api/products", Product);
 app.use("/api/seed", seedRouter);
 app.use("/api/users", userRouter);
+app.get('/api/config/paypal', (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID || 'sb'); 
+});
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
