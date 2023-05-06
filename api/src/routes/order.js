@@ -1,6 +1,6 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
-import order from "../models/order.js";
+import Order from "../models/order.js";
 import { isAuth, isAdmin } from "../middlewares/middlewares.js";
 import User from "../models/user";
 import Product from "../models/product";
@@ -18,7 +18,7 @@ orderRouter.get(
 		const page = query.page || 1;
 		const pageSize = query.pageSize || PAGE_SIZE;
 
-		const orders = await order.find()
+		const orders = await Order.find()
 			.populate("user", "name")
 			.skip(pageSize * (page - 1))
 			.limit(pageSize);
@@ -38,7 +38,7 @@ orderRouter.post(
 	"/",
 	isAuth,
 	expressAsyncHandler(async (req, res) => {
-		const newOrder = new order({
+		const newOrder = new Order({
 			orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
 			shippingAddress: req.body.shippingAddress,
 			paymentMethod: req.body.paymentMethod,
@@ -59,7 +59,7 @@ orderRouter.get(
 	isAuth,
 	isAdmin,
 	expressAsyncHandler(async (req, res) => {
-		const orders = await order.aggregate([
+		const orders = await Order.aggregate([
 			{
 				$group: {
 					_id: null,
@@ -76,7 +76,7 @@ orderRouter.get(
 				},
 			},
 		]);
-		const dailyOrders = await order.aggregate([
+		const dailyOrders = await Order.aggregate([
 			{
 				$group: {
 					_id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
@@ -102,7 +102,7 @@ orderRouter.get(
 	"/mine",
 	isAuth,
 	expressAsyncHandler(async (req, res) => {
-		const orders = await order.find({ user: req.user._id });
+		const orders = await Order.find({ user: req.user._id });
 		res.send(orders);
 	})
 );
@@ -111,7 +111,7 @@ orderRouter.get(
 	"/:id",
 	isAuth,
 	expressAsyncHandler(async (req, res) => {
-		const order = await order.findById(req.params.id);
+		const order = await Order.findById(req.params.id);
 		if (order) {
 			res.send(order);
 		} else {
@@ -124,7 +124,7 @@ orderRouter.put(
 	"/:id/pay",
 	isAuth,
 	expressAsyncHandler(async (req, res) => {
-		const order = await order.findById(req.params.id);
+		const order = await Order.findById(req.params.id);
 		if (order) {
 			order.isPaid = true;
 			order.paidAt = Date.now();
