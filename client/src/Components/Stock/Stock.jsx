@@ -54,7 +54,7 @@ console("DEBO ELIMINAR EL PRODUCTO")
         <thead>
           <tr>
             <th className="thStock1">Name</th>
-            <th className="thStock2">Categoty</th>
+            <th className="thStock2">Category</th>
             <th className="thStock2">Stock</th>
             <th className="thStock2">Brand</th>
             <th className="thStock3">Actions</th>
