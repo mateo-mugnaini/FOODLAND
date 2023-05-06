@@ -6,7 +6,7 @@ import img1 from "../../Imgs/LogIn-Registro/Img1.png";
 import img2 from "../../Imgs/LogIn-Registro/Img2.png";
 import { signin } from "../../redux/actions/userActions";
 import Loader from "../../Components/Loader/Loader";
-import MessageBox from "../Error/messageBox";
+import MessageBox from "../../Components/Error/messageBox";
 
 export default function SigninScreen() {
 	const navigate = useNavigate();
