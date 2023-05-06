@@ -3,8 +3,8 @@
 import axios from "axios";
 import * as action from "./action-types"; // Import para traer todas las actions-types
 
-const URL = "http://localhost:5000";
-//const URL = "https://foodland-back.onrender.com";
+//const URL = "http://localhost:5000";
+const URL = "https://foodland-production.up.railway.app
 
 /* ========================*  LOADER *======================== */
 export function loading() {
