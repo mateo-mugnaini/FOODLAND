@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import seedRouter from "./src/routes/seedRoutes.js";
 import userRouter from "./src/routes/userRoutes.js";
 import Product from "./src/routes/products.js";
+import orderRouter from "./src/routes/order.js";
 
 import path from "path";
 
@@ -36,6 +37,11 @@ app.use((req, res, next) => {
 app.use("/api/products", Product);
 app.use("/api/seed", seedRouter);
 app.use("/api/users", userRouter);
+app.use("/api/orders", orderRouter);
+
+app.get('/api/config/paypal', (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID || 'sb'); 
+});
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });

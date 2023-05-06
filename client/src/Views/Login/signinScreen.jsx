@@ -6,7 +6,7 @@ import img1 from "../../Imgs/LogIn-Registro/Img1.png";
 import img2 from "../../Imgs/LogIn-Registro/Img2.png";
 import { signin } from "../../redux/actions/userActions";
 import Loader from "../../Components/Loader/Loader";
-import MessageBox from "../Error/messageBox";
+import MessageBox from "../../Components/Error/messageBox";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function SigninScreen() {
