@@ -2,8 +2,8 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Order from "../models/order.js";
 import { isAuth, isAdmin } from "../middlewares/middlewares.js";
-import User from "../models/user";
-import Product from "../models/product";
+import User from "../models/user.js";
+import Product from "../models/product.js";
 
 const orderRouter = express.Router();
 
