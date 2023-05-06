@@ -9,11 +9,13 @@ import {
   RESULTSEARCH,
   RESULTSEARCH2,
   FILTERPRICE,
-  ADD_CATEGORY_REQUEST,
+  ADD_CATEGORY_REQUEST, //no se usa
   ADD_CATEGORY_SUCCESS,
-  ADD_CATEGORY_FAILURE,
+  ADD_CATEGORY_FAILURE, //no se usa
   GET_PRODUCTS,
   DETAIL_PRODUCT,
+  GET_BY_CATEGORY,
+  SET_PRODUCT,
 } from "./action-types";
 
 /* ========================* INITIAL STATE *======================== */
@@ -40,13 +42,23 @@ const rootReducer = (state = initialState, action) => {
     case GET_ALL_PRODUCTS:
       return {
         ...state,
-        products: action.payload,
+        AllProducts: action.payload,
       };
+    case GET_BY_CATEGORY:
+      return {
+        ...state,
+        products:action.payload
+      }
     case GET_ALL_CATEGORIES:
       return {
         ...state,
         categories: action.payload,
       };
+    case SET_PRODUCT:
+      return {
+        ...state,
+        products:action.payload
+      }
     case DETAIL_PRODUCT:
       return {
         ...state,
@@ -192,7 +204,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
-    case GET_ALL_CATEGORIES:
+      //el caso esta duplicado
+    case GET_ALL_CATEGORIES: 
       return action.payload;
     case ADD_CATEGORY_SUCCESS:
       return [...state, action.payload];

@@ -2,10 +2,11 @@ import React from "react";
 import "./rating.css"
 
 function Rating(props) {
-	const { rating, numReviews, caption } = props;
+	const { rating, numReviews, caption, onClick } = props;
+
 	return (
 		<div className="rating">
-			<span>
+			<span onClick={() => onClick(1)}>
 				<i
 					className={
 						rating >= 1
@@ -16,7 +17,7 @@ function Rating(props) {
 					}
 				></i>
 			</span>
-			<span>
+			<span onClick={() => onClick(2)}>
 				<i
 					className={
 						rating >= 2
@@ -27,7 +28,7 @@ function Rating(props) {
 					}
 				></i>
 			</span>
-			<span>
+			<span onClick={() => onClick(3)}>
 				<i
 					className={
 						rating >= 3
@@ -38,7 +39,7 @@ function Rating(props) {
 					}
 				></i>
 			</span>
-			<span>
+			<span onClick={() => onClick(4)}>
 				<i
 					className={
 						rating >= 4
@@ -49,7 +50,7 @@ function Rating(props) {
 					}
 				></i>
 			</span>
-			<span>
+			<span onClick={() => onClick(5)}>
 				<i
 					className={
 						rating >= 5
@@ -64,7 +65,7 @@ function Rating(props) {
 			{caption ? (
 				<span>{caption}</span>
 			) : (
-				<span>{/*{numReviews + " reviews"}*/}</span>
+				<span></span>
 			)}
 		</div>
 	);

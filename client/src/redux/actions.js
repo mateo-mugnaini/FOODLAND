@@ -1,3 +1,4 @@
+/*TODAS ESTAS ACCIONES AHORA ESTAN EN productActions.js*/
 //IMPORTS
 import axios from "axios";
 import * as action from "./action-types"; // Import para traer todas las actions-types
@@ -18,31 +19,17 @@ export function ready() {
   };
 }
 
-function getProducts(data) {
-  return {
-    type: action.GET_PRODUCTS,
-    payload: data,
-  };
-}
-
 /* ========================*  PRODUCTS *======================== */
 
-export const getAllProducts = (category) => {
+export const getAllProducts = () => {
   return async (dispatch) => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-      const arrayProducts = response.data.products;
-      const productosFiltrados = arrayProducts.filter((producto) => {
-        return producto.category === category;
-      });
-
-      // console.log("estoy filtrado", productosFiltrados);
-      // console.log("aaaa", response.data.products);
 
       dispatch({
         type: action.GET_ALL_PRODUCTS,
-        payload: productosFiltrados,
+        payload: response.data,
       });
       dispatch(ready());
     } catch (error) {
@@ -55,6 +42,34 @@ export const getAllProducts = (category) => {
     }
   };
 };
+
+export const getAllCategories = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(loading());
+      const response = await axios.get(`${URL}/api/products/categories`);
+      dispatch({
+        type: action.GET_ALL_CATEGORIES,
+        payload: response.data,
+      });
+      dispatch(ready());
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: action.GET_ALL_CATEGORIES,
+        payload: error,
+      });
+      dispatch(ready());
+    }
+  };
+};
+
+export function setProduct(payload) {
+  return {
+    type: "SET_PRODUCT",
+    payload,
+  };
+}
 
 export const getDetail = (id) => {
   return async (dispatch) => {
@@ -81,22 +96,33 @@ export const getDetail = (id) => {
 
 /* ========================* FILTROS *======================== */
 
-export const getAllCategories = () => {
+export const getByCategory = (category) => {
   return async (dispatch) => {
     try {
       dispatch(loading());
-      const response = await axios.get(`${URL}/api/products/categories`);
-      const products = await axios.get(`${URL}/api/products`);
-      dispatch(getProducts(products.data.products));
-      dispatch({
-        type: action.GET_ALL_CATEGORIES,
-        payload: response.data,
-      });
-      dispatch(ready());
+      const response = await axios.get(`${URL}/api/products`);
+      const arrayProducts = response.data.products;
+
+      if (category === "allProducts") {
+        dispatch({
+          type: action.GET_BY_CATEGORY,
+          payload: arrayProducts,
+        });
+        dispatch(ready());
+      } else {
+        const productosFiltrados = arrayProducts.filter((producto) => {
+          return producto.category === category;
+        });
+        dispatch({
+          type: action.GET_BY_CATEGORY,
+          payload: productosFiltrados,
+        });
+        dispatch(ready());
+      }
     } catch (error) {
       console.log(error);
       dispatch({
-        type: action.GET_ALL_CATEGORIES,
+        type: action.GET_BY_CATEGORY,
         payload: error,
       });
       dispatch(ready());
