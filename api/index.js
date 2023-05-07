@@ -5,11 +5,14 @@ import seedRouter from "./src/routes/seedRoutes.js";
 import userRouter from "./src/routes/userRoutes.js";
 import Product from "./src/routes/products.js";
 import orderRouter from "./src/routes/order.js";
-
+import express from "express";
+import cors from "cors";
 import path from "path";
 
 dotenv.config();
-const origin = process.env.ORIGIN ?? "https://foodlandmarket.vercel.app";
+// const origin = process.env.ORIGIN ?? "https://foodlandmarket.vercel.app";
+const origin = "https://foodlandmarket.vercel.app";
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -21,6 +24,7 @@ mongoose
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
