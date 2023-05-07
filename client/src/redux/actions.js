@@ -177,10 +177,7 @@ export const filterPrice = (products) => {
 export const addCategory = (category) => async (dispatch) => {
   try {
     dispatch({ type: action.ADD_CATEGORY_REQUEST });
-    const { data } = await axios.post(
-      "http://localhost:5000/api/categories",
-      category
-    );
+    const { data } = await axios.post(`${URL}/api/categories`, category);
     dispatch({
       type: action.ADD_CATEGORY_SUCCESS,
       payload: data,
