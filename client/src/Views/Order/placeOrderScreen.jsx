@@ -12,8 +12,9 @@ export default function PlaceOrderScreen() {
 	
 	const dispatch = useDispatch();
     //traer el carrito del estado:
-	const totalOrder = useSelector((state) => state.totalOrder);
 	const [cart, setCart] = useLocalStore("Carrito",[]);
+	
+	const totalOrder = useSelector((state) =>  state.totalOrder);
 	console.log(totalOrder);  //No llega la info
 
 	const [value, setValue] = useState({

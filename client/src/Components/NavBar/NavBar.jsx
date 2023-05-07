@@ -1,6 +1,7 @@
 import SearchBar from "./SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import { signout } from "../../redux/actions/userActions";
+
 // import { signout } from '../../actions/userActions';
 
 //IMPORT IMAGES
@@ -9,9 +10,13 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 //IMPORT ESTILOS
 import "./NavBar.css";
 import { Link } from "react-router-dom";
+import useLocalStore from "../../hooks/useLocalStore";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+  
+  const[cart, setCart] = useLocalStore("Carrito", []);
+  const lastThreeItems = cart.slice(-4);  //Selecciono los ultimos 4 productos del carrito
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -24,6 +29,8 @@ const NavBar = () => {
     window.location.href = "/"
 	};
   
+
+
   return (
     <div name="ContainerNav" key="ContainerNav" className="ContainerNav">
       {/* -------------------Logo FootLand --------------*/}
@@ -45,21 +52,25 @@ const NavBar = () => {
               <li>
                 <Link to="/MyCart">
                   <span>
-                    <p>My cart:</p>
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/">
-                  <span>
-                    <p>Products</p>
+                  <h2 class="titlecart">My cart:</h2>
+                  <div className="viewCartNav">
+                    {!cart ? "Add products" :
+                lastThreeItems.map((item) => (
+                <div key={item.product} class="background">
+                  <img src={item.image} alt={item.name}  />
+                  <span class="span1">{item.name}</span>
+                  <span class="span2">x{item.quantity}</span>
+                </div>
+              ))
+                }
+            </div>
                   </span>
                 </Link>
               </li>
               <li>
                 <Link to="/MyCart">
                   <span>
-                    <p> My cart</p>
+                    <p> View my cart</p>
                   </span>
                 </Link>
               </li>

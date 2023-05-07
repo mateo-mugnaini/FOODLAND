@@ -99,7 +99,19 @@ ul, ol {
     padding:3px 12px;
     display:block;
     /* border-radius: 2px; */
+    width: 268px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
+.nav li span .span2{
+    width: 96px;
+    background-color: #b7b6b6;
+}
+.nav li span .span2:hover{
+    background-color: #b7b6b6;
+}
+
 
 .nav li span:hover{
     background-color: rgb(228, 227, 227);
@@ -115,15 +127,18 @@ ul, ol {
 }
 
 .nav li span p{
-    background-color:rgb(205, 203, 203);
-    color:black;
-    text-decoration:none;
-    display:block;
+    background-color: rgb(205, 203, 203);
+    color: black;
+    text-decoration: none;
     width: 180px;
     border-radius: 5px;
-    margin: 0px 6px 3px 6px;
     cursor: pointer;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    font-weight: bolder;
 }
+
 .nav li span p:hover {
     background-color:#434343;
     color:white;
@@ -137,10 +152,49 @@ ul, ol {
     z-index: 50;
     min-width: 140px;
     padding: 0px;
-    margin-left: -166px;
-    margin-top: 51px;
+    margin-left: -218px;
+    margin-top: 50px;
 }
 
 .nav li:hover > ul {
     display:block;
+}
+
+.viewCartNav{
+    display: flex;
+    flex-direction: column;
+}
+
+.viewCartNav img{
+    width: 50px;    
+    background-color: grey;
+    height: 50px; 
+    border:2px solid #b7b6b6;
+    border-radius: 10px;
+}
+
+.viewCartNav div{
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.titlecart{
+    border-radius: 7px;
+    width: 58%;
+    margin: auto;
+    font-weight: 200;
+    font-size: inherit;
+}
+
+.background{
+    background-color: #b7b6b6;
+    border-radius: 10px;
+}
+
+.background .span1{
+    background-color:#b7b6b6;
+}
+.background .span1:hover{
+    background-color: #b7b6b6;
 }
