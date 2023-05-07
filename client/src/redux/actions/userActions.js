@@ -47,26 +47,28 @@ export const signIn = (user) => (dispatch) => {
         if (data._id) {
           dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
           localStorage.setItem("userInfo", JSON.stringify(data));
-        } else {
-          Axios.post(`${URL}/api/users/signup`, {
-            name: user.name,
-            email: user.email,
-            password: user.email,
-          }).then(({ data }) => {
-            dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-            localStorage.setItem("userInfo", JSON.stringify(data));
-          });
         }
       })
-      .catch((error) =>
-        dispatch({
-          type: USER_SIGNIN_FAIL,
-          payload:
-            error.response && error.response.data.message
-              ? error.response.data.message
-              : error.message,
+      .catch((error) => {
+        Axios.post(`${URL}/api/users/signup`, {
+          name: user.name,
+          email: user.email,
+          password: user.email,
         })
-      );
+          .then(({ data }) => {
+            dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+            localStorage.setItem("userInfo", JSON.stringify(data));
+          })
+          .catch((error) =>
+            dispatch({
+              type: USER_SIGNIN_FAIL,
+              payload:
+                error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+            })
+          );
+      });
   } else {
     dispatch({ type: USER_SIGNIN_FAIL, payload: "Third party login failure" });
   }
