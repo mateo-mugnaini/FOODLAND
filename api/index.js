@@ -9,7 +9,7 @@ import orderRouter from "./src/routes/order.js";
 import path from "path";
 
 dotenv.config();
-const origin = process.env.ORIGIN ?? "http://localhost:3000";
+const origin = process.env.ORIGIN ?? "https://foodlandmarket.vercel.app";
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
