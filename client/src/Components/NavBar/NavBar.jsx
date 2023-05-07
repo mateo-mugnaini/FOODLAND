@@ -1,6 +1,7 @@
 import SearchBar from "./SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import { signout } from "../../redux/actions/userActions";
+import { useEffect } from "react";
 
 // import { signout } from '../../actions/userActions';
 
@@ -17,6 +18,10 @@ const NavBar = () => {
   
   const[cart, setCart] = useLocalStore("Carrito", []);
   const lastThreeItems = cart.slice(-4);  //Selecciono los ultimos 4 productos del carrito
+  useEffect(() => {
+    // Actualizar el carrito cada vez que cambia el estado
+    console.log('Cart actualizado', cart);
+  }, [cart]);
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
