@@ -3,16 +3,10 @@
     flex-direction: column;
 }
 
-
-.userProfile a {
-    align-self: flex-start;
-    font-size: 17;
-    margin-top: 2%;
-    margin-left: 2%;
-    text-decoration: underline;
-    color: green;
-
-   
+.btnHome{
+    position: absolute;
+    top: 100px;
+    left: 0;
 }
 
 .profileCard {
@@ -20,7 +14,7 @@
     display: flex;
     flex-direction: row;
     width: 70%;
-    margin-top: 2%;
+    margin-top: 8%;
     margin-bottom: 4%;
     align-self: center;
 }
@@ -31,6 +25,8 @@
     flex-direction: column;
     align-items: center;
 }
+.left p {font-size: 13px; padding: 5px;  border-radius: 4px; margin-top: 5%;border: 1px solid rgba(155, 114, 80, 0.541)}
+
 .profileCard .left img {
     width: 50%;
     margin-top: 7%;
@@ -70,7 +66,7 @@
 .left-btns {
     display: flex;
     flex-direction: column;
-    margin-top: 16%;
+    margin-top: 8%;
 }
 
 .left-btns button {

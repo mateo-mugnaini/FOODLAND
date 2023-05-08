@@ -6,8 +6,8 @@ import {
 } from "../constants/userConstants";
 import Axios from "axios";
 
-// const URL = "http://localhost:5000";
-const URL = "https://foodland-production.up.railway.app";
+const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
+// const URL = "https://foodland-production.up.railway.app/";
 
 export const signin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST, payload: email, password });
