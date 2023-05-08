@@ -5,7 +5,7 @@
     box-shadow: 3px 4px 12px rgb(0, 0 ,0,25%);
     display: flex;
     flex-direction: column;
-    width: 23%;
+    width: 30%;
     height: fit-content;
 }
 
@@ -44,9 +44,11 @@ color: green;
     border-radius: 20px;
     border: 2px solid rgb(29, 121, 29);
     width: 224px;
+    align-self: center;
+
 }
 
-.ContainerPayment button:hover{
+/* .ContainerPayment button:hover{
     background-color: white;
     color: rgb(29, 121, 29);
     box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
@@ -56,7 +58,7 @@ color: green;
     font-size: 30px;
     border-radius: 20px;
     border: 2px solid rgb(29, 121, 29);
-}
+} */
 
 .ContainerPayment button a{
     color: white;

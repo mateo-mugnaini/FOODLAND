@@ -27,7 +27,7 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-
+      console.log(response.data)
       dispatch({
         type: action.GET_ALL_PRODUCTS,
         payload: response.data,
@@ -71,6 +71,12 @@ export function setProduct(payload) {
     payload,
   };
 }
+export function setFilterState (payload) {
+  return {
+    type: "SET_FILTER_STATE",
+    payload,
+  };
+};
 
 export const getDetail = (id) => {
   return async (dispatch) => {
@@ -143,6 +149,11 @@ export function handle_sorts2(payload) {
     payload,
   };
 }
+
+export function clearProducts(payload){ return {
+  type: "CLEAR_PRODUCTS",
+  payload,
+};};
 
 /* ========================*  SEARCH*======================== */
 export const resultSearch = (result) => {

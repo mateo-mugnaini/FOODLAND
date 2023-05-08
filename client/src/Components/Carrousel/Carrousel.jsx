@@ -3,8 +3,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Carrousel.css";
-import oferta1 from "../../Imgs/oferta1.jpeg"
-import oferta2 from "../../Imgs/oferta2.png"
+import oferta2 from "../../Imgs/logo-no-background.png"
+import ofertGrocery from "../../Imgs/Ofert-grocery.png"
+import ofertPet from"../../Imgs/Ofert-Pet.png"
+import ofertLapto from"../../Imgs/Ofert-Lapto.png"
+import oferthead from"../../Imgs/Ofert-head.png"
+import oferProducts from "../../Imgs/Ofert-products.jpg"
 
 const Carrousel = () => {
   const settings = {
@@ -24,19 +28,19 @@ const Carrousel = () => {
    
       <Slider {...settings}>
         <div>
-          <img src={oferta1} alt="" />
+          <img src={ofertPet} alt="" />
         </div>
         <div>
-          <img src={oferta2} />
+          <img src={ofertGrocery} alt=""/>
         </div>
         <div>
-          <img src={oferta1} alt="" />
+          <img src={ofertLapto} alt="" />
         </div>
         <div>
-          <img src={oferta2} alt="" />
+          <img src={oferthead} alt="" />
         </div>
         <div>
-          <img src={oferta1} alt="" />
+          <img src={oferProducts} alt="" />
         </div>
         <div>
           <img src={oferta2} alt="" />

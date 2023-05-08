@@ -2,13 +2,13 @@ import React, {  useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import  "./DetailCard.css"
 import { useParams, NavLink } from "react-router-dom"
-// import { products } from "../../Components/products"
 import Rating from '../../Components/Rating/rating'
 import "../Detail/DetailCard.css"
-
+import Swal from 'sweetalert2'
+import returnPolicyPopup from "../../Texts/returnPolicyPopup.txt"
 import {getDetail} from "../../redux/actions"
-//IMPORT LOCALSTORE 
 import useLocalStore from "../../hooks/useLocalStore";
+
 
 const DetailCard = () => {
   const { id } = useParams();
@@ -42,6 +42,18 @@ const DetailCard = () => {
       }
     };
 
+    const showLegalInfo = () => {
+      fetch(returnPolicyPopup)
+      .then((response) => response.text())
+      .then((data) => {
+        Swal.fire({
+          title: 'Supermarket Purchase Agreement',
+          text:data,
+          confirmButtonText: 'OK'
+        })
+      });
+     
+    }
 
   return (
     <div className='DetailCardCont'>
@@ -77,7 +89,7 @@ const DetailCard = () => {
 
          <button className="addButton" onClick={handleAddToCart}>Add Product</button>
         
-        <button className='returnButton'>Cambios y devoluciones →</button>
+        <button className='returnButton' onClick={showLegalInfo}>Cambios y devoluciones →</button>
       </div>
 
     </div>

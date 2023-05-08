@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader"
 import ProductCard from "./productCard"
 
 //IMPORT ACTIONS
-import { handle_sorts, getByCategory  } from "../../redux/actions";
+import { handle_sorts, getByCategory, setFilterState  } from "../../redux/actions";
 
 
 
@@ -16,7 +16,7 @@ const ProductsContainer = () => {
   const { categoriesId } = useParams();
 
   /* IMPORT STATES */
-  const { products, display } = useSelector((state) => state.products);
+  const { products, display, filterState } = useSelector((state) => state.products);
   /* PAGINADO */
   const [numeroPagina, setNumeroPagina] = useState(1);
 
@@ -46,19 +46,16 @@ const ProductsContainer = () => {
     dispatch(handle_sorts(e.target.value))
   }
 
-
   /* DISPATCH PARA TRAER LOS PRODUCTOS */
   const dispatch = useDispatch();
 
 
-
   useEffect(() => {
-    // Si el estado global de productos está vacío, obtén los productos según la categoría
-    if (products.length === 0) {
-      dispatch(getByCategory(categoriesId));
-    }
-    
-
+    // si esta en true me despacha la accion que me trae los prod por
+    if (filterState) {
+      dispatch(getByCategory(categoriesId));  
+       }
+  
   }, [dispatch]);
 
   return (
