@@ -4,7 +4,7 @@ import React, { useEffect , useState} from "react";
 import CategoryCard from "./categoryCard";
 import { NavLink } from "react-router-dom";
 import "./cards.css";
-import { getAllCategories, getAllProducts, setProduct } from "../../redux/actions";
+import { getAllCategories, getAllProducts, setFilterState, setProduct } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import Carrousel from "../Carrousel/Carrousel";
 import oferta1 from "../../Imgs/oferta1.jpeg"
@@ -13,7 +13,8 @@ const CategoryContainer = () => {
   
   /* IMPORT STATES */
 
-  const { categories } = useSelector((state) => state.products);
+  const { categories, filterState } = useSelector((state) => state.products);
+  
   
 const localCategories = categories.sort((a, b) => {
   if (a._id < b._id) return -1;
@@ -29,6 +30,7 @@ const localCategories = categories.sort((a, b) => {
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getAllProducts());
+    dispatch(setFilterState(true))
     console.log(AllProducts)
   }, [dispatch]);
 
