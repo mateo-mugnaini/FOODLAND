@@ -13,36 +13,27 @@ import "./NavBar.css";
 import { Link } from "react-router-dom";
 
 import { useEffect } from "react";
+import useLocalStore from "../../hooks/useLocalStore";
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const { logout, user, isAuthenticated } = useAuth0();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-
-
-import useLocalStore from "../../hooks/useLocalStore";
-
-const NavBar = () => {
-  const dispatch = useDispatch();
   
   const[cart, setCart] = useLocalStore("Carrito", []);
   const lastThreeItems = cart.slice(-4);  //Selecciono los ultimos 4 productos del carrito
+    
+  const logoSvg = logo;
+  
   useEffect(() => {
     // Actualizar el carrito cada vez que cambia el estado
     console.log('Cart actualizado', cart);
-  }, [cart]);
-
-
-
-  const logoSvg = logo;
-
-  useEffect(() => {
     console.log(isAuthenticated);
     if (isAuthenticated) {
       dispatch(signIn(user));
     }
-  }, [isAuthenticated, dispatch, user]);
+  }, [isAuthenticated, dispatch, user, cart]);
 
   const signOutHandler = () => {
     dispatch(signout());

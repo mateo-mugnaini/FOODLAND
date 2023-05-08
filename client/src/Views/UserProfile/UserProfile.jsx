@@ -19,11 +19,7 @@ function Profile() {
   
   const dispatch = useDispatch();
 
-  const signOutHandler = () => {
-		dispatch(signout());
-    navigate("/")
-	};
-
+  
   const showLegalInfo = () => {
     fetch(legalPopup)
     .then((response) => response.text())
@@ -34,9 +30,9 @@ function Profile() {
         confirmButtonText: 'OK'
       })
     });
-   
+    
   }
-
+  
   const [userData, setUserData] = useState({
     name: "Juan",
     lastName: "Rodriguez",
@@ -45,14 +41,17 @@ function Profile() {
     address: "los tilos 2234",
     password: "",
   });
-
+  
   const handleEditProfile = () => {
     // Lógica para mostrar un formulario de edición
   };
-
+  
+  
   const signOutHandler = () => {
-		dispatch(signout());
-    window.location.href = "/"
+    dispatch(signout());
+    navigate("/")
+		//dispatch(signout());
+    //window.location.href = "/"
 	};
 
   return (
