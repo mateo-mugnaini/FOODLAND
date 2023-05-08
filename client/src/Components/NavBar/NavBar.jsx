@@ -1,3 +1,7 @@
+
+//IMPORT ESTILOS:
+import "./NavBar.css";
+//IMPORT COMPONENTS:
 import SearchBar from "./SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import { signIn, signout } from "../../redux/actions/userActions";
@@ -7,9 +11,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 //IMPORT IMAGES
 import logo from "../../Imgs/LogosSVG/logo-no-background.png";
-
-//IMPORT ESTILOS
-import "./NavBar.css";
 import { Link } from "react-router-dom";
 import useLocalStore from "../../hooks/useLocalStore";
 import { useEffect } from "react";
