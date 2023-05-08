@@ -44,7 +44,7 @@ function CartItem({ product, updateQuantity, removeItem, updateCartTotal, total 
         </div>
       </li>
       <li className="cart_price_col">
-        <h2>${product.price * quantity}</h2>
+        <h2>${(product.price * quantity).toFixed(2)}</h2>
       </li>
       <li className="cart_del_col">
         <img src="https://tinypic.host/images/2023/05/05/butonDelete.png" alt="deleteButton" onClick={removeItemHandler} />
