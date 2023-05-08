@@ -9,7 +9,7 @@ import orderRouter from "./src/routes/order.js";
 import path from "path";
 
 dotenv.config();
-const origin = procesos.env.ORIGIN ??  "http://localhost:3000";
+const origin = process.env.ORIGIN ?? "http://localhost:3000";
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -24,7 +24,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", origin ); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", origin); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -39,8 +39,8 @@ app.use("/api/seed", seedRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 
-app.get('/api/config/paypal', (req, res) => {
-  res.send(process.env.PAYPAL_CLIENT_ID || 'sb'); 
+app.get("/api/config/paypal", (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
 
 app.use((err, req, res, next) => {
