@@ -69,6 +69,13 @@ export function setProduct (payload) {
     payload,
   };
 }
+export function setFilterState (payload) {
+  return {
+    type: "SET_FILTER_STATE",
+    payload,
+  };
+};
+
 
 export const getDetail = (id) => {
   return async (dispatch) => {
@@ -93,10 +100,6 @@ export const getDetail = (id) => {
   };
 };
 
-export function clearProducts(payload){ return {
-  type: "CLEAR_PRODUCTS",
-  payload,
-};};
 
 /* ========================* FILTROS *======================== */
 

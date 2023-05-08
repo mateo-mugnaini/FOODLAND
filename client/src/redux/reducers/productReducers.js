@@ -15,6 +15,7 @@ import {
 	DETAIL_PRODUCT,
 	GET_BY_CATEGORY,
 	SET_PRODUCT,
+	SET_FILTER_STATE,
 } from "../constants/productConstants";
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
 	categories: [],
 	AllProducts: [],
 	product: {},
+	filterState:true
   };
   const productsReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -56,6 +58,11 @@ const initialState = {
 		  ...state,
 		  products:action.payload
 		}
+		case SET_FILTER_STATE:
+			return {
+			  ...state,
+			  filterState:action.payload
+			}
 	  case DETAIL_PRODUCT:
 		return {
 		  ...state,
@@ -125,6 +132,7 @@ const initialState = {
 		}
   
 	  //========================== SORT HOME / PRODUCTS SEARCH =============
+	  /*
 	  case HANDLE_SORTS2:
 		const auxToOrder2 = state.AllProducts;
   
@@ -209,7 +217,7 @@ const initialState = {
 		return {
 		  ...state,
 		  AllProducts: action.payload,
-		};
+		}; */
 	  default:
 		return { ...state };
 	}

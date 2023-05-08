@@ -16,7 +16,8 @@ import {
   DETAIL_PRODUCT,
   GET_BY_CATEGORY,
   SET_PRODUCT,
-  CLEAR_PRODUCTS
+  CLEAR_PRODUCTS,
+  SET_FILTER_STATE
 } from "./action-types";
 
 /* ========================* INITIAL STATE *======================== */
@@ -26,6 +27,7 @@ const initialState = {
   categories: [],
   AllProducts: [],
   product: {},
+  filterState:true
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -62,6 +64,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products:action.payload
       }
+    ;  case SET_FILTER_STATE:
+    return {
+      ...state,
+      products:action.payload
+    }
     case DETAIL_PRODUCT:
       return {
         ...state,
