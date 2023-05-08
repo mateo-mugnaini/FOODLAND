@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import "./UserProfile.css"
 import usuario from "../../Imgs/usuario.jpg"
 import { Link, useNavigate } from 'react-router-dom';
@@ -48,6 +49,11 @@ function Profile() {
   const handleEditProfile = () => {
     // Lógica para mostrar un formulario de edición
   };
+
+  const signOutHandler = () => {
+		dispatch(signout());
+    window.location.href = "/"
+	};
 
   return (
     <div className='userProfile'>
