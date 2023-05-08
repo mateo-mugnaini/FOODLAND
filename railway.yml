@@ -1,0 +1,8 @@
+services:
+  backend:
+    image: node:14
+    build:
+      context: ./api
+      command: npm install
+    run:
+      command: npm start
