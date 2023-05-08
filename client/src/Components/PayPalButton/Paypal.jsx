@@ -5,6 +5,10 @@ import Loader from "../Loader/Loader";
 
 function Paypal() {
 	
+
+// const URL = "http://localhost:5000";
+const URL = "https://foodland-production.up.railway.app/";
+	
     //traer del estado los datos de la orden y usar el monto total para pasarlo al PayPalButton
 
     const [sdkReady, setSdkReady] = useState(false);
@@ -13,7 +17,7 @@ function Paypal() {
 		const addPayPalScript = async () => {
 			//trae del back el usuario de prueba de paypal
             const { data } = await Axios.get(
-				"http://localhost:5000/api/config/paypal"
+				`${URL}/api/config/paypal`
 			);
 			const script = document.createElement("script");
 			script.type = "text/javascript";

@@ -1,8 +1,8 @@
 import axios from "axios";
 import * as action from "../constants/productConstants"; // Import para traer todas las actions-types
 
-const URL = "http://localhost:5000";
-//const URL = "https://foodland-back.onrender.com";
+// const URL = "http://localhost:5000";
+const URL = "https://foodland-production.up.railway.app/";
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -17,7 +17,6 @@ export function ready() {
   };
 }
 
-
 /* ========================*  PRODUCTS *======================== */
 
 export const getAllProducts = () => {
@@ -25,7 +24,7 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-   
+
       dispatch({
         type: action.GET_ALL_PRODUCTS,
         payload: response.data,
@@ -47,7 +46,7 @@ export const getAllCategories = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products/categories`);
-     dispatch({
+      dispatch({
         type: action.GET_ALL_CATEGORIES,
         payload: response.data,
       });
@@ -63,7 +62,7 @@ export const getAllCategories = () => {
   };
 };
 
-export function setProduct (payload) {
+export function setProduct(payload) {
   return {
     type: "SET_PRODUCT",
     payload,
@@ -110,22 +109,22 @@ export const getByCategory = (category) => {
       const response = await axios.get(`${URL}/api/products`);
       const arrayProducts = response.data.products;
 
-    if (category === "allProducts") {
-      dispatch({
-        type: action.GET_BY_CATEGORY,
-        payload: arrayProducts,
-      });
-      dispatch(ready()); }
-    else {
-      const productosFiltrados = arrayProducts.filter((producto) => {
-        return producto.category === category;
-      });
-      dispatch({
-        type: action.GET_BY_CATEGORY,
-        payload: productosFiltrados,
-      });
-      dispatch(ready());
-    }
+      if (category === "allProducts") {
+        dispatch({
+          type: action.GET_BY_CATEGORY,
+          payload: arrayProducts,
+        });
+        dispatch(ready());
+      } else {
+        const productosFiltrados = arrayProducts.filter((producto) => {
+          return producto.category === category;
+        });
+        dispatch({
+          type: action.GET_BY_CATEGORY,
+          payload: productosFiltrados,
+        });
+        dispatch(ready());
+      }
     } catch (error) {
       console.log(error);
       dispatch({
@@ -136,7 +135,6 @@ export const getByCategory = (category) => {
     }
   };
 };
-
 
 export function handle_sorts(payload) {
   return {
@@ -184,10 +182,7 @@ export const filterPrice = (products) => {
 export const addCategory = (category) => async (dispatch) => {
   try {
     dispatch({ type: action.ADD_CATEGORY_REQUEST });
-    const { data } = await axios.post(
-      "http://localhost:5000/api/categories",
-      category
-    );
+    const { data } = await axios.post(`${URL}/api/categories`, category);
     dispatch({
       type: action.ADD_CATEGORY_SUCCESS,
       payload: data,

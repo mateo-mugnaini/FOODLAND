@@ -3,8 +3,9 @@
 import axios from "axios";
 import * as action from "./action-types"; // Import para traer todas las actions-types
 
-const URL = "http://localhost:5000";
-// const URL = "https://foodland-production.up.railway.app/";
+//const URL = "http://localhost:5000";
+
+const URL = "https://foodland-production.up.railway.app/";
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -187,10 +188,7 @@ export const filterPrice = (products) => {
 export const addCategory = (category) => async (dispatch) => {
   try {
     dispatch({ type: action.ADD_CATEGORY_REQUEST });
-    const { data } = await axios.post(
-      "http://localhost:5000/api/categories",
-      category
-    );
+    const { data } = await axios.post(`${URL}/api/categories`, category);
     dispatch({
       type: action.ADD_CATEGORY_SUCCESS,
       payload: data,
