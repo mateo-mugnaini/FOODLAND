@@ -1,9 +1,41 @@
 import React, { useState } from 'react';
 import "./UserProfile.css"
 import usuario from "../../Imgs/usuario.jpg"
-import { NavLink } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {useSelector, useDispatch} from "react-redux"
+import { signout } from "../../redux/actions/userActions";
+import Swal from 'sweetalert2'
+import legalPopup from "../../Texts/legalPopup.txt"
 
 function Profile() {
+
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
+  
+  const navigate = useNavigate();
+  
+  const dispatch = useDispatch();
+
+  const signOutHandler = () => {
+		dispatch(signout());
+    navigate("/")
+	};
+
+  const showLegalInfo = () => {
+    fetch(legalPopup)
+    .then((response) => response.text())
+    .then((data) => {
+      Swal.fire({
+        title: 'Supermarket Purchase Agreement',
+        text:data,
+        confirmButtonText: 'OK'
+      })
+    });
+   
+  }
+
   const [userData, setUserData] = useState({
     name: "Juan",
     lastName: "Rodriguez",
@@ -19,20 +51,23 @@ function Profile() {
 
   return (
     <div className='userProfile'>
-        <NavLink to="/">
-            Back to home
-        </NavLink>
+      
+        <Link to="/">
+          <button className="btnHome">BACK TO HOME</button>
+        </Link>
+      
         <div className='profileCard'>
             <div className='left'> 
                 <img src={usuario} alt="" />
+                <p>Id = {userInfo._id}</p>
                 <div className='left-btns'>
-                    <button> Legal information </button>
-                    <button className='singOut-btn'> Sing out</button>
+                    <button onClick={showLegalInfo}> Legal information </button>
+                    <button onClick={signOutHandler} className='singOut-btn'> Sing out</button>
                 </div>
             </div>
             <div className='right'>
-                <h1>{userData.name} { userData.lastName}</h1>
-                <h3><span>Email adress: </span> {userData.email}</h3>
+                <h1>{userInfo.name} { userData.lastName}</h1>
+                <h3><span>Email adress: </span> {userInfo.email}</h3>
                 <h3><span>Adress: </span>{userData.address}</h3>
                 <h3><span>Phone number: </span> {userData.phone}</h3>
                 <button className='editProfile-btn'>Edit profile</button>

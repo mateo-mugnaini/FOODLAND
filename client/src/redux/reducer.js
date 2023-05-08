@@ -16,6 +16,7 @@ import {
   DETAIL_PRODUCT,
   GET_BY_CATEGORY,
   SET_PRODUCT,
+  CLEAR_PRODUCTS
 } from "./action-types";
 
 /* ========================* INITIAL STATE *======================== */
@@ -44,6 +45,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         AllProducts: action.payload,
       };
+      case CLEAR_PRODUCTS:
+        return { ...state, products: [] };
     case GET_BY_CATEGORY:
       return {
         ...state,
