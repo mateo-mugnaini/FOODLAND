@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { useSelector } from "react-redux";
 
 import "./UserProfile.css"
 import usuario from "../../Imgs/usuario.jpg"
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import { signout } from "../../redux/actions/userActions";
 
 function Profile() {
+  const dispatch = useDispatch();
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -25,6 +27,11 @@ function Profile() {
     // Lógica para mostrar un formulario de edición
   };
 
+  const signOutHandler = () => {
+		dispatch(signout());
+    window.location.href = "/"
+	};
+
   return (
     <div className='userProfile'>
         <NavLink to="/">
@@ -35,7 +42,7 @@ function Profile() {
                 <img src={usuario} alt="" />
                 <div className='left-btns'>
                     <button> Legal information </button>
-                    <button className='singOut-btn'> Sing out</button>
+                    <button onClick={signOutHandler} className='singOut-btn'> Sing out</button>
                 </div>
             </div>
             <div className='right'>

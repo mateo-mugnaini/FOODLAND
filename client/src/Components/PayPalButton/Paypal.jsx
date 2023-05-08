@@ -7,7 +7,7 @@ function Paypal() {
 	
 
 // const URL = "http://localhost:5000";
-const URL = "https://foodland-production.up.railway.app/";
+const URL = "https://foodland-production.up.railway.app";
 	
     //traer del estado los datos de la orden y usar el monto total para pasarlo al PayPalButton
 

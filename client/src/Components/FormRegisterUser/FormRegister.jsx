@@ -15,7 +15,7 @@ import {
 const FormRegister = () => {
 
   // const URL = "http://localhost:5000";
-const URL = "https://foodland-production.up.railway.app/";
+const URL = "https://foodland-production.up.railway.app";
 
   const [user, setUser] = useState({
     name: "",
