@@ -5,7 +5,6 @@ import seedRouter from "./src/routes/seedRoutes.js";
 import userRouter from "./src/routes/userRoutes.js";
 import Product from "./src/routes/products.js";
 import orderRouter from "./src/routes/order.js";
-
 import path from "path";
 
 dotenv.config();
@@ -47,7 +46,7 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
 
-//Catches errors due to express-async-handler
+// Catches errors due to express-async-handler
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
