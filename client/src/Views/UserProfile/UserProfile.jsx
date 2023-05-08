@@ -46,14 +46,13 @@ function Profile() {
     // Lógica para mostrar un formulario de edición
   };
   
-  
   const signOutHandler = () => {
     dispatch(signout());
     navigate("/")
 		//dispatch(signout());
     //window.location.href = "/"
 	};
-
+  
   return (
     <div className='userProfile'>
       
