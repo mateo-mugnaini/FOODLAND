@@ -10,10 +10,8 @@ import legalPopup from "../../Texts/legalPopup.txt"
 
 function Profile() {
 
-
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-
   
   const navigate = useNavigate();
   
