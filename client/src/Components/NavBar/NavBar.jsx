@@ -11,7 +11,7 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 //IMPORT ESTILOS
 import "./NavBar.css";
 import { Link } from "react-router-dom";
-
+import useLocalStore from "../../hooks/useLocalStore";
 import { useEffect } from "react";
 
 const NavBar = () => {
@@ -20,20 +20,12 @@ const NavBar = () => {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
-
-import useLocalStore from "../../hooks/useLocalStore";
-
-const NavBar = () => {
-  const dispatch = useDispatch();
-  
-  const[cart, setCart] = useLocalStore("Carrito", []);
-  const lastThreeItems = cart.slice(-4);  //Selecciono los ultimos 4 productos del carrito
+  const [cart] = useLocalStore("Carrito", []);
+  const lastThreeItems = cart.slice(-4); //Selecciono los ultimos 4 productos del carrito
   useEffect(() => {
     // Actualizar el carrito cada vez que cambia el estado
-    console.log('Cart actualizado', cart);
+    console.log("Cart actualizado", cart);
   }, [cart]);
-
-
 
   const logoSvg = logo;
 
@@ -49,7 +41,6 @@ const NavBar = () => {
     logout();
     window.location.href = "/";
   };
-
 
   return (
     <div name="ContainerNav" key="ContainerNav" className="ContainerNav">
@@ -72,18 +63,18 @@ const NavBar = () => {
               <li>
                 <Link to="/MyCart">
                   <span>
-                  <h2 class="titlecart">My cart:</h2>
-                  <div className="viewCartNav">
-                    {!cart ? "Add products" :
-                lastThreeItems.map((item) => (
-                <div key={item.product} class="background">
-                  <img src={item.image} alt={item.name}  />
-                  <span class="span1">{item.name}</span>
-                  <span class="span2">x{item.quantity}</span>
-                </div>
-              ))
-                }
-            </div>
+                    <h2 class="titlecart">My cart:</h2>
+                    <div className="viewCartNav">
+                      {!cart
+                        ? "Add products"
+                        : lastThreeItems.map((item) => (
+                            <div key={item.product} class="background">
+                              <img src={item.image} alt={item.name} />
+                              <span class="span1">{item.name}</span>
+                              <span class="span2">x{item.quantity}</span>
+                            </div>
+                          ))}
+                    </div>
                   </span>
                 </Link>
               </li>
