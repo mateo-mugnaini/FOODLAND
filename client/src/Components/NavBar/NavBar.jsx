@@ -11,24 +11,21 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 //IMPORT ESTILOS
 import "./NavBar.css";
 import { Link } from "react-router-dom";
-
-import { useEffect } from "react";
 import useLocalStore from "../../hooks/useLocalStore";
+import { useEffect } from "react";
 
 const NavBar = () => {
+
   const dispatch = useDispatch();
   const { logout, user, isAuthenticated } = useAuth0();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-  
-  const[cart, setCart] = useLocalStore("Carrito", []);
+   const[cart, setCart] = useLocalStore("Carrito", []);
   const lastThreeItems = cart.slice(-4);  //Selecciono los ultimos 4 productos del carrito
-    
+
   const logoSvg = logo;
-  
+
   useEffect(() => {
-    // Actualizar el carrito cada vez que cambia el estado
-    console.log('Cart actualizado', cart);
     console.log(isAuthenticated);
     if (isAuthenticated) {
       dispatch(signIn(user));
@@ -40,7 +37,6 @@ const NavBar = () => {
     logout();
     window.location.href = "/";
   };
-
 
   return (
     <div name="ContainerNav" key="ContainerNav" className="ContainerNav">
@@ -166,5 +162,7 @@ const NavBar = () => {
       </div>
     </div>
   );
-};
+}; 
+
+
 export default NavBar;
