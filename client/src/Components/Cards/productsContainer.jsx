@@ -46,18 +46,13 @@ const ProductsContainer = () => {
     dispatch(handle_sorts(e.target.value))
   }
 
-
   /* DISPATCH PARA TRAER LOS PRODUCTOS */
   const dispatch = useDispatch();
 
 
-
   useEffect(() => {
     // Si el estado global de productos está vacío, obtén los productos según la categoría
-    if (products.length === 0) {
       dispatch(getByCategory(categoriesId));
-    }
-    
 
   }, [dispatch]);
 

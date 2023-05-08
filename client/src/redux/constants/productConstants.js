@@ -10,6 +10,8 @@ const SET_PRODUCT ="SET_PRODUCT" // actualiza el estado products con el array qu
 const HANDLE_SORTS = "HANDLE_SORTS"; // ordena los productos
 const RESULTSEARCH = "RESULTSEARCH"; // Action que actualiza el estado global
 const DETAIL_PRODUCT = "DETAIL_PRODUCT"; // Action para traer el detalle
+const CLEAR_PRODUCTS = 'CLEAR_PRODUCTS'; // Limpiar el estado de "products"
+
 
 /* ======================= FILTER ==========================*/
 const FILTERPRICE = "FILTERPRICE"; //Action que filtra por precio
@@ -35,5 +37,6 @@ module.exports = {
   ADD_CATEGORY_FAILURE,
   DETAIL_PRODUCT,
   GET_BY_CATEGORY,
-  SET_PRODUCT
+  SET_PRODUCT,
+  CLEAR_PRODUCTS
 };

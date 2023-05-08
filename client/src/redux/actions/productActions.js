@@ -93,6 +93,11 @@ export const getDetail = (id) => {
   };
 };
 
+export function clearProducts(payload){ return {
+  type: "CLEAR_PRODUCTS",
+  payload,
+};};
+
 /* ========================* FILTROS *======================== */
 
 export const getByCategory = (category) => {
