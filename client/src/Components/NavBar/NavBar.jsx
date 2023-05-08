@@ -1,7 +1,7 @@
 import SearchBar from "./SearchBar";
 import { useSelector, useDispatch } from "react-redux";
-import { signout } from "../../redux/actions/userActions";
-import { useEffect } from "react";
+import { signIn, signout } from "../../redux/actions/userActions";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // import { signout } from '../../actions/userActions';
 
@@ -11,6 +11,16 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 //IMPORT ESTILOS
 import "./NavBar.css";
 import { Link } from "react-router-dom";
+
+import { useEffect } from "react";
+
+const NavBar = () => {
+  const dispatch = useDispatch();
+  const { logout, user, isAuthenticated } = useAuth0();
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
+
 import useLocalStore from "../../hooks/useLocalStore";
 
 const NavBar = () => {
@@ -23,17 +33,22 @@ const NavBar = () => {
     console.log('Cart actualizado', cart);
   }, [cart]);
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
 
-  console.log(userInfo);
+
   const logoSvg = logo;
-  
+
+  useEffect(() => {
+    console.log(isAuthenticated);
+    if (isAuthenticated) {
+      dispatch(signIn(user));
+    }
+  }, [isAuthenticated, dispatch, user]);
+
   const signOutHandler = () => {
-		dispatch(signout());
-    window.location.href = "/"
-	};
-  
+    dispatch(signout());
+    logout();
+    window.location.href = "/";
+  };
 
 
   return (
@@ -88,8 +103,8 @@ const NavBar = () => {
               alt="iconsLogin"
               className="iconsNav2"
             />
-            {userInfo &&<span className="userName">{userInfo.name}</span>  }
-            
+            {userInfo && <span className="userName">{userInfo.name}</span>}
+
             <ul className="ulNav">
               {userInfo ? (
                 userInfo.isAdmin ? (
@@ -117,7 +132,7 @@ const NavBar = () => {
                     </li>
                     <li>
                       <span>
-                          <p onClick={signOutHandler}>Log out</p>
+                        <p onClick={signOutHandler}>Log out</p>
                       </span>
                     </li>
                   </div>
