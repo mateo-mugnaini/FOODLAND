@@ -26,7 +26,7 @@ import { getAllCategories } from "../../redux/actions/productActions";
 function FormCreateProduct() {
 
 // const URL = "http://localhost:5000";
-const URL = "https://foodland-production.up.railway.app/";
+const URL = "https://foodland-production.up.railway.app";
 
   /* ========================* ESTADO LOCAL  *======================== */
   const [product, setProduct] = useState({

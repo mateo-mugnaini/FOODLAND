@@ -3,9 +3,9 @@
 import axios from "axios";
 import * as action from "./action-types"; // Import para traer todas las actions-types
 
-//const URL = "http://localhost:5000";
+const URL = process.env.REACT_APP_URL ??  "http://localhost:5000";
 
-const URL = "https://foodland-production.up.railway.app/";
+// const URL = "https://foodland-production.up.railway.app/";
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -27,7 +27,6 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-      console.log(response.data)
       dispatch({
         type: action.GET_ALL_PRODUCTS,
         payload: response.data,
@@ -58,7 +57,7 @@ export const getAllCategories = () => {
       console.log(error);
       dispatch({
         type: action.GET_ALL_CATEGORIES,
-        payload: error,
+        payload: [],
       });
       dispatch(ready());
     }
