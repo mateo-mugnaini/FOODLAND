@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateProduct, getDetail, getAllCategories } from "../../redux/actions/productActions";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 import "./FormUpdateProduct.css"
 
-const EditProductForm = ({ onClose }) => {
+const EditProductForm = () => {
   const { id } = useParams();
   const decodedName = decodeURI(id);
   const {product} = useSelector((state) => state.products)
@@ -13,13 +13,11 @@ const EditProductForm = ({ onClose }) => {
   // const product = products.find((product) => product.name === decodedName);
   const dispatch = useDispatch();
 
-  
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getDetail(decodedName));
   }, [dispatch,decodedName]);
-const aux = product
-console.log(aux);
+
   const [formData, setFormData] = useState({
     name: product?.name || "",
     slug: product?.slug || "",
@@ -46,7 +44,6 @@ console.log(aux);
     e.preventDefault();
     const editedProduct = { id: product._id, ...formData };
     dispatch(updateProduct(editedProduct));
-    onClose();
   };
 
   return (
@@ -124,12 +121,13 @@ console.log(aux);
             <select
               className="input"
               name="category"
+          placeholder={product?.category}
               value={product.category}
               onChange={(e) => handleChange(e)}
             >
               <option value="0">Select a category</option>
               {categories.map((category) => (
-                <option key={category._id} value={category.name}>
+                <option key={category._id} value={category?.name}>
                   {category._id}
                 </option>
               ))}
@@ -173,7 +171,9 @@ console.log(aux);
       </div>
       <div className="btnContainer">
       <button className="btn" type="submit">Submit</button>
-      <button className="btnCancel" onClick={onClose}>Cancel</button>
+      <Link to="/products">
+      <button className="btnCancel">Cancel</button>
+      </Link>
     </div>
     </form>
     </div>
