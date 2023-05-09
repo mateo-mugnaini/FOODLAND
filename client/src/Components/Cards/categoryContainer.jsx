@@ -1,19 +1,19 @@
 
-import React, { useEffect , useState} from "react";
+import React, { useEffect } from "react";
 // import {categorys} from "../categorys.js"
 import CategoryCard from "./categoryCard";
 import { NavLink } from "react-router-dom";
 import "./cards.css";
-import { getAllCategories, getAllProducts, setFilterState, setProduct } from "../../redux/actions";
+import { getAllCategories, getAllProducts, setFilterState } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
-import Carrousel from "../Carrousel/Carrousel";
+// import Carrousel from "../Carrousel/Carrousel";
 import oferta1 from "../../Imgs/oferta1.jpeg"
 
 const CategoryContainer = () => {
   
   /* IMPORT STATES */
 
-  const { categories, filterState } = useSelector((state) => state.products);
+  const { categories } = useSelector((state) => state.products);
   
   
 const localCategories = categories.sort((a, b) => {
@@ -32,7 +32,7 @@ const localCategories = categories.sort((a, b) => {
     dispatch(getAllProducts());
     dispatch(setFilterState(true))
     console.log(AllProducts)
-  }, [dispatch]);
+  }, [AllProducts, dispatch]);
 
 
   return (
