@@ -11,10 +11,8 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { store2 } from "./redux/store2";
 
 import { BrowserRouter } from "react-router-dom";
-const domainAuth =
-  process.env.REACT_APP_DOMAIN ?? "dev-7azhwajhv4hw38nz.us.auth0.com";
-const clientIdAuth =
-  process.env.REACT_APP_CLIENT_ID ?? "e3gB8LMAjd1Klyt5asWWQTY5xPBSu07g";
+const domainAuth ="dev-7azhwajhv4hw38nz.us.auth0.com";
+const clientIdAuth ="e3gB8LMAjd1Klyt5asWWQTY5xPBSu07g";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
