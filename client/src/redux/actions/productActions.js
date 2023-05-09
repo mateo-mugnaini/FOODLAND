@@ -3,7 +3,6 @@ import * as action from "../constants/productConstants"; // Import para traer to
 
 const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
 
-
 /* ========================*  LOADER *======================== */
 export function loading() {
   return {
@@ -192,22 +191,23 @@ export const addCategory = (category) => async (dispatch) => {
     });
   }
 };
-//========================*Add Category*==============//
+//========================* UPDATE PRODUCT *==============//
 
-export const updateProduct = (product) => async (dispatch) => {
+export const updateProduct = (product) => async (dispatch, getState) => {
+  dispatch({ type: action.PRODUCT_UPDATE_REQUEST, payload: product });
+  const {
+    userSignin: { userInfo },
+  } = getState();
   try {
-    dispatch({ type: action.PRODUCT_UPDATE_REQUEST });
-
-    const { data } = await axios.put(
-      `http://localhost:5000/api/products/${product._id}`,
-      product
-    );
-
+    const { data } = await axios.put(`/api/products/${product._id}`, product, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
     dispatch({ type: action.PRODUCT_UPDATE_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({
-      type: action.PRODUCT_UPDATE_FAIL,
-      payload: error.response?.data?.message || error.message,
-    });
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: action.PRODUCT_UPDATE_FAIL, error: message });
   }
 };

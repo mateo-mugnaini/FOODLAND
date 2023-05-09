@@ -12,7 +12,7 @@ import MyCart from "./Views/MyCart/MyCart";
 import SigninScreen from "./Views/Login/signinScreen";
 import UserRegister from "./Views/Register/Register";
 import StockViews from "./Views/Stock/StockViews";
-import EditProduct from "./Components/Stock/FormUpdateProduct";
+import UpdateProduct from "./Views/UpdateProduct/UpdateProduct";
 import PlaceOrderScreen from "./Views/Order/placeOrderScreen";
 import UserProfile from "./Views/UserProfile/UserProfile.jsx";
 function App() {
@@ -86,7 +86,7 @@ function App() {
         ></Route>
         <Route
           path="/editproduct/:id"
-          element={<EditProduct />}
+          element={<UpdateProduct />}
           name="products"
           key="products"
         ></Route>

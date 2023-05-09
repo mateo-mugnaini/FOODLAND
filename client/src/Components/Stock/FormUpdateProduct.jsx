@@ -1,118 +1,184 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateProduct } from "../../redux/actions/productActions"; 
-import { Link } from "react-router-dom";
+import { updateProduct, getDetail, getAllCategories } from "../../redux/actions/productActions";
+import { useParams } from "react-router-dom"
 
 import "./FormUpdateProduct.css"
 
-const EditProduct = () => {
-  const productId = "";
-
-  console.log(productId);
+const EditProductForm = ({ onClose }) => {
+  const { id } = useParams();
+  const decodedName = decodeURI(id);
+  const {product} = useSelector((state) => state.products)
+  const categories = useSelector((state) => state.products.categories);
+  // const product = products.find((product) => product.name === decodedName);
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState({
-    name: "",
-    slug: "",
-    price: "",
-    category: "",
-    brand: "",
-    stock: "",
-    description: "",
-    image: "",
+  
+  useEffect(() => {
+    dispatch(getAllCategories());
+    dispatch(getDetail(decodedName));
+  }, [dispatch,decodedName]);
+const aux = product
+console.log(aux);
+  const [formData, setFormData] = useState({
+    name: product?.name || "",
+    slug: product?.slug || "",
+    image: product?.image || "",
+    images: product?.images || [],
+    imageCategory: product?.imageCategory || "",
+    brand: product?.brand || "",
+    category: product?.category || "",
+    description: product?.description || "",
+    price: product?.price || 0,
+    stock: product?.stock || 0,
   });
 
-  const [previewProduct, setPreviewProduct] = useState({});
 
-  const products = useSelector((state) => state.products);
-  const productList = products.AllProducts.products;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-  useEffect(() => {
-    const product = productList?.find((p) => p.id === productId);
-    setPreviewProduct(product);
-    setProduct({
-      ...product,
-    });
-  }, [productList, productId]);
-
-  const handleUpdateProduct = () => {
-    const updatedProduct = {
-      id: previewProduct.id,
-      ...product,
-    };
-    dispatch(updateProduct(updatedProduct));
-    setPreviewProduct(updatedProduct);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const editedProduct = { id: product._id, ...formData };
+    dispatch(updateProduct(editedProduct));
+    onClose();
   };
 
   return (
-    <div className="editProductContainer">
-      <h1>Edit Product</h1>
-      <div className="editForm">
-        <div className="formRow">
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={product.name}
-            onChange={(e) => setProduct({ ...product, name: e.target.value })}
-          />
-        </div>
-        <div className="formRow">
-          <label htmlFor="category">Category:</label>
-          <input
-            type="text"
-            id="category"
-            value={product.category}
-            onChange={(e) =>
-              setProduct({ ...product, category: e.target.value })
-            }
-          />
-        </div>
-        <div className="formRow">
-          <label htmlFor="stock">Stock:</label>
-          <input
-            type="number"
-            id="stock"
-            value={product.stock}
-            onChange={(e) => setProduct({ ...product, stock: e.target.value })}
-          />
-        </div>
-        <div className="formRow">
-          <label htmlFor="brand">Brand:</label>
-          <input
-            type="text"
-            id="brand"
-            value={product.brand}
-            onChange={(e) => setProduct({ ...product, brand: e.target.value })}
-          />
-        </div>
-        <button onClick={handleUpdateProduct}>Save Changes</button>
-        <Link to="/stock">
-          <button>Cancel</button>
-        </Link>
+    <div className="formProductContainer">
+    <form onSubmit={handleSubmit}  className="formCreate">
+      {/* ================== * NAME * ================== */}
+      <div className="labelContainer">
+        <label htmlFor="name"  className="label">Name:</label>
+        <input
+        className="input"
+          type="text"
+          id="name"
+          name="name"
+          placeholder={product?.name}
+          value={formData.name}
+          onChange={handleChange}
+        />
       </div>
-
-      <div className="preview">
-        <h2>Preview:</h2>
-        <div className="previewRow">
-          <label>Name:</label>
-          <span>{previewProduct?.name}</span>
-        </div>
-        <div className="previewRow">
-          <label>Category:</label>
-          <span>{previewProduct?.category}</span>
-        </div>
-        <div className="previewRow">
-          <label>Stock:</label>
-          <span>{previewProduct?.stock}</span>
-        </div>
-        <div className="previewRow">
-          <label>Brand:</label>
-          <span>{previewProduct?.brand}</span>
-        </div>
+      {/* ================== * SLUG * ================== */}
+      <div className="labelContainer">
+        <label htmlFor="slug"  className="label">Slug:</label>
+        <input
+        className="input"
+          type="text"
+          id="slug"
+          name="slug"
+          placeholder={product?.slug}
+          value={formData.slug}
+          onChange={handleChange}
+        />
       </div>
+      {/* ================== * IMAGE * ================== */}
+      <div className="labelContainer">
+        <label htmlFor="image" className="label">Image:</label>
+        <input
+        className="input"
+          type="text"
+          id="image"
+          name="image"
+          placeholder="Insert a new image"
+          value={formData.image}
+          onChange={handleChange}
+        />
+      </div>
+      {/* ================== * IMAGES * ================== */}
+      <div className="labelContainer">
+        <label htmlFor="images" className="label">Images:</label>
+        <input
+        className="input"
+          type="text"
+          id="images"
+          name="images"
+          placeholder="Insert a new images"
+          value={formData.images}
+          onChange={handleChange}
+        />
+      </div>
+      {/* ================== * BRAND * ================== */}
+      <div className="labelContainer">
+        <label htmlFor="brand"  className="label">Brand:</label>
+        <input
+        className="input"
+          type="text"
+          id="brand"
+          name="brand"
+          placeholder={product?.brand}
+          value={formData.brand}
+          onChange={handleChange}
+        />
+      </div>
+        {/* ================== * CATEGORIA * ================== */}
+        <div className="labelContainer">
+          <label className="label">
+            Category
+            <select
+              className="input"
+              name="category"
+              value={product.category}
+              onChange={(e) => handleChange(e)}
+            >
+              <option value="0">Select a category</option>
+              {categories.map((category) => (
+                <option key={category._id} value={category.name}>
+                  {category._id}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+      {/* ================== * DESCRIPTION * ================== */}
+      <div className="labelContainer">
+        <label htmlFor="description" className="label">Description:</label>
+        <textarea
+        className="inputDescription"
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+        />
+      </div>
+      {/* ================== * PRICE * ================== */}
+      <div className="labelContainer">
+        <label htmlFor="price" className="label">Price:</label>
+        <input
+        className="input"
+          type="number"
+          id="price"
+          name="price"
+          value={formData.price}
+          onChange={handleChange}
+        />
+      </div>
+      {/* ================== * STOCK * ================== */}
+      <div className="labelContainer">
+        <label htmlFor="stock" className="label">Stock:</label>
+        <input
+        className="input"
+          type="number"
+          id="stock"
+          name="stock"
+          value={formData.stock}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="btnContainer">
+      <button className="btn" type="submit">Submit</button>
+      <button className="btnCancel" onClick={onClose}>Cancel</button>
     </div>
+    </form>
+    </div>
+
   );
 };
 
-export default EditProduct;
+export default EditProductForm;
