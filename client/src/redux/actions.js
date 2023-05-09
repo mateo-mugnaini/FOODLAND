@@ -58,7 +58,7 @@ export const getAllCategories = () => {
       console.log(error);
       dispatch({
         type: action.GET_ALL_CATEGORIES,
-        payload: error,
+        payload: [],
       });
       dispatch(ready());
     }
