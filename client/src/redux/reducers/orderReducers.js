@@ -8,7 +8,7 @@ const initialState = {
 const ordersReducer = (state = initialState, action) => {
     switch (action.type) {
         case TOTAL_ORDER:
-            console.log(action.payload)
+            // console.log(action.payload)
             return {
                 ...state,
                 totalOrder: action.payload,

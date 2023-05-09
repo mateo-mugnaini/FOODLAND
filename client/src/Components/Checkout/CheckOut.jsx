@@ -52,7 +52,7 @@ const Payment = ({ total} ) => {
           shipping: "Free",
           totalOrder: couponApplied ? (total*1.15)*0.85 : total*1.15,
         };
-        console.log(order);
+        // console.log(order);
         dispatch(total_order(order));
         
         /* ======== Redireccion ==== */

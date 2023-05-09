@@ -17,7 +17,7 @@ export default function PlaceOrderScreen() {
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 
-	console.log(userInfo)
+	// console.log(userInfo)
 
 	const [value, setValue] = useState({
 		name: "",
@@ -132,13 +132,14 @@ export default function PlaceOrderScreen() {
 						<label>Country:<input type="text"value={value.country} onChange={(event) =>setValue({ ...value, country: event.target.value })} ></input></label><br/>
 						<button>Continue</button>
 						</div>
-						:<div>
-						<label>Name:<input type="text" value={value.name} onChange={(event) =>setValue({ ...value, name: event.target.value })}></input></label>
-						<label>Lastname:<input type="text" value={value.lastname} onChange={(event) =>setValue({ ...value, lastname: event.target.value })}></input></label><br/>
-						<label>Adress:<input type="text" value={value.address} onChange={(event) =>setValue({ ...value, address: event.target.value })}></input></label>
-						<label>City:<input type="text" value={value.city} onChange={(event) =>setValue({ ...value, city: event.target.value })}></input></label><br/>
-						<label>PostalCode:<input type="text" value={value.postalCode} onChange={(event) =>setValue({ ...value, postalCode: event.target.value })}></input></label>
-						<label>Country:<input type="text"value={value.country} onChange={(event) =>setValue({ ...value, country: event.target.value })} ></input></label><br/>
+						:<div> 
+							{/* Esto es para no pueda acceder la info */}
+						<label>Name:<input ></input></label>
+						<label>Lastname:<input ></input></label><br/>
+						<label>Adress:<input ></input></label>
+						<label>City:<input ></input></label><br/>
+						<label>PostalCode:<input ></input></label>
+						<label>Country:<input ></input></label><br/>
 						<button>Continue</button>
 						</div>
 						}

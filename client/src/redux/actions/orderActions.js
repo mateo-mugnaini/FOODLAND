@@ -3,7 +3,7 @@ import axios from "axios";
 
 // //  ============ Actualizo el total de la orden ======================
     export const total_order = (order) => {
-        console.log(order)
+        // console.log(order)
         return (dispatch) => {
             dispatch({
                 type: action.TOTAL_ORDER,
