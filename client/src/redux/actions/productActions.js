@@ -1,8 +1,7 @@
 import axios from "axios";
 import * as action from "../constants/productConstants"; // Import para traer todas las actions-types
 
-const URL = process.env.REACT_APP_URL ??  "http://localhost:5000";
-// const URL = "https://foodland-production.up.railway.app/";
+const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -68,13 +67,12 @@ export function setProduct(payload) {
     payload,
   };
 }
-export function setFilterState (payload) {
+export function setFilterState(payload) {
   return {
     type: "SET_FILTER_STATE",
     payload,
   };
-};
-
+}
 
 export const getDetail = (id) => {
   return async (dispatch) => {
@@ -98,7 +96,6 @@ export const getDetail = (id) => {
     }
   };
 };
-
 
 /* ========================* FILTROS *======================== */
 
@@ -194,7 +191,6 @@ export const addCategory = (category) => async (dispatch) => {
     });
   }
 };
-
 //========================*Add Category*==============//
 
 export const updateProduct = (product) => async (dispatch) => {
