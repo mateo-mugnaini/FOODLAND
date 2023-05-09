@@ -27,7 +27,6 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-      console.log(response.data)
       dispatch({
         type: action.GET_ALL_PRODUCTS,
         payload: response.data,

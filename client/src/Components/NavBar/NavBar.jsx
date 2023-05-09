@@ -10,11 +10,12 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 
 //IMPORT ESTILOS
 import "./NavBar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useLocalStore from "../../hooks/useLocalStore";
 import { useEffect } from "react";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { logout, user, isAuthenticated } = useAuth0();
   const userSignin = useSelector((state) => state.userSignin);
@@ -22,24 +23,21 @@ const NavBar = () => {
 
   const [cart] = useLocalStore("Carrito", []);
   const lastThreeItems = cart.slice(-4); //Selecciono los ultimos 4 productos del carrito
-  useEffect(() => {
-    // Actualizar el carrito cada vez que cambia el estado
-    console.log("Cart actualizado", cart);
-  }, [cart]);
+ 
 
   const logoSvg = logo;
 
   useEffect(() => {
-    console.log(isAuthenticated);
     if (isAuthenticated) {
       dispatch(signIn(user));
     }
   }, [isAuthenticated, dispatch, user]);
 
-  const signOutHandler = () => {
+  const signOutHandler = (e) => {
+    e.preventDefault();
     dispatch(signout());
     logout();
-    window.location.href = "/";
+    navigate("/")
   };
 
   return (
@@ -63,15 +61,15 @@ const NavBar = () => {
               <li>
                 <Link to="/MyCart">
                   <span>
-                    <h2 class="titlecart">My cart:</h2>
+                    <h2 className="titlecart">My cart:</h2>
                     <div className="viewCartNav">
                       {!cart
                         ? "Add products"
                         : lastThreeItems.map((item) => (
-                            <div key={item.product} class="background">
+                            <div key={item.id} className="background">
                               <img src={item.image} alt={item.name} />
-                              <span class="span1">{item.name}</span>
-                              <span class="span2">x{item.quantity}</span>
+                              <span className="span1">{item.name}</span>
+                              <span className="span2">x{item.quantity}</span>
                             </div>
                           ))}
                     </div>
