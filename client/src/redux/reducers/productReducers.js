@@ -2,16 +2,8 @@ import {
 	GET_ALL_CATEGORIES,
 	GET_ALL_PRODUCTS,
 	HANDLE_SORTS,
-	HANDLE_SORTS2,
 	LOADING,
 	READY,
-	RESULTSEARCH,
-	RESULTSEARCH2,
-	FILTERPRICE,
-	ADD_CATEGORY_REQUEST,
-	ADD_CATEGORY_SUCCESS,
-	ADD_CATEGORY_FAILURE,
-	GET_PRODUCTS,
 	DETAIL_PRODUCT,
 	GET_BY_CATEGORY,
 	SET_PRODUCT,
@@ -130,94 +122,6 @@ const initialState = {
 			products: arrOrdenado,
 		  };
 		}
-  
-	  //========================== SORT HOME / PRODUCTS SEARCH =============
-	  /*
-	  case HANDLE_SORTS2:
-		const auxToOrder2 = state.AllProducts;
-  
-		const toOrder2 = auxToOrder2.map((product) => {
-		  const normalizedPrice = parseFloat(
-			product.price.toString().replace(".", "")
-		  ); // Le quito los puntos a los precios
-		  const normalizedName = product.name.replace(/[0-9/]+/g, ""); // Omitir dígitos y caracteres de fracción en el nombre del producto
-		  return {
-			...product,
-			price: normalizedPrice,
-			name: normalizedName.trim(), // Trimeo el nombre del producto para eliminar cualquier espacio en blanco extra
-		  };
-		});
-  
-		if (action.payload === "desc") {
-		  const arrOrdenado2 = toOrder2.sort(function (a, b) {
-			if (a.name.toLowerCase() > b.name.toLowerCase()) {
-			  return -1;
-			}
-			if (b.name.toLowerCase() > a.name.toLowerCase()) {
-			  return 1;
-			}
-			return 0;
-		  });
-		  return {
-			...state,
-			AllProducts: arrOrdenado2,
-		  };
-		}
-  
-		if (action.payload === "asc") {
-		  const arrOrdenado2 = toOrder2.sort(function (a, b) {
-			if (a.name.toLowerCase() > b.name.toLowerCase()) {
-			  return 1;
-			}
-			if (b.name.toLowerCase() > a.name.toLowerCase()) {
-			  return -1;
-			}
-			return 0;
-		  });
-		  return {
-			...state,
-			AllProducts: arrOrdenado2,
-		  };
-		}
-		if (action.payload === "higher_price") {
-		  const arrOrdenado2 = toOrder2.sort((a, b) => b.price - a.price);
-		  return {
-			...state,
-			AllProducts: arrOrdenado2,
-		  };
-		} else {
-		  const arrOrdenado2 = toOrder2.sort((a, b) => a.price - b.price);
-		  return {
-			...state,
-			AllProducts: arrOrdenado2,
-		  };
-		}
-	  case RESULTSEARCH:
-		return {
-		  ...state,
-		  products: state.AllProducts.filter((product) =>
-			product.name.toLowerCase().includes(action.payload.toLowerCase())
-		  ),
-		};
-	  case RESULTSEARCH2: //>>>> EN HOME Y EN PRODUCTS
-		return {
-		  ...state,
-		  Allproducts: action.payload,
-		};
-	  case FILTERPRICE:
-		return {
-		  ...state,
-		  products: action.payload,
-		};
-	  case GET_ALL_CATEGORIES:
-		return action.payload;
-	  case ADD_CATEGORY_SUCCESS:
-		return [...state, action.payload];
-	  case GET_PRODUCTS:
-		return {
-		  ...state,
-		  AllProducts: action.payload,
-		}; */
 	  default:
 		return { ...state };
 	}

@@ -1,9 +1,7 @@
 import React, { useEffect , useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { Link, useNavigate } from "react-router-dom";
 import "./placeOrderScreen.css"
 import useLocalStore from "../../hooks/useLocalStore";
-
 import { post_order } from "../../redux/actions/orderActions";
 import { Link } from "react-router-dom";
 //import Loader from "../../Components/Loader/Loader";
@@ -29,21 +27,20 @@ export default function PlaceOrderScreen() {
 	});
 
 	//   ================ creo shippingAddress ==========
-	function concatenaObjeto(objeto) {
-		let valores = []; 
-		for(let propiedad in objeto) {
-		if(objeto.hasOwnProperty(propiedad)) { 
-			valores.push(objeto[propiedad]); 
-		}}
-		return valores.join(", ");}
-			// =========Concatenado ==========
-		let shippingAddress= concatenaObjeto(value)
+	
+		let shippingAddress= {
+			fullname: value.lastname+","+ value.name,
+			address: value.address,
+			city: value.city,
+			postalCode: value.postalCode,
+			country: value.country,
+		}
 
 
 	  // ============= Cargo los datos de la orden ============
 	const paymentMethod ="Paypal";
 	// let paymentResult = "Pending";
-	let shippingPrice = totalstate.shipping;
+	let shippingPrice = 0;
 	let itemsPrice = totalstate.subtotal ;    
 	let taxPrice= totalstate.taxes ;
 	let totalPrice =totalstate.totalOrder.toFixed(2);
@@ -55,7 +52,7 @@ export default function PlaceOrderScreen() {
 		// console.log(value);
 	  };
 
-    //despachar la accion con esta información guardada en el carrito con el objeto q figura abajo
+    // ======== Despacho la orden =======
 	const placeOrderHandler = () => {
 		if (!userInfo || !userInfo._id) { // verifica si userInfo no está definido o si su propiedad _id es falsa o nula
 			alert("You need to be logged in to complete the purchase");
@@ -70,7 +67,7 @@ export default function PlaceOrderScreen() {
 				orderItems: cart,
 				shippingAddress,
 				paymentMethod,
-				// paymentResult, no lo pide el back
+				// paymentResult, <<<< no lo pide el back
 				itemsPrice,
 				shippingPrice,
 				taxPrice,
@@ -79,15 +76,6 @@ export default function PlaceOrderScreen() {
 			}));
 		}
 	};
-
-
-    //useeffect q detecte si 
-	/* useEffect(() => {
-		if (success) {
-			navigate(`/order/${order._id}`);
-			dispatch({ type: ORDER_CREATE_RESET });
-		}
-	}, [success, order, navigate, dispatch, navigate]); */
 
 	return (
 		<div name="ShippingOrder" className="ShippingOrder">
@@ -195,7 +183,8 @@ export default function PlaceOrderScreen() {
 									<h3>Total:<span>${totalPrice}</span></h3>
 									<label className="Shippingtitle">
 										Shipping:<br></br>
-										<span>To: {concatenaObjeto(value)}</span>
+										<span>To: {value.lastname+","+value.name}</span>
+										<span>{value.address},{value.postalCode},{value.city}</span>
 									</label>
 								</div>
 					{/* ========= Boton para generar orden ====== */}
