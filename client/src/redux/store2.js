@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 
 import productsReducer from "./reducers/productReducers"; 
 import { userSigninReducer } from "./reducers/userReducers";
+import ordersReducer from "./reducers/orderReducers";
 
 //import { ..., ... } from "./reducers/cartReducers";
 //import { ..., ... } from "./reducers/userReducers";
@@ -30,8 +31,9 @@ const initialState = {
 
 //Aca van todos los reducers
 const reducer = combineReducers({
-	products: productsReducer, 
+	products: productsReducer,
 	userSignin: userSigninReducer,	
+	order: ordersReducer,
 });
 
 export const store2 = createStore(

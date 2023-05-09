@@ -1,6 +1,8 @@
 import SearchBar from "./SearchBar";
 import { useSelector, useDispatch } from "react-redux";
-import { signout } from "../../redux/actions/userActions";
+import { signIn, signout } from "../../redux/actions/userActions";
+import { useAuth0 } from "@auth0/auth0-react";
+
 // import { signout } from '../../actions/userActions';
 
 //IMPORT IMAGES
@@ -8,22 +10,36 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 
 //IMPORT ESTILOS
 import "./NavBar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useLocalStore from "../../hooks/useLocalStore";
+import { useEffect } from "react";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { logout, user, isAuthenticated } = useAuth0();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
-  console.log(userInfo);
+  const [cart] = useLocalStore("Carrito", []);
+  const lastThreeItems = cart.slice(-4); //Selecciono los ultimos 4 productos del carrito
+ 
+
   const logoSvg = logo;
-  
-  const signOutHandler = () => {
-		dispatch(signout());
-    window.location.href = "/"
-	};
-  
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(signIn(user));
+    }
+  }, [isAuthenticated, dispatch, user]);
+
+  const signOutHandler = (e) => {
+    e.preventDefault();
+    dispatch(signout());
+    logout();
+    navigate("/")
+  };
+
   return (
     <div name="ContainerNav" key="ContainerNav" className="ContainerNav">
       {/* -------------------Logo FootLand --------------*/}
@@ -45,21 +61,25 @@ const NavBar = () => {
               <li>
                 <Link to="/MyCart">
                   <span>
-                    <p>My cart:</p>
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/">
-                  <span>
-                    <p>Products</p>
+                    <h2 className="titlecart">My cart:</h2>
+                    <div className="viewCartNav">
+                      {!cart
+                        ? "Add products"
+                        : lastThreeItems.map((item) => (
+                            <div key={item.id} className="background">
+                              <img src={item.image} alt={item.name} />
+                              <span className="span1">{item.name}</span>
+                              <span className="span2">x{item.quantity}</span>
+                            </div>
+                          ))}
+                    </div>
                   </span>
                 </Link>
               </li>
               <li>
                 <Link to="/MyCart">
                   <span>
-                    <p> My cart</p>
+                    <p> View my cart</p>
                   </span>
                 </Link>
               </li>
@@ -72,8 +92,8 @@ const NavBar = () => {
               alt="iconsLogin"
               className="iconsNav2"
             />
-            {userInfo &&<span className="userName">{userInfo.name}</span>  }
-            
+            {userInfo && <span className="userName">{userInfo.name}</span>}
+
             <ul className="ulNav">
               {userInfo ? (
                 userInfo.isAdmin ? (
@@ -101,7 +121,7 @@ const NavBar = () => {
                     </li>
                     <li>
                       <span>
-                          <p onClick={signOutHandler}>Log out</p>
+                        <p onClick={signOutHandler}>Log out</p>
                       </span>
                     </li>
                   </div>

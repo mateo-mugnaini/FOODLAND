@@ -112,10 +112,10 @@ userRouter.post(
     });
     const user = await newUser.save();
     res.send({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
+      _id: user._doc._id,
+      name: user._doc.name,
+      email: user._doc.email,
+      isAdmin: user._doc.isAdmin,
       token: generateToken(user),
     });
   })

@@ -58,7 +58,7 @@ function MyCart() {
             <ul className="cart_foot">
               <li className="cart_head_title">Total</li>
               <li>
-                <p>${total}</p>
+                <p>${total.toFixed(2)}</p>
               </li>
             </ul>
           </div>
