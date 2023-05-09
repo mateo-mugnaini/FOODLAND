@@ -1,60 +1,78 @@
-//IMPORT STYLE:
+// En MyCart
 import "./MyCart.css";
-//IMPORT Librery:
-import {Link} from "react-router-dom";
-import { useState } from "react";
-//IMPORT STATE:
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import useLocalStore from "../../hooks/useLocalStore";
 //IMPORT COMPONENTS:
-import Payment from "../../Components/Payment/Payment";
+import CheckOut from "../../Components/Checkout/CheckOut"
 import CartItem from "../../Components/CartItem/CartItem";
 
 function MyCart() {
-
   const [cart, setCart] = useLocalStore("Carrito", []);
-  const [quantity, setQuantity] = useState(1)
-  const [total , setTotal] = useState();
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const newTotal = cart.reduce((acc, product) => acc + product.price * product.quantity, 0);
+    setTotal(newTotal);
+  }, [cart]);
+
+  const updateQuantity = (productId, newQuantity) => {
+    const updatedCart = cart.map((product) => {
+      if (product.id === productId) {
+        return { ...product, quantity: newQuantity };
+      } else {
+        return product;
+      }
+    });
+    setCart(updatedCart);
+  };
+
+  const removeItem = (productId) => {
+    const updatedCart = cart.filter((product) => product.id !== productId);
+    setCart(updatedCart);
+  };
 
   return (
-    <div name="MyCart" class="MyCart">
-      {/* ==========boton para seguir comprando==============  */}
-      <div name="Container Button back" class="ButonReturn">
-        <p>Did you forget something?...</p>
-        <buton class="butonBack"><Link to="/">keep buying</Link></buton>
-      </div>
-
-      {/* ============ Contenedor de carrito y forma de pago ======== */}
-      <div name="Container My cart && Payment " class="ContainerPage">
-        {/* <<<<<< Carritoo>>>>>> */}
-        <div class="page">
+    <div name="MyCart" className="MyCart">
+      <div name="Container My cart && Payment " className="ContainerPage">
+        <div className="page">
           <div id="store_cart">
-            {/* <<<<<<Encabezado>>>> */}
-            <ul class="cart_head">
-              <li class="cart_head_title">
-                <img src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png" alt="Mycart" class="logoCart" />
+            <ul className="cart_head">
+              <li className="cart_head_title">
+                <img src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png" alt="Mycart" className="logoCart" />
               </li>
-              <li class="cart_head_product">Product</li>
-              <li class="cart_head_options">Quantity</li>
-              <li class="cart_head_price">Price</li>
+              <li className="cart_head_product">Product</li>
+              <li className="cart_head_options">Quantity</li>
+              <li className="cart_head_price">Price</li>
             </ul>
-
-            {/* Productos del carrito: */}
             {cart.map((product) => (
-              <CartItem key={product.id} product={product}/>
+              <CartItem
+                key={product.id}
+                product={product}
+                updateQuantity={updateQuantity}
+                removeItem={removeItem}
+                updateCartTotal={setTotal}
+                total={total}
+              />
             ))}
-
-            {/* <<<<<<<<< Totales  >>>>>>>>*/}
-            <ul class="cart_foot">
-              <li class="cart_head_title">Total</li>
+            <ul className="cart_foot">
+              <li className="cart_head_title">Total</li>
               <li>
-                <p>${cart.reduce((total, product) => total + product.price * product.quantity ,0)}</p> 
+                <p>${total.toFixed(2)}</p>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* ==================Container Payment=============== */}
-          <Payment />
+        {/* ==================Container CheckOut=============== */}
+          <CheckOut total={total}/>
+      </div>
+      <div name="Container Button back" className="ButonReturn">
+        <p>Did you forget something?...</p>
+        <button className="butonBack">
+          <Link to="/">keep buying</Link>
+        </button>
+
       </div>
     </div>
   );

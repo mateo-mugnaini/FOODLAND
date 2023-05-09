@@ -24,6 +24,10 @@ import "../FormCreateProduct/FormCreateProduct.css";
 import { getAllCategories } from "../../redux/actions/productActions";
 
 function FormCreateProduct() {
+
+// const URL = "http://localhost:5000";
+const URL = "https://foodland-production.up.railway.app";
+
   /* ========================* ESTADO LOCAL  *======================== */
   const [product, setProduct] = useState({
     name: "",
@@ -80,7 +84,7 @@ function FormCreateProduct() {
     //     category: product.category,
     //   });
     // }
-    await axios.post("http://localhost:5000/api/products", product);
+    await axios.post(`${URL}/api/products`, product);
     window.alert("El producto ha sido creado con éxito!!");
   }
 

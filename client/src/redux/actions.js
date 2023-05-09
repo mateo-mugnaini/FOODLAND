@@ -3,8 +3,9 @@
 import axios from "axios";
 import * as action from "./action-types"; // Import para traer todas las actions-types
 
-const URL = "http://localhost:5000";
-//const URL = "https://foodland-back.onrender.com";
+const URL = process.env.REACT_APP_URL ??  "http://localhost:5000";
+
+// const URL = "https://foodland-production.up.railway.app/";
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -26,7 +27,6 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-
       dispatch({
         type: action.GET_ALL_PRODUCTS,
         payload: response.data,
@@ -57,7 +57,7 @@ export const getAllCategories = () => {
       console.log(error);
       dispatch({
         type: action.GET_ALL_CATEGORIES,
-        payload: error,
+        payload: [],
       });
       dispatch(ready());
     }
@@ -70,6 +70,12 @@ export function setProduct(payload) {
     payload,
   };
 }
+export function setFilterState (payload) {
+  return {
+    type: "SET_FILTER_STATE",
+    payload,
+  };
+};
 
 export const getDetail = (id) => {
   return async (dispatch) => {
@@ -143,6 +149,11 @@ export function handle_sorts2(payload) {
   };
 }
 
+export function clearProducts(payload){ return {
+  type: "CLEAR_PRODUCTS",
+  payload,
+};};
+
 /* ========================*  SEARCH*======================== */
 export const resultSearch = (result) => {
   return async (dispatch) => {
@@ -176,10 +187,7 @@ export const filterPrice = (products) => {
 export const addCategory = (category) => async (dispatch) => {
   try {
     dispatch({ type: action.ADD_CATEGORY_REQUEST });
-    const { data } = await axios.post(
-      "http://localhost:5000/api/categories",
-      category
-    );
+    const { data } = await axios.post(`${URL}/api/categories`, category);
     dispatch({
       type: action.ADD_CATEGORY_SUCCESS,
       payload: data,

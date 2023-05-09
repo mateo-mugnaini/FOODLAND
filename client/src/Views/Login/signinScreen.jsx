@@ -6,90 +6,94 @@ import img1 from "../../Imgs/LogIn-Registro/Img1.png";
 import img2 from "../../Imgs/LogIn-Registro/Img2.png";
 import { signin } from "../../redux/actions/userActions";
 import Loader from "../../Components/Loader/Loader";
-import MessageBox from "../Error/messageBox";
+import MessageBox from "../../Components/Error/messageBox";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function SigninScreen() {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { loginWithRedirect } = useAuth0();
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/";
 
-	const { search } = useLocation();
-	const redirectInUrl = new URLSearchParams(search).get("redirect");
-	const redirect = redirectInUrl ? redirectInUrl : "/";
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo, loading, error } = userSignin;
 
-	const userSignin = useSelector((state) => state.userSignin);
-	const { userInfo, loading, error } = userSignin;
+  const dispatch = useDispatch();
 
-	const dispatch = useDispatch();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(signin(email, password));
+  };
 
-	const submitHandler = (e) => {
-		e.preventDefault();
-		dispatch(signin(email, password));
-	};
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [userInfo, navigate, redirect]);
 
-	useEffect(() => {
-		if (userInfo) {
-			navigate(redirect);
-		}
-	}, [userInfo, navigate, redirect]);
+  const imgA = img1;
+  const imgB = img2;
 
-	const imgA = img1;
-	const imgB = img2;
-
-	return (
-		<div className="loginContasiner">
-			<div className="btnHomeRegisterContainer">
-				<Link to="/">
-					<button className="btnHome">HOME</button>
-				</Link>
-			</div>
-			<form className="formLogin" onSubmit={submitHandler}>
-				<div>
-					<h1>Sign In</h1>
-				</div>
-				{loading && <Loader />}
-				{error && <MessageBox variant="danger">{error}</MessageBox>}
-				<div>
-					<label htmlFor="email">Email address</label>
-					<input
-						type="email"
-						id="email"
-						placeholder="Enter email"
-						required
-						onChange={(e) => setEmail(e.target.value)}
-					></input>
-				</div>
-				<div>
-					<label htmlFor="password">Password</label>
-					<input
-						type="password"
-						id="password"
-						placeholder="Enter password"
-						required
-						onChange={(e) => setPassword(e.target.value)}
-					></input>
-				</div>
-				<div>
-					<label />
-					<button className="primary" type="submit">
-						Sign In
-					</button>
-				</div>
-				<div>
-					<label />
-					<div>
-						New customer?{" "}
-						<Link to={`/register?redirect=${redirect}`}>
-							Create your account
-						</Link>
-					</div>
-				</div>
-			</form>
-			<div>
-				<img className="imgALogin" src={imgA} alt="" />
-				<img className="imgBLogin" src={imgB} alt="" />
-			</div>
-		</div>
-	);
+  return (
+    <div className="loginContasiner">
+      <div className="btnHomeRegisterContainer">
+        <Link to="/">
+          <button className="btnHome">HOME</button>
+        </Link>
+      </div>
+      <form className="formLogin" onSubmit={submitHandler}>
+        <div>
+          <h1>Sign In</h1>
+        </div>
+        {loading && <Loader />}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        <div>
+          <label htmlFor="email">Email address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter email"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label />
+          <button className="primary" type="submit">
+            Sign In
+          </button>
+          <button className="primary" onClick={() => loginWithRedirect()}>
+            Log In Google
+          </button>
+        </div>
+        <div>
+          <label />
+          <div>
+            New customer?{" "}
+            <Link to={`/register?redirect=${redirect}`}>
+              Create your account
+            </Link>
+          </div>
+        </div>
+      </form>
+      <div>
+        <img className="imgALogin" src={imgA} alt="" />
+        <img className="imgBLogin" src={imgB} alt="" />
+      </div>
+    </div>
+  );
 }

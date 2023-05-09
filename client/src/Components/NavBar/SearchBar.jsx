@@ -4,7 +4,7 @@ import React from "react"
 import "./SearchBar.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setProduct } from "../../redux/actions";
+import { setProduct, setFilterState } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
@@ -20,6 +20,7 @@ const SearchBar = () => {
     const filteredProducts = AllProducts.filter(product =>
       product.name.toLowerCase().includes(searchValue.toLowerCase())
     );
+    dispatch(setFilterState(false))
     console.log(filteredProducts)
     dispatch(setProduct(filteredProducts));
     navigate("/categories/allProducts");

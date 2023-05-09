@@ -16,6 +16,7 @@
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     padding: 5.5px;
+    
 }
 
 .butonSearch{
@@ -82,9 +83,15 @@
     top:0px;
 }
 
-span.userName{
+/* span.userName{
     background-color: #0000 !important;
     color: white !important;
     display:flex !important;
     align-items: center !important;
-}
+    margin-left: -11px;
+    }
+
+span.userName:hover{
+    background-color: #0000 !important;
+    color: white !important;
+} */

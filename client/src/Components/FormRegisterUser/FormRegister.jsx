@@ -14,7 +14,9 @@ import {
 
 const FormRegister = () => {
 
-  
+  // const URL = "http://localhost:5000";
+const URL = "https://foodland-production.up.railway.app";
+
   const [user, setUser] = useState({
     name: "",
     lastName: "",
@@ -44,7 +46,7 @@ const FormRegister = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:5000/api/users/signup",
+        `${URL}/api/users/signup`,
         user
       )
       .then(res => console.log(res,'marcos'))

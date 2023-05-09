@@ -13,6 +13,8 @@ import SigninScreen from "./Views/Login/signinScreen";
 import UserRegister from "./Views/Register/Register";
 import StockViews from "./Views/Stock/StockViews";
 import EditProduct from "./Components/Stock/FormUpdateProduct";
+import PlaceOrderScreen from "./Views/Order/placeOrderScreen";
+import UserProfile from "./Views/UserProfile/UserProfile.jsx";
 function App() {
   const location = useLocation();
   return (
@@ -43,7 +45,7 @@ function App() {
           name="About"
           key="About"
         ></Route>
-
+        <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
         {/* -----------------Routes Users -----------------*/}
         <Route
           path="/detail/:id"
@@ -59,7 +61,7 @@ function App() {
         ></Route>
         <Route
           path="/profile"
-          element={""}
+          element={<UserProfile />}
           name="ProfileUser"
           key="ProfileUser"
         ></Route>
