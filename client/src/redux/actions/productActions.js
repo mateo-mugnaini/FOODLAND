@@ -17,7 +17,6 @@ export function ready() {
   };
 }
 
-
 /* ========================*  PRODUCTS *======================== */
 
 export const getAllProducts = () => {
@@ -25,7 +24,7 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-   
+
       dispatch({
         type: action.GET_ALL_PRODUCTS,
         payload: response.data,
@@ -47,7 +46,7 @@ export const getAllCategories = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products/categories`);
-     dispatch({
+      dispatch({
         type: action.GET_ALL_CATEGORIES,
         payload: response.data,
       });
@@ -63,7 +62,7 @@ export const getAllCategories = () => {
   };
 };
 
-export function setProduct (payload) {
+export function setProduct(payload) {
   return {
     type: "SET_PRODUCT",
     payload,
@@ -102,22 +101,22 @@ export const getByCategory = (category) => {
       const response = await axios.get(`${URL}/api/products`);
       const arrayProducts = response.data.products;
 
-    if (category === "allProducts") {
-      dispatch({
-        type: action.GET_BY_CATEGORY,
-        payload: arrayProducts,
-      });
-      dispatch(ready()); }
-    else {
-      const productosFiltrados = arrayProducts.filter((producto) => {
-        return producto.category === category;
-      });
-      dispatch({
-        type: action.GET_BY_CATEGORY,
-        payload: productosFiltrados,
-      });
-      dispatch(ready());
-    }
+      if (category === "allProducts") {
+        dispatch({
+          type: action.GET_BY_CATEGORY,
+          payload: arrayProducts,
+        });
+        dispatch(ready());
+      } else {
+        const productosFiltrados = arrayProducts.filter((producto) => {
+          return producto.category === category;
+        });
+        dispatch({
+          type: action.GET_BY_CATEGORY,
+          payload: productosFiltrados,
+        });
+        dispatch(ready());
+      }
     } catch (error) {
       console.log(error);
       dispatch({
@@ -128,7 +127,6 @@ export const getByCategory = (category) => {
     }
   };
 };
-
 
 export function handle_sorts(payload) {
   return {
@@ -188,6 +186,26 @@ export const addCategory = (category) => async (dispatch) => {
     dispatch({
       type: action.ADD_CATEGORY_FAILURE,
       payload: error.message,
+    });
+  }
+};
+
+//========================*Add Category*==============//
+
+export const updateProduct = (product) => async (dispatch) => {
+  try {
+    dispatch({ type: action.PRODUCT_UPDATE_REQUEST });
+
+    const { data } = await axios.put(
+      `http://localhost:5000/api/products/${product._id}`,
+      product
+    );
+
+    dispatch({ type: action.PRODUCT_UPDATE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: action.PRODUCT_UPDATE_FAIL,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };

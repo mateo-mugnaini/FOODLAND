@@ -12,6 +12,7 @@ import MyCart from "./Views/MyCart/MyCart";
 import SigninScreen from "./Views/Login/signinScreen";
 import UserRegister from "./Views/Register/Register";
 import StockViews from "./Views/Stock/StockViews";
+import EditProduct from "./Components/Stock/FormUpdateProduct";
 function App() {
   const location = useLocation();
   return (
@@ -78,6 +79,12 @@ function App() {
         <Route
           path="/products"
           element={<StockViews />}
+          name="products"
+          key="products"
+        ></Route>
+        <Route
+          path="/editproduct/:id"
+          element={<EditProduct />}
           name="products"
           key="products"
         ></Route>
