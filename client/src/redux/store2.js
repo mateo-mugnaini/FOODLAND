@@ -18,6 +18,7 @@ const initialState = {
 			? JSON.parse(localStorage.getItem("userInfo"))
 			: null,
 	},
+  };
 	/*cart: {
 		cartItems: localStorage.getItem("cartItems")
 			? JSON.parse(localStorage.getItem("cartItems"))
@@ -27,7 +28,7 @@ const initialState = {
 			: {},
 		paymentMethod: "Paypal",
 	}, */
-};
+
 
 //Aca van todos los reducers
 const reducer = combineReducers({

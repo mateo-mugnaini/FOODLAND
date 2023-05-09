@@ -3,15 +3,12 @@ import{
 } from "../constants/orderConstants";
 
 const initialState = { 
-    totalOrder: { 
-    subtotal: 0,
-    taxes: 0,
-    shipping: "Free",
-    totalOrder: 0, }, };
+    totalOrder: 0 };
 
 const ordersReducer = (state = initialState, action) => {
     switch (action.type) {
         case TOTAL_ORDER:
+            console.log(action.payload)
             return {
                 ...state,
                 totalOrder: action.payload,

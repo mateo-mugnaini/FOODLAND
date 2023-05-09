@@ -1,7 +1,8 @@
 import "./CheckOut.css";
 import { useEffect, useState } from "react";
 import { total_order } from "../../redux/actions/orderActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {Link} from "react-router-dom";
 
 const Payment = ({ total} ) => {
   const [totalCont, setTotalCont] = useState({
@@ -44,7 +45,7 @@ const Payment = ({ total} ) => {
 
 
   /* ======== Cargo los totales al estado  ========== */
-    async function handleCartToOrder() {
+       function handleCartToOrder() {
         const order = {
           subtotal: total,
           taxes: total * 0.15,
@@ -55,11 +56,9 @@ const Payment = ({ total} ) => {
         dispatch(total_order(order));
         
         /* ======== Redireccion ==== */
-        await new Promise(resolve => setTimeout(resolve, 500));
-        window.location.href = "/placeorder";
+        // await new Promise(resolve => setTimeout(resolve, 500));
+        // window.location.href = "/placeorder";
       }
-
-  
 
   return (
     <div className="ContainerPayment">
@@ -73,7 +72,7 @@ const Payment = ({ total} ) => {
       <input type="text" placeholder="Add discount coupon" onChange={handleCoupon}></input>
       <p>{errorMessage}</p>
       <h2>Total Order: <span>${totalCont.totalOrder.toFixed(2)}</span></h2>
-      <button onClick={handleCartToOrder}>Buy now</button>
+      <Link to="/placeorder"><button onClick={handleCartToOrder}>Buy now</button></Link>
     </div>
   );
 };
