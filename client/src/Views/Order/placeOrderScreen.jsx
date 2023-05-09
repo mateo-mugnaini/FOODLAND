@@ -134,12 +134,12 @@ export default function PlaceOrderScreen() {
 						</div>
 						:<div> 
 							{/* Esto es para no pueda acceder la info */}
-						<label>Name:<input ></input></label>
-						<label>Lastname:<input ></input></label><br/>
-						<label>Adress:<input ></input></label>
-						<label>City:<input ></input></label><br/>
-						<label>PostalCode:<input ></input></label>
-						<label>Country:<input ></input></label><br/>
+						<label>Name:<input disabled></input></label>
+						<label>Lastname:<input disabled></input></label><br/>
+						<label>Adress:<input disabled></input></label>
+						<label>City:<input disabled></input></label><br/>
+						<label>PostalCode:<input disabled></input></label>
+						<label>Country:<input disabled ></input></label><br/>
 						<button>Continue</button>
 						</div>
 						}
