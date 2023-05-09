@@ -5,7 +5,7 @@ import * as action from "./action-types"; // Import para traer todas las actions
 
 const URL = process.env.REACT_APP_URL ??  "http://localhost:5000";
 
-// const URL = "https://foodland-production.up.railway.app/";
+const URL = "https://foodland-production.up.railway.app";
 
 /* ========================*  LOADER *======================== */
 export function loading() {

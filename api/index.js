@@ -5,10 +5,21 @@ import seedRouter from "./src/routes/seedRoutes.js";
 import userRouter from "./src/routes/userRoutes.js";
 import Product from "./src/routes/products.js";
 import orderRouter from "./src/routes/order.js";
+import cors from "cors";
 import path from "path";
 
 dotenv.config();
-// const origin = process.env.ORIGIN ?? "http://localhost:3000";
+
+const app = express();
+
+app.use(
+  cors({
+    origin: "https://foodlandmarket.vercel.app",
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -18,11 +29,10 @@ mongoose
     console.log(err.message);
   });
 
-const app = express();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
+
   res.header("Access-Control-Allow-Origin", '*'); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
