@@ -1,47 +1,168 @@
-import SearchBar from "./SearchBar"
+import SearchBar from "./SearchBar";
+import { useSelector, useDispatch } from "react-redux";
+import { signIn, signout } from "../../redux/actions/userActions";
+import { useAuth0 } from "@auth0/auth0-react";
+
+// import { signout } from '../../actions/userActions';
 
 //IMPORT IMAGES
-import logo from "../../Imgs/LogosSVG/logo-no-background.png"
+import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 
 //IMPORT ESTILOS
-import "./NavBar.css"
-import { Link } from "react-router-dom";
+import "./NavBar.css";
+import { Link, useNavigate } from "react-router-dom";
+import useLocalStore from "../../hooks/useLocalStore";
+import { useEffect } from "react";
 
 const NavBar = () => {
- const logoSvg = logo
-return (
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { logout, user, isAuthenticated } = useAuth0();
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
+  const [cart] = useLocalStore("Carrito", []);
+  const lastThreeItems = cart.slice(-4); //Selecciono los ultimos 4 productos del carrito
+ 
+
+  const logoSvg = logo;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(signIn(user));
+    }
+  }, [isAuthenticated, dispatch, user]);
+
+  const signOutHandler = (e) => {
+    e.preventDefault();
+    dispatch(signout());
+    logout();
+    navigate("/")
+  };
+
+  return (
     <div name="ContainerNav" key="ContainerNav" className="ContainerNav">
-            {/* -------------------Logo FootLand --------------*/}
-        <Link to="/" className="LinkLogo"><img src={logoSvg} alt="LogoFoodLand" className="LogoFoodLand"/></Link>
+      {/* -------------------Logo FootLand --------------*/}
+      <Link to="/" className="LinkLogo">
+        <img src={logoSvg} alt="LogoFoodLand" className="LogoFoodLand" />
+      </Link>
+      <SearchBar />
+      {/* -----------Cart & Login Icons on Nav--------------*/}
+      <div id="header" className="headerNavList">
+        <ul className="nav">
+          {/* -----------Cart list--------------*/}
+          <li>
+            <img
+              src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png"
+              alt="iconsWidget"
+              className="iconsNav1"
+            />
+            <ul className="ulNav">
+              <li>
+                <Link to="/MyCart">
+                  <span>
+                    <h2 className="titlecart">My cart:</h2>
+                    <div className="viewCartNav">
+                      {!cart
+                        ? "Add products"
+                        : lastThreeItems.map((item) => (
+                            <div key={item.id} className="background">
+                              <img src={item.image} alt={item.name} />
+                              <span className="span1">{item.name}</span>
+                              <span className="span2">x{item.quantity}</span>
+                            </div>
+                          ))}
+                    </div>
+                  </span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/MyCart">
+                  <span>
+                    <p> View my cart</p>
+                  </span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          {/* -----------Login list --------------*/}
+          <li>
+            <img
+              src="https://tinypic.host/images/2023/04/27/People-removebg-preview.png"
+              alt="iconsLogin"
+              className="iconsNav2"
+            />
+            {userInfo && <span className="userName">{userInfo.name}</span>}
 
-        <SearchBar/>
-        <Link to="/create" className="linkNavbar">Create Product</Link>
-
-            {/* -----------Cart & Login Icons on Nav--------------*/}
-        <div id="header" className="headerNavList">
-            
-                <ul className="nav">
-                        {/* -----------Cart list--------------*/}
-                    <li ><img src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png" alt="iconsWidget" className="iconsNav1"/>
-                            <ul className="ulNav">
-                                <li><Link to="/MyCart"><span><p>My cart:</p></span></Link></li>
-                                <li><Link to="/"><span><p>Products</p></span></Link></li>
-                                <li><Link to="/MyCart"><span><p> My cart</p></span></Link></li>
-                            </ul>
+            <ul className="ulNav">
+              {userInfo ? (
+                userInfo.isAdmin ? (
+                  <div>
+                    <li>
+                      <Link to="/products">
+                        <span>
+                          <p>Stock</p>
+                        </span>
+                      </Link>
                     </li>
-                        {/* -----------Login list --------------*/}
-                    <li ><img src="https://tinypic.host/images/2023/04/27/People-removebg-preview.png" alt="iconsLogin" className="iconsNav2"/>
-                            <ul className="ulNav">
-                                <li><Link to="/"><span><p>My Profile</p></span></Link></li>
-                                <li><Link to="/"><span><p>My Orders</p></span></Link></li>
-                                <li><Link to="/"><span><p>Log out</p></span></Link></li>
-                            </ul>
+                    <li>
+                      <Link to="/create">
+                        <span>
+                          <p>Create Product</p>
+                        </span>
+                      </Link>
                     </li>
-
-                </ul>
-            </div>
-
+                    <li>
+                      <Link to="/profile">
+                        <span>
+                          <p>My Profile</p>
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <span>
+                        <p onClick={signOutHandler}>Log out</p>
+                      </span>
+                    </li>
+                  </div>
+                ) : (
+                  <div>
+                    <li>
+                      <Link to="/profile">
+                        <span>
+                          <p>My Profile</p>
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link tp="/MyCart">
+                        <span>
+                          <p>Shop history</p>
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <span>
+                        {/* <p onClick={() => dispatch(signout())}>Log out</p> */}
+                        <p onClick={signOutHandler}>Log out</p>
+                      </span>
+                    </li>
+                  </div>
+                )
+              ) : (
+                <li>
+                  <Link to="/login">
+                    <span>
+                      <p>Log In</p>
+                    </span>
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-
-)};
-export default  NavBar
+  );
+};
+export default NavBar;

@@ -1,12 +1,17 @@
 .carrousel {
     margin-bottom: 3%;
 }
+
+
+.carrouselContainer {
+  width: 100%;
+}
 .carrousel img {
-    width: 55%;
-  
+  width: 81%;
+  height: 200px;
 }
 .carrousel div {
-    background-color: rgb(94, 214, 39);
+    background-color: #cdcdcd5c;
     display: flex;
 align-items: center;
 

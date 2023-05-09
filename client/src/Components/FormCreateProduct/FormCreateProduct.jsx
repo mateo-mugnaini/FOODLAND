@@ -19,9 +19,15 @@ import {
 import "../FormCreateProduct/FormCreateProduct.css";
 
 /* ========================* ESTADO LOCAL  *======================== */
-import { getAllCategories, addCategory } from "../../redux/actions";
+//import { getAllCategories, addCategory } from "../../redux/actions";
+//nueva importación con store2. AddCategory no se está usando
+import { getAllCategories } from "../../redux/actions/productActions";
 
 function FormCreateProduct() {
+
+// const URL = "http://localhost:5000";
+const URL = "https://foodland-production.up.railway.app";
+
   /* ========================* ESTADO LOCAL  *======================== */
   const [product, setProduct] = useState({
     name: "",
@@ -78,12 +84,12 @@ function FormCreateProduct() {
     //     category: product.category,
     //   });
     // }
-    await axios.post("http://localhost:5000/api/products", product);
+    await axios.post(`${URL}/api/products`, product);
     window.alert("El producto ha sido creado con éxito!!");
   }
 
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
+  const categories = useSelector((state) => state.products.categories);
 
   useEffect(() => {
     dispatch(getAllCategories());
@@ -92,9 +98,11 @@ function FormCreateProduct() {
   return (
     /* ================== * CONTENEDOR GENERAL * ================== */
     <div className="formProductContainer">
+      <div className="btnHomeContainer">
       <Link to="/">
-      <button >HOME</button>
+      <button className="btnHome" >HOME</button>
       </Link>
+      </div>
       {/* ================== * CONTENEDOR FORMULARIO * ================== */}
       <form className="formCreate" onSubmit={handleSubmit}>
         {/* ================== * NOMBRE * ================== */}

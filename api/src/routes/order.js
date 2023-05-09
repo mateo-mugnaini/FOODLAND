@@ -7,38 +7,24 @@ import Product from "../models/product.js";
 
 const orderRouter = express.Router();
 
-const PAGE_SIZE = 6;
-
+//Ruta para que el Admin reciba todas las órdenes de compra
 orderRouter.get(
 	"/",
 	isAuth,
 	isAdmin,
 	expressAsyncHandler(async (req, res) => {
-		const { query } = req;
-		const page = query.page || 1;
-		const pageSize = query.pageSize || PAGE_SIZE;
-
-		const orders = await Order.find()
-			.populate("user", "name")
-			.skip(pageSize * (page - 1))
-			.limit(pageSize);
-
-		const countOrders = await Order.countDocuments();
-		
-		res.send({
-			orders,
-			countOrders,
-			page,
-			pages: Math.ceil(countOrders / pageSize),
-		});
+		const orders = await Order.find().populate("user", "name");
+		res.send(orders);
 	})
 );
 
+//Ruta para que el usuario cree una orden de compra
 orderRouter.post(
 	"/",
 	isAuth,
 	expressAsyncHandler(async (req, res) => {
 		const newOrder = new Order({
+			//orderItems: req.body.orderItems,
 			orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
 			shippingAddress: req.body.shippingAddress,
 			paymentMethod: req.body.paymentMethod,
@@ -54,6 +40,7 @@ orderRouter.post(
 	})
 );
 
+//Ruta por si hacemos un dashboard del admin
 orderRouter.get(
 	"/summary",
 	isAuth,
@@ -98,6 +85,7 @@ orderRouter.get(
 	})
 );
 
+//Ruta que le manda al usuario todas sus ordenes de compra
 orderRouter.get(
 	"/mine",
 	isAuth,
@@ -107,6 +95,7 @@ orderRouter.get(
 	})
 );
 
+//Ruta que manda la orden segun id
 orderRouter.get(
 	"/:id",
 	isAuth,
@@ -120,6 +109,7 @@ orderRouter.get(
 	})
 );
 
+//Ruta para marcar la orden como paga despues de Paypal
 orderRouter.put(
 	"/:id/pay",
 	isAuth,
@@ -143,9 +133,11 @@ orderRouter.put(
 	})
 );
 
+//Ruta en donde el Admin registra que se despachó una orden
 orderRouter.put(
 	"/:id/deliver",
 	isAuth,
+	isAdmin,
 	expressAsyncHandler(async (req, res) => {
 		const order = await Order.findById(req.params.id);
 		if (order) {
@@ -159,6 +151,7 @@ orderRouter.put(
 	})
 );
 
+//Ruta que usa el Admin para dar de baja una orden
 orderRouter.delete(
 	"/:id",
 	isAuth,

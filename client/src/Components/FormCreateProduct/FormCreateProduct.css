@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&family=Yanone+Kaffeesatz:wght@300;400;700&display=swap ');
+
 .formProductContainer {
     display: flex;
     flex-direction: column;
@@ -35,21 +37,23 @@
   }
   
   .input {
-    font-size: 20px;
-    border: 2px black solid;
-    border-radius: 20px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
     width: 300px;
-    text-align: center;
-    gap: 5px;
+    max-width: 100%;
+    margin-bottom: 10px;
   }
 
   .inputDescription{
-    font-size: 20px;
-    border: 2px black solid;
-    border-radius: 20px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
     width: 940px;
     height: 200px;
-    text-align: center;
+    text-align: justify;
     gap: 5px;
   }
   
@@ -92,9 +96,33 @@
     width: 400px;
 }
 
-.errorFormCP{
+.errorFormCP {
+  position: fixed ;
   color: red;
   font-size: 15px;
+  text-align: center;
   margin-top: -10px;
   margin-bottom: -20px;
+}
+
+.btnHomeContainer{
+  display: flex;
+  position: relative;
+  top: -110px;
+  left: -172px;
+}
+
+.btnHome{
+  background-color: #30925E;
+  border: none;
+  width: 200px;
+  height: 50px;
+  font-size: 30px;
+  font-family: "Yanone Kaffeesatz";
+  color: white;
+  cursor: pointer;
+}
+
+.btnHome:hover {
+  background-color: #29b66b;
 }
