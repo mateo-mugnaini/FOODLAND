@@ -4,6 +4,7 @@ import "./placeOrderScreen.css"
 import useLocalStore from "../../hooks/useLocalStore";
 import { post_order } from "../../redux/actions/orderActions";
 import { Link } from "react-router-dom";
+import swal from "sweetalert"
 //import Loader from "../../Components/Loader/Loader";
 //import MessageBox from "../../Views/Error/messageBox";
 
@@ -49,19 +50,50 @@ export default function PlaceOrderScreen() {
 	// ========== ShippingAdress ======== 
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
-		// console.log(value);
-	  };
+		if (!userInfo || !userInfo._id) swal({
+			title: "You need to be logged in to complete the purchase",
+			icon: "warning",
+			confirmButtonText: "OK",
+			showClass: {
+			popup: "animate__animated animate__fadeInDown",
+			},
+			hideClass: {
+			popup: "animate__animated animate__fadeOutUp",
+			},
+		}); 
+
+	};
 
     // ======== Despacho la orden =======
 	const placeOrderHandler = () => {
-		if (!userInfo || !userInfo._id) { // verifica si userInfo no está definido o si su propiedad _id es falsa o nula
-			alert("You need to be logged in to complete the purchase");
+		if (!userInfo || !userInfo._id) {
+			swal({
+				title: "You need to be logged in to complete the purchase",
+				icon: "warning",
+				confirmButtonText: "OK",
+				showClass: {
+				  popup: "animate__animated animate__fadeInDown",
+				},
+				hideClass: {
+				  popup: "animate__animated animate__fadeOutUp",
+				},
+			}); 
 			return;
-		}
+			}
 		else if (!value.address || !value.lastname || !value.name || !value.country || !value.postalCode || !value.city) {
-			alert("you need to complete all the shipping information");
-			return;
-		}
+			swal({
+				title: "you need to complete all the shipping information",
+				icon: "warning",
+				confirmButtonText: "OK",
+				showClass: {
+				popup: "animate__animated animate__fadeInDown",
+				},
+				hideClass: {
+				popup: "animate__animated animate__fadeOutUp",
+				},
+			}); 
+				return;
+			}
 		else {
 			dispatch(post_order({
 				orderItems: cart,
@@ -75,17 +107,6 @@ export default function PlaceOrderScreen() {
 				user: userInfo._id,
 			}));
 
-			// dispatch(post_order({
-			// 	orderItems: cart,
-			// 	shippingAddress,
-			// 	paymentMethod,
-			// 	// paymentResult, <<<< no lo pide el back
-			// 	itemsPrice,
-			// 	shippingPrice,
-			// 	taxPrice,
-			// 	totalPrice,
-			// 	user: userInfo._id,
-			// }));
 		}
 	};
 
