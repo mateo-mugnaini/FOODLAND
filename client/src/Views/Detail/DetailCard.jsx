@@ -36,9 +36,9 @@ const DetailCard = () => {
         const updatedCart = Cart.filter((item) => item.id !== id);
         const updatedQuantity = existingItem.quantity + quantity;
   
-        setCart([...updatedCart, { ...existingItem, quantity: updatedQuantity }]);
+        setCart([...updatedCart, { ...existingItem, quantity: updatedQuantity , slug:existingItem.slug || existingItem.name}]);
       } else {
-        setCart([...Cart, { id, name: product.name, description: product.description, price: product.price, image: product.image, quantity }]);
+        setCart([...Cart, { id, name: product.name, description: product.description, price: product.price, image: product.image, quantity ,slug:product.slug || product.name}]);
       }
     };
 
