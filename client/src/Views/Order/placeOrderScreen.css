@@ -8,11 +8,9 @@
 
 .Form-Shipping{
     display: inline-flex;
-
     justify-content: space-between;
-    padding: 40px;
+    padding: 12px;
     background-color: rgb(228, 227, 227);
-
     border-radius: 20px;
     box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
     width: auto;
@@ -25,7 +23,7 @@
 }
 
 .formInput label{
-    font-size: 25px;
+    font-size: 22px;
     font-weight: bolder;
     display: flex;
     justify-self: right;
@@ -33,9 +31,9 @@
 }
 
 .formInput label input{
-    font-size: 25px;
+    font-size: 22px;
     margin-left: 10px;
-    width: 94%;
+    width: 100%;
     border-radius: 11px;
 }
 
@@ -45,11 +43,12 @@
     box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
     cursor: pointer;
     margin: auto;
-    padding: 20px;
+    padding: 8px;
     font-size: 30px;
     border-radius: 20px;
     border: 2px solid rgb(29, 121, 29);
-    width: 174px;
+    width: 153px;
+    display: flex;
 }
 
 .columna h2{
@@ -72,22 +71,26 @@
 }
 
 .imgResumen{
-    width: 80px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin-right: 18px;
 }
 
-.resumen li{
+.resumen .row li{
     list-style: none;
+    text-align: -webkit-left;
+    display: inline-flex;
 }
 
 .resumen .row{
-    display: list-item;
+    display: grid;
     background-color: rgb(221 221 221);
-    width: 60%;
+    width: fit-content;
     margin: auto;
     border-radius: 11px;
     box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
+    list-style: none;
+    padding: 10px;
 }
 
 .row p{
@@ -99,7 +102,7 @@
 
 .summary{
     background-color: #c5c5c5a3;
-    width: 43%;
+    width: fit-content;
     margin: auto;
     border-radius: 14px;
     box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
@@ -114,6 +117,8 @@
     display: flex;
     justify-content: space-around;
     margin: 11px;
+    font-size: large;
+    
 }
 .summary label h4 span{
     color:green;
@@ -144,14 +149,15 @@
 
 .Shippingtitle span{
     font-weight: initial;
-    height: 59px;
+    height: 28pxpx;
+    width: 359px;
 }
 
 .isLogin{
         background-color: rgb(228, 227, 227);
         border-radius: 20px;
         box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
-        width: 90%;
+        width: fit-content;
         height: -moz-fit-content;
         height: fit-content;
         margin: auto;
@@ -163,14 +169,52 @@
 }
 
 .isLogin input{
-    font-size: 25px;
+    font-size: 22px;
     margin-left: 10px;
     width: 94%;
     border-radius: 11px;
 }
 .isLogin img{
-    width: 180px;
-    height: 180px;
+    width: 130px;
+    height: 115px;
     margin-right: 20px;
     margin-top:10px;
+}
+.isLogin h3{
+    margin: 0px;
+}
+
+.row li h4{
+margin: 0px;
+width: 268px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.row li p{
+    margin: 0px;
+    }
+
+.row li h3{
+margin: 0px;
+align-self:end;
+}
+
+.bottons{
+    padding: 12px;
+    background-color: rgb(228, 227, 227);
+    border-radius: 20px;
+    box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+}
+
+.bottons button{
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
+    background-color:rgb(29, 121, 29);
+    border: 2px solid rgb(29, 121, 29);
+    color:white;
 }

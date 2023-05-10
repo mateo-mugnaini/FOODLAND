@@ -6,8 +6,8 @@ import "./cards.css";
 import {
   getAllCategories,
   getAllProducts,
-  setFilterState,
 } from "../../redux/actions";
+import { setFilterState } from "../../redux/actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
 // import Carrousel from "../Carrousel/Carrousel";
 import oferta1 from "../../Imgs/oferta1.jpeg";

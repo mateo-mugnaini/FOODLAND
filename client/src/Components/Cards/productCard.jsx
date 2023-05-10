@@ -4,7 +4,7 @@ import Rating from "../Rating/rating"
 //IMPORT LOCALSTORE
 import useLocalStore from "../../hooks/useLocalStore"
 
-const ProductCard = ({id,name,price,image, rating,description, numReviews}) =>{
+const ProductCard = ({id,name,price,image, rating,description, numReviews, slug}) =>{
 
   // ======== Traigo el LocalStore ====
   const [Cart, setCart] = useLocalStore( "Carrito", []);
@@ -20,7 +20,7 @@ const ProductCard = ({id,name,price,image, rating,description, numReviews}) =>{
 
       setCart([...updatedCart, { ...existingItem, quantity: updatedQuantity }]);
     } else {
-      setCart([...Cart, { id, name, price, image, description, quantity: 1 }]);
+      setCart([...Cart, { id, name, price, image, description, quantity: 1, slug,}]);
     }
   };
 

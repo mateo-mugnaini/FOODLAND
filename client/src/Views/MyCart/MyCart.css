@@ -60,13 +60,12 @@
   
   .ButonReturn a{
     color: white;
-    font-weight: bolder;
     text-decoration:none;
     font-size: xx-large;
   }
   
   .page{
-    max-width: 53%;
+    width: 50%;
     margin:20px;
     border-radius: 20px;
     text-decoration:none;
@@ -349,12 +348,11 @@
   }
   
   .cart_item li p {
-    font-size: 1.7em;
     font-weight: 700;
   }
   
   .cart_item li span {
-    font-size: 1.3em;
+    font-size: 13px;
   }
   
   .cart_item li h2 {
