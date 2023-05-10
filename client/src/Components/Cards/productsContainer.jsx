@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader"
 import ProductCard from "./productCard"
 
 //IMPORT ACTIONS
-import { handle_sorts, getByCategory, setFilterState  } from "../../redux/actions";
+import { handle_sorts, getByCategory, setFilterState, getAllProducts } from "../../redux/actions/productActions";
 
 
 
@@ -16,7 +16,8 @@ const ProductsContainer = () => {
   const { categoriesId } = useParams();
 
   /* IMPORT STATES */
-  const { products, display, filterState } = useSelector((state) => state.products);
+  const { AllProducts, display, filterState } = useSelector((state) => state.products);
+
   /* PAGINADO */
   const [numeroPagina, setNumeroPagina] = useState(1);
 
@@ -26,18 +27,19 @@ const ProductsContainer = () => {
 
 
   const aux =
-  products && products.slice
-      ? products.slice(conteoInicial, conteoFinal)
+  AllProducts?.products && AllProducts?.products?.slice
+      ? AllProducts?.products?.slice(conteoInicial, conteoFinal)
       : [];
-
 
   const page = [];
 
-  const pageNum = Math.ceil(products?.length / grupo);
+  const pageNum = Math.ceil(AllProducts?.products?.length / grupo);
 
   for (let i = 1; i <= pageNum; i++) {
     page.push(i);
   }
+
+  console.log(pageNum, "AAAAAAAA");
 
   /* FUNCION DE ORDENAMIENTO  */
 
@@ -53,6 +55,7 @@ const ProductsContainer = () => {
   useEffect(() => {
     // si esta en true me despacha la accion que me trae los prod por
     if (filterState) {
+      dispatch(getAllProducts())
       dispatch(getByCategory(categoriesId));  
        }
   
