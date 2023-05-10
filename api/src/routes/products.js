@@ -26,8 +26,8 @@ productRouter.get(
 
 productRouter.post(
   "/",
-  // isAuth,
-  // isAdmin,
+   isAuth,
+   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const {
       name,
@@ -64,8 +64,8 @@ productRouter.post(
 
 productRouter.put(
   "/customer/:id",
-  // isAuth,
-  // isAdmin,
+   isAuth,
+   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const modStock = req.body.stock;
@@ -83,8 +83,8 @@ productRouter.put(
 
 productRouter.put(
   "/:id",
-  // isAuth,
-  // isAdmin,
+   isAuth,
+   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const { id } = req.params;
     const {
