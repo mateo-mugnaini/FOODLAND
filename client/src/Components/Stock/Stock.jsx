@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllProducts } from "../../redux/actions";
+import { getAllProducts, updateProduct } from "../../redux/actions/productActions";
 import { Link } from "react-router-dom";
 
 import "./Stock.css"
@@ -43,11 +43,6 @@ const Stock = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
-  // Eliminar producto
-  const handleDeleteProduct = (productId) => {
-console.log("Borrar el producto");
-  };
-
   return (
     <div className="stockList">
       <table>
@@ -71,9 +66,6 @@ console.log("Borrar el producto");
               <td>usd${p.price}</td>
               <td>
                 <Link to={`/editproduct/${p._id}`}>Editar</Link>
-                <button onClick={() => handleDeleteProduct()}>
-                  Eliminar
-                </button>
               </td>
             </tr>
           ))}

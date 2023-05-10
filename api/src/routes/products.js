@@ -95,6 +95,7 @@ productRouter.put(
   expressAsyncHandler(async (req, res) => {
     const { id } = req.params;
     const {
+      active,
       name,
       slug,
       price,
@@ -110,6 +111,7 @@ productRouter.put(
     } = req.body;
     const product = await Product.findById(id);
     if (product) {
+      product.active = active ?? product.active;
       product.name = name ?? product.name;
       product.slug = slug ?? product.slug;
       product.price = price ?? product.price;
