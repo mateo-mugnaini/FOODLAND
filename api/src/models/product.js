@@ -26,6 +26,7 @@ const productSchema = new mongoose.Schema(
     rating: { type: Number, required: false },
     numReviews: { type: Number, required: false },
     reviews: [reviewSchema],
+    active: {type: Boolean, default: true },
   },
   {
     timestamps: true,
