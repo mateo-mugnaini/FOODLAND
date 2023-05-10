@@ -23,8 +23,8 @@ orderRouter.post(
 	"/",
 	isAuth,
 	expressAsyncHandler(async (req, res) => {
+		console.log(req.body);
 		const newOrder = new Order({
-			//orderItems: req.body.orderItems,
 			orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
 			shippingAddress: req.body.shippingAddress,
 			paymentMethod: req.body.paymentMethod,
@@ -159,7 +159,12 @@ orderRouter.delete(
 	expressAsyncHandler(async (req, res) => {
 		const order = await Order.findById(req.params.id);
 		if (order) {
-			await order.remove();
+			const [deleted] = await order.update(
+				{
+					active: false,
+				}
+			);
+			console.log(`${deleted} order marked as inactive`)
 			res.send({ message: "Order Deleted" });
 		} else {
 			res.status(404).send({ message: "Order Not Found" });

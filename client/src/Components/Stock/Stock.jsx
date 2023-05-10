@@ -45,7 +45,7 @@ const Stock = () => {
 
   // Eliminar producto
   const handleDeleteProduct = (productId) => {
-console("DEBO ELIMINAR EL PRODUCTO")
+console.log("Borrar el producto");
   };
 
   return (
@@ -69,7 +69,7 @@ console("DEBO ELIMINAR EL PRODUCTO")
               <td>{p.brand}</td>
               <td>
                 <Link to={`/editproduct/${p._id}`}>Editar</Link>
-                <button onClick={() => handleDeleteProduct(p.id)}>
+                <button onClick={() => handleDeleteProduct()}>
                   Eliminar
                 </button>
               </td>
@@ -81,7 +81,7 @@ console("DEBO ELIMINAR EL PRODUCTO")
       {/* Paginado */}
       <div className="pagination">
         <button onClick={goToPreviousPage} disabled={currentPage === 1}>
-          Anterior
+          Prev
         </button>
 
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
@@ -95,7 +95,7 @@ console("DEBO ELIMINAR EL PRODUCTO")
         ))}
 
         <button onClick={goToNextPage} disabled={currentPage === totalPages}>
-          Siguiente
+          Next
         </button>
       </div>
     </div>
