@@ -411,7 +411,7 @@ const data = {
 		},
 
 		{
-			name: "Great Value Greek Vanilla Nonfat Yogurt, 32 oz",
+			name: "Great Value Greek Vanilla Nonfat Yogurt, 32 oZ",
 			slug: "Great Value Greek Vanilla Nonfat Yogurt, 32 oz",
 			price: 3.92,
 			description: "Great Value Greek Vanilla Nonfat Yogurt, 32 oz",
