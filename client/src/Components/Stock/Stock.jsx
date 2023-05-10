@@ -45,8 +45,7 @@ const Stock = () => {
 
   // Eliminar producto
   const handleDeleteProduct = (productId) => {
-    const updateProducts = productList.filter((p) => p._id !== productId)
-    dispatch(deleteProduct(productId)) 
+console.log("Borrar el producto");
   };
 
   return (
@@ -70,7 +69,7 @@ const Stock = () => {
               <td>{p.brand}</td>
               <td>
                 <Link to={`/editproduct/${p._id}`}>Editar</Link>
-                <button onClick={() => handleDeleteProduct(p._id)}>
+                <button onClick={() => handleDeleteProduct()}>
                   Eliminar
                 </button>
               </td>
