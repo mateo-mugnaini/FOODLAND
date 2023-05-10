@@ -12,7 +12,7 @@ export default function PlaceOrderScreen() {
 	
 	const dispatch = useDispatch();
 	const [cart, setCart] = useLocalStore("Carrito",[]);
-	const totalstate= useSelector((state) => state.order.totalOrder);
+	const {subtotal,taxes,totalOrder}= useSelector((state) => state.order.totalOrder);
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 
@@ -30,7 +30,7 @@ export default function PlaceOrderScreen() {
 	//   ================ creo shippingAddress ==========
 	
 		let shippingAddress= {
-			fullname: value.lastname+","+ value.name,
+			fullName: value.lastname+","+ value.name,
 			address: value.address,
 			city: value.city,
 			postalCode: value.postalCode,
@@ -42,9 +42,9 @@ export default function PlaceOrderScreen() {
 	const paymentMethod ="Paypal";
 	// let paymentResult = "Pending";
 	let shippingPrice = 0;
-	let itemsPrice = totalstate.subtotal ;    
-	let taxPrice= totalstate.taxes ;
-	let totalPrice =totalstate.totalOrder.toFixed(2);
+	let itemsPrice = subtotal ;    
+	let taxPrice= taxes ;
+	let totalPrice =parseFloat(totalOrder.toFixed(2));
 
 
 	// ========== ShippingAdress ======== 
@@ -96,7 +96,7 @@ export default function PlaceOrderScreen() {
 			}
 		else {
 			dispatch(post_order({
-				orderItems: cart,
+				orderItems: cart.map(product=>({...product,slug:"prueba"})),
 				shippingAddress,
 				paymentMethod,
 				// paymentResult, <<<< no lo pide el back
@@ -105,7 +105,7 @@ export default function PlaceOrderScreen() {
 				taxPrice,
 				totalPrice,
 				user: userInfo._id,
-			}));
+			},userInfo.token));
 
 		}
 	};
