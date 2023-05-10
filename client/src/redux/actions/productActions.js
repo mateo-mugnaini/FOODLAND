@@ -193,15 +193,15 @@ export const addCategory = (category) => async (dispatch) => {
 };
 //========================* UPDATE PRODUCT *==============//
 
-export const updateProduct = (product) => async (dispatch, getDetail) => {
+export const updateProduct = (product, _id) => async (dispatch, getState) => {
   dispatch({ type: action.PRODUCT_UPDATE_REQUEST, payload: product });
   const {
     userSignin: { userInfo },
-  } = getDetail();
+  } = getState();
+  const { data } = await axios.put(`${URL}/api/products/${_id}`, product, {
+    headers: { Authorization: `Bearer ${userInfo.token}` },
+  });
   try {
-    const { data } = await axios.put(`/api/products/${product.id}`, product, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    });
     dispatch({ type: action.PRODUCT_UPDATE_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -210,5 +210,4 @@ export const updateProduct = (product) => async (dispatch, getDetail) => {
         : error.message;
     dispatch({ type: action.PRODUCT_UPDATE_FAIL, error: message });
   }
-  console.log(product.id);
 };

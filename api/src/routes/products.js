@@ -1,7 +1,7 @@
 import express from "express";
 import Product from "../models/product.js";
 import expressAsyncHandler from "express-async-handler";
-import { isAdmin, isAuth } from '../middlewares/middlewares.js';
+import { isAdmin, isAuth } from "../middlewares/middlewares.js";
 
 const productRouter = express.Router();
 
@@ -17,17 +17,22 @@ productRouter.get(
   "/categories",
   expressAsyncHandler(async (req, res) => {
     //const categories = await Product.find().distinct("category"); -->solo trae categorías
-    const categories = await Product.aggregate([{ $group: { _id: "$category", imageCategory: { $first: "$imageCategory" } } }])
+    const categories = await Product.aggregate([
+      {
+        $group: {
+          _id: "$category",
+          imageCategory: { $first: "$imageCategory" },
+        },
+      },
+    ]);
     res.send(categories);
-
   })
 );
 
-
 productRouter.post(
   "/",
-   isAuth,
-   isAdmin,
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const {
       name,
@@ -55,7 +60,9 @@ productRouter.post(
       rating: rating ?? 0,
       numReviews: numReviews ?? 0,
       description,
-      imageCategory: imageCategory ?? "https://jumboargentina.vtexassets.com/arquivos/ids/537347-800-auto?v=636972888517500000&width=800&height=auto&aspect=true",
+      imageCategory:
+        imageCategory ??
+        "https://jumboargentina.vtexassets.com/arquivos/ids/537347-800-auto?v=636972888517500000&width=800&height=auto&aspect=true",
     });
     const product = await newProduct.save();
     res.send({ message: "Product Created", product });
@@ -64,8 +71,8 @@ productRouter.post(
 
 productRouter.put(
   "/customer/:id",
-   isAuth,
-   isAdmin,
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const modStock = req.body.stock;
@@ -83,8 +90,8 @@ productRouter.put(
 
 productRouter.put(
   "/:id",
-   isAuth,
-   isAdmin,
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const { id } = req.params;
     const {
@@ -99,7 +106,7 @@ productRouter.put(
       description,
       rating,
       numReviews,
-      imageCategory
+      imageCategory,
     } = req.body;
     const product = await Product.findById(id);
     if (product) {
@@ -114,7 +121,7 @@ productRouter.put(
       product.description = description ?? product.description;
       product.rating = rating ?? product.rating;
       product.numReviews = numReviews ?? product.numReviews;
-      product.imageCategory = imageCategory ?? product.imageCategory
+      product.imageCategory = imageCategory ?? product.imageCategory;
       await product.save();
       res.send({ message: "Product Updated" });
     } else {

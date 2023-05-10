@@ -57,6 +57,7 @@ console.log("Borrar el producto");
             <th className="thStock2">Category</th>
             <th className="thStock2">Stock</th>
             <th className="thStock2">Brand</th>
+            <th className="thStock2">Price</th>
             <th className="thStock3">Actions</th>
           </tr>
         </thead>
@@ -67,6 +68,7 @@ console.log("Borrar el producto");
               <td>{p.category}</td>
               <td>{p.stock}</td>
               <td>{p.brand}</td>
+              <td>usd${p.price}</td>
               <td>
                 <Link to={`/editproduct/${p._id}`}>Editar</Link>
                 <button onClick={() => handleDeleteProduct()}>
