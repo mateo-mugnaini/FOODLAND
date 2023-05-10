@@ -74,6 +74,18 @@ export default function PlaceOrderScreen() {
 				totalPrice,
 				user: userInfo._id,
 			}));
+
+			// dispatch(post_order({
+			// 	orderItems: cart,
+			// 	shippingAddress,
+			// 	paymentMethod,
+			// 	// paymentResult, <<<< no lo pide el back
+			// 	itemsPrice,
+			// 	shippingPrice,
+			// 	taxPrice,
+			// 	totalPrice,
+			// 	user: userInfo._id,
+			// }));
 		}
 	};
 
@@ -174,9 +186,9 @@ export default function PlaceOrderScreen() {
 							
 								<div className="summary">
 									<label>
-									<h4>Subtotal:<span>${itemsPrice}</span></h4>
+									<h4>Subtotal:<span>${itemsPrice.toFixed(2)}</span></h4>
 									<h4>Shipping:<span>{shippingPrice}</span></h4>
-									<h4>Taxes:<span>${taxPrice}</span></h4>
+									<h4>Taxes:<span>${taxPrice.toFixed(2)}</span></h4>
 									</label>
 									<hr></hr>
 
