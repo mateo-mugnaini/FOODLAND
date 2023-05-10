@@ -94,59 +94,41 @@ productRouter.put(
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const { id } = req.params;
-    const updateFields = req.body;
+    const {
+      name,
+      slug,
+      price,
+      image,
+      images,
+      category,
+      brand,
+      stock,
+      description,
+      rating,
+      numReviews,
+      imageCategory,
+    } = req.body;
     const product = await Product.findById(id);
-    if (Object.keys(updateFields).length > 0) {
-      Object.assign(product, updateFields);
+    if (product) {
+      product.name = name ?? product.name;
+      product.slug = slug ?? product.slug;
+      product.price = price ?? product.price;
+      product.image = image ?? product.image;
+      product.images = images ?? product.images;
+      product.category = category ?? product.category;
+      product.brand = brand ?? product.brand;
+      product.stock = stock ?? product.stock;
+      product.description = description ?? product.description;
+      product.rating = rating ?? product.rating;
+      product.numReviews = numReviews ?? product.numReviews;
+      product.imageCategory = imageCategory ?? product.imageCategory;
       await product.save();
       res.send({ message: "Product Updated" });
     } else {
-      res.send({ message: "No fields to update" });
+      res.status(404).send({ message: "Product Not Found" });
     }
   })
 );
-
-// productRouter.put(
-//   "/:id",
-//    isAuth,
-//    isAdmin,
-//   expressAsyncHandler(async (req, res) => {
-//     const { id } = req.params;
-//     const {
-//       name,
-//       slug,
-//       price,
-//       image,
-//       images,
-//       category,
-//       brand,
-//       stock,
-//       description,
-//       rating,
-//       numReviews,
-//       imageCategory
-//     } = req.body;
-//     const product = await Product.findById(id);
-//     if (product) {
-//       product.name = name ?? product.name;
-//       product.slug = slug ?? product.slug;
-//       product.price = price ?? product.price;
-//       product.image = image ?? product.image;
-//       product.images = images ?? product.images;
-//       product.category = category ?? product.category;
-//       product.brand = brand ?? product.brand;
-//       product.stock = stock ?? product.stock;
-//       product.description = description ?? product.description;
-//       product.rating = rating ?? product.rating;
-//       product.numReviews = numReviews ?? product.numReviews;
-//       product.imageCategory = imageCategory ?? product.imageCategory
-//       await product.save();
-//       res.send({ message: "Product Updated" });
-//     } else {
-//       res.status(404).send({ message: "Product Not Found" });
-//     }
-//   })
-// );
 
 productRouter.get(
   "/slug/:id",

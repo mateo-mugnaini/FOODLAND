@@ -193,27 +193,21 @@ export const addCategory = (category) => async (dispatch) => {
 };
 //========================* UPDATE PRODUCT *==============//
 
-export const updateProduct =
-  (product, updateFields) => async (dispatch, getState) => {
-    console.log(product);
-    dispatch({ type: action.PRODUCT_UPDATE_REQUEST, payload: product.id });
-    const {
-      userSignin: { userInfo },
-    } = getState();
-    try {
-      const { data } = await axios.put(
-        `/api/products/${product.id}`,
-        updateFields,
-        {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
-      );
-      dispatch({ type: action.PRODUCT_UPDATE_SUCCESS, payload: data });
-    } catch (error) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-      dispatch({ type: action.PRODUCT_UPDATE_FAIL, error: message });
-    }
-  };
+export const updateProduct = (product, _id) => async (dispatch, getState) => {
+  dispatch({ type: action.PRODUCT_UPDATE_REQUEST, payload: product });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  const { data } = await axios.put(`${URL}/api/products/${_id}`, product, {
+    headers: { Authorization: `Bearer ${userInfo.token}` },
+  });
+  try {
+    dispatch({ type: action.PRODUCT_UPDATE_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: action.PRODUCT_UPDATE_FAIL, error: message });
+  }
+};
