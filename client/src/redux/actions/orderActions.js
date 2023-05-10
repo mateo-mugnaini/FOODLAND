@@ -2,7 +2,7 @@ import * as action from "../constants/orderConstants";
 import {ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAIL } from "../constants/orderConstants";
 import axios from "axios";
 
-const URL = process.env.REACT_APP_URL ??  "http://localhost:5000/api"
+const URL = process.env.REACT_APP_URL ??  "http://localhost:5000"
 
 
 // //  ============ Actualizo el total de la orden ======================
@@ -61,6 +61,7 @@ const URL = process.env.REACT_APP_URL ??  "http://localhost:5000/api"
             const { data } = await axios.post(`${URL}/api/orders`, order, {
                 headers: { Authorization: `Bearer ${token}` },
             });
+            console.log(data);
             if (data.message==="New Order Created") {
                 dispatch ({type: ORDER_CREATE_SUCCESS, payload: data.order })
             }

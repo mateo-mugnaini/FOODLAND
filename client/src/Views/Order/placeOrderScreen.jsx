@@ -2,7 +2,7 @@ import React, { useEffect , useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./placeOrderScreen.css"
 import useLocalStore from "../../hooks/useLocalStore";
-import { post_order } from "../../redux/actions/orderActions";
+import { createOrder } from "../../redux/actions/orderActions";
 import { Link } from "react-router-dom";
 import swal from "sweetalert"
 //import Loader from "../../Components/Loader/Loader";
@@ -12,7 +12,7 @@ export default function PlaceOrderScreen() {
 	
 	const dispatch = useDispatch();
 	const [cart, setCart] = useLocalStore("Carrito",[]);
-	const {subtotal,taxes,totalOrder}= useSelector((state) => state.order.totalOrder);
+	const totalstate= useSelector((state) => state.order.totalOrder);
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 
@@ -42,9 +42,9 @@ export default function PlaceOrderScreen() {
 	const paymentMethod ="Paypal";
 	// let paymentResult = "Pending";
 	let shippingPrice = 0;
-	let itemsPrice = subtotal ;    
-	let taxPrice= taxes ;
-	let totalPrice =parseFloat(totalOrder.toFixed(2));
+	let itemsPrice = totalstate.subtotal;    
+	let taxPrice= totalstate.taxes ;
+	let totalPrice = parseFloat(totalstate.totalOrder.toFixed(2));
 
 
 	// ========== ShippingAdress ======== 
@@ -95,7 +95,7 @@ export default function PlaceOrderScreen() {
 				return;
 			}
 		else {
-			dispatch(post_order({
+			dispatch(createOrder({
 				orderItems: cart.map(product=>({...product,slug:"prueba"})),
 				shippingAddress,
 				paymentMethod,

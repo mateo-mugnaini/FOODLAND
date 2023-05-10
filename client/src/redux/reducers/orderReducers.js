@@ -9,7 +9,8 @@ const initialState = {
     orders: [],
     loading: false,
     error: "",
-    isError: false };
+    isError: false,
+    totalOrder: 0};
 
 const ordersReducer = (state = initialState, action) => {
     switch (action.type) {
