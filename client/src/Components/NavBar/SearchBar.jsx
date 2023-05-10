@@ -4,7 +4,7 @@ import React from "react";
 import "./SearchBar.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setProduct, setFilterState } from "../../redux/actions";
+import { setProduct, setFilterState } from "../../redux/actions/productActions";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {

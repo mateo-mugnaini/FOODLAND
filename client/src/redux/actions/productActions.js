@@ -1,8 +1,8 @@
 import axios from "axios";
 import * as action from "../constants/productConstants"; // Import para traer todas las actions-types
 
-const URL = process.env.REACT_APP_URL ??  "http://localhost:5000";
-// const URL = "https://foodland-production.up.railway.app/";
+const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
+
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -68,13 +68,12 @@ export function setProduct(payload) {
     payload,
   };
 }
-export function setFilterState (payload) {
+export function setFilterState(payload) {
   return {
     type: "SET_FILTER_STATE",
     payload,
   };
-};
-
+}
 
 export const getDetail = (id) => {
   return async (dispatch) => {
@@ -98,7 +97,6 @@ export const getDetail = (id) => {
     }
   };
 };
-
 
 /* ========================* FILTROS *======================== */
 
@@ -191,6 +189,25 @@ export const addCategory = (category) => async (dispatch) => {
     dispatch({
       type: action.ADD_CATEGORY_FAILURE,
       payload: error.message,
+    });
+  }
+};
+//========================*Add Category*==============//
+
+export const updateProduct = (product) => async (dispatch) => {
+  try {
+    dispatch({ type: action.PRODUCT_UPDATE_REQUEST });
+
+    const { data } = await axios.put(
+      `http://localhost:5000/api/products/${product._id}`,
+      product
+    );
+
+    dispatch({ type: action.PRODUCT_UPDATE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: action.PRODUCT_UPDATE_FAIL,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };

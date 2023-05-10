@@ -62,13 +62,13 @@ console("DEBO ELIMINAR EL PRODUCTO")
         </thead>
         <tbody>
           {currentProducts?.map((p) => (
-            <tr key={p.id}>
+            <tr key={p._id}>
               <td>{p.name}</td>
               <td>{p.category}</td>
               <td>{p.stock}</td>
               <td>{p.brand}</td>
               <td>
-                <Link to={`/editProduct/${p.id}`}>Editar</Link>
+                <Link to={`/editproduct/${p._id}`}>Editar</Link>
                 <button onClick={() => handleDeleteProduct(p.id)}>
                   Eliminar
                 </button>
