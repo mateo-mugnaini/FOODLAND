@@ -26,7 +26,7 @@ const EditProductForm = () => {
   }, [dispatch, decodedName]);
 
   const [formData, setFormData] = useState({
-    active: true,
+    // active: true,
     name: "",
     slug: "",
     image: "",
@@ -41,7 +41,7 @@ const EditProductForm = () => {
 
   useEffect(() => {
     setFormData({
-      active: product?.active,
+      // active: product?.active,
       name: product?.name,
       slug: product?.slug,
       image: product?.image,
@@ -73,7 +73,7 @@ const EditProductForm = () => {
       //   .put(`${URL}/api/products/${product._id}`, formData)
       //   .then((res) => console.log(res));
       setFormData({
-        active: "",
+        // active: "",
         name: "",
         slug: "",
         image: "",
