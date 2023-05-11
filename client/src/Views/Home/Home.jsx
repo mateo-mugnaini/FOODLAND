@@ -79,13 +79,13 @@ const Home = () => {
             className={`btnPagAdm ${selectedButton === "showUser" ? "selected" : ""}`}
             onClick={handleShowUser}
           >
-            Show Users
+            Users
           </button>
           <button
             className={`btnPagAdm ${selectedButton === "showStatistics" ? "selected" : ""}`}
             onClick={handleShowStatistics}
           >
-            Show Statistics
+            Statistics
           </button>
         </div>
         {showStock && <StockViews />}
