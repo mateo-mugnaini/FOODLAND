@@ -15,6 +15,7 @@ import StockViews from "./Views/Stock/StockViews";
 import UpdateProduct from "./Views/UpdateProduct/UpdateProduct";
 import PlaceOrderScreen from "./Views/Order/placeOrderScreen";
 import UserProfile from "./Views/UserProfile/UserProfile.jsx";
+
 function App() {
   const location = useLocation();
   return (
@@ -38,7 +39,7 @@ function App() {
           element={<UserRegister />}
           name="Register"
           key="Register"
-        ></Route>
+        ></Route>       
         <Route
           path="/about"
           element={<About />}

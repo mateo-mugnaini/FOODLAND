@@ -7,7 +7,7 @@ import img2 from "../../Imgs/LogIn-Registro/Img2.png"
 /* ----------------------- STYLES -----------------------*/
 import "../Register/Register.css";
 /* ----------------------- COMPONENTS -----------------------*/
-import FormRegister from "../../Components/FormRegisterUser/FormRegister";
+import RegisterScreen from "../../Components/FormRegisterUser/registerScreen";
 
 const UserRegister = () => {
   const imgA = img1
@@ -20,7 +20,7 @@ const UserRegister = () => {
         </Link>
       </div>
       <div>
-      <FormRegister />
+      <RegisterScreen />
       </div>
       <div>
         <img className='imgARegister' src={imgA} alt="" />
