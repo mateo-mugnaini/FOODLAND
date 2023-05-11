@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllProducts } from "../../redux/actions";
+import { getAllProducts, updateProduct } from "../../redux/actions/productActions";
 import { Link } from "react-router-dom";
 
 import "./Stock.css"
@@ -26,6 +26,8 @@ const Stock = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
+const aux = currentProducts?.map(e => e = e.active)
+  console.log(aux);
 
   // Calcular el número total de páginas
   const totalPages = Math.ceil(productList?.length / productsPerPage);
@@ -43,11 +45,6 @@ const Stock = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
-  // Eliminar producto
-  const handleDeleteProduct = (productId) => {
-console.log("Borrar el producto");
-  };
-
   return (
     <div className="stockList">
       <table>
@@ -58,6 +55,7 @@ console.log("Borrar el producto");
             <th className="thStock2">Stock</th>
             <th className="thStock2">Brand</th>
             <th className="thStock2">Price</th>
+            {/* <th className="thStock2">A / D</th> */}
             <th className="thStock3">Actions</th>
           </tr>
         </thead>
@@ -69,11 +67,9 @@ console.log("Borrar el producto");
               <td>{p.stock}</td>
               <td>{p.brand}</td>
               <td>usd${p.price}</td>
+              {/* <td>{p.active ="TRUE" || !p.active === "FALSE"}</td> */}
               <td>
                 <Link to={`/editproduct/${p._id}`}>Editar</Link>
-                <button onClick={() => handleDeleteProduct()}>
-                  Eliminar
-                </button>
               </td>
             </tr>
           ))}
