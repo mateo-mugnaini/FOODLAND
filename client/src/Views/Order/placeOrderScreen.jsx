@@ -1,8 +1,8 @@
-import React, { useEffect , useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./placeOrderScreen.css"
 import useLocalStore from "../../hooks/useLocalStore";
-import { post_order } from "../../redux/actions/orderActions";
+import { createOrder } from "../../redux/actions/orderActions";
 import { Link } from "react-router-dom";
 import swal from "sweetalert"
 //import Loader from "../../Components/Loader/Loader";
@@ -11,7 +11,7 @@ import swal from "sweetalert"
 export default function PlaceOrderScreen() {
 	
 	const dispatch = useDispatch();
-	const [cart, setCart] = useLocalStore("Carrito",[]);
+	const [cart] = useLocalStore("Carrito",[]);
 	const totalstate= useSelector((state) => state.order.totalOrder);
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
@@ -30,7 +30,7 @@ export default function PlaceOrderScreen() {
 	//   ================ creo shippingAddress ==========
 	
 		let shippingAddress= {
-			fullname: value.lastname+","+ value.name,
+			fullName: value.lastname+","+ value.name,
 			address: value.address,
 			city: value.city,
 			postalCode: value.postalCode,
@@ -42,9 +42,9 @@ export default function PlaceOrderScreen() {
 	const paymentMethod ="Paypal";
 	// let paymentResult = "Pending";
 	let shippingPrice = 0;
-	let itemsPrice = totalstate.subtotal ;    
+	let itemsPrice = totalstate.subtotal;    
 	let taxPrice= totalstate.taxes ;
-	let totalPrice =totalstate.totalOrder.toFixed(2);
+	let totalPrice = parseFloat(totalstate.totalOrder.toFixed(2));
 
 
 	// ========== ShippingAdress ======== 
@@ -95,8 +95,8 @@ export default function PlaceOrderScreen() {
 				return;
 			}
 		else {
-			dispatch(post_order({
-				orderItems: cart,
+			dispatch(createOrder({
+				orderItems: cart.map(product=>({...product,slug:"prueba"})),
 				shippingAddress,
 				paymentMethod,
 				// paymentResult, <<<< no lo pide el back
@@ -105,7 +105,7 @@ export default function PlaceOrderScreen() {
 				taxPrice,
 				totalPrice,
 				user: userInfo._id,
-			}));
+			},userInfo.token));
 
 		}
 	};
@@ -117,12 +117,12 @@ export default function PlaceOrderScreen() {
 			{userInfo ? 
 			<div>
 			<h2>User:</h2>
-			<div class="isLogin">
+			<div className="isLogin">
 				{/* aca iria la imagen de perfil */}
 				<img src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png" alt="ProfileUSer"></img>  
 				<label>
-					<h3>User:<input value={userInfo.name} type="text" readonly/></h3>
-					<h3>Email:<input value={userInfo.email}  type="text" readonly/></h3>
+					<h3>User:<input value={userInfo.name} type="text" readOnly/></h3>
+					<h3>Email:<input value={userInfo.email}  type="text" readOnly/></h3>
 				</label>
 			</div>
 			</div>
@@ -144,7 +144,7 @@ export default function PlaceOrderScreen() {
 				<div name="Container Form Shipping" className="Form-Shipping">
 
 					<form onClick={handleFormSubmit} className="formInput" >
-						{ userInfo? <div pointer-events="none">
+						{ userInfo? <div pointerEvents="none">
 						<label>Name:<input type="text" value={value.name} onChange={(event) =>setValue({ ...value, name: event.target.value })}></input></label>
 						<label>Lastname:<input type="text" value={value.lastname} onChange={(event) =>setValue({ ...value, lastname: event.target.value })}></input></label><br/>
 						<label>Adress:<input type="text" value={value.address} onChange={(event) =>setValue({ ...value, address: event.target.value })}></input></label>
@@ -177,7 +177,7 @@ export default function PlaceOrderScreen() {
 						<h2>Order Items</h2>
 						<div className="row">
 						{cart.map((item) => (
-							<li key={item.product}>
+							<li key={item.id}>
 												
 								<h4><img
 										src={item.image}
@@ -193,10 +193,10 @@ export default function PlaceOrderScreen() {
 							</div>
 				</div>
 				{/* ============ METODO DE PAGO =============== */}
-				<div name="Payment" class="containerPayment">
+				<div name="Payment" className="containerPayment">
 					<br/>
 						<h2>Payment</h2>
-				<img src="https://logodownload.org/wp-content/uploads/2014/10/paypal-logo-2.png" value="Paypal" alt="logoPaypal" class="paypalLogo"></img>
+				<img src="https://logodownload.org/wp-content/uploads/2014/10/paypal-logo-2.png" value="Paypal" alt="logoPaypal" className="paypalLogo"></img>
 				</div>
 				</div>
 
