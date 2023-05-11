@@ -1,4 +1,4 @@
-import React, { useEffect , useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./placeOrderScreen.css"
 import useLocalStore from "../../hooks/useLocalStore";
@@ -11,7 +11,7 @@ import swal from "sweetalert"
 export default function PlaceOrderScreen() {
 	
 	const dispatch = useDispatch();
-	const [cart, setCart] = useLocalStore("Carrito",[]);
+	const [cart] = useLocalStore("Carrito",[]);
 	const totalstate= useSelector((state) => state.order.totalOrder);
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;

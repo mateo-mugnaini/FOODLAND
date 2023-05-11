@@ -31,29 +31,6 @@ const URL = process.env.REACT_APP_URL ??  "http://localhost:5000"
     }
 
     //==================== CREATE ORDER ================//
-    
-    /*export const createOrder = (order) => async (dispatch, getState) => {
-        dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
-        try {
-            const {
-                userSignin: { userInfo },
-            } = getState();
-            const { data } = await axios.post("/api/orders", order, {
-                headers: { Authorization: `Bearer ${userInfo.token}` },
-            });
-            dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
-            dispatch({ type: CART_EMPTY });
-            localStorage.removeItem("cartItems");
-        } catch (error) {
-            dispatch({
-                type: ORDER_CREATE_FAIL,
-                payload:
-                    error.response && error.response.data.message
-                        ? error.response.data.message
-                        : error.message,
-            });
-        }
-    };*/
 
     export const createOrder = (order, token) => async (dispatch) => {
         dispatch({ type: ORDER_CREATE_REQUEST });
@@ -61,9 +38,9 @@ const URL = process.env.REACT_APP_URL ??  "http://localhost:5000"
             const { data } = await axios.post(`${URL}/api/orders`, order, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            console.log(data);
             if (data.message==="New Order Created") {
                 dispatch ({type: ORDER_CREATE_SUCCESS, payload: data.order })
+                window.localStorage.removeItem("Carrito");
             }
         } catch (error) {
             dispatch({
