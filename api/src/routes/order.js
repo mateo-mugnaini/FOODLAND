@@ -23,9 +23,8 @@ orderRouter.post(
 	"/",
 	isAuth,
 	expressAsyncHandler(async (req, res) => {
-		console.log(req.body);
 		const newOrder = new Order({
-			orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
+			orderItems: req.body.orderItems.map((x) => ({ ...x, product: x.id })),
 			shippingAddress: req.body.shippingAddress,
 			paymentMethod: req.body.paymentMethod,
 			itemsPrice: req.body.itemsPrice,
@@ -39,6 +38,32 @@ orderRouter.post(
 		res.status(201).send({ message: "New Order Created", order });
 	})
 );
+
+/*orderRouter.post(
+	"/",
+	isAuth,
+	expressAsyncHandler(async (req, res) => {
+		if (req.body.orderItems.length === 0) {
+			res.status(400).send({ message: "Cart is empty" });
+		} else {
+			const order = new Order({
+				seller: req.body.orderItems[0].seller,
+				orderItems: req.body.orderItems,
+				shippingAddress: req.body.shippingAddress,
+				paymentMethod: req.body.paymentMethod,
+				itemsPrice: req.body.itemsPrice,
+				shippingPrice: req.body.shippingPrice,
+				taxPrice: req.body.taxPrice,
+				totalPrice: req.body.totalPrice,
+				user: req.user._id,
+			});
+			const createdOrder = await order.save();
+			res
+				.status(201)
+				.send({ message: "New Order Created", order: createdOrder });
+		}
+	})
+);*/
 
 //Ruta por si hacemos un dashboard del admin
 orderRouter.get(

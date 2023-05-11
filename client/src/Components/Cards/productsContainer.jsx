@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader"
 import ProductCard from "./productCard"
 
 //IMPORT ACTIONS
-import { handle_sorts, getByCategory, setFilterState, getAllProducts } from "../../redux/actions/productActions";
+import { handle_sorts, getByCategory, getAllProducts } from "../../redux/actions/productActions";
 
 
 
@@ -16,7 +16,7 @@ const ProductsContainer = () => {
   const { categoriesId } = useParams();
 
   /* IMPORT STATES */
-  const { AllProducts, display, filterState } = useSelector((state) => state.products);
+  const {products, display, filterState } = useSelector((state) => state.products);
 
   /* PAGINADO */
   const [numeroPagina, setNumeroPagina] = useState(1);
@@ -27,13 +27,13 @@ const ProductsContainer = () => {
 
 
   const aux =
-  AllProducts?.products && AllProducts?.products?.slice
-      ? AllProducts?.products?.slice(conteoInicial, conteoFinal)
+  products && products?.slice
+      ? products?.slice(conteoInicial, conteoFinal)
       : [];
 
   const page = [];
 
-  const pageNum = Math.ceil(AllProducts?.products?.length / grupo);
+  const pageNum = Math.ceil(products?.length / grupo);
 
   for (let i = 1; i <= pageNum; i++) {
     page.push(i);

@@ -8,9 +8,7 @@ import {
   RESULTSEARCH,
   RESULTSEARCH2,
   FILTERPRICE,
-  ADD_CATEGORY_REQUEST,
   ADD_CATEGORY_SUCCESS,
-  ADD_CATEGORY_FAILURE,
   GET_PRODUCTS,
   DETAIL_PRODUCT,
   GET_BY_CATEGORY,
@@ -206,8 +204,6 @@ switch (action.type) {
       ...state,
       products: action.payload,
     };
-  case GET_ALL_CATEGORIES:
-    return action.payload;
   case ADD_CATEGORY_SUCCESS:
     return [...state, action.payload];
   case GET_PRODUCTS:

@@ -34,7 +34,7 @@ const initialState = {
 const reducer = combineReducers({
 	products: productsReducer,
 	userSignin: userSigninReducer,	
-	order: ordersReducer,
+	order: ordersReducer, 
 });
 
 export const store2 = createStore(

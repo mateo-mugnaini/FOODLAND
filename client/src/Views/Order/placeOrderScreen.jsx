@@ -1,8 +1,8 @@
-import React, { useEffect , useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./placeOrderScreen.css"
 import useLocalStore from "../../hooks/useLocalStore";
-import { post_order } from "../../redux/actions/orderActions";
+import { createOrder } from "../../redux/actions/orderActions";
 import { Link } from "react-router-dom";
 import swal from "sweetalert"
 //import Loader from "../../Components/Loader/Loader";
@@ -11,7 +11,7 @@ import swal from "sweetalert"
 export default function PlaceOrderScreen() {
 	
 	const dispatch = useDispatch();
-	const [cart, setCart] = useLocalStore("Carrito",[]);
+	const [cart] = useLocalStore("Carrito",[]);
 	const totalstate= useSelector((state) => state.order.totalOrder);
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
@@ -30,7 +30,7 @@ export default function PlaceOrderScreen() {
 	//   ================ creo shippingAddress ==========
 	
 		let shippingAddress= {
-			fullname: value.lastname+","+ value.name,
+			fullName: value.lastname+","+ value.name,
 			address: value.address,
 			city: value.city,
 			postalCode: value.postalCode,
@@ -42,9 +42,9 @@ export default function PlaceOrderScreen() {
 	const paymentMethod ="Paypal";
 	// let paymentResult = "Pending";
 	let shippingPrice = 0;
-	let itemsPrice = totalstate.subtotal ;    
+	let itemsPrice = totalstate.subtotal;    
 	let taxPrice= totalstate.taxes ;
-	let totalPrice =totalstate.totalOrder.toFixed(2);
+	let totalPrice = parseFloat(totalstate.totalOrder.toFixed(2));
 
 
 	// ========== ShippingAdress ======== 
@@ -95,8 +95,8 @@ export default function PlaceOrderScreen() {
 				return;
 			}
 		else {
-			dispatch(post_order({
-				orderItems: cart,
+			dispatch(createOrder({
+				orderItems: cart.map(product=>({...product,slug:"prueba"})),
 				shippingAddress,
 				paymentMethod,
 				// paymentResult, <<<< no lo pide el back
@@ -105,7 +105,7 @@ export default function PlaceOrderScreen() {
 				taxPrice,
 				totalPrice,
 				user: userInfo._id,
-			}));
+			},userInfo.token));
 
 		}
 	};

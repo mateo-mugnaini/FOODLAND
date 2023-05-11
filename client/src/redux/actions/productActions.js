@@ -23,7 +23,7 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-
+      if(response.data)
       dispatch({
         type: action.GET_ALL_PRODUCTS,
         payload: response.data,
