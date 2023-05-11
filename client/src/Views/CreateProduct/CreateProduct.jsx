@@ -18,8 +18,8 @@ const CreateProduct = () => {
           <h1>This route is not available for buyers.</h1>
           <p>Please return to the home page.</p>
         </div>
-        <Link to='/'>
-        <button>Go to Home</button>
+        <Link to="/">
+          <button>Go to Home</button>
         </Link>
       </div>
     );

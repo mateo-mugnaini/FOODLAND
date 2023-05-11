@@ -42,7 +42,7 @@
   
   .formLogin button[type="submit"] {
 	padding: 10px 20px;
-	background-color: #4CAF50;
+    background-color: #30925E;
 	color: #fff;
 	border: none;
 	border-radius: 5px;
@@ -52,7 +52,7 @@
   }
   
   .formLogin button[type="submit"]:hover {
-	background-color: #30925E;
+    background-color: #29b66b;
   }
   
   .formLogin div:last-of-type {
@@ -81,3 +81,24 @@
     top: 100px;
     left: 0;
 }
+
+.titleFormCreateProduct{
+    font-size: 30px;
+    font-family: "Yanone Kaffeesatz";
+}
+
+.btnHome{
+    background-color: #30925E;
+    border: none;
+    width: 200px;
+    height: 50px;
+    font-size: 30px;
+    font-family: "Yanone Kaffeesatz";
+    color: white;
+    cursor: pointer;
+  }
+  
+  .btnHome:hover {
+    background-color: #29b66b;
+  }
+  
