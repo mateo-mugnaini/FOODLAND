@@ -12,9 +12,9 @@ import CreateProduct from "../CreateProduct/CreateProduct";
 const Home = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [selectedButton, setSelectedButton] = useState(""); // Estado para almacenar el botón seleccionado
-  const [showStock, setShowStock] = useState(true);
+  const [showStock, setShowStock] = useState(false);
   const [showCreateProduct, setShowCreateProduct] = useState(false);
-  const [showStatistics, setShowStatistics] = useState(false);
+  const [showStatistics, setShowOverview] = useState(true);
   const [showUser, setShowUser] = useState(false);
 
   const handleImageLoad = () => {
@@ -29,7 +29,7 @@ const Home = () => {
     setShowStock(true);
     setShowCreateProduct(false);
     setShowUser(false);
-    setShowStatistics(false);
+    setShowOverview(false);
   };
 
   const handleShowCreateProduct = () => {
@@ -37,7 +37,7 @@ const Home = () => {
     setShowCreateProduct(true);
     setShowStock(false);
     setShowUser(false);
-    setShowStatistics(false);
+    setShowOverview(false);
   };
 
   const handleShowUser = () => {
@@ -45,22 +45,22 @@ const Home = () => {
     setShowCreateProduct(false);
     setShowStock(false);
     setShowUser(true);
-    setShowStatistics(false);
+    setShowOverview(false);
   };
 
-  const handleShowStatistics = () => {
+  const handleShowOverview = () => {
     setSelectedButton("showStatistics"); // Actualizar el botón seleccionado
     setShowCreateProduct(false);
     setShowStock(false);
     setShowUser(false);
-    setShowStatistics(true);
+    setShowOverview(true);
   };
 
   if (userInfo?.isAdmin) {
     return (
       <div className="containerHome">
         <div className="messageHome">
-          <h1>Hi! Admin</h1>
+          <h1>Hi! {userInfo.name}</h1>
         </div>
         <div className="admBtnContainer">
           <button
@@ -83,9 +83,9 @@ const Home = () => {
           </button>
           <button
             className={`btnPagAdm ${selectedButton === "showStatistics" ? "selected" : ""}`}
-            onClick={handleShowStatistics}
+            onClick={handleShowOverview}
           >
-            Statistics
+            Overview
           </button>
         </div>
         {showStock && <StockViews />}
@@ -94,7 +94,7 @@ const Home = () => {
         {showStatistics && <CreateProduct />}
       </div>
     );
-  } else{
+  } else {
     return (
       <div className="ContainerHome">
         {!imagesLoaded && (
