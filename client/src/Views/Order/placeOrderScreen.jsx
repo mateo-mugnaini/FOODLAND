@@ -117,12 +117,12 @@ export default function PlaceOrderScreen() {
 			{userInfo ? 
 			<div>
 			<h2>User:</h2>
-			<div class="isLogin">
+			<div className="isLogin">
 				{/* aca iria la imagen de perfil */}
 				<img src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png" alt="ProfileUSer"></img>  
 				<label>
-					<h3>User:<input value={userInfo.name} type="text" readonly/></h3>
-					<h3>Email:<input value={userInfo.email}  type="text" readonly/></h3>
+					<h3>User:<input value={userInfo.name} type="text" readOnly/></h3>
+					<h3>Email:<input value={userInfo.email}  type="text" readOnly/></h3>
 				</label>
 			</div>
 			</div>
@@ -144,7 +144,7 @@ export default function PlaceOrderScreen() {
 				<div name="Container Form Shipping" className="Form-Shipping">
 
 					<form onClick={handleFormSubmit} className="formInput" >
-						{ userInfo? <div pointer-events="none">
+						{ userInfo? <div pointerEvents="none">
 						<label>Name:<input type="text" value={value.name} onChange={(event) =>setValue({ ...value, name: event.target.value })}></input></label>
 						<label>Lastname:<input type="text" value={value.lastname} onChange={(event) =>setValue({ ...value, lastname: event.target.value })}></input></label><br/>
 						<label>Adress:<input type="text" value={value.address} onChange={(event) =>setValue({ ...value, address: event.target.value })}></input></label>
@@ -177,7 +177,7 @@ export default function PlaceOrderScreen() {
 						<h2>Order Items</h2>
 						<div className="row">
 						{cart.map((item) => (
-							<li key={item.product}>
+							<li key={item.id}>
 												
 								<h4><img
 										src={item.image}
@@ -193,10 +193,10 @@ export default function PlaceOrderScreen() {
 							</div>
 				</div>
 				{/* ============ METODO DE PAGO =============== */}
-				<div name="Payment" class="containerPayment">
+				<div name="Payment" className="containerPayment">
 					<br/>
 						<h2>Payment</h2>
-				<img src="https://logodownload.org/wp-content/uploads/2014/10/paypal-logo-2.png" value="Paypal" alt="logoPaypal" class="paypalLogo"></img>
+				<img src="https://logodownload.org/wp-content/uploads/2014/10/paypal-logo-2.png" value="Paypal" alt="logoPaypal" className="paypalLogo"></img>
 				</div>
 				</div>
 
