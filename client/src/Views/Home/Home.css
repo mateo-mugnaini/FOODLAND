@@ -9,3 +9,19 @@
     margin-top: 200px;
     margin-bottom: 200px;
 } */
+.admBtnContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1%;
+
+}
+
+.btnPagAdm{
+    display: block;
+    height: 40px;
+    width: fit-content;
+    border-radius: 7px;
+    font-size: 20px;
+    cursor: pointer;
+}

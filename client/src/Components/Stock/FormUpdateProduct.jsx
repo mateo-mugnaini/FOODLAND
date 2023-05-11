@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateProduct,
@@ -19,7 +18,6 @@ const EditProductForm = () => {
   const decodedName = decodeURI(id);
   const { product } = useSelector((state) => state.products);
   const categories = useSelector((state) => state.products.categories);
-  // const product = products.find((product) => product.name === decodedName);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,6 +26,7 @@ const EditProductForm = () => {
   }, [dispatch, decodedName]);
 
   const [formData, setFormData] = useState({
+    // active: true,
     name: "",
     slug: "",
     image: "",
@@ -40,9 +39,9 @@ const EditProductForm = () => {
     stock: 0,
   });
 
-
   useEffect(() => {
     setFormData({
+      // active: product?.active,
       name: product?.name,
       slug: product?.slug,
       image: product?.image,
@@ -57,7 +56,6 @@ const EditProductForm = () => {
     // console.log(product.id, product._id);
   }, [product]);
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -70,11 +68,12 @@ const EditProductForm = () => {
     e.preventDefault();
     // console.log(formData, product);
     try {
-      dispatch(updateProduct(formData, product._id))
+      dispatch(updateProduct(formData, product._id));
       // await axios
       //   .put(`${URL}/api/products/${product._id}`, formData)
       //   .then((res) => console.log(res));
       setFormData({
+        // active: "",
         name: "",
         slug: "",
         image: "",
@@ -104,9 +103,6 @@ const EditProductForm = () => {
     } catch (err) {
       console.log(err);
     }
-    // e.preventDefault();
-    // const editedProduct = { id: product._id, ...formData };
-    // dispatch(updateProduct(editedProduct));
   };
 
   return (
@@ -248,10 +244,26 @@ const EditProductForm = () => {
             onChange={handleChange}
           />
         </div>
+        {/* ================== * ACTIVADO * ================== */}
+        <div className="labelContainer">
+          <label className="label">
+            Active / Disactive
+            <select
+              className="input"
+              name="active"
+              value={formData?.active}
+              onChange={(e) => handleChange(e)}
+            >
+              <option value="0">Active / Desactive</option>
+              <option value={true}> Active</option>
+              <option value={false}> Desactive</option>
+            </select>
+          </label>
+        </div>
         <div className="btnContainer">
-            <button className="btn" type="submit">
-              Submit
-            </button>
+          <button className="btn" type="submit">
+            Submit
+          </button>
           <Link to="/products">
             <button className="btnCancel">Cancel</button>
           </Link>

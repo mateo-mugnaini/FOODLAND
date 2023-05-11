@@ -99,7 +99,7 @@ const NavBar = () => {
                 userInfo.isAdmin ? (
                   <div>
                     <li>
-                      <Link to="/products">
+                      {/* <Link to="/products">
                         <span>
                           <p>Stock</p>
                         </span>
@@ -112,7 +112,7 @@ const NavBar = () => {
                         </span>
                       </Link>
                     </li>
-                    <li>
+                    <li> */}
                       <Link to="/profile">
                         <span>
                           <p>My Profile</p>
