@@ -8,6 +8,7 @@ import oferta1 from "../../Imgs/oferta1.jpeg";
 import oferta2 from "../../Imgs/oferta2.png";
 import StockViews from "../Stock/StockViews";
 import CreateProduct from "../CreateProduct/CreateProduct";
+import ListUsers from "../../Components/ListUser-Admin/Users";
 
 const Home = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -90,7 +91,7 @@ const Home = () => {
         </div>
         {showStock && <StockViews />}
         {showCreateProduct && <CreateProduct />}
-        {showUser && <CreateProduct />}
+        {showUser && <ListUsers />}
         {showStatistics && <CreateProduct />}
       </div>
     );

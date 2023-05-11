@@ -6,3 +6,5 @@ export const USER_SIGNOUT = "USER_SIGNOUT";
 export const USER_REGISTER_REQUEST = "USER_REGISTER_REQUEST";
 export const USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS";
 export const USER_REGISTER_FAIL = "USER_REGISTER_FAIL";
+
+export const GET_USERS = "GET_USERS" // Para obtener todos los usuarios

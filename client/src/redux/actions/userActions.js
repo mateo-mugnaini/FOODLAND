@@ -6,6 +6,7 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  GET_USERS,
 } from "../constants/userConstants";
 import Axios from "axios";
 
@@ -100,4 +101,28 @@ export const register = (name, email, password) => async (dispatch) => {
 					: error.message,
 		});
 	}
+};
+
+//action para obtener la lista de usuarios:
+export const get_users= (token) => {
+  return async (dispatch) => {
+    try {
+      const data = await Axios.get(`${URL}/api/users`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(data);
+
+      dispatch({
+        type: GET_USERS,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: GET_USERS,
+        payload: error,
+      });
+    }
+  };
 };
