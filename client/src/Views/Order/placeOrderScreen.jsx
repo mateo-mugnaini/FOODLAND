@@ -5,6 +5,8 @@ import useLocalStore from "../../hooks/useLocalStore";
 import { createOrder } from "../../redux/actions/orderActions";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
+import ButtonPayPal from "../../Components/PayPalButton/PaypalButton";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 //import Loader from "../../Components/Loader/Loader";
 //import MessageBox from "../../Views/Error/messageBox";
 
@@ -13,8 +15,9 @@ export default function PlaceOrderScreen() {
   const [cart] = useLocalStore("Carrito", []);
   const totalstate = useSelector((state) => state.order.totalOrder);
   const { userInfo } = useSelector((state) => state.userSignin);
-
-  // console.log(userInfo)
+  const {
+    orders: { totalPrice: amount, active },
+  } = useSelector((state) => state.order);
 
   const [value, setValue] = useState({
     name: "",
@@ -23,7 +26,7 @@ export default function PlaceOrderScreen() {
     city: "",
     postalCode: "",
     country: "",
-	email:"",
+    email: "",
   });
 
   //   ================ creo shippingAddress ==========
@@ -62,7 +65,8 @@ export default function PlaceOrderScreen() {
   };
 
   // ======== Despacho la orden =======
-  const placeOrderHandler = () => {
+  const placeOrderHandler = (e) => {
+    e.preventDefault();
     if (!userInfo || !userInfo._id) {
       swal({
         title: "You need to be logged in to complete the purchase",
@@ -83,7 +87,7 @@ export default function PlaceOrderScreen() {
       !value.country ||
       !value.postalCode ||
       !value.city ||
-	  !value.email
+      !value.email
     ) {
       swal({
         title: "you need to complete all the shipping information",
@@ -173,7 +177,7 @@ export default function PlaceOrderScreen() {
                   ></input>
                 </label>
                 <br />
-				<label>
+                <label>
                   Email:
                   <input
                     type="text"
@@ -247,11 +251,11 @@ export default function PlaceOrderScreen() {
       </div>
       {/* =========== Columna derecha  ========== */}
       {/* <div className="columna"> */}
-        {/* ============ RESUMEN DE COMPRA ============ */}
-        {/* <div name="Resumen" className="resumen">
+      {/* ============ RESUMEN DE COMPRA ============ */}
+      {/* <div name="Resumen" className="resumen">
           <h2>Order Items</h2>
           <div className="row"> */}
-            {/* {cart.map((item) => (
+      {/* {cart.map((item) => (
               <li key={item.id}>
                 <h4>
                   <img
@@ -260,19 +264,19 @@ export default function PlaceOrderScreen() {
                     className="imgResumen"
                   ></img> */}
 
-                  {/* {item.quantity}
+      {/* {item.quantity}
                   {"  "}
                   {item.name}
                   {"  "} */}
-                {/* </h4>
+      {/* </h4>
                 <h3>${item.quantity * item.price}</h3>
               </li>
             ))}
             ;
           </div>
         </div> */}
-        {/* ============ METODO DE PAGO =============== */}
-        {/* <div name="Payment" className="containerPayment">
+      {/* ============ METODO DE PAGO =============== */}
+      {/* <div name="Payment" className="containerPayment">
           <br />
           <h2>Payment</h2>
           <img
@@ -314,14 +318,32 @@ export default function PlaceOrderScreen() {
           </label>
         </div>
         {/* ========= Boton para generar orden ====== */}
-        <button
-          type="button"
-          onClick={placeOrderHandler}
-          className="PlaceOrder"
-          disabled={cart.length === 0}
-        >
-          Place Order
-        </button>
+        {active ? (
+          <PayPalScriptProvider
+            options={{
+              "client-id":
+                "AXHIU4HHrVBO9gSmNtt7XuR1HxOokO55uDTnSTspREa2qThnJH2LnaDnG-djbF-6tcEPN37ug1bhnPbe",
+              components: "buttons",
+              currency: "USD",
+            }}
+          >
+            <ButtonPayPal
+              amount={amount}
+              currency={"USD"}
+              showSpinner={false}
+              style={{ layout: "vertical" }}
+            />
+          </PayPalScriptProvider>
+        ) : (
+          <button
+            type="button"
+            onClick={placeOrderHandler}
+            className="PlaceOrder"
+            disabled={cart.length === 0}
+          >
+            Place Order
+          </button>
+        )}
       </div>
     </div>
   );
