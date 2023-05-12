@@ -97,9 +97,22 @@ userRouter.post(
         return;
       }
     }
+    
     res.status(401).send({ message: "Invalid email or password" });
   })
 );
+
+// configuracion para envio de mail
+
+let transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, 
+  auth: {
+    user: "foodland.henry@gmail.com", 
+    pass: "eofcyzqwebqksbvu",
+  },
+});
 
 //Ruta para crear usuario
 userRouter.post(
@@ -111,6 +124,27 @@ userRouter.post(
 			password: bcrypt.hashSync(req.body.password, 8),
 		});
 		const createdUser = await user.save();
+    const mailOptions = {
+      from:"foodland.henry@gmail.com",
+      to:req.body.email,
+      subject:"CONFIRMACION DE REGISTRO FOODLAND",
+      html: `
+        <h2>Bienvenido a nuestro supermercado</h2>
+        <p>Hola ${req.body.name},</p>
+        <p>¡Gracias por registrarte en nuestro supermercado! Tu cuenta ha sido creada exitosamente con el mail ${req.body.email}.</p>
+        <p>Estamos emocionados de tenerte como parte de nuestra comunidad. Esperamos que disfrutes de nuestras ofertas y servicios.</p>
+        <p>¡Bienvenido y feliz compra!</p>
+        <p>Equipo del Supermercado</p>
+        
+        `,
+      };
+      transporter.sendMail(mailOptions, function(error,info){
+        if (error){
+          console.log(error)
+        } else{
+          console.log("email sent succesfuly ")
+        }
+      })
 		res.send({
 			_id: createdUser._id,
 			name: createdUser.name,
@@ -150,50 +184,6 @@ userRouter.delete(
   })
 );
 
-/* ENVIO DE MAILS */
-
-let transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: "foodland.henry@gmail.com", // generated ethereal user
-    pass: "eofcyzqwebqksbvu", // generated ethereal password
-  },
-});
-
-userRouter.post(
-  "/email",
-  expressAsyncHandler(async (req, res) => {
-    const {email, subject, message} = req.body;
-    console.log(email, subject, message) ;
-    
-    const mailOptions = {
-      from:"foodland.henry@gmail.com",
-      to:email,
-      subject:subject,
-      html: `
-        <h2>Bienvenido a nuestro supermercado</h2>
-        <p>Hola ${email},</p>
-        <p>¡Gracias por registrarte en nuestro supermercado! Tu cuenta ha sido creada exitosamente.</p>
-        <p>Estamos emocionados de tenerte como parte de nuestra comunidad. Esperamos que disfrutes de nuestras ofertas y servicios.</p>
-        <p>¡Bienvenido y feliz compra!</p>
-        <p>Equipo del Supermercado</p>
-        };
-        `,
-      };
-  
-
-    transporter.sendMail(mailOptions, function(error,info){
-      if (error){
-        console.log(error)
-      } else{
-        console.log("email sent succesfuly 2")
-      }
-    })
-    res.send(mailOptions);
-  })
-);
 
 
 export default userRouter;

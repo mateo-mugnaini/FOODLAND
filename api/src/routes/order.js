@@ -7,6 +7,55 @@ import Product from "../models/product.js";
 
 const orderRouter = express.Router();
 
+// FUNCION PARA AGREGAR A LA RUTA QUE CONFIRMA LA ORDEN Y ENVIA EL MAIL DE CONFIRMACION
+/*
+const mailOptions = {
+	from:"foodland.henry@gmail.com",
+	to:req.body.email,
+	subject:"CONFIRMACION DE REGISTRO FOODLAND",
+	html: `
+	<h2> Estimado [Nombre del Cliente] </h2>
+
+	<p>Gracias por elegir Supermercado XYZ. Nos complace confirmar que hemos recibido tu pedido y estamos procesándolo. A continuación, te proporcionamos los detalles de tu pedido: </p>
+	
+	<p> Número de pedido: #123456 </p>
+	<p>Fecha del pedido: [Fecha del pedido] </p>
+	<p>Dirección de entrega: [Dirección de entrega] </p>
+	
+	<h3>Detalles del pedido:</h3>
+	
+	<p>Producto 1: Cantidad: [Cantidad], Precio unitario: [Precio] </p>
+	<p>Producto 2: Cantidad: [Cantidad], Precio unitario: [Precio] </p>
+	<p> Producto 3: Cantidad: [Cantidad], Precio unitario: [Precio] </p>
+	...
+	<p>Total del pedido: [Total] </p>
+	
+	<p> Método de pago: [Método de pago seleccionado] </p>
+	
+	<p>Si tienes alguna pregunta o necesitas realizar alguna modificación en tu pedido, no dudes en comunicarte con nuestro servicio de atención al cliente al [número de contacto] o responder a este correo electrónico. Estaremos encantados de asistirte.</p>
+	  `,
+	};
+	transporter.sendMail(mailOptions, function(error,info){
+	  if (error){
+		console.log(error)
+	  } else{
+		console.log("email sent succesfuly ")
+	  }
+	}) */
+
+/* CONFIGURACION PARA ENVIO DE MAILS 
+
+let transporter = nodemailer.createTransport({
+	host: "smtp.gmail.com",
+	port: 587,
+	secure: false, 
+	auth: {
+	  user: "foodland.henry@gmail.com", 
+	  pass: "eofcyzqwebqksbvu", 
+	},
+  }); */
+
+
 //Ruta para que el Admin reciba todas las órdenes de compra
 orderRouter.get(
 	"/",

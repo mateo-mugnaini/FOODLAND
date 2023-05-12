@@ -62,7 +62,7 @@ function Profile() {
           </div>
         </div>
         <div className='right'>
-          <h1>{userInfo.name} {userData.lastName}</h1>
+          <h1>{userInfo.name} </h1>
           <h3><span>Email adress: </span> {userInfo.email}</h3>
           <h3><span>Adress: </span>{userData.address}</h3>
           <h3><span>Phone number: </span> {userData.phone}</h3>
