@@ -76,8 +76,8 @@ export default function SigninScreen() {
           <button className="primary" type="submit">
             Sign In
           </button>
-          <button className="primary" onClick={() => loginWithRedirect()}>
-            Log In Google
+          <button className="login_google" onClick={() => loginWithRedirect()}>
+            Sign in with Google
           </button>
         </div>
         <div>
