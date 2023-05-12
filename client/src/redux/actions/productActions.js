@@ -23,11 +23,11 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-      if(response.data)
-      dispatch({
-        type: action.GET_ALL_PRODUCTS,
-        payload: response.data,
-      });
+      if (response.data)
+        dispatch({
+          type: action.GET_ALL_PRODUCTS,
+          payload: response.data,
+        });
       dispatch(ready());
     } catch (error) {
       console.log(error);
@@ -209,5 +209,29 @@ export const updateProduct = (product, _id) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
     dispatch({ type: action.PRODUCT_UPDATE_FAIL, error: message });
+  }
+};
+
+//========================* CREATE PRODUCT *==============//
+
+export const createProduct = (product) => async (dispatch, getState) => {
+  dispatch({ type: action.PRODUCT_CREATE_REQUEST });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const { data } = await axios.post(`${URL}/api/products`, product, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    dispatch({ type: action.PRODUCT_CREATE_SUCCESS, payload: data.product });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: action.PRODUCT_CREATE_FAIL,
+      payload: message,
+    });
   }
 };

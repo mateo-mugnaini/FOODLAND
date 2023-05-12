@@ -2,7 +2,9 @@
 const LOADING = "LOADING";
 const READY = "READY";
 /* ========================* ACTIONS PRODUCTS *======================== */
-
+const PRODUCT_CREATE_REQUEST = "PRODUCT_CREATE_REQUEST";
+const PRODUCT_CREATE_SUCCESS = "PRODUCT_CREATE_SUCCESS";
+const PRODUCT_CREATE_FAIL = "PRODUCT_CREATE_FAIL";
 const CREATE_PRODUCT = "CREATE_PRODUCT"; // Action para crear un producto
 const PRODUCT_UPDATE_REQUEST = "PRODUCT_UPDATE_REQUEST"; // Action para crear un producto
 const PRODUCT_UPDATE_SUCCESS = "PRODUCT_UPDATE_SUCCESS"; // Action para crear un producto
@@ -46,4 +48,7 @@ module.exports = {
   PRODUCT_UPDATE_FAIL,
   SET_FILTER_STATE,
   CLEAR_PRODUCTS,
+  PRODUCT_CREATE_REQUEST,
+  PRODUCT_CREATE_SUCCESS,
+  PRODUCT_CREATE_FAIL,
 };

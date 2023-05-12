@@ -98,9 +98,9 @@ ul, ol {
     color:black;
     text-decoration:none;
     padding:3px 12px;
-    display:block;
+    display:flex;
+    align-items: center;
     /* border-radius: 2px; */
-    width: 268px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -153,7 +153,7 @@ ul, ol {
     z-index: 50;
     min-width: 140px;
     padding: 0px;
-    margin-left: -218px;
+    margin-left: -187px;
     margin-top: 50px;
 }
 
@@ -200,19 +200,9 @@ ul, ol {
     background-color: #b7b6b6;
 }
 
-.span .username:hover{
-    width: auto;
-    margin-left: -11px;
-    background-color: black;
-}
-
 span.userName{
     background-color: #0000 !important;
     color: white !important;
-    display:flex !important;
-    align-items: center !important;
-    margin-left: -11px;
-    margin-right: -176px;
     }
     
 span.userName:hover{
