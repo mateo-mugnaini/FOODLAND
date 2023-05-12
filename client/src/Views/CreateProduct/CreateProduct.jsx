@@ -27,7 +27,7 @@ const CreateProduct = () => {
 
   return (
     <div className="containerCreateProduct">
-      <div className="titleFormCreateProduct">
+      <div className="svTitle">
         <h1>Create your product</h1>
       </div>
       <div className="formCreateProduct">
