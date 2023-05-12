@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import CategoryContainer from "../../Components/Cards/categoryContainer";
 import "./Home.css";
 import Carrousel from "../../Components/Carrousel/Carrousel";
@@ -8,90 +8,178 @@ import oferta1 from "../../Imgs/oferta1.jpeg";
 import oferta2 from "../../Imgs/oferta2.png";
 import StockViews from "../Stock/StockViews";
 import CreateProduct from "../CreateProduct/CreateProduct";
+import UserProfile from "../UserProfile/UserProfile";
+import { signout } from "../../redux/actions/userActions";
 
 const Home = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  /* =================== ESTADOS PARA COMPONENTES ===================*/
   const [selectedButton, setSelectedButton] = useState(""); // Estado para almacenar el botón seleccionado
-  const [showStock, setShowStock] = useState(false);
-  const [showCreateProduct, setShowCreateProduct] = useState(false);
-  const [showStatistics, setShowOverview] = useState(true);
-  const [showUser, setShowUser] = useState(false);
+  const [showHomeClient, setshowHomeClient] = useState(false); //Estado del Home del user
+  const [showStock, setShowStock] = useState(false); //Estado ver el Stock
+  const [showCreateProduct, setShowCreateProduct] = useState(false); //Estado para crear producto
+  const [showOverview, setShowOverview] = useState(true); // Estado estadisticas
+  const [showUser, setShowUser] = useState(false); // Estado ver usuarios
+  const [showProfile, setShowProfile] = useState(false); // Estado mi perfil
 
   const handleImageLoad = () => {
     setImagesLoaded(true);
   };
 
+  /* =================== TOKEN USER ===================*/
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
+  /* =================== FUNCTION VER VENTANAS ===================*/
+  /* =================== STOCK ===================*/
   const handleShowStock = () => {
-    setSelectedButton("stock"); // Actualizar el botón seleccionado
+    setSelectedButton("showStock");
     setShowStock(true);
     setShowCreateProduct(false);
     setShowUser(false);
     setShowOverview(false);
+    setshowHomeClient(false);
+    setShowProfile(false);
   };
-
+  /* =================== CREATE PRODUCT ===================*/
   const handleShowCreateProduct = () => {
-    setSelectedButton("createProduct"); // Actualizar el botón seleccionado
+    setSelectedButton("showCreateProduct");
     setShowCreateProduct(true);
     setShowStock(false);
     setShowUser(false);
     setShowOverview(false);
+    setshowHomeClient(false);
+    setShowProfile(false);
   };
-
+  /* =================== VER USUARIOS ===================*/
   const handleShowUser = () => {
-    setSelectedButton("showUser"); // Actualizar el botón seleccionado
+    setSelectedButton("showUser"); 
     setShowCreateProduct(false);
     setShowStock(false);
     setShowUser(true);
     setShowOverview(false);
+    setshowHomeClient(false);
+    setShowProfile(false);
   };
 
+  /* =================== VER ESTADISTICAS ===================*/
   const handleShowOverview = () => {
-    setSelectedButton("showStatistics"); // Actualizar el botón seleccionado
+    setSelectedButton("ShowOverview");
     setShowCreateProduct(false);
     setShowStock(false);
     setShowUser(false);
     setShowOverview(true);
+    setshowHomeClient(false);
+    setShowProfile(false);
+  };
+
+  /* =================== VER HOME CLIENTES ===================*/
+  const handleShowHomeClient = () => {
+    setSelectedButton("showHomeClient");
+    setShowCreateProduct(false);
+    setShowStock(false);
+    setShowUser(false);
+    setShowOverview(false);
+    setshowHomeClient(true);
+    setShowProfile(false);
+  };
+
+  /* =================== VER MI PERFIL ===================*/
+  const handleShowProfile = () => {
+    setSelectedButton("showHomeClient");
+    setShowCreateProduct(false);
+    setShowStock(false);
+    setShowUser(false);
+    setShowOverview(false);
+    setshowHomeClient(false);
+    setShowProfile(true);
+  };
+
+  /* =================== LOG OUT ===================*/
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const signOutHandler = () => {
+    dispatch(signout());
+    navigate("/");
   };
 
   if (userInfo?.isAdmin) {
     return (
+      /* =================== CONTENEDOR GENERAL ===================*/
       <div className="containerHome">
-        <div className="messageHome">
-          <h1>Hi! {userInfo.name}</h1>
+        <div className="containerHomeAdm">
+          <div className="admBtnContainer">
+            <div className="messageHome">
+              <h1>Hi! {userInfo.name}</h1>
+            </div>
+            {/* =================== BTN OVERVIEW ===================*/}
+            <button
+              className={`btnPagAdm ${
+                selectedButton === "ShowOverview" ? "selected" : ""
+              }`}
+              onClick={handleShowOverview}
+            >
+              Overview
+            </button>
+            {/* =================== BTN HOME CLIENT ===================*/}
+            <button
+              className={`btnPagAdm ${
+                selectedButton === "showHomeClient" ? "selected" : ""
+              }`}
+              onClick={handleShowHomeClient}
+            >
+              Home Client
+            </button>
+            {/* =================== BTN STOCK ===================*/}
+            <button
+              className={`btnPagAdm ${
+                selectedButton === "showStock" ? "selected" : ""
+              }`}
+              onClick={handleShowStock}
+            >
+              Stock
+            </button>
+            {/* =================== BTN CREATE PRODUCT ===================*/}
+            <button
+              className={`btnPagAdm ${
+                selectedButton === "showCreateProduct" ? "selected" : ""
+              }`}
+              onClick={handleShowCreateProduct}
+            >
+              Create Product
+            </button>
+            {/* =================== BTN USERS ===================*/}
+            <button
+              className={`btnPagAdm ${
+                selectedButton === "showUser" ? "selected" : ""
+              }`}
+              onClick={handleShowUser}
+            >
+              Users
+            </button>
+            {/* =================== BTN MYPROFILE ===================*/}
+            <button
+              className={`btnPagAdm ${
+                selectedButton === "showProfile" ? "selected" : ""
+              }`}
+              onClick={handleShowProfile}
+            >
+              My profile
+            </button>
+            {/* =================== BTN LOGOUT ===================*/}
+            <button onClick={signOutHandler} className="btnPagAdmOut">
+              {" "}
+              Log out
+            </button>
+          </div>
+          {showHomeClient && <CategoryContainer />} {/* VER HOME CLIENTE */}
+          {showStock && <StockViews />} {/* VER STOCK */}
+          {showCreateProduct && <CreateProduct />} {/* VER CREATE PRODUCT */}
+          {showUser && <CreateProduct />} {/* VER USERS */}
+          {showOverview && <CreateProduct />} {/* VER OVERVIEW */}
+          {showProfile && <UserProfile />} {/* VER MYPROFILE */}
         </div>
-        <div className="admBtnContainer">
-          <button
-            className={`btnPagAdm ${selectedButton === "stock" ? "selected" : ""}`}
-            onClick={handleShowStock}
-          >
-            Stock
-          </button>
-          <button
-            className={`btnPagAdm ${selectedButton === "createProduct" ? "selected" : ""}`}
-            onClick={handleShowCreateProduct}
-          >
-            Create Product
-          </button>
-          <button
-            className={`btnPagAdm ${selectedButton === "showUser" ? "selected" : ""}`}
-            onClick={handleShowUser}
-          >
-            Users
-          </button>
-          <button
-            className={`btnPagAdm ${selectedButton === "showStatistics" ? "selected" : ""}`}
-            onClick={handleShowOverview}
-          >
-            Overview
-          </button>
-        </div>
-        {showStock && <StockViews />}
-        {showCreateProduct && <CreateProduct />}
-        {showUser && <CreateProduct />}
-        {showStatistics && <CreateProduct />}
       </div>
     );
   } else {
@@ -129,8 +217,7 @@ const Home = () => {
         />
       </div>
     );
-  };
   }
-  
+};
 
 export default Home;

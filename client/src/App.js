@@ -39,7 +39,7 @@ function App() {
           element={<UserRegister />}
           name="Register"
           key="Register"
-        ></Route>       
+        ></Route>
         <Route
           path="/about"
           element={<About />}
