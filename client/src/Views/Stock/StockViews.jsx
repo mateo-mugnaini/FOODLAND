@@ -24,7 +24,7 @@ const StockViews = () => {
 return(
     <div className="svContainer">
         <div className="svTitle">
-            <h1>Stock:</h1>
+            <h1>Stock</h1>
         </div>
         <div>
             <Stock/>

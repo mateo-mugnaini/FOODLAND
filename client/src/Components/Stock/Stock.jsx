@@ -18,6 +18,7 @@ const Stock = () => {
   // Paginado
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
+  const maxPages = 10; // Número máximo de páginas a mostrar en la paginación
 
   // Calcular índices de productos a mostrar en la página actual
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -26,7 +27,7 @@ const Stock = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
-const aux = currentProducts?.map(e => e = e.active)
+  const aux = currentProducts?.map((e) => e = e.active);
   console.log(aux);
 
   // Calcular el número total de páginas
@@ -44,6 +45,22 @@ const aux = currentProducts?.map(e => e = e.active)
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
+
+  // Botones para ir a la primera y última página
+  const goToFirstPage = () => {
+    setCurrentPage(1);
+  };
+  const goToLastPage = () => {
+    setCurrentPage(totalPages);
+  };
+
+  // Calcular el número de páginas a mostrar en la paginación
+  const paginationPages = [];
+  const paginationStart = Math.max(currentPage - Math.floor(maxPages / 2), 1);
+  const paginationEnd = Math.min(paginationStart + maxPages - 1, totalPages);
+  for (let i = paginationStart; i <= paginationEnd; i++) {
+    paginationPages.push(i);
+  }
 
   return (
     <div className="stockList">
@@ -76,28 +93,35 @@ const aux = currentProducts?.map(e => e = e.active)
         </tbody>
       </table>
 
-      {/* Paginado */}
-      <div className="pagination">
-        <button onClick={goToPreviousPage} disabled={currentPage === 1}>
-          Prev
-        </button>
+     {/* Paginado */}
+<div className="pagination">
 
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-          <button
-            key={page}
-            onClick={() => handlePageChange(page)}
-            className={currentPage === page ? "active" : ""}
-          >
-            {page}
-          </button>
-        ))}
+<button onClick={goToPreviousPage} disabled={currentPage === 1}>
+      Prev
+    </button>
+    <button onClick={goToFirstPage} disabled={currentPage === 1}>
+First
+</button>
+    {paginationPages.map((page) => (
+      <button
+        key={page}
+        onClick={() => handlePageChange(page)}
+        className={currentPage === page ? "active" : ""}
+      >
+        {page}
+      </button>
+    ))}
+<button onClick={goToLastPage} disabled={currentPage === totalPages}>
+      Last
+    </button>
+    <button onClick={goToNextPage} disabled={currentPage === totalPages}>
+      Next
+    </button>
 
-        <button onClick={goToNextPage} disabled={currentPage === totalPages}>
-          Next
-        </button>
-      </div>
-    </div>
-  );
+    
+  </div>
+</div>
+);
 };
 
 export default Stock;
