@@ -16,6 +16,9 @@ import {
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAIL,
+  PRODUCT_CREATE_REQUEST,
+  PRODUCT_CREATE_SUCCESS,
+  PRODUCT_CREATE_FAIL,
 } from "../constants/productConstants";
 
 const initialState = {
@@ -24,215 +27,234 @@ const initialState = {
   categories: [],
   AllProducts: [],
   product: {},
-  filterState:true,
+  filterState: true,
 };
 
 const productsReducer = (state = initialState, action) => {
-switch (action.type) {
-  case LOADING:
-    return {
-      ...state,
-      display: true,
-    };
-  case READY:
-    return {
-      ...state,
-      display: false,
-    };
-  case GET_ALL_PRODUCTS:
-    return {
-      ...state,
-      AllProducts: action.payload,
-    };
-  case GET_BY_CATEGORY:
-    return {
-      ...state,
-      products: action.payload,
-    };
-  case GET_ALL_CATEGORIES:
-    return {
-      ...state,
-      categories: action.payload,
-    };
-  case SET_PRODUCT:
-    return {
-      ...state,
-      products: action.payload,
-    };
-  case DETAIL_PRODUCT:
-    return {
-      ...state,
-      product: action.payload,
-    };
-  case HANDLE_SORTS:
-    const auxToOrder = state.products;
-
-    console.log(action.payload);
-
-    const toOrder = auxToOrder.map((product) => {
-      const normalizedPrice = parseFloat(
-        product.price.toString().replace(".", "")
-      ); 
-      const normalizedName = product.name.replace(/[0-9/]+/g, ""); 
-
+  switch (action.type) {
+    case LOADING:
       return {
-        ...product,
-        price: normalizedPrice,
-        name: normalizedName.trim(), 
+        ...state,
+        display: true,
       };
-    });
+    case READY:
+      return {
+        ...state,
+        display: false,
+      };
+    case GET_ALL_PRODUCTS:
+      return {
+        ...state,
+        AllProducts: action.payload,
+      };
+    case GET_BY_CATEGORY:
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case GET_ALL_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
+      };
+    case SET_PRODUCT:
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case DETAIL_PRODUCT:
+      return {
+        ...state,
+        product: action.payload,
+      };
+    case HANDLE_SORTS:
+      const auxToOrder = state.products;
 
-    if (action.payload === "desc") {
-      const arrOrdenado = toOrder.sort(function (a, b) {
-        if (a.name.toLowerCase() > b.name.toLowerCase()) {
-          return -1;
-        }
-        if (b.name.toLowerCase() > a.name.toLowerCase()) {
-          return 1;
-        }
-        return 0;
+      console.log(action.payload);
+
+      const toOrder = auxToOrder.map((product) => {
+        const normalizedPrice = parseFloat(
+          product.price.toString().replace(".", "")
+        );
+        const normalizedName = product.name.replace(/[0-9/]+/g, "");
+
+        return {
+          ...product,
+          price: normalizedPrice,
+          name: normalizedName.trim(),
+        };
       });
-      return {
-        ...state,
-        products: arrOrdenado,
-      };
-    }
 
-    if (action.payload === "asc") {
-      const arrOrdenado = toOrder.sort(function (a, b) {
-        if (a.name.toLowerCase() > b.name.toLowerCase()) {
-          return 1;
-        }
-        if (b.name.toLowerCase() > a.name.toLowerCase()) {
-          return -1;
-        }
-        return 0;
+      if (action.payload === "desc") {
+        const arrOrdenado = toOrder.sort(function (a, b) {
+          if (a.name.toLowerCase() > b.name.toLowerCase()) {
+            return -1;
+          }
+          if (b.name.toLowerCase() > a.name.toLowerCase()) {
+            return 1;
+          }
+          return 0;
+        });
+        return {
+          ...state,
+          products: arrOrdenado,
+        };
+      }
+
+      if (action.payload === "asc") {
+        const arrOrdenado = toOrder.sort(function (a, b) {
+          if (a.name.toLowerCase() > b.name.toLowerCase()) {
+            return 1;
+          }
+          if (b.name.toLowerCase() > a.name.toLowerCase()) {
+            return -1;
+          }
+          return 0;
+        });
+        return {
+          ...state,
+          products: arrOrdenado,
+        };
+      }
+      if (action.payload === "higher_price") {
+        const arrOrdenado = toOrder.sort((a, b) => b.price - a.price);
+        return {
+          ...state,
+          products: arrOrdenado,
+        };
+      } else {
+        const arrOrdenado = toOrder.sort((a, b) => a.price - b.price);
+        return {
+          ...state,
+          products: arrOrdenado,
+        };
+      }
+
+    //========================== SORT HOME / PRODUCTS SEARCH =============
+    case HANDLE_SORTS2:
+      const auxToOrder2 = state.AllProducts;
+
+      const toOrder2 = auxToOrder2.map((product) => {
+        const normalizedPrice = parseFloat(
+          product.price.toString().replace(".", "")
+        ); // Le quito los puntos a los precios
+        const normalizedName = product.name.replace(/[0-9/]+/g, ""); // Omitir dígitos y caracteres de fracción en el nombre del producto
+        return {
+          ...product,
+          price: normalizedPrice,
+          name: normalizedName.trim(), // Trimeo el nombre del producto para eliminar cualquier espacio en blanco extra
+        };
       });
-      return {
-        ...state,
-        products: arrOrdenado,
-      };
-    }
-    if (action.payload === "higher_price") {
-      const arrOrdenado = toOrder.sort((a, b) => b.price - a.price);
-      return {
-        ...state,
-        products: arrOrdenado,
-      };
-    } else {
-      const arrOrdenado = toOrder.sort((a, b) => a.price - b.price);
-      return {
-        ...state,
-        products: arrOrdenado,
-      };
-    }
 
-  //========================== SORT HOME / PRODUCTS SEARCH =============
-  case HANDLE_SORTS2:
-    const auxToOrder2 = state.AllProducts;
+      if (action.payload === "desc") {
+        const arrOrdenado2 = toOrder2.sort(function (a, b) {
+          if (a.name.toLowerCase() > b.name.toLowerCase()) {
+            return -1;
+          }
+          if (b.name.toLowerCase() > a.name.toLowerCase()) {
+            return 1;
+          }
+          return 0;
+        });
+        return {
+          ...state,
+          AllProducts: arrOrdenado2,
+        };
+      }
 
-    const toOrder2 = auxToOrder2.map((product) => {
-      const normalizedPrice = parseFloat(
-        product.price.toString().replace(".", "")
-      ); // Le quito los puntos a los precios
-      const normalizedName = product.name.replace(/[0-9/]+/g, ""); // Omitir dígitos y caracteres de fracción en el nombre del producto
-      return {
-        ...product,
-        price: normalizedPrice,
-        name: normalizedName.trim(), // Trimeo el nombre del producto para eliminar cualquier espacio en blanco extra
-      };
-    });
-
-    if (action.payload === "desc") {
-      const arrOrdenado2 = toOrder2.sort(function (a, b) {
-        if (a.name.toLowerCase() > b.name.toLowerCase()) {
-          return -1;
-        }
-        if (b.name.toLowerCase() > a.name.toLowerCase()) {
-          return 1;
-        }
-        return 0;
-      });
-      return {
-        ...state,
-        AllProducts: arrOrdenado2,
-      };
-    }
-
-    if (action.payload === "asc") {
-      const arrOrdenado2 = toOrder2.sort(function (a, b) {
-        if (a.name.toLowerCase() > b.name.toLowerCase()) {
-          return 1;
-        }
-        if (b.name.toLowerCase() > a.name.toLowerCase()) {
-          return -1;
-        }
-        return 0;
-      });
+      if (action.payload === "asc") {
+        const arrOrdenado2 = toOrder2.sort(function (a, b) {
+          if (a.name.toLowerCase() > b.name.toLowerCase()) {
+            return 1;
+          }
+          if (b.name.toLowerCase() > a.name.toLowerCase()) {
+            return -1;
+          }
+          return 0;
+        });
+        return {
+          ...state,
+          AllProducts: arrOrdenado2,
+        };
+      }
+      if (action.payload === "higher_price") {
+        const arrOrdenado2 = toOrder2.sort((a, b) => b.price - a.price);
+        return {
+          ...state,
+          AllProducts: arrOrdenado2,
+        };
+      } else {
+        const arrOrdenado2 = toOrder2.sort((a, b) => a.price - b.price);
+        return {
+          ...state,
+          AllProducts: arrOrdenado2,
+        };
+      }
+    case RESULTSEARCH:
       return {
         ...state,
-        AllProducts: arrOrdenado2,
+        products: state.AllProducts.filter((product) =>
+          product.name.toLowerCase().includes(action.payload.toLowerCase())
+        ),
       };
-    }
-    if (action.payload === "higher_price") {
-      const arrOrdenado2 = toOrder2.sort((a, b) => b.price - a.price);
+    case RESULTSEARCH2: //>>>> EN HOME Y EN PRODUCTS
       return {
         ...state,
-        AllProducts: arrOrdenado2,
+        Allproducts: action.payload,
       };
-    } else {
-      const arrOrdenado2 = toOrder2.sort((a, b) => a.price - b.price);
+    case FILTERPRICE:
       return {
         ...state,
-        AllProducts: arrOrdenado2,
+        products: action.payload,
       };
-    }
-  case RESULTSEARCH:
-    return {
-      ...state,
-      products: state.AllProducts.filter((product) =>
-        product.name.toLowerCase().includes(action.payload.toLowerCase())
-      ),
-    };
-  case RESULTSEARCH2: //>>>> EN HOME Y EN PRODUCTS
-    return {
-      ...state,
-      Allproducts: action.payload,
-    };
-  case FILTERPRICE:
-    return {
-      ...state,
-      products: action.payload,
-    };
-  case ADD_CATEGORY_SUCCESS:
-    return [...state, action.payload];
-  case GET_PRODUCTS:
-    return {
-      ...state,
-      AllProducts: action.payload,
-    };
-  case PRODUCT_UPDATE_REQUEST:
-    return {
-      ...state,
-      loading: true,
-    };
-  case PRODUCT_UPDATE_SUCCESS:
-    return {
-      ...state,
-      loading: false,
-      error: null,
-      success: true,
-    };
-  case PRODUCT_UPDATE_FAIL:
-    return {
-      ...state,
-      loading: false,
-      error: action.payload,
-      success: false,
-    };
-  default:
-    return { ...state };
-}
+    case ADD_CATEGORY_SUCCESS:
+      return [...state, action.payload];
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        AllProducts: action.payload,
+      };
+    case PRODUCT_UPDATE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case PRODUCT_UPDATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        success: true,
+      };
+    case PRODUCT_UPDATE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        success: false,
+      };
+    case PRODUCT_CREATE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case PRODUCT_CREATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        allProducts: [...state.AllProducts, action.payload],
+      };
+    case PRODUCT_CREATE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return { ...state };
+  }
 };
 
 export default productsReducer;

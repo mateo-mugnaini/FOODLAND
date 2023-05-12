@@ -47,7 +47,7 @@ function Profile() {
   };
   return (
     <div className='userProfile'>
-      {!userInfo.isAdmin && (
+      {!userInfo?.isAdmin && (
         <Link to="/">
           <button className="btnHome">BACK TO HOME</button>
         </Link>
@@ -55,17 +55,17 @@ function Profile() {
       <div className='profileCard'>
         <div className='left'>
           <img src={usuario} alt="" />
-          <p>Id = {userInfo._id}</p>
+          <p>Id = {userInfo?._id}</p>
           <div className='left-btns'>
             <button onClick={showLegalInfo}> Legal information </button>
             <button onClick={signOutHandler} className='singOut-btn'> Sing out</button>
           </div>
         </div>
         <div className='right'>
-          <h1>{userInfo.name} </h1>
-          <h3><span>Email adress: </span> {userInfo.email}</h3>
-          <h3><span>Adress: </span>{userData.address}</h3>
-          <h3><span>Phone number: </span> {userData.phone}</h3>
+          <h1>{userInfo?.name} </h1>
+          <h3><span>Email adress: </span> {userInfo?.email}</h3>
+          <h3><span>Adress: </span>{userData?.address}</h3>
+          <h3><span>Phone number: </span> {userData?.phone}</h3>
           <button className='editProfile-btn'>Edit profile</button>
         </div>
       </div>
