@@ -186,7 +186,7 @@ const Home = () => {
         {showStock && <StockViews />}
         {showCreateProduct && <CreateProduct />}
         {showUser && <ListUsers />}
-        {showStatistics && <CreateProduct />}
+        {showOverview && <CreateProduct />}
 
       </div>
     );
