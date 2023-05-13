@@ -33,7 +33,7 @@ export const userSigninReducer = (state = {}, action) => {
 
 
 //Reducer para usuario que se crea una cuenta
-export const userRegisterReducer = (state, action) => {
+export const userRegisterReducer = (state={}, action) => {
 	switch (action.type) {
 		case USER_REGISTER_REQUEST:
 			return { loading: true };

@@ -9,7 +9,7 @@ import oferta2 from "../../Imgs/oferta2.png";
 import StockViews from "../Stock/StockViews";
 import CreateProduct from "../CreateProduct/CreateProduct";
 import ListUsers from "../../Components/ListUser-Admin/Users";
-mport UserProfile from "../UserProfile/UserProfile";
+import UserProfile from "../UserProfile/UserProfile";
 import { signout } from "../../redux/actions/userActions";
 
 
