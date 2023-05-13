@@ -2,7 +2,6 @@ import SearchBar from "./SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import { signIn, signout } from "../../redux/actions/userActions";
 import { useAuth0 } from "@auth0/auth0-react";
-
 // import { signout } from '../../actions/userActions';
 
 //IMPORT IMAGES
@@ -12,9 +11,10 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
 import useLocalStore from "../../hooks/useLocalStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { logout, user, isAuthenticated } = useAuth0();
@@ -22,9 +22,7 @@ const NavBar = () => {
   const { userInfo } = userSignin;
 
   const [cart] = useLocalStore("Carrito", []);
-  const lastThreeItems = cart.slice(-4); //Selecciono los ultimos 4 productos del carrito
- 
-
+  // const [carNew, setCarNew] = useState(cart); 
   const logoSvg = logo;
 
   useEffect(() => {
@@ -50,41 +48,44 @@ const NavBar = () => {
       {/* -----------Cart & Login Icons on Nav--------------*/}
       <div id="header" className="headerNavList">
         <ul className="nav">
-          {/* -----------Cart list--------------*/}
-          <li>
-            <img
-              src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png"
-              alt="iconsWidget"
-              className="iconsNav1"
-            />
-            <ul className="ulNav">
-              <li>
-                <Link to="/MyCart">
-                  <span>
-                    <h2 className="titlecart">My cart:</h2>
-                    <div className="viewCartNav">
-                      {!cart
-                        ? "Add products"
-                        : lastThreeItems.map((item) => (
-                            <div key={item.id} className="background">
-                              <img src={item.image} alt={item.name} />
-                              <span className="span1">{item.name}</span>
-                              <span className="span2">x{item.quantity}</span>
-                            </div>
-                          ))}
-                    </div>
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/MyCart">
-                  <span>
-                    <p> View my cart</p>
-                  </span>
-                </Link>
-              </li>
-            </ul>
-          </li>
+ {/* -----------Cart list--------------*/}
+ {!userInfo?.isAdmin && (
+            <li>
+              <img
+                src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png"
+                alt="iconsWidget"
+                className="iconsNav1"
+              />
+              <ul className="ulNav">
+                <li>
+                  <Link to="/MyCart">
+                    <span>
+
+                      <div className="viewCartNav">
+                        {!cart
+                          ? "Add products"
+                          : cart.map((item) => (
+                              <div key={item.id} className="background">
+                                <img src={item.image} alt={item.name} />
+                                <span className="span1">{item.name}</span>
+                                <span className="span2">x{item.quantity}</span>
+                              </div>
+                            ))}
+                      </div>
+                    </span>
+
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/MyCart">
+                    <span>
+                      <p> View my cart</p>
+                    </span>
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          )}
           {/* -----------Login list --------------*/}
           <li>
             <img

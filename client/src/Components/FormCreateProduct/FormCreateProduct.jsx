@@ -1,8 +1,11 @@
 /* ========================* IMPORT GENERALES  *======================== */
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {Link} from "react-router-dom"
-import axios from "axios";
+import { createProduct } from "../../redux/actions/productActions"
+// import {Link} from "react-router-dom"
+// import axios from "axios";
+import swal from "sweetalert";
+
 
 /* ========================* IMPORT VALIDACIONES  *======================== */
 import {
@@ -72,21 +75,43 @@ const URL = "https://foodland-production.up.railway.app";
   // };
 
   /* ========================* FUNCION PARA QUE SE ENVIEN *======================== */
-  async function handleSubmit(event) {
-    event.preventDefault();
-    // if (product.category === "New category" && product.category !== "") {
-    //   await axios.post("http://localhost:5000/api/categories", {
-    //     name: product.category,
-    //   });
-    //   dispatch(addCategory({ name: product.category }));
-    //   setProduct({
-    //     ...product,
-    //     category: product.category,
-    //   });
-    // }
-    await axios.post(`${URL}/api/products`, product);
-    window.alert("El producto ha sido creado con éxito!!");
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log(formData, product);
+    try {
+      dispatch(createProduct(product));
+      // await axios
+      //   .put(`${URL}/api/products/${product._id}`, formData)
+      //   .then((res) => console.log(res));
+      setProduct({
+        // active: "",
+        name: "",
+        slug: "",
+        price: 0,
+        category: "",
+        brand: "",
+        stock: 0,
+        description: "",
+      });
+      swal({
+        title: "The product was created successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.products.categories);
@@ -98,11 +123,6 @@ const URL = "https://foodland-production.up.railway.app";
   return (
     /* ================== * CONTENEDOR GENERAL * ================== */
     <div className="formProductContainer">
-      <div className="btnHomeContainer">
-      <Link to="/">
-      <button className="btnHome" >HOME</button>
-      </Link>
-      </div>
       {/* ================== * CONTENEDOR FORMULARIO * ================== */}
       <form className="formCreate" onSubmit={handleSubmit}>
         {/* ================== * NOMBRE * ================== */}

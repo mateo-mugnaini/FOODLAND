@@ -1,4 +1,5 @@
 {
+
   "name": "api",
   "type": "module",
   "version": "1.0.0",
@@ -24,4 +25,5 @@
     "nodemailer": "^6.9.2",
     "nodemon": "^2.0.22"
   }
+
 }

@@ -18,8 +18,8 @@ const CreateProduct = () => {
           <h1>This route is not available for buyers.</h1>
           <p>Please return to the home page.</p>
         </div>
-        <Link to='/'>
-        <button>Go to Home</button>
+        <Link to="/">
+          <button>Go to Home</button>
         </Link>
       </div>
     );
@@ -27,7 +27,7 @@ const CreateProduct = () => {
 
   return (
     <div className="containerCreateProduct">
-      <div className="titleFormCreateProduct">
+      <div className="svTitle">
         <h1>Create your product</h1>
       </div>
       <div className="formCreateProduct">
