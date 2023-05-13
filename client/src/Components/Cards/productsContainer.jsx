@@ -84,7 +84,7 @@ const ProductsContainer = () => {
        }
   
   }, [dispatch]);
-if (userInfo.isAdmin){
+if (userInfo?.isAdmin){
   return(<div className="productsContainer">
   <div className='select_and_breadcrumb'>
   <Link to="/">

@@ -97,7 +97,7 @@ const NavBar = () => {
 
             <ul className="ulNav">
               {userInfo ? (
-                userInfo.isAdmin ? (
+                userInfo?.isAdmin ? (
                   <div>
                     <li>
                       {/* <Link to="/products">
