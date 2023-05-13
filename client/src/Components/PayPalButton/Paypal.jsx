@@ -1,16 +1,15 @@
 import Axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
+import {useDispatch} from 'react-redux'
 import React, { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
+const URL = "http://localhost:5000";
+// const URL = "https://foodland-production.up.railway.app";
 
-function Paypal() {
-	
-
-// const URL = "http://localhost:5000";
-const URL = "https://foodland-production.up.railway.app";
-	
+function Paypal({order}) {
+		const dispatch = useDispatch();
     //traer del estado los datos de la orden y usar el monto total para pasarlo al PayPalButton
-
+	const { _id:orderId, } = order;
     const [sdkReady, setSdkReady] = useState(false);
 
 	useEffect(() => {

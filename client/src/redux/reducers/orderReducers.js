@@ -3,10 +3,13 @@ import {
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAIL,
+  ORDER_COMPLETE_PAY,
 } from "../constants/orderConstants";
 
 const initialState = {
-  orders: [],
+  orders: {
+    active:false,
+  },
   loading: false,
   error: "",
   isError: false,
@@ -21,7 +24,6 @@ const initialState = {
 const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
     case TOTAL_ORDER:
-      // console.log(action.payload)
       return {
         ...state,
         totalOrder: action.payload,
@@ -44,6 +46,14 @@ const ordersReducer = (state = initialState, action) => {
         error: action.payload,
         isError: true,
       };
+      case ORDER_COMPLETE_PAY:
+        return {
+          ...state,
+          orders:{
+            active:false
+          },
+          loading:false
+        }
     default:
       return { ...state };
   }
