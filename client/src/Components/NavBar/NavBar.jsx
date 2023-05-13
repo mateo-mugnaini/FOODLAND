@@ -136,7 +136,7 @@ const NavBar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link tp="/MyCart">
+                      <Link to="/MyOrders">
                         <span>
                           <p>Shop history</p>
                         </span>

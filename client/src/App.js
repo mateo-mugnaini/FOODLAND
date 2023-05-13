@@ -15,6 +15,7 @@ import StockViews from "./Views/Stock/StockViews";
 import UpdateProduct from "./Views/UpdateProduct/UpdateProduct";
 import PlaceOrderScreen from "./Views/Order/placeOrderScreen";
 import UserProfile from "./Views/UserProfile/UserProfile";
+import UserOrders from "./Components/UserOrders/UserOrders";
 
 function App() {
   const location = useLocation();
@@ -71,6 +72,12 @@ function App() {
           element={<MyCart />}
           name="MyCart"
           key="MyCart"
+        ></Route>
+        <Route
+          path="/MyOrders"
+          element={<UserOrders />}
+          name="MyOrders"
+          key="MyOrders"
         ></Route>
         {/* -----------------Routes Admins -----------------*/}
         <Route
