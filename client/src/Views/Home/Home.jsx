@@ -178,15 +178,10 @@ const Home = () => {
           {showHomeClient && <CategoryContainer />} {/* VER HOME CLIENTE */}
           {showStock && <StockViews />} {/* VER STOCK */}
           {showCreateProduct && <CreateProduct />} {/* VER CREATE PRODUCT */}
-          {showUser && <CreateProduct />} {/* VER USERS */}
+          {showUser && <ListUsers/>} {/* VER USERS */}
           {showOverview && <CreateProduct />} {/* VER OVERVIEW */}
           {showProfile && <UserProfile />} {/* VER MYPROFILE */}
         </div>
-
-        {showStock && <StockViews />}
-        {showCreateProduct && <CreateProduct />}
-        {showUser && <ListUsers />}
-        {showOverview && <CreateProduct />}
 
       </div>
     );
