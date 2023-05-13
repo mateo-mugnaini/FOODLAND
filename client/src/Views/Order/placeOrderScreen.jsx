@@ -125,27 +125,6 @@ export default function PlaceOrderScreen() {
     <div name="ShippingOrder" className="ShippingOrder">
       {/* =========== Columna izquierda ========== */}
       <div className="columna">
-        {/*userInfo ? 
-			<div>
-			<h2>User:</h2>
-			<div className="isLogin">
-				<img src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png" alt="ProfileUSer"></img>  
-				<label>
-					<h3>User:<input value={userInfo.name} type="text" readOnly/></h3>
-					<h3>Email:<input value={userInfo.email}  type="text" readOnly/></h3>
-				</label>
-			</div>
-			</div>
-			:
-			<div>
-				<h2>User:</h2>
-				<div className="bottons">
-					<p>You need to be logged in to continue</p>
-				<Link to="/login"><button>Login</button></Link> {"or "}
-				<Link to="/register"><button>Register</button></Link>
-				</div>
-			</div>
-			}
 
 			 {/* =============== SHIPPING ======================= */}
         <h2>Invoice Data</h2>
@@ -228,17 +207,16 @@ export default function PlaceOrderScreen() {
                     }
                   ></input>
                 </label>
-                {/* <br />
-                <button>Continue</button> */}
+
               </div>
             ) : (
-              <div>
-                <h2>User:</h2>
+              <div className="UsersInfo">
+                <h2>User</h2>
                 <div className="bottons">
                   <p>You need to be logged in to continue</p>
                   <Link to="/login">
                     <button>Login</button>
-                  </Link>{" "}
+                  </Link>
                   {"or "}
                   <Link to="/register">
                     <button>Register</button>
@@ -249,44 +227,7 @@ export default function PlaceOrderScreen() {
           </form>
         </div>
       </div>
-      {/* =========== Columna derecha  ========== */}
-      {/* <div className="columna"> */}
-      {/* ============ RESUMEN DE COMPRA ============ */}
-      {/* <div name="Resumen" className="resumen">
-          <h2>Order Items</h2>
-          <div className="row"> */}
-      {/* {cart.map((item) => (
-              <li key={item.id}>
-                <h4>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="imgResumen"
-                  ></img> */}
 
-      {/* {item.quantity}
-                  {"  "}
-                  {item.name}
-                  {"  "} */}
-      {/* </h4>
-                <h3>${item.quantity * item.price}</h3>
-              </li>
-            ))}
-            ;
-          </div>
-        </div> */}
-      {/* ============ METODO DE PAGO =============== */}
-      {/* <div name="Payment" className="containerPayment">
-          <br />
-          <h2>Payment</h2>
-          <img
-            src="https://logodownload.org/wp-content/uploads/2014/10/paypal-logo-2.png"
-            value="Paypal"
-            alt="logoPaypal"
-            className="paypalLogo"
-          ></img>
-        </div>
-      </div> */}
 
       <div className="columna">
         {/* ===========Summary ========== */}
