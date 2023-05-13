@@ -1,55 +1,178 @@
 //IMPORT STYLE:
 import "./Users.css"
 //IMPORT REACT:
-import { useSelector,useDispatch } from "react-redux";
-import { useEffect ,useState } from "react";
-import { get_users } from "../../redux/actions/userActions";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { get_users, put_user , delete_user, set_users, sort_user} from "../../redux/actions/userActions";
+import Swal from "sweetalert2";
+import swal from "sweetalert";
 
-const ListUsers = () =>{
+const ListUsers = () => {
+  const { userInfo } = useSelector((state) => state.userSignin);
+  const token = userInfo.token;
+  const users = useSelector((state) => state.users.users);
+  const dispatch = useDispatch();
+  
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedValue, setSelectedValue] = useState({});
+  const [searchValue, setSearchValue] = useState("");
+  
+  const [isLoading, setIsLoading] = useState(false);
+  
+  useEffect(() => {
+  dispatch(get_users(token));
+    }, [dispatch, token]);
+  
+  const handleLabelClick = () => {
+    setIsEditing(true);
+  };
 
-        const  listUsers = useSelector((state) => state.users);
-        const {userInfo} = useSelector((state) => state.userSignin);
-        const dispatch = useDispatch();
-        const token = userInfo.token;
+  const handlePutUser = async ({ id, isAdmin, token }) => {
+    setIsLoading(true);
+    await dispatch(put_user({ id, isAdmin, token }));
+    await dispatch(get_users(token));
+    setIsLoading(false);
+  };
 
-        // console.log(listUsers)
-      
-        useEffect(() => {
-          dispatch(get_users(token));
-        }, [dispatch]);
-      
-        // Paginado
-        const [currentPage, setCurrentPage] = useState(1);
-        const usersPerPage = 10;
-      
-        // Calcular índices de productos a mostrar en la página actual
-        const indexOfLastProduct = currentPage * usersPerPage;
-        const indexOfFirstProduct = indexOfLastProduct - usersPerPage;
-        const currentProducts = listUsers?.slice(
-          indexOfFirstProduct,
-          indexOfLastProduct
-        );
-      const aux = currentProducts?.map(e => e = e.active)
-        console.log(aux);
-      
-        // Calcular el número total de páginas
-        const totalUsers = Math.ceil(listUsers.length / usersPerPage);
-      
-        // Cambiar de página
-        const handlePageChange = (pageNumber) => {
-          setCurrentPage(pageNumber);
-        };
-      
-        // Botones para ir a la página siguiente y anterior
-        const goToNextPage = () => {
-          setCurrentPage((prevPage) => prevPage + 1);
-        };
-        const goToPreviousPage = () => {
-          setCurrentPage((prevPage) => prevPage - 1);
-        };
-      
-        return (
-          <div className="stockList">
+  const handleSelectChange = (event, user) => {
+    const newSelectedValue = {
+      ...selectedValue,
+      [user._id]: event.target.value,
+    };
+    setSelectedValue(newSelectedValue);
+    setIsEditing(false);
+    if (event.target.value === "true") {
+      Swal.fire({
+        title: `Do you want to make ${user.name} an admin?`,
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ok",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handlePutUser({
+            id: user._id,
+            isAdmin: true,
+            token,
+          });
+        } else {
+          setSelectedValue({
+            ...selectedValue,
+            [user._id]: "false",
+          });
+        }
+      });
+    } else {
+      handlePutUser({
+        id: user._id,
+        isAdmin: false,
+        token,
+      });
+    }
+  };  
+    
+  const handledelete = (u) =>{
+      Swal.fire({
+        title: 'Are you sure?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+        const updateUsers = users.filter(user => user._id !== u._id);
+        dispatch(set_users(updateUsers));
+          }
+        });
+
+          // dispatch(delete_user(u._id)) //// << Ruta no funciona , cuando la arreglen lo actualizo
+          // dispatch(get_users(token));
+    }
+
+    const handleSearch =() =>{
+
+      const filteredUsers = users.filter(user=>
+        user.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        user._id.toLowerCase().includes(searchValue.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchValue.toLowerCase())
+      );
+  
+      if (filteredUsers.length > 0){
+          dispatch(set_users(filteredUsers));
+      } else {
+        swal({
+          title: "User not found",
+          icon: "warning",
+          confirmButtonText: "OK",
+          showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+        }); 
+      }
+    }
+    
+    const handleOnChange =(e) =>{
+      setSearchValue(e.target.value)
+      if(e.target.value === "") dispatch(get_users(token)) 
+    }
+    
+    const handleSelectsearch = (event) =>{
+      dispatch(sort_user({value:event.target.value, users}))
+    }
+
+  // Paginado
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 10;
+  // Calcular índices de usuarios a mostrar en la página actual
+const indexOfLastUser = currentPage * usersPerPage;
+const indexOfFirstUser = indexOfLastUser - usersPerPage;
+const currentUsers = Array.isArray(users) ? users.slice(indexOfFirstUser, indexOfLastUser) : [];
+
+// Calcular el número total de páginas
+const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
+
+  // Cambiar de página
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Botones para ir a la página siguiente y anterior
+  const goToNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+  const goToPreviousPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+
+  return (
+
+        <div className="stockList">
+            <h1>List User</h1>
+            <label>Search user:<input name="searchUser" type="text" onChange={handleOnChange } placeholder="Search users"></input><button type="submit" onClick={handleSearch} >        <img
+          src="https://tinypic.host/images/2023/04/27/lupa2.png"
+          alt="iconLupa"
+          className="Lup"
+        /></button></label>
+            <label>Sort by:
+              <select onChange={handleSelectsearch}>
+                <option value="all"> All </option>
+                <option value="NameAsc" >Fullname A-Z</option>
+                <option value="NameDsc" >Fullname Z-A</option>
+                {/* <option value="IdAsc" >ID ↑</option>
+                <option value="IsDsc" >ID ↓</option> */}
+                <option value="EmailAsc" >Email A-Z</option>
+                <option value="EmailDsc" >Email Z-A</option>
+                <option value="Users" >Users</option>
+                <option value="Admin" >Admin</option>
+              </select>
+              </label>
             <table>
               <thead>
                 <tr>
@@ -61,13 +184,41 @@ const ListUsers = () =>{
                 </tr>
               </thead>
               <tbody>
-                {currentPage?.map((p) => (
-                  <tr key={p._id}>
-                    <td>{p.id}</td>
-                    <td>{p.fullname}</td>
-                    <td>{p.email}</td>
-                    <td>{p.Status}</td>
-                    <td></td>
+                {currentUsers?.map((u) => (
+                  <tr key={u._id}>
+                    <td>{u._id}</td>
+                    <td>{u.name}</td>
+                    <td>{u.email}</td>
+                    <td>
+                    {isEditing && selectedValue[u._id] !== undefined ? (
+                          <select
+                            name={`isAdmin-${u._id}`}
+                            value={selectedValue[u._id]}
+                            onChange={(event) => handleSelectChange(event, u)}
+                          >
+                            <option value="false">User</option>
+                            <option value="true">Admin</option>
+                          </select>
+                        ) : (
+                          <label
+                            onClick={() => {
+                              setSelectedValue({
+                                ...selectedValue,
+                                [u._id]: u.isAdmin,
+                              });
+                              setIsEditing(true);
+                            }}
+                          >
+                            {u.isAdmin ? "Admin" : "User"}
+                          </label>
+                        )}
+                    </td>
+                    {u.email === "admin@gmail.com" ? <td> </td> : 
+                      <td>
+                          <button onClick={() => handledelete(u)}>Delete</button>
+                          {/* <button>Block</button> */} 
+                      </td>
+                      }
                   </tr>
                 ))}
               </tbody>
@@ -96,114 +247,5 @@ const ListUsers = () =>{
           </div>
         );
       };
-      
-
-    // <div name="ContainerListUsers" className="UserList">
-    // <div id="bodywrap">
-    // <div class="row">
-    // <div class="large-10 columns">
-    // <div class="scroll-window-wrapper">
-    // <h2>User List</h2>
-    // <label>Filtros:</label>
-    // <br></br>
-    // <br></br>
-    // <div class="scroll-window">
-    // <table class="table table-striped table-hover user-list fixed-header">
-    //     <thead>
-    //     <th><div>FullName</div></th>
-    //     <th><div>Email</div></th>
-    //     <th><div>Status</div></th>
-    //     <th><div>Edit</div></th>
-    //     </thead>
-    //     <tbody>
-    //     <tr>
-    //         <td>Michael Jones</td>
-    //         <td>michael@gmail.com</td>
-    //         <td>active</td>
-    //         <td class="text-right">
-    //         <button class="button tiny">View User</button>
-    //         <button class="button alert tiny">Delete</button>     
-    //         </td>
-    //     </tr>
-    //     <tr>
-    //         <td>Michael Jones</td>
-    //         <td>michael@gmail.com</td>
-    //         <td>active</td>
-    //         <td class="text-right">
-    //         <button class="button tiny">View User</button>
-    //         <button class="button alert tiny">Delete</button>     
-    //         </td>
-    //     </tr>
-    //     <tr>
-    //         <td>Michael Jones</td>
-    //         <td>michael@gmail.com</td>
-    //         <td>active</td>
-    //         <td class="text-right">
-    //         <button class="button tiny">View User</button>
-    //         <button class="button alert tiny">Delete</button>     
-    //         </td>
-    //     </tr>
-    //     <tr>
-    //         <td>Michael Jones</td>
-    //         <td>michael@gmail.com</td>
-    //         <td>active</td>
-    //         <td class="text-right">
-    //         <button class="button tiny">View User</button>
-    //         <button class="button alert tiny">Delete</button>     
-    //         </td>
-    //     </tr>
-    //     <tr>
-    //         <td>Michael Jones</td>
-    //         <td>michael@gmail.com</td>
-    //         <td>active</td>
-    //         <td class="text-right">
-    //         <button class="button tiny">View User</button>
-    //         <button class="button alert tiny">Delete</button>     
-    //         </td>
-    //     </tr>
-    //     <tr>
-    //         <td>Michael Jones</td>
-    //         <td>michael@gmail.com</td>
-    //         <td>active</td>
-    //         <td class="text-right">
-    //         <button class="button tiny">View User</button>
-    //         <button class="button alert tiny">Delete</button>     
-    //         </td>
-    //     </tr>
-    //     <tr>
-    //         <td>Michael Jones</td>
-    //         <td>michael@gmail.com</td>
-    //         <td>active</td>
-    //         <td class="text-right">
-    //         <button class="button tiny">View User</button>
-    //         <button class="button alert tiny">Delete</button>     
-    //         </td>
-    //     </tr>
-    //     <tr>
-    //         <td>Michael Jones</td>
-    //         <td>michael@gmail.com</td>
-    //         <td>active</td>
-    //         <td class="text-right">
-    //         <button class="button tiny">View User</button>
-    //         <button class="button alert tiny">Delete</button>     
-    //         </td>
-    //     </tr>
-    //     <tr>
-    //         <td>Michael Jones</td>
-    //         <td>michael@gmail.com</td>
-    //         <td>active</td>
-    //         <td class="text-right">
-    //         <button class="button tiny">block user</button>
-    //         <button class="button alert tiny">Delete</button>     
-    //         </td>
-    //     </tr>
-    //     </tbody>
-    // </table>
-    // </div>
-    // </div>
-    // </div>
-    // </div>
-    // </div>
-    // </div>
-    // )
-export default ListUsers;
+    
+    export default ListUsers;

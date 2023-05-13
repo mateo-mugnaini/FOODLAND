@@ -8,3 +8,8 @@ export const USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS";
 export const USER_REGISTER_FAIL = "USER_REGISTER_FAIL";
 
 export const GET_USERS = "GET_USERS" // Para obtener todos los usuarios
+export const USER_DELETE_REQUEST = "USER_DELETE_REQUEST";
+export const USER_DELETE_SUCCESS = "USER_DELETE_SUCCESS";
+export const USER_DELETE_FAIL = "USER_DELETE_FAIL";
+export const SET_USERS = "SET_USERS";
+export const SORT_USER = "SORT_USER";

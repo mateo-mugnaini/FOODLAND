@@ -7,11 +7,12 @@ import {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
   GET_USERS,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
+  SET_USERS,
+  SORT_USER,
 } from "../constants/userConstants";
-
-const initialState = {
-  users:[],
-};
 
 //Reducer para usuario que se loguea
 export const userSigninReducer = (state = {}, action) => {
@@ -30,8 +31,9 @@ export const userSigninReducer = (state = {}, action) => {
   }
 };
 
+
 //Reducer para usuario que se crea una cuenta
-export const userRegisterReducer = (state = initialState, action) => {
+export const userRegisterReducer = (state, action) => {
 	switch (action.type) {
 		case USER_REGISTER_REQUEST:
 			return { loading: true };
@@ -39,9 +41,49 @@ export const userRegisterReducer = (state = initialState, action) => {
 			return { loading: false, userInfo: action.payload };
 		case USER_REGISTER_FAIL:
 			return { loading: false, error: action.payload };
-    case GET_USERS:
-      return{...state, users:action.payload}
+
 		default:
 			return state;
 	}
 };
+
+export const users = (
+  state = { users: [], loading: false, listLoading: true }, action) => {
+    switch (action.type) {
+      case GET_USERS:
+        return {
+          ...state,
+          users: action.payload,
+          listLoading: false,
+        };
+      case USER_DELETE_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+      case USER_DELETE_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          deletedUser: action.payload,
+        };
+      case USER_DELETE_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+        case SET_USERS:
+          return{
+            ...state,
+            users:action.payload,
+          }
+        case SORT_USER: 
+        return{
+          ...state,
+          users:action.payload,
+        }
+      default:
+        return state;
+    }
+  };
