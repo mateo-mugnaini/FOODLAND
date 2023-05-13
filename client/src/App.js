@@ -14,7 +14,7 @@ import UserRegister from "./Views/Register/Register";
 import StockViews from "./Views/Stock/StockViews";
 import UpdateProduct from "./Views/UpdateProduct/UpdateProduct";
 import PlaceOrderScreen from "./Views/Order/placeOrderScreen";
-import UserProfile from "./Views/UserProfile/UserProfile.jsx";
+import UserProfile from "./Views/UserProfile/UserProfile";
 
 function App() {
   const location = useLocation();
