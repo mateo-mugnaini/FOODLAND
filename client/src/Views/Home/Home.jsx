@@ -182,7 +182,6 @@ const Home = () => {
           {showOverview && <CreateProduct />} {/* VER OVERVIEW */}
           {showProfile && <UserProfile />} {/* VER MYPROFILE */}
         </div>
-
       </div>
     );
   } else {
