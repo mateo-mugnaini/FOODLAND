@@ -8,8 +8,10 @@ import oferta1 from "../../Imgs/oferta1.jpeg";
 import oferta2 from "../../Imgs/oferta2.png";
 import StockViews from "../Stock/StockViews";
 import CreateProduct from "../CreateProduct/CreateProduct";
-import UserProfile from "../UserProfile/UserProfile";
+import ListUsers from "../../Components/ListUser-Admin/Users";
+mport UserProfile from "../UserProfile/UserProfile";
 import { signout } from "../../redux/actions/userActions";
+
 
 const Home = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -180,6 +182,12 @@ const Home = () => {
           {showOverview && <CreateProduct />} {/* VER OVERVIEW */}
           {showProfile && <UserProfile />} {/* VER MYPROFILE */}
         </div>
+
+        {showStock && <StockViews />}
+        {showCreateProduct && <CreateProduct />}
+        {showUser && <ListUsers />}
+        {showStatistics && <CreateProduct />}
+
       </div>
     );
   } else {
