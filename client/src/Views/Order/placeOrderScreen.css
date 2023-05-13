@@ -217,4 +217,15 @@ align-self:end;
     background-color:rgb(29, 121, 29);
     border: 2px solid rgb(29, 121, 29);
     color:white;
+    justify-content: center;
+}
+.bottons a{
+    display: flex;
+    width: fit-content;
+    margin: auto;
+}
+
+.UsersInfo{
+    text-align-last: auto;
+    padding: 0px 15px;
 }

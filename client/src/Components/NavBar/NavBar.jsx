@@ -11,7 +11,7 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
 import useLocalStore from "../../hooks/useLocalStore";
-import { useEffect, useState } from "react";
+import { useEffect,  } from "react";
 
 const NavBar = () => {
 
@@ -22,7 +22,7 @@ const NavBar = () => {
   const { userInfo } = userSignin;
 
   const [cart] = useLocalStore("Carrito", []);
-  // const [carNew, setCarNew] = useState(cart); 
+
   const logoSvg = logo;
 
   useEffect(() => {
