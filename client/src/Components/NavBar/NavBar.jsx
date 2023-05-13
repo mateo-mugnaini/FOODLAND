@@ -97,7 +97,7 @@ const NavBar = () => {
 
             <ul className="ulNav">
               {userInfo ? (
-                userInfo.isAdmin ? (
+                userInfo?.isAdmin ? (
                   <div>
                     <li>
                       {/* <Link to="/products">
@@ -136,7 +136,7 @@ const NavBar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link tp="/MyCart">
+                      <Link to="/MyOrders">
                         <span>
                           <p>Shop history</p>
                         </span>

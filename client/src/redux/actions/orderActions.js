@@ -11,7 +11,7 @@ const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
 
 // //  ============ Actualizo el total de la orden ======================
 export const total_order = (order) => {
-  // console.log(order)
+  console.log(order);
   return (dispatch) => {
     dispatch({
       type: action.TOTAL_ORDER,
