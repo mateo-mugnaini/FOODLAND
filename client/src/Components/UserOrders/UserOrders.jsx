@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "./UserOrders.css"
 
 const UserOrders = () => {
-  const orders = useSelector((state) => state.orders);
+  const orders = useSelector((state) => state.totalOrder);
   const dispatch = useDispatch();
 
   useEffect(() => {
