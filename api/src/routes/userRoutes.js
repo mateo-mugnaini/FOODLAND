@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
 import User from "../models/user.js";
 import { generateToken, isAdmin, isAuth } from "../middlewares/middlewares.js";
-import nodemailer from "nodemailer"
+import nodemailer from "nodemailer";
 const userRouter = express.Router();
 
 //Ruta para que el Admin pueda traer todos los usuarios
@@ -34,29 +34,25 @@ userRouter.get(
 
 //Ruta para que el usuario actualice sus datos
 userRouter.put(
-  "/profile",
+  "/profile/:id",
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.params.id);
+    console.log(user, req.body.user.name, req.body.user, "NAME");
     if (user) {
-      user.name = req.body.name || user.name;
-      user.email = req.body.email || user.email;
-      if (req.body.password) {
-        user.password = bcrypt.hashSync(req.body.password, 8);
-      } else {
-        user.password = user.password;
-      }
-
+      user.name =
+        req.body.user.name.length > 0 ? req.body.user.name : user.name;
+      user.email =
+        req.body.user.email.length > 0 ? req.body.user.email : user.email;
+      user.password =
+        req.body.user.password.length > 0
+          ? bcrypt.hashSync(req.body.user.password, 8)
+          : user.password;
       const updatedUser = await user.save();
-      res.send({
-        _id: updatedUser._id,
-        name: updatedUser.name,
-        email: updatedUser.email,
-        isAdmin: updatedUser.isAdmin,
-        token: generateToken(updatedUser),
-      });
+      console.log(updatedUser, "userUpdate");
+      res.send({ message: "User Updated", user: updatedUser });
     } else {
-      res.status(404).send({ message: "User not found" });
+      res.status(404).send({ message: "User Not Found" });
     }
   })
 );
@@ -97,7 +93,7 @@ userRouter.post(
         return;
       }
     }
-    
+
     res.status(401).send({ message: "Invalid email or password" });
   })
 );
@@ -107,27 +103,27 @@ userRouter.post(
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
-  secure: false, 
+  secure: false,
   auth: {
-    user: "foodland.henry@gmail.com", 
+    user: "foodland.henry@gmail.com",
     pass: "eofcyzqwebqksbvu",
   },
 });
 
 //Ruta para crear usuario
 userRouter.post(
-	"/signup",
-	expressAsyncHandler(async (req, res) => {
-		const user = new User({
-			name: req.body.name,
-			email: req.body.email,
-			password: bcrypt.hashSync(req.body.password, 8),
-		});
-		const createdUser = await user.save();
+  "/signup",
+  expressAsyncHandler(async (req, res) => {
+    const user = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 8),
+    });
+    const createdUser = await user.save();
     const mailOptions = {
-      from:"foodland.henry@gmail.com",
-      to:req.body.email,
-      subject:"CONFIRMACION DE REGISTRO FOODLAND",
+      from: "foodland.henry@gmail.com",
+      to: req.body.email,
+      subject: "CONFIRMACION DE REGISTRO FOODLAND",
       html: `
         <h2>Bienvenido a nuestro supermercado</h2>
         <p>Hola ${req.body.name},</p>
@@ -137,22 +133,22 @@ userRouter.post(
         <p>Equipo del Supermercado</p>
         
         `,
-      };
-      transporter.sendMail(mailOptions, function(error,info){
-        if (error){
-          console.log(error)
-        } else{
-          console.log("email sent succesfuly ")
-        }
-      })
-		res.send({
-			_id: createdUser._id,
-			name: createdUser.name,
-			email: createdUser.email,
-			isAdmin: createdUser.isAdmin,
-			token: generateToken(createdUser),
-		});
-	})
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("email sent succesfuly ");
+      }
+    });
+    res.send({
+      _id: createdUser._id,
+      name: createdUser.name,
+      email: createdUser.email,
+      isAdmin: createdUser.isAdmin,
+      token: generateToken(createdUser),
+    });
+  })
 );
 
 //Ruta para que el admin borre usuario
@@ -170,20 +166,19 @@ userRouter.delete(
       const [deleted] = await user.update(
         {
           active: false,
-        }, 
+        },
         {
           where: {
             id: _id,
-          }
-        });
-        console.log(`${deleted} user marked as inactive`);
-        res.send({ message: "User Deleted" });
+          },
+        }
+      );
+      console.log(`${deleted} user marked as inactive`);
+      res.send({ message: "User Deleted" });
     } else {
       res.status(404).send({ message: "User Not Found" });
     }
   })
 );
-
-
 
 export default userRouter;

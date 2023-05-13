@@ -152,27 +152,35 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
 
 
   return (
+    <div name="containerListUser">
 
+
+        <div name="containerFilters">
+        <h1>List User</h1>
+              <label><input name="searchUser" type="text" onChange={handleOnChange } placeholder="Search users" className="searchListUsers"/>
+              <button type="submit" onClick={handleSearch} className="searchUser">
+                <img
+                  src="https://tinypic.host/images/2023/04/27/lupa2.png"
+                  alt="iconLupa"
+                  className="Lup"
+                /></button></label>
+                    <label>
+                      <select onChange={handleSelectsearch} className="sortList">
+                        <option value="all">Sort by:</option>
+                        <option value="NameAsc" >Fullname A-Z</option>
+                        <option value="NameDsc" >Fullname Z-A</option>
+                        {/* <option value="IdAsc" >ID ↑</option>
+                        <option value="IsDsc" >ID ↓</option> */}
+                        <option value="EmailAsc" >Email A-Z</option>
+                        <option value="EmailDsc" >Email Z-A</option>
+                        <option value="Users" >Users</option>
+                        <option value="Admin" >Admin</option>
+                      </select>
+                      </label>
+                      <button>baneados</button>
+        </div>
         <div className="stockList">
-            <h1>List User</h1>
-            <label>Search user:<input name="searchUser" type="text" onChange={handleOnChange } placeholder="Search users"></input><button type="submit" onClick={handleSearch} >        <img
-          src="https://tinypic.host/images/2023/04/27/lupa2.png"
-          alt="iconLupa"
-          className="Lup"
-        /></button></label>
-            <label>Sort by:
-              <select onChange={handleSelectsearch}>
-                <option value="all"> All </option>
-                <option value="NameAsc" >Fullname A-Z</option>
-                <option value="NameDsc" >Fullname Z-A</option>
-                {/* <option value="IdAsc" >ID ↑</option>
-                <option value="IsDsc" >ID ↓</option> */}
-                <option value="EmailAsc" >Email A-Z</option>
-                <option value="EmailDsc" >Email Z-A</option>
-                <option value="Users" >Users</option>
-                <option value="Admin" >Admin</option>
-              </select>
-              </label>
+            
             <table>
               <thead>
                 <tr>
@@ -215,7 +223,7 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
                     </td>
                     {u.email === "admin@gmail.com" ? <td> </td> : 
                       <td>
-                          <button onClick={() => handledelete(u)}>Delete</button>
+                          <button onClick={() => handledelete(u)}>Ban</button>
                           {/* <button>Block</button> */} 
                       </td>
                       }
@@ -244,6 +252,7 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
                 Next
               </button>
             </div>
+          </div>
           </div>
         );
       };
