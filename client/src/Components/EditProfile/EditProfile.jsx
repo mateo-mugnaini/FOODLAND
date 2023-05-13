@@ -22,12 +22,13 @@ const EditProfile = () => {
 	const submitHandler = (event) => {
 		event.preventDefault();
 		if (password !== confirmPassword) {
-			alert("Passwords don't match");
+		  alert("Passwords don't match");
 		} else {
-			const editedUser = {name, email, password}
-			dispatch(update_users(userInfo._id, userInfo.isAdmin, editedUser, userInfo.token));
+		  const editedUser = { name, email, password };
+		  dispatch(update_users(userInfo._id, userInfo.isAdmin, editedUser, userInfo.token));
 		}
 	};
+	
 return(
     <div className="EditProfileContainer">
         <form className="formRegister" onSubmit={submitHandler}>

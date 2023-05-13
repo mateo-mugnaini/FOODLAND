@@ -261,12 +261,11 @@ export const sort_user = ({ value, users }) => {
 };
 
 export const update_users = (_id, isAdmin, user, token) => {
-  console.log({ _id, isAdmin, user, token });
   return async (dispatch) => {
     try {
       const updateUser = await Axios.put(
-        `${URL}/api/users/${_id}`,
-        { isAdmin, user },
+        `${URL}/api/users/profile/${_id}`,
+        { user, isAdmin },
         {
           headers: { Authorization: `Bearer ${token}` },
         }

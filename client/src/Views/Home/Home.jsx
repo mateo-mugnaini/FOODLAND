@@ -182,12 +182,6 @@ const Home = () => {
           {showOverview && <CreateProduct />} {/* VER OVERVIEW */}
           {showProfile && <UserProfile />} {/* VER MYPROFILE */}
         </div>
-
-        {showStock && <StockViews />}
-        {showCreateProduct && <CreateProduct />}
-        {showUser && <ListUsers />}
-        {showOverview && <CreateProduct />}
-
       </div>
     );
   } else {
