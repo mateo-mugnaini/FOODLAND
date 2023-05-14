@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import returnPolicyPopup from "../../Texts/returnPolicyPopup.txt"
 import {getDetail} from "../../redux/actions"
 import useLocalStore from "../../hooks/useLocalStore";
+import { update_cart } from "../../redux/actions/cartActions";
 
 
 const DetailCard = () => {
@@ -28,6 +29,7 @@ const DetailCard = () => {
   const [quantity, setQuantity] = useState(1);
   const [Cart, setCart] = useLocalStore( "Carrito", []);
 
+
   const handleAddToCart = () => {
 
       const existingItem = Cart.find((item) => item.id === id);
@@ -37,8 +39,10 @@ const DetailCard = () => {
         const updatedQuantity = existingItem.quantity + quantity;
   
         setCart([...updatedCart, { ...existingItem, quantity: updatedQuantity , slug:existingItem.slug || existingItem.name}]);
+        dispatch(update_cart(Cart))
       } else {
         setCart([...Cart, { id, name: product.name, description: product.description, price: product.price, image: product.image, quantity ,slug:product.slug || product.name}]);
+        dispatch(update_cart(Cart))
       }
     };
 

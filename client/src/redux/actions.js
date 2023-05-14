@@ -83,7 +83,7 @@ export const getDetail = (id) => {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products/slug/${id}`);
 
-      console.log(response.data);
+      // console.log(response.data);
       dispatch({
         type: action.DETAIL_PRODUCT,
         payload: response.data,

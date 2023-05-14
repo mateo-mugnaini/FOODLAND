@@ -9,6 +9,7 @@ import ProductCard from "./productCard"
 import { handle_sorts, getByCategory, getAllProducts } from "../../redux/actions/productActions";
 //IMPORT LOCALSTORE
 import useLocalStore from "../../hooks/useLocalStore";
+import { update_cart } from "../../redux/actions/cartActions";
 
 
 const ProductsContainer = () => {
@@ -68,11 +69,14 @@ const ProductsContainer = () => {
       // =========== Si existe sumo 1 a la cantidad pero no lo agrego al carrito =====
       cart[existingItem].quantity += 1;
       setCart(cart);
+      dispatch(update_cart(cart))
     } else {
+      let updatecarrito = { id, name, price, image, description, quantity: 1, slug };
       setCart([
         ...cart,
-        { id, name, price, image, description, quantity: 1, slug },
+        updatecarrito
       ]);
+      dispatch(update_cart(cart))
     }
   };
 
@@ -84,6 +88,7 @@ const ProductsContainer = () => {
        }
   
   }, [dispatch]);
+
 if (userInfo?.isAdmin){
   return(<div className="productsContainer">
   <div className='select_and_breadcrumb'>

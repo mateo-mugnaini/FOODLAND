@@ -5,11 +5,7 @@ import thunk from "redux-thunk";
 import { userRegisterReducer, userSigninReducer, users } from "./reducers/userReducers";
 import productsReducer, { productReviewCreateReducer } from "./reducers/productReducers"; 
 import ordersReducer from "./reducers/orderReducers";
-
-//import { ..., ... } from "./reducers/cartReducers";
-//import { ..., ... } from "./reducers/userReducers";
-//import { ..., ... } from "./reducers/orderReducers";
-
+import cartsReducer from "./reducers/cartReducers";
 
 //Esto es para que si el usuario estuvo loguado tenga guardados los datos en local storage (usuario, carrito, dirección) y sino arranca sin nada
 const initialState = {
@@ -19,16 +15,6 @@ const initialState = {
 			: null,
 	},
   };
-	/*cart: {
-		cartItems: localStorage.getItem("cartItems")
-			? JSON.parse(localStorage.getItem("cartItems"))
-			: [],
-		shippingAddress: localStorage.getItem("shippingAddress")
-			? JSON.parse(localStorage.getItem("shippingAddress"))
-			: {},
-		paymentMethod: "Paypal",
-	}, */
-
 
 //Aca van todos los reducers
 const reducer = combineReducers({
@@ -38,7 +24,7 @@ const reducer = combineReducers({
 	users: users,
 	userRegister: userRegisterReducer,
 	productReviewCreate: productReviewCreateReducer,
-
+	carrito: cartsReducer,
 });
 
 export const store2 = createStore(

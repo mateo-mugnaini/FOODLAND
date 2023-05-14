@@ -1,55 +1,45 @@
-import SearchBar from "./SearchBar";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signIn, signout } from "../../redux/actions/userActions";
 import { useAuth0 } from "@auth0/auth0-react";
-// import { signout } from '../../actions/userActions';
-
-//IMPORT IMAGES
 import logo from "../../Imgs/LogosSVG/logo-no-background.png";
-
-//IMPORT ESTILOS
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
-import useLocalStore from "../../hooks/useLocalStore";
-import { useEffect,  } from "react";
 
 const NavBar = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { logout, user, isAuthenticated } = useAuth0();
   const userSignin = useSelector((state) => state.userSignin);
+  const cart = useSelector((state) => state.carrito);
   const { userInfo } = userSignin;
 
-  const [cart] = useLocalStore("Carrito", []);
-
+  const [cartItems, setCartItems] = useState([]);
   const logoSvg = logo;
 
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(signIn(user));
     }
-  }, [isAuthenticated, dispatch, user]);
+    // setCartItems(cart);
+  }, [isAuthenticated, dispatch, user, cart]);
 
   const signOutHandler = (e) => {
     e.preventDefault();
     dispatch(signout());
     logout();
-    navigate("/")
+    navigate("/");
   };
 
   return (
     <div name="ContainerNav" key="ContainerNav" className="ContainerNav">
-      {/* -------------------Logo FootLand --------------*/}
       <Link to="/" className="LinkLogo">
         <img src={logoSvg} alt="LogoFoodLand" className="LogoFoodLand" />
       </Link>
-      <SearchBar />
-      {/* -----------Cart & Login Icons on Nav--------------*/}
+      {/* Resto del código... */}
       <div id="header" className="headerNavList">
         <ul className="nav">
- {/* -----------Cart list--------------*/}
- {!userInfo?.isAdmin && (
+          {!userInfo?.isAdmin && (
             <li>
               <img
                 src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png"
@@ -60,17 +50,20 @@ const NavBar = () => {
                 <li>
                   <Link to="/MyCart">
                     <span>
-
                       <div className="viewCartNav">
-                        {!cart
-                          ? "Add products"
-                          : cart.map((item) => (
-                              <div key={item.id} className="background">
-                                <img src={item.image} alt={item.name} />
-                                <span className="span1">{item.name}</span>
-                                <span className="span2">x{item.quantity}</span>
-                              </div>
-                            ))}
+                        {
+                        !cartItems ? (
+                          "Add products!!"
+                        ) : (
+                          cartItems.map((item) => (
+                            <div key={item.id} className="background">
+                              <img src={item.image} alt={item.name} />
+                              <span className="span1">{item.name}</span>
+                              <span className="span2">x{item.quantity}</span>
+                            </div>
+                          ))
+                        )
+                        }
                       </div>
                     </span>
 
@@ -100,20 +93,6 @@ const NavBar = () => {
                 userInfo?.isAdmin ? (
                   <div>
                     <li>
-                      {/* <Link to="/products">
-                        <span>
-                          <p>Stock</p>
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/create">
-                        <span>
-                          <p>Create Product</p>
-                        </span>
-                      </Link>
-                    </li>
-                    <li> */}
                       <Link to="/profile">
                         <span>
                           <p>My Profile</p>
