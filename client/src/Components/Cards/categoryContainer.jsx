@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import Carrousel from "../Carrousel/Carrousel";
 import oferta1 from "../../Imgs/oferta1.jpeg";
 
+
 const CategoryContainer = () => {
   /* IMPORT STATES */
 
