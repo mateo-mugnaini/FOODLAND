@@ -1,7 +1,8 @@
 import "./CheckOut.css";
 import { useEffect, useState } from "react";
 import { total_order } from "../../redux/actions/orderActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
+import useLocalStore from "../../hooks/useLocalStore";
 import {Link} from "react-router-dom";
 
 const Payment = ({ total} ) => {
@@ -12,6 +13,7 @@ const Payment = ({ total} ) => {
     totalOrder: 0,
   });
 
+  const [check ,setcheck] = useLocalStore("resumen",[]);
   const [couponApplied, setCouponApplied] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
@@ -27,6 +29,7 @@ const Payment = ({ total} ) => {
       ...prevTotalCont,
       totalOrder: totalWithTaxes,
     }));
+
   }, [total, couponApplied]);
 
 
@@ -53,7 +56,9 @@ const Payment = ({ total} ) => {
           totalOrder: couponApplied ? (total*1.15)*0.85 : total*1.15,
         };
         // console.log(order);
-        dispatch(total_order(order));
+        // dispatch(total_order(order));
+        console.log(order)
+        setcheck(order)
         
         /* ======== Redireccion ==== */
         // await new Promise(resolve => setTimeout(resolve, 500));

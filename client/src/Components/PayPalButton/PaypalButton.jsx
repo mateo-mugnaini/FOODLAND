@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { orderPay } from "../../redux/actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import "./paypal.css";
 const URL = process.env.REACT_APP_URL ?? "http://localhost:5000/api/orders/";
 // This values are the props in the UI
 // const amount = "2";
@@ -35,6 +36,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount, style }) => {
     <>
       {showSpinner && isPending && <div className="spinner" />}
       <PayPalButtons
+      className="buttonPaypal"
         style={style}
         disabled={false}
         forceReRender={[amount, currency, style]}
