@@ -88,7 +88,7 @@ export const getDetail = (id) => {
       });
       dispatch(ready());
     } catch (error) {
-      console.log(error, "WWWW");
+      // console.log(error, "WWWW");
       dispatch({
         type: action.DETAIL_PRODUCT,
         payload: error,
@@ -216,21 +216,21 @@ export const updateProduct = (product, _id) => async (dispatch, getState) => {
 
 //==============CREATE REVIEWS===================================//
 export const createReview =
-	(productId, review) => async (dispatch, getState) => {
-		console.log("id", productId)
-		console.log("review", review)
+	(productId, review,token) => async (dispatch) => {
+		// console.log("id", productId)
+		// console.log("review", review)
 
     dispatch({ type: action.PRODUCT_REVIEW_CREATE_REQUEST });
-		const {
-			userSignin: { userInfo },
-		} = getState();
-    console.log("token",userInfo.token)
+		// const {
+		// 	userSignin: { userInfo },
+		// } = getState();
+    // console.log("token",userInfo.token)
 		try {
 			const { data } = await axios.post(
 				`${URL}/api/products/${productId}/reviews`,
 				review,
 				{
-					headers: { Authorization: `Bearer ${userInfo.token}` },
+					headers: { Authorization: `Bearer ${token}` },
 				}
 			);
 			dispatch({

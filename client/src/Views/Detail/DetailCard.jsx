@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import returnPolicyPopup from "../../Texts/returnPolicyPopup.txt"
 import {getDetail} from "../../redux/actions"
 import useLocalStore from "../../hooks/useLocalStore";
+import Reviews from "../../Components/Reviews/Reviews";
 
 
 const DetailCard = () => {
@@ -93,6 +94,7 @@ const DetailCard = () => {
       </div>
 
     </div>
+    {product.name && <Reviews  />}
   </div>
   )
 }
