@@ -1,19 +1,24 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { total_order } from "../../redux/actions/orderActions";
+import { getOrders } from "../../redux/actions/orderActions";
 import { Link } from "react-router-dom";
 
 import "./UserOrders.css"
 
 const UserOrders = () => {
-  const orders = useSelector((state) => state.totalOrder);
+  const orders = useSelector((state) => state.order.myOrders);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(total_order());
+    dispatch(getOrders());
   }, [dispatch]);
 
-  console.log(orders);
+console.log(orders.map());
+  const aux = orders.map(e => e.orderItems)
+
+  // console.log(aux.map(e => e.map(p => p)));
+  const compra = aux.map(e => e.map(p => p))
+
+  // console.log(compra);
 
   return (
     <div>
@@ -21,7 +26,7 @@ const UserOrders = () => {
         <h1>My order history</h1>
       </div>
       <div className="orderTableUser">
-        <table >
+        <table>
           <thead>
             <tr>
               <th className="thStock1">Name</th>
@@ -33,7 +38,7 @@ const UserOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {orders?.length === undefined ? (
+            {compra?.length === 0 ? (
               <tr>
                 <td colSpan="6">
                   <p>
@@ -43,7 +48,7 @@ const UserOrders = () => {
                 </td>
               </tr>
             ) : (
-              orders?.map((p) => (
+              compra?.map((p) => (
                 <tr key={p._id}>
                   <td>{p.name}</td>
                   <td>{p.category}</td>
