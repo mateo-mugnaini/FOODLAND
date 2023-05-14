@@ -7,14 +7,12 @@ import {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
   GET_USERS,
-  USER_DELETE_REQUEST,
-  USER_DELETE_SUCCESS,
-  USER_DELETE_FAIL,
+  USER_BAN,
   SET_USERS,
   SORT_USER,
+  USER_DELETE,
 } from "../constants/userConstants";
 import Axios from "axios";
-import Swal from "sweetalert2";
 
 const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
 
@@ -152,27 +150,6 @@ export const put_user = ({ id, isAdmin, token }) => {
   };
 };
 
-export const delete_user = ({id, activ,token}) => {
-  return async (dispatch) => {
-    try {
-      const updateActive = await Axios.put(`${URL}/api/users/${id}`,
-        {active:activ},
-        {headers: { Authorization: `Bearer ${token}` },
-      });
-      dispatch({
-        type: GET_USERS,
-        payload: updateActive.data,
-      });
-    } catch (error) {
-      console.log(error);
-      dispatch({
-        type: GET_USERS,
-        payload: error,
-      });
-    }
-  };
-};
-
 export const set_users = (payload) => {
   return {
     type: SET_USERS,
@@ -270,6 +247,48 @@ export const update_users = (_id, isAdmin, user, token) => {
       console.log(error);
       dispatch({
         type: GET_USERS,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const ban_user = ({id, activ,token}) => {
+  return async (dispatch) => {
+    try {
+      const updateActive = await Axios.put(`${URL}/api/users/${id}`,
+        {active:activ},
+        {headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch({
+        type: USER_BAN,
+        payload: updateActive.data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: USER_BAN,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const delete_user = ({admin, token, id}) =>{
+  return async (dispatch) => {
+    try {
+      const deleteduser = await Axios.delete(`${URL}/api/users/${id}`,
+        // {isAdmin:admin},
+        {headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch({
+        type: USER_DELETE,
+        payload: deleteduser.data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: USER_DELETE,
         payload: error,
       });
     }

@@ -3,7 +3,7 @@ import "./Users.css"
 //IMPORT REACT:
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_users, put_user , delete_user, set_users, sort_user} from "../../redux/actions/userActions";
+import { get_users, put_user , ban_user, set_users, sort_user, delete_user} from "../../redux/actions/userActions";
 import Swal from "sweetalert2";
 import swal from "sweetalert";
 
@@ -72,40 +72,55 @@ const ListUsers = () => {
     }
   };  
     
-  const handleBan = (u) =>{
-      Swal.fire({
-        title: 'Are you sure?',
-        text: `Do you want to ban ${u.name}??`,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-        dispatch(delete_user({id:u._id , activ:false, token}))
-        // dispatch(get_users(token));
-          }}
-        );
-      }
+  const handleBan = async (u) => {
+    const result =  await Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to ban ${u.name}??`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    });
+  
+    if (result.isConfirmed) {
+      setIsLoading(true);
+      await dispatch(ban_user({id:u._id , activ:false, token}));
+      await dispatch(get_users(token));
+      setIsLoading(false);
+  
+      Swal.fire(
+        'Banned!',
+        `${u.name} has been banned.`,
+        'success'
+      );
+    }
+  }
 
-      const handleDesban = (u) =>{
-        Swal.fire({
-          title: 'Are you sure?',
-          text: `Do you want to unban ${u.name}??`,
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-          dispatch(delete_user({id:u._id, activ:true, token}))
-          dispatch(get_users(token));
-            }
-          }
-          );
-        }
+  const handleDesban = async (u) => {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to ban ${u.name}??`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    });
+  
+    if (result.isConfirmed) {
+      setIsLoading(true);
+      await dispatch(ban_user({id:u._id , activ:true, token}));
+      await dispatch(get_users(token));
+      setIsLoading(false);
+  
+      Swal.fire(
+        'Undanned!',
+        `${u.name} has unbanned.`,
+        'success'
+      );
+    }
+  }
       
     const handleSearch =() =>{
 
@@ -141,6 +156,33 @@ const ListUsers = () => {
       dispatch(sort_user({value:event.target.value, users}))
     }
 
+    // const deleteuser = async (u) => {
+    //     const result =  Swal.fire({
+    //       title: 'Are you sure?',
+    //       text: `The user ${u.name} will be permanently deleted. This action cannot be undone.`,
+    //       icon: 'warning',
+    //       showCancelButton: true,
+    //       confirmButtonColor: '#d33',
+    //       cancelButtonColor: '#3085d6',
+    //       confirmButtonText: 'Delete'
+    //     });
+      
+    //     if (result.isConfirmed) {
+    //       setIsLoading(true);
+    //       await dispatch(delete_user({id:u._id, token , dmin:u.isAdmin}));
+    //       await dispatch(get_users(token));
+    //       setIsLoading(false);      
+
+    //       Swal.fire(
+    //         'Deleted!',
+    //         `${u.name} has been permanently deleted.`,
+    //         'success'
+    //       );
+    //     }
+    //   }
+    
+  
+
   // Paginado
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 10;
@@ -165,7 +207,7 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
-  console.log(users)
+  // console.log(users)
 
   return (
     <div name="containerListUser">
@@ -243,6 +285,7 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
                           ? <button onClick={() => handleBan(u)} className="red">Ban</button>
                           : <button onClick={() => handleDesban(u)} className="blue">Unban</button>
                         }
+                        {/* <button onClick={() =>deleteuser(u)} className="black">Delete</button> */}
                       </td>
                       }
                   </tr>
