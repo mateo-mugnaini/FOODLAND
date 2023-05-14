@@ -22,7 +22,7 @@ const ListUsers = () => {
   useEffect(() => {
   dispatch(get_users(token));
     }, [dispatch, token]);
-  
+
   const handleLabelClick = () => {
     setIsEditing(true);
   };
@@ -72,26 +72,41 @@ const ListUsers = () => {
     }
   };  
     
-  const handledelete = (u) =>{
+  const handleBan = (u) =>{
       Swal.fire({
         title: 'Are you sure?',
-        // text: "You won't be able to revert this!",
+        text: `Do you want to ban ${u.name}??`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes!'
       }).then((result) => {
         if (result.isConfirmed) {
-        const updateUsers = users.filter(user => user._id !== u._id);
-        dispatch(set_users(updateUsers));
+        dispatch(delete_user({id:u._id , activ:false, token}))
+        // dispatch(get_users(token));
+          }}
+        );
+      }
+
+      const handleDesban = (u) =>{
+        Swal.fire({
+          title: 'Are you sure?',
+          text: `Do you want to unban ${u.name}??`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+          dispatch(delete_user({id:u._id, activ:true, token}))
+          dispatch(get_users(token));
+            }
           }
-        });
-
-          // dispatch(delete_user(u._id)) //// << Ruta no funciona , cuando la arreglen lo actualizo
-          // dispatch(get_users(token));
-    }
-
+          );
+        }
+      
     const handleSearch =() =>{
 
       const filteredUsers = users.filter(user=>
@@ -116,7 +131,7 @@ const ListUsers = () => {
         }); 
       }
     }
-    
+
     const handleOnChange =(e) =>{
       setSearchValue(e.target.value)
       if(e.target.value === "") dispatch(get_users(token)) 
@@ -150,6 +165,7 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
+  console.log(users)
 
   return (
     <div name="containerListUser">
@@ -175,9 +191,9 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
                         <option value="EmailDsc" >Email Z-A</option>
                         <option value="Users" >Users</option>
                         <option value="Admin" >Admin</option>
+                        <option value="bann">Banned</option>
                       </select>
                       </label>
-                      <button>baneados</button>
         </div>
         <div className="stockList">
             
@@ -193,10 +209,10 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
               </thead>
               <tbody>
                 {currentUsers?.map((u) => (
-                  <tr key={u._id}>
-                    <td>{u._id}</td>
-                    <td>{u.name}</td>
-                    <td>{u.email}</td>
+                  <tr key={u._id} >
+                    <td className={u.active ? "" : "ban"}>{u._id}</td>
+                    <td className={u.active ? "" : "ban"}>{u.name}</td>
+                    <td className={u.active ? "" : "ban"}>{u.email}</td>
                     <td>
                     {isEditing && selectedValue[u._id] !== undefined ? (
                           <select
@@ -208,7 +224,7 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
                             <option value="true">Admin</option>
                           </select>
                         ) : (
-                          <label
+                          <label className={u.active ? "" : "ban"}
                             onClick={() => {
                               setSelectedValue({
                                 ...selectedValue,
@@ -223,8 +239,10 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
                     </td>
                     {u.email === "admin@gmail.com" ? <td> </td> : 
                       <td>
-                          <button onClick={() => handledelete(u)}>Ban</button>
-                          {/* <button>Block</button> */} 
+                          {u.active=== true
+                          ? <button onClick={() => handleBan(u)} className="red">Ban</button>
+                          : <button onClick={() => handleDesban(u)} className="blue">Unban</button>
+                        }
                       </td>
                       }
                   </tr>

@@ -152,27 +152,25 @@ export const put_user = ({ id, isAdmin, token }) => {
   };
 };
 
-export const delete_user = (id, token) => async (dispatch) => {
-  dispatch({ type: USER_DELETE_REQUEST });
-  try {
-    const { data } = await Axios.delete(`/api/users/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(data);
-    dispatch({ type: USER_DELETE_SUCCESS, payload: id });
-    Swal.fire("User Deleted!", "The user has been deleted.", "success");
-  } catch (error) {
-    dispatch({
-      type: USER_DELETE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-    Swal.fire("Error", error.message, "error");
-  }
+export const delete_user = ({id, activ,token}) => {
+  return async (dispatch) => {
+    try {
+      const updateActive = await Axios.put(`${URL}/api/users/${id}`,
+        {active:activ},
+        {headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch({
+        type: GET_USERS,
+        payload: updateActive.data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: GET_USERS,
+        payload: error,
+      });
+    }
+  };
 };
 
 export const set_users = (payload) => {
@@ -207,15 +205,9 @@ export const sort_user = ({ value, users }) => {
         return 0;
       }
     });
-    // } else if(value === "IdAsc") {
-    //   datasort = users.slice().sort(function(a, b) {
-    //     return a._id - b._id;
-    //   });
-    // } else if(value === "IdDsc") {
-    //   datasort = users.slice().sort(function(a, b) {
-    //     return b._id - a._id;
-    //   });
-  } else if (value === "EmailAsc") {
+    } else if(value === "bann") {
+      datasort = users.filter((u)=> u.active === false)
+    } else if (value === "EmailAsc") {
     datasort = users.slice().sort(function (a, b) {
       if (a.email < b.email) {
         return -1;

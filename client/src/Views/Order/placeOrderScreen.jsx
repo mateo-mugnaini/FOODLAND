@@ -13,7 +13,7 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 export default function PlaceOrderScreen() {
   const dispatch = useDispatch();
   const [cart] = useLocalStore("Carrito", []);
-  const totalstate = useSelector((state) => state.order.totalOrder);
+  const totalstate = useLocalStore("resumen",[])
   const { userInfo } = useSelector((state) => state.userSignin);
   const {
     orders: { totalPrice: amount, active },
@@ -26,9 +26,18 @@ export default function PlaceOrderScreen() {
     city: "",
     postalCode: "",
     country: "",
-    email: "",
   });
 
+  const [shippingDiv, setshippingDiv] = useState(false);  //Esto es para que aparezca o no el div
+  const [shippingInfo, setshippingInfo] = useState(false); // Este es como validador
+  const [shippValue, setShippValue] = useState({         //Este chequea que todo este lleno
+    name:"",
+    lastname:"",
+    address: "",
+    city: "",
+    postalCode: "",
+    country: "",
+  })
   //   ================ creo shippingAddress ==========
 
   let shippingAddress = {
@@ -43,9 +52,9 @@ export default function PlaceOrderScreen() {
   const paymentMethod = "Paypal";
   // let paymentResult = "Pending";
   let shippingPrice = 0;
-  let itemsPrice = totalstate.subtotal;
-  let taxPrice = totalstate.taxes;
-  let totalPrice = parseFloat(totalstate.totalOrder.toFixed(2));
+  let itemsPrice = totalstate[0].subtotal;
+  let taxPrice = totalstate[0].taxes;
+  let totalPrice = parseFloat(totalstate[0].totalOrder.toFixed(2));
 
   // ========== ShippingAdress ========
   const handleFormSubmit = (event) => {
@@ -64,10 +73,59 @@ export default function PlaceOrderScreen() {
       });
   };
 
+  const handleShipping = (event) =>{
+    if (event.target.value === "On") {
+      setshippingDiv(true);
+
+    } else {
+      setshippingDiv(false);
+      setshippingInfo(true);
+    }
+  }
+
+  const handlesubmit = () =>{
+    if(shippValue.name !== "" &&
+        shippValue.lastname !== "" &&
+        shippValue.address !== "" &&
+        shippValue.postalCode !== ""&&
+        shippValue.city !== "" &&
+        shippValue.country !== "" 
+        )
+          {setshippingInfo(true);
+        }else{
+            swal({
+              title: "you need to complete all information",
+              icon: "warning",
+              confirmButtonText: "OK",
+              showClass: {
+                popup: "animate__animated animate__fadeInDown",
+              },
+              hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+              },
+            });  
+          }
+
+  }
+
   // ======== Despacho la orden =======
   const placeOrderHandler = (e) => {
     e.preventDefault();
-    if (!userInfo || !userInfo._id) {
+    if(cart.length === 0){
+      swal({
+        title: "You need add products firts!!",
+        icon: "warning",
+        confirmButtonText: "OK",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      return;
+    }
+    else if (!userInfo || !userInfo._id) {
       swal({
         title: "You need to be logged in to complete the purchase",
         icon: "warning",
@@ -86,11 +144,10 @@ export default function PlaceOrderScreen() {
       !value.name ||
       !value.country ||
       !value.postalCode ||
-      !value.city ||
-      !value.email
+      !value.city
     ) {
       swal({
-        title: "you need to complete all the shipping information",
+        title: "you need to complete all information",
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {
@@ -101,7 +158,22 @@ export default function PlaceOrderScreen() {
         },
       });
       return;
-    } else {
+    } 
+    else if( shippingInfo === false){
+      swal({
+        title: "you need to complete shipping information",
+        icon: "warning",
+        confirmButtonText: "OK",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      return;
+    }
+    else {
       dispatch(
         createOrder(
           {
@@ -121,6 +193,8 @@ export default function PlaceOrderScreen() {
     }
   };
 
+
+
   return (
     <div name="ShippingOrder" className="ShippingOrder">
       {/* =========== Columna izquierda ========== */}
@@ -134,7 +208,12 @@ export default function PlaceOrderScreen() {
         <div name="Container Form Shipping" className="Form-Shipping">
           <form onClick={handleFormSubmit} className="formInput">
             {userInfo ? (
-              <div pointerEvents="none">
+              <div>
+                <label>
+                  Email: <input value={userInfo.email} disabled></input>
+                </label>
+                <hr></hr>
+                <h3>Billing Information</h3><br></br>
                 <label>
                   Name:
                   <input
@@ -155,17 +234,6 @@ export default function PlaceOrderScreen() {
                     }
                   ></input>
                 </label>
-                <br />
-                <label>
-                  Email:
-                  <input
-                    type="text"
-                    value={value.email}
-                    onChange={(event) =>
-                      setValue({ ...value, email: event.target.value })
-                    }
-                  ></input>
-                </label>
                 <label>
                   Adress:
                   <input
@@ -179,17 +247,16 @@ export default function PlaceOrderScreen() {
                 <label>
                   City:
                   <input
+                  className="postal"
                     type="text"
                     value={value.city}
                     onChange={(event) =>
                       setValue({ ...value, city: event.target.value })
                     }
                   ></input>
-                </label>
-                <br />
-                <label>
                   PostalCode:
                   <input
+                  className="postal"
                     type="text"
                     value={value.postalCode}
                     onChange={(event) =>
@@ -207,7 +274,42 @@ export default function PlaceOrderScreen() {
                     }
                   ></input>
                 </label>
-
+                Shipping Address:<select onChange={handleShipping}>
+                  <option value="Off">Same</option>
+                  <option value="On">Diferent</option>
+                </select>
+                {shippingDiv 
+                ? 
+                <div className="ShippingInfo">
+                    <hr/>
+                  <h3>Shipping Information</h3><br></br>
+                  <label>Name:
+                    <input type="text" value={shippValue.name}
+                    onChange={(event) => setShippValue({ ...shippValue, name: event.target.value })} />
+                  </label>
+                  <label>Lastname:
+                  <input type="text" value={shippValue.lastname}
+                    onChange={(event) => setShippValue({ ...shippValue, lastname: event.target.value })} />
+                  </label>
+                  <label> Adress:
+                  <input type="text" value={shippValue.address}
+                    onChange={(event) => setShippValue({ ...shippValue, address: event.target.value })} />
+                  </label>
+                  <label>City:
+                  <input type="text" value={shippValue.city} className="postal"
+                    onChange={(event) => setShippValue({ ...shippValue, city: event.target.value })} />
+                    PostalCode:
+                    <input type="text" value={shippValue.postalCode} className="postal"
+                    onChange={(event) => setShippValue({ ...shippValue, postalCode: event.target.value })} />
+                  </label>
+                  <label> Country:
+                  <input type="text" value={shippValue.country}
+                    onChange={(event) => setShippValue({ ...shippValue, country: event.target.value })} />
+                  </label> 
+                  <button onClick={handlesubmit}>Confirm</button>
+                </div>
+                : "" }
+              
               </div>
             ) : (
               <div className="UsersInfo">
@@ -252,9 +354,9 @@ export default function PlaceOrderScreen() {
           </h3>
           <label className="Shippingtitle">
             Shipping:<br></br>
-            <span>To: {value.lastname + "," + value.name}</span>
+            <span>To: {shippingInfo? shippValue.lastname + ","+ shippValue.name : value.lastname + "," + value.name}</span>
             <span>
-              {value.address},{value.postalCode},{value.city}
+            {shippingInfo ? shippValue.address + "," +shippValue.postalCode+ "," +shippValue.city : value.address+ "," +value.postalCode+ "," +value.city}
             </span>
           </label>
         </div>

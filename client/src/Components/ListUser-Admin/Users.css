@@ -65,6 +65,7 @@
   .stockList button {
   background-color: #f44336;
   color: black;
+  /* width: 82px; */
   }
   
   .stockList button:hover {
@@ -93,10 +94,12 @@
   .pagination button.active {
   background-color: #4CAF50;
   color: black;
+  width: 36px;
   }
   
   .pagination button:hover:not(.active) {
       background-color: #4CAF50;
+      width: fit-content;
   }
 
 .searchListUsers{
@@ -131,3 +134,28 @@
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.324);
     color: #4e7d48;
 }
+
+.ban{
+ color:rgb(255, 6, 6);
+ font-style: italic;
+}
+
+button.blue{
+    background-color: #4e7d48;
+}
+
+button.blue:hover{
+    background-color: #72b569;
+}
+
+button.red{
+ background-color: #f44336;
+color: black;
+ width: 72px; 
+}
+
+button.red:hover{
+    background-color: #f6695f;
+   color: black;
+    width: 72px; 
+   }
