@@ -16,6 +16,7 @@ import UpdateProduct from "./Views/UpdateProduct/UpdateProduct";
 import PlaceOrderScreen from "./Views/Order/placeOrderScreen";
 import UserProfile from "./Views/UserProfile/UserProfile";
 import UserOrders from "./Components/UserOrders/UserOrders";
+import Error404 from "./Components/Error/error404";
 
 function App() {
   const location = useLocation();
@@ -118,6 +119,7 @@ function App() {
           name="detailOrder"
           key="detailOrder"
         ></Route>
+        <Route path="*" element={<Error404/>}></Route>
       </Routes>
 
       <Footer />
