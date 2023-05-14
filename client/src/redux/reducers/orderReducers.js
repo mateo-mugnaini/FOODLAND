@@ -4,11 +4,14 @@ import {
   ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAIL,
   ORDER_COMPLETE_PAY,
+  GET_ORDERS_FAIL,
+  GET_ORDERS_SUCCESS,
+  GET_ORDERS_REQUEST,
 } from "../constants/orderConstants";
 
 const initialState = {
   orders: {
-    active:false,
+    active: false,
   },
   loading: false,
   error: "",
@@ -19,6 +22,7 @@ const initialState = {
     taxes: 0,
     totalOrder: 0,
   },
+  myOrders: [],
 };
 
 const ordersReducer = (state = initialState, action) => {
@@ -46,14 +50,32 @@ const ordersReducer = (state = initialState, action) => {
         error: action.payload,
         isError: true,
       };
-      case ORDER_COMPLETE_PAY:
-        return {
-          ...state,
-          orders:{
-            active:false
-          },
-          loading:false
-        }
+    case ORDER_COMPLETE_PAY:
+      return {
+        ...state,
+        orders: {
+          active: false,
+        },
+        loading: false,
+      };
+    case GET_ORDERS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_ORDERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        myOrders: action.payload,
+      };
+    case GET_ORDERS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
     default:
       return { ...state };
   }
