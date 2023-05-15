@@ -104,25 +104,3 @@
   margin-top: -10px;
   margin-bottom: -20px;
 }
-
-.btnHomeContainer{
-  display: flex;
-  position: relative;
-  top: -110px;
-  left: -172px;
-}
-
-.btnHome{
-  background-color: #30925E;
-  border: none;
-  width: 200px;
-  height: 50px;
-  font-size: 30px;
-  font-family: "Yanone Kaffeesatz";
-  color: white;
-  cursor: pointer;
-}
-
-.btnHome:hover {
-  background-color: #29b66b;
-}

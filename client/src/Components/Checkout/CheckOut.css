@@ -5,7 +5,7 @@
     box-shadow: 3px 4px 12px rgb(0, 0 ,0,25%);
     display: flex;
     flex-direction: column;
-    width: 23%;
+    width: 25%;
     height: fit-content;
 }
 
@@ -15,24 +15,29 @@
     margin:0px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    padding: 33px;
+    padding: 27px;
 }
 
 .ContainerPayment hr{
     height: 10px;
     background-color: rgb(32, 32, 32);
     writing-mode: vertical-rl;
+    margin:5px;
 }
 .ContainerPayment h2{
     display: flex;
     justify-content: space-between;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin: 7px 50px 0px 50px;
     }
 
 .ContainerPayment h2 span{
 color: green;
 }
+
+.ContainerPayment h3{
+    margin:5px;
+    }
+
 .ContainerPayment button{
     color: white;
     background-color: rgb(29, 121, 29);
@@ -40,13 +45,15 @@ color: green;
     cursor: pointer;
     margin: inherit;
     padding: 20px;
-    font-size: 30px;
+    font-size: 25px;
     border-radius: 20px;
     border: 2px solid rgb(29, 121, 29);
     width: 224px;
+    align-self: center;
+
 }
 
-.ContainerPayment button:hover{
+/* .ContainerPayment button:hover{
     background-color: white;
     color: rgb(29, 121, 29);
     box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
@@ -56,7 +63,7 @@ color: green;
     font-size: 30px;
     border-radius: 20px;
     border: 2px solid rgb(29, 121, 29);
-}
+} */
 
 .ContainerPayment button a{
     color: white;
@@ -82,3 +89,4 @@ font-weight: bolder;
     font-weight: bolder;
     font-size:20px ;
 }
+

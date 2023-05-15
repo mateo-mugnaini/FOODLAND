@@ -2,13 +2,14 @@ import React, {  useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import  "./DetailCard.css"
 import { useParams, NavLink } from "react-router-dom"
-// import { products } from "../../Components/products"
 import Rating from '../../Components/Rating/rating'
 import "../Detail/DetailCard.css"
-
+import Swal from 'sweetalert2'
+import returnPolicyPopup from "../../Texts/returnPolicyPopup.txt"
 import {getDetail} from "../../redux/actions"
-//IMPORT LOCALSTORE 
 import useLocalStore from "../../hooks/useLocalStore";
+import Reviews from "../../Components/Reviews/Reviews";
+
 
 const DetailCard = () => {
   const { id } = useParams();
@@ -36,12 +37,24 @@ const DetailCard = () => {
         const updatedCart = Cart.filter((item) => item.id !== id);
         const updatedQuantity = existingItem.quantity + quantity;
   
-        setCart([...updatedCart, { ...existingItem, quantity: updatedQuantity }]);
+        setCart([...updatedCart, { ...existingItem, quantity: updatedQuantity , slug:existingItem.slug || existingItem.name}]);
       } else {
-        setCart([...Cart, { id, name: product.name, description: product.description, price: product.price, image: product.image, quantity }]);
+        setCart([...Cart, { id, name: product.name, description: product.description, price: product.price, image: product.image, quantity ,slug:product.slug || product.name}]);
       }
     };
 
+    const showLegalInfo = () => {
+      fetch(returnPolicyPopup)
+      .then((response) => response.text())
+      .then((data) => {
+        Swal.fire({
+          title: 'Supermarket Purchase Agreement',
+          text:data,
+          confirmButtonText: 'OK'
+        })
+      });
+     
+    }
 
   return (
     <div className='DetailCardCont'>
@@ -77,10 +90,11 @@ const DetailCard = () => {
 
          <button className="addButton" onClick={handleAddToCart}>Add Product</button>
         
-        <button className='returnButton'>Cambios y devoluciones →</button>
+        <button className='returnButton' onClick={showLegalInfo}>Cambios y devoluciones →</button>
       </div>
 
     </div>
+    {product.name && <Reviews  />}
   </div>
   )
 }

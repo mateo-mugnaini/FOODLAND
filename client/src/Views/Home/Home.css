@@ -9,3 +9,44 @@
     margin-top: 200px;
     margin-bottom: 200px;
 } */
+
+.containerHomeAdm{
+    display: flex;
+    flex-direction: row;
+    /* align-items: top; */     
+}
+.admBtnContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: flex-start;
+    background-color: gray;
+    margin: 10px;
+    border-radius: 20px;
+
+}
+
+.btnPagAdm{
+    display: block;
+    height: 40px;
+    width: 200px;
+    border-radius: 7px;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 20px;
+}
+
+.messageHome{
+    color: white;
+}
+
+.btnPagAdmOut{
+    display: block;
+    height: 40px;
+    width: 200px;
+    border-radius: 7px;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 20px;
+    background-color: rgb(178, 34, 34);
+}

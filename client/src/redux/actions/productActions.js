@@ -1,8 +1,8 @@
 import axios from "axios";
+
 import * as action from "../constants/productConstants"; // Import para traer todas las actions-types
 
-// const URL = "http://localhost:5000";
-const URL = "https://foodland-production.up.railway.app";
+const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -24,11 +24,11 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
-
-      dispatch({
-        type: action.GET_ALL_PRODUCTS,
-        payload: response.data,
-      });
+      if (response.data)
+        dispatch({
+          type: action.GET_ALL_PRODUCTS,
+          payload: response.data,
+        });
       dispatch(ready());
     } catch (error) {
       console.log(error);
@@ -68,6 +68,12 @@ export function setProduct(payload) {
     payload,
   };
 }
+export function setFilterState(payload) {
+  return {
+    type: "SET_FILTER_STATE",
+    payload,
+  };
+}
 
 export const getDetail = (id) => {
   return async (dispatch) => {
@@ -75,14 +81,14 @@ export const getDetail = (id) => {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products/slug/${id}`);
 
-      console.log(response.data);
+      // console.log(response.data);
       dispatch({
         type: action.DETAIL_PRODUCT,
         payload: response.data,
       });
       dispatch(ready());
     } catch (error) {
-      console.log(error, "WWWW");
+      // console.log(error, "WWWW");
       dispatch({
         type: action.DETAIL_PRODUCT,
         payload: error,
@@ -186,3 +192,80 @@ export const addCategory = (category) => async (dispatch) => {
     });
   }
 };
+//========================* UPDATE PRODUCT *==============//
+
+export const updateProduct = (product, _id) => async (dispatch, getState) => {
+  dispatch({ type: action.PRODUCT_UPDATE_REQUEST, payload: product });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  const { data } = await axios.put(`${URL}/api/products/${_id}`, product, {
+    headers: { Authorization: `Bearer ${userInfo.token}` },
+  });
+  try {
+    dispatch({ type: action.PRODUCT_UPDATE_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: action.PRODUCT_UPDATE_FAIL, error: message });
+  }
+};
+
+
+//==============CREATE REVIEWS===================================//
+export const createReview =
+	(productId, review,token) => async (dispatch) => {
+		// console.log("id", productId)
+		// console.log("review", review)
+
+    dispatch({ type: action.PRODUCT_REVIEW_CREATE_REQUEST });
+		// const {
+		// 	userSignin: { userInfo },
+		// } = getState();
+    // console.log("token",userInfo.token)
+		try {
+			const { data } = await axios.post(
+				`${URL}/api/products/${productId}/reviews`,
+				review,
+				{
+					headers: { Authorization: `Bearer ${token}` },
+				}
+			);
+			dispatch({
+				type: action.PRODUCT_REVIEW_CREATE_SUCCESS,
+				payload: data.review,
+			});
+		} catch (error) {
+			const message =
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message;
+			dispatch({ type: action.PRODUCT_REVIEW_CREATE_FAIL, payload: message });
+		}
+	};
+//========================* CREATE PRODUCT *==============//
+
+export const createProduct = (product) => async (dispatch, getState) => {
+  dispatch({ type: action.PRODUCT_CREATE_REQUEST });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const { data } = await axios.post(`${URL}/api/products`, product, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    dispatch({ type: action.PRODUCT_CREATE_SUCCESS, payload: data.product });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: action.PRODUCT_CREATE_FAIL,
+      payload: message,
+    });
+  }
+};
+

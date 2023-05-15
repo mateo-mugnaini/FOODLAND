@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-
-import productsReducer from "./reducers/productReducers"; 
-import { userSigninReducer } from "./reducers/userReducers";
+ 
+import { userRegisterReducer, userSigninReducer, users } from "./reducers/userReducers";
+import productsReducer, { productReviewCreateReducer } from "./reducers/productReducers"; 
+import ordersReducer from "./reducers/orderReducers";
+import { cartReducer } from "./reducers/cartReducers";
 
 //import { ..., ... } from "./reducers/cartReducers";
 //import { ..., ... } from "./reducers/userReducers";
@@ -17,6 +19,7 @@ const initialState = {
 			? JSON.parse(localStorage.getItem("userInfo"))
 			: null,
 	},
+  };
 	/*cart: {
 		cartItems: localStorage.getItem("cartItems")
 			? JSON.parse(localStorage.getItem("cartItems"))
@@ -26,12 +29,17 @@ const initialState = {
 			: {},
 		paymentMethod: "Paypal",
 	}, */
-};
+
 
 //Aca van todos los reducers
 const reducer = combineReducers({
-	products: productsReducer, 
+	products: productsReducer,
 	userSignin: userSigninReducer,	
+	order: ordersReducer, 
+	users: users,
+	userRegister: userRegisterReducer,
+	productReviewCreate: productReviewCreateReducer,
+	cart: cartReducer,
 });
 
 export const store2 = createStore(

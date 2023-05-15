@@ -9,28 +9,31 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 
 //IMPORT ESTILOS
 import "./NavBar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { logout, user, isAuthenticated } = useAuth0();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
+  const cart = useSelector(({ cart: { cart: cartState } }) => cartState);
+
   const logoSvg = logo;
 
   useEffect(() => {
-    console.log(isAuthenticated);
     if (isAuthenticated) {
       dispatch(signIn(user));
     }
   }, [isAuthenticated, dispatch, user]);
 
-  const signOutHandler = () => {
+  const signOutHandler = (e) => {
+    e.preventDefault();
     dispatch(signout());
     logout();
-    window.location.href = "/";
+    navigate("/");
   };
 
   return (
@@ -44,36 +47,41 @@ const NavBar = () => {
       <div id="header" className="headerNavList">
         <ul className="nav">
           {/* -----------Cart list--------------*/}
-          <li>
-            <img
-              src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png"
-              alt="iconsWidget"
-              className="iconsNav1"
-            />
-            <ul className="ulNav">
-              <li>
-                <Link to="/MyCart">
-                  <span>
-                    <p>My cart:</p>
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/">
-                  <span>
-                    <p>Products</p>
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/MyCart">
-                  <span>
-                    <p> My cart</p>
-                  </span>
-                </Link>
-              </li>
-            </ul>
-          </li>
+          {!userInfo?.isAdmin && (
+            <li>
+              <img
+                src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png"
+                alt="iconsWidget"
+                className="iconsNav1"
+              />
+              <ul className="ulNav">
+                <li>
+                  <Link to="/MyCart">
+                    <span>
+                      <div className="viewCartNav">
+                        {!cart
+                          ? "Add products"
+                          : cart.map((item) => (
+                              <div key={item.id} className="background">
+                                <img src={item.image} alt={item.name} />
+                                <span className="span1">{item.name}</span>
+                                <span className="span2">x{item.quantity}</span>
+                              </div>
+                            ))}
+                      </div>
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/MyCart">
+                    <span>
+                      <p> View my cart</p>
+                    </span>
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          )}
           {/* -----------Login list --------------*/}
           <li>
             <img
@@ -85,10 +93,10 @@ const NavBar = () => {
 
             <ul className="ulNav">
               {userInfo ? (
-                userInfo.isAdmin ? (
+                userInfo?.isAdmin ? (
                   <div>
                     <li>
-                      <Link to="/products">
+                      {/* <Link to="/products">
                         <span>
                           <p>Stock</p>
                         </span>
@@ -101,7 +109,7 @@ const NavBar = () => {
                         </span>
                       </Link>
                     </li>
-                    <li>
+                    <li> */}
                       <Link to="/profile">
                         <span>
                           <p>My Profile</p>
@@ -124,7 +132,7 @@ const NavBar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link tp="/MyCart">
+                      <Link to="/MyOrders">
                         <span>
                           <p>Shop history</p>
                         </span>

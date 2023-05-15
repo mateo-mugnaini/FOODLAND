@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./CartItem.css";
 import { Link } from "react-router-dom";
 import useLocalStore from "../../hooks/useLocalStore";
+import Swal from "sweetalert2";
 
 function CartItem({ product, updateQuantity, removeItem, updateCartTotal, total }) {
   const [quantity, setQuantity] = useState(product.quantity || 1);
@@ -17,8 +18,21 @@ function CartItem({ product, updateQuantity, removeItem, updateCartTotal, total 
   };
 
   const removeItemHandler = () => {
-    removeItem(product.id);
-  };
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "you want to delete this product?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+     removeItem(product.id);
+      }
+    });
+  }
+  
 
   return (
     <ul className="cart_item">
@@ -44,7 +58,7 @@ function CartItem({ product, updateQuantity, removeItem, updateCartTotal, total 
         </div>
       </li>
       <li className="cart_price_col">
-        <h2>${product.price * quantity}</h2>
+        <h2>${(product.price * quantity).toFixed(2)}</h2>
       </li>
       <li className="cart_del_col">
         <img src="https://tinypic.host/images/2023/05/05/butonDelete.png" alt="deleteButton" onClick={removeItemHandler} />

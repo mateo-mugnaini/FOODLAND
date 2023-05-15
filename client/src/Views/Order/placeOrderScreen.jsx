@@ -1,145 +1,392 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import "./placeOrderScreen.css"
-
-//import { createOrder } from "../redux/actions/orderActions";
+import "./placeOrderScreen.css";
+import useLocalStore from "../../hooks/useLocalStore";
+import { createOrder } from "../../redux/actions/orderActions";
+import { Link } from "react-router-dom";
+import swal from "sweetalert";
+import ButtonPayPal from "../../Components/PayPalButton/PaypalButton";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 //import Loader from "../../Components/Loader/Loader";
 //import MessageBox from "../../Views/Error/messageBox";
 
-export default function PlaceOrderScreen(props) {
-	
-    //traer el carrito del estado
+export default function PlaceOrderScreen() {
+  const dispatch = useDispatch();
+  const [cart] = useLocalStore("Carrito", []);
+  const totalstate = useLocalStore("resumen",[])
+  const { userInfo } = useSelector((state) => state.userSignin);
+  const {
+    orders: { totalPrice: amount, active },
+  } = useSelector((state) => state.order);
 
-	const dispatch = useDispatch();
-	
-    //despachar la accion con esta información guardada en el carrito con el objeto q figura abajo
-    /* const placeOrderHandler = () => {
-		dispatch(createOrder({
-            orderItems: orderItems,
-            shippingAddress: shippingAddress,
-            paymentMethod: paymentMethod,
-            itemsPrice: itemsPrice, 
-            shippingPrice: shippingPrice,
-            taxPrice: taxPrice,
-            totalPrice: totalPrice,
-            user: user._id,
-        })); 
-	}; */
+  const [value, setValue] = useState({
+    name: "",
+    lastname: "",
+    address: "",
+    city: "",
+    postalCode: "",
+    country: "",
+  });
+
+  const [shippingDiv, setshippingDiv] = useState(false);  //Esto es para que aparezca o no el div
+  const [shippingInfo, setshippingInfo] = useState(false); // Este es como validador
+  const [shippValue, setShippValue] = useState({         //Este chequea que todo este lleno
+    name:"",
+    lastname:"",
+    address: "",
+    city: "",
+    postalCode: "",
+    country: "",
+  })
+  //   ================ creo shippingAddress ==========
+
+  let shippingAddress = {
+    fullName: value.lastname + "," + value.name,
+    address: value.address,
+    city: value.city,
+    postalCode: value.postalCode,
+    country: value.country,
+  };
+
+  // ============= Cargo los datos de la orden ============
+  const paymentMethod = "Paypal";
+  // let paymentResult = "Pending";
+  let shippingPrice = 0;
+  let itemsPrice = totalstate[0].subtotal;
+  let taxPrice = totalstate[0].taxes;
+  let totalPrice = parseFloat(totalstate[0].totalOrder.toFixed(2));
+
+  // ========== ShippingAdress ========
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    if (!userInfo || !userInfo._id)
+      swal({
+        title: "You need to be logged in to complete the purchase",
+        icon: "warning",
+        confirmButtonText: "OK",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+  };
+
+  const handleShipping = (event) =>{
+    if (event.target.value === "On") {
+      setshippingDiv(true);
+
+    } else {
+      setshippingDiv(false);
+      setshippingInfo(true);
+    }
+  }
+
+  const handlesubmit = () =>{
+    if(shippValue.name !== "" &&
+        shippValue.lastname !== "" &&
+        shippValue.address !== "" &&
+        shippValue.postalCode !== ""&&
+        shippValue.city !== "" &&
+        shippValue.country !== "" 
+        )
+          {setshippingInfo(true);
+        }else{
+            swal({
+              title: "you need to complete all information",
+              icon: "warning",
+              confirmButtonText: "OK",
+              showClass: {
+                popup: "animate__animated animate__fadeInDown",
+              },
+              hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+              },
+            });  
+          }
+
+  }
+
+  // ======== Despacho la orden =======
+  const placeOrderHandler = (e) => {
+    e.preventDefault();
+    if(cart.length === 0){
+      swal({
+        title: "You need add products firts!!",
+        icon: "warning",
+        confirmButtonText: "OK",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      return;
+    }
+    else if (!userInfo || !userInfo._id) {
+      swal({
+        title: "You need to be logged in to complete the purchase",
+        icon: "warning",
+        confirmButtonText: "OK",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      return;
+    } else if (
+      !value.address ||
+      !value.lastname ||
+      !value.name ||
+      !value.country ||
+      !value.postalCode ||
+      !value.city
+    ) {
+      swal({
+        title: "you need to complete all information",
+        icon: "warning",
+        confirmButtonText: "OK",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      return;
+    } 
+    else if( shippingInfo === false){
+      swal({
+        title: "you need to complete shipping information",
+        icon: "warning",
+        confirmButtonText: "OK",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      return;
+    }
+    else {
+      dispatch(
+        createOrder(
+          {
+            orderItems: cart.map((product) => ({ ...product, slug: "prueba" })),
+            shippingAddress,
+            paymentMethod,
+            itemsPrice,
+            shippingPrice,
+            taxPrice,
+            totalPrice,
+            user: userInfo._id,
+          },
+          userInfo.token
+        )
+      );
+    }
+  };
 
 
-    //useeffect q detecte si 
-	/* useEffect(() => {
-		if (success) {
-			navigate(`/order/${order._id}`);
-			dispatch({ type: ORDER_CREATE_RESET });
-		}
-	}, [success, order, navigate, dispatch, navigate]); */
 
-	return (
-		<div>
-			
-			{/* <div className="row top">
-				<div className="col-2">
-					<ul>
-						<li>
-							<div className="card card-body">
-								<h2>Shipping</h2>
-								<p>
-									<strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-									<strong>Address: </strong> {cart.shippingAddress.address},{" "}
-									{cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
-									, {cart.shippingAddress.country}
-								</p>
-							</div>
-						</li>
-						<li>
-							<div className="card card-body">
-								<h2>Payment</h2>
-								<p>
-									<strong>Method:</strong> {cart.paymentMethod}
-								</p>
-							</div>
-						</li>
-						<li>
-							<div className="card card-body">
-								<h2>Order Items</h2>
-								<ul>
-									{cart.cartItems.map((item) => (
-										<li key={item.product}>
-											<div className="row">
-												<div>
-													<img
-														src={item.image}
-														alt={item.name}
-														className="small"
-													></img>
-												</div>
-												<div className="min-30">
-													<Link to={`/product/${item.product}`}>
-														{item.name}
-													</Link>
-												</div>
+  return (
+    <div name="ShippingOrder" className="ShippingOrder">
+      {/* =========== Columna izquierda ========== */}
+      <div className="columna">
 
-												<div>
-													{item.qty} x ${item.price} = ${item.qty * item.price}
-												</div>
-											</div>
-										</li>
-									))}
-								</ul>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div className="col-1">
-					<div className="card card-body">
-						<ul>
-							<li>
-								<h2>Order Summary</h2>
-							</li>
-							<li>
-								<div className="row">
-									<div>Items</div>
-									<div>${cart.itemsPrice.toFixed(2)}</div>
-								</div>
-							</li>
-							<li>
-								<div className="row">
-									<div>Shipping</div>
-									<div>${cart.shippingPrice.toFixed(2)}</div>
-								</div>
-							</li>
-							<li>
-								<div className="row">
-									<div>Tax</div>
-									<div>${cart.taxPrice.toFixed(2)}</div>
-								</div>
-							</li>
-							<li>
-								<div className="row">
-									<div>
-										<strong> Order Total</strong>
-									</div>
-									<div>
-										<strong>${cart.totalPrice.toFixed(2)}</strong>
-									</div>
-								</div>
-							</li>
-							<li>
-								<button
-									type="button"
-									onClick={placeOrderHandler}
-									className="primary block"
-									disabled={cart.cartItems.length === 0}
-								>
-									Place Order
-								</button>
-							</li>							
-						</ul>
-					</div>
-				</div>
-			</div> */}
-		</div>
-	);
+			 {/* =============== SHIPPING ======================= */}
+        <h2>Invoice Data</h2>
+        <br />
+
+        {/* console.log(userSignin.userInfo) >>>> activo */}
+        <div name="Container Form Shipping" className="Form-Shipping">
+          <form onClick={handleFormSubmit} className="formInput">
+            {userInfo ? (
+              <div>
+                <label>
+                  Email: <input value={userInfo.email} disabled></input>
+                </label>
+                <hr></hr>
+                <h3>Billing Information</h3><br></br>
+                <label>
+                  Name:
+                  <input
+                    type="text"
+                    value={value.name}
+                    onChange={(event) =>
+                      setValue({ ...value, name: event.target.value })
+                    }
+                  ></input>
+                </label>
+                <label>
+                  Lastname:
+                  <input
+                    type="text"
+                    value={value.lastname}
+                    onChange={(event) =>
+                      setValue({ ...value, lastname: event.target.value })
+                    }
+                  ></input>
+                </label>
+                <label>
+                  Adress:
+                  <input
+                    type="text"
+                    value={value.address}
+                    onChange={(event) =>
+                      setValue({ ...value, address: event.target.value })
+                    }
+                  ></input>
+                </label>
+                <label>
+                  City:
+                  <input
+                  className="postal"
+                    type="text"
+                    value={value.city}
+                    onChange={(event) =>
+                      setValue({ ...value, city: event.target.value })
+                    }
+                  ></input>
+                  PostalCode:
+                  <input
+                  className="postal"
+                    type="text"
+                    value={value.postalCode}
+                    onChange={(event) =>
+                      setValue({ ...value, postalCode: event.target.value })
+                    }
+                  ></input>
+                </label>
+                <label>
+                  Country:
+                  <input
+                    type="text"
+                    value={value.country}
+                    onChange={(event) =>
+                      setValue({ ...value, country: event.target.value })
+                    }
+                  ></input>
+                </label>
+                Shipping Address:<select onChange={handleShipping}>
+                  <option value="Off">Same</option>
+                  <option value="On">Diferent</option>
+                </select>
+                {shippingDiv 
+                ? 
+                <div className="ShippingInfo">
+                    <hr/>
+                  <h3>Shipping Information</h3><br></br>
+                  <label>Name:
+                    <input type="text" value={shippValue.name}
+                    onChange={(event) => setShippValue({ ...shippValue, name: event.target.value })} />
+                  </label>
+                  <label>Lastname:
+                  <input type="text" value={shippValue.lastname}
+                    onChange={(event) => setShippValue({ ...shippValue, lastname: event.target.value })} />
+                  </label>
+                  <label> Adress:
+                  <input type="text" value={shippValue.address}
+                    onChange={(event) => setShippValue({ ...shippValue, address: event.target.value })} />
+                  </label>
+                  <label>City:
+                  <input type="text" value={shippValue.city} className="postal"
+                    onChange={(event) => setShippValue({ ...shippValue, city: event.target.value })} />
+                    PostalCode:
+                    <input type="text" value={shippValue.postalCode} className="postal"
+                    onChange={(event) => setShippValue({ ...shippValue, postalCode: event.target.value })} />
+                  </label>
+                  <label> Country:
+                  <input type="text" value={shippValue.country}
+                    onChange={(event) => setShippValue({ ...shippValue, country: event.target.value })} />
+                  </label> 
+                  <button onClick={handlesubmit}>Confirm</button>
+                </div>
+                : "" }
+              
+              </div>
+            ) : (
+              <div className="UsersInfo">
+                <h2>User</h2>
+                <div className="bottons">
+                  <p>You need to be logged in to continue</p>
+                  <Link to="/login">
+                    <button>Login</button>
+                  </Link>
+                  {"or "}
+                  <Link to="/register">
+                    <button>Register</button>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </form>
+        </div>
+      </div>
+
+
+      <div className="columna">
+        {/* ===========Summary ========== */}
+        <h2>Order Summary</h2>
+
+        <div className="summary">
+          <label>
+            <h4>
+              Subtotal:<span>${itemsPrice.toFixed(2)}</span>
+            </h4>
+            <h4>
+              Shipping:<span>{shippingPrice}</span>
+            </h4>
+            <h4>
+              Taxes:<span>${taxPrice.toFixed(2)}</span>
+            </h4>
+          </label>
+          <hr></hr>
+
+          <h3>
+            Total:<span>${totalPrice}</span>
+          </h3>
+          <label className="Shippingtitle">
+            Shipping:<br></br>
+            <span>To: {shippingInfo? shippValue.lastname + ","+ shippValue.name : value.lastname + "," + value.name}</span>
+            <span>
+            {shippingInfo ? shippValue.address + "," +shippValue.postalCode+ "," +shippValue.city : value.address+ "," +value.postalCode+ "," +value.city}
+            </span>
+          </label>
+        </div>
+        {/* ========= Boton para generar orden ====== */}
+        {active ? (
+          <PayPalScriptProvider
+            options={{
+              "client-id":
+                "AXHIU4HHrVBO9gSmNtt7XuR1HxOokO55uDTnSTspREa2qThnJH2LnaDnG-djbF-6tcEPN37ug1bhnPbe",
+              components: "buttons",
+              currency: "USD",
+            }}
+          >
+            <ButtonPayPal
+              amount={amount}
+              currency={"USD"}
+              showSpinner={false}
+              style={{ layout: "vertical" }}
+            />
+          </PayPalScriptProvider>
+        ) : (
+          <button
+            type="button"
+            onClick={placeOrderHandler}
+            className="PlaceOrder"
+            disabled={cart.length === 0}
+          >
+            Place Order
+          </button>
+        )}
+      </div>
+    </div>
+  );
 }

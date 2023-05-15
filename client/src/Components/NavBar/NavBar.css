@@ -68,6 +68,7 @@
 			
 ul, ol {
     list-style:none;
+    width: 22.6%;
 }
 
 .nav{
@@ -86,10 +87,11 @@ ul, ol {
 .nav li{
     background-color: #0E0E0E;
 }
-.nav li:hover{
+.nav li img:hover{
     background-color: rgb(228, 227, 227);
     border-top-right-radius:23px;
     border-top-left-radius:23px;
+    transition: transform 2s;
 }
 
 .nav li span{
@@ -97,9 +99,22 @@ ul, ol {
     color:black;
     text-decoration:none;
     padding:3px 12px;
-    display:block;
+    display:flex;
+    align-items: center;
     /* border-radius: 2px; */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
+.nav li span .span2{
+    width: 96px;
+    background-color: #b7b6b6;
+    width: 18%;
+}
+.nav li span .span2:hover{
+    background-color: #b7b6b6;
+}
+
 
 .nav li span:hover{
     background-color: rgb(228, 227, 227);
@@ -115,15 +130,18 @@ ul, ol {
 }
 
 .nav li span p{
-    background-color:rgb(205, 203, 203);
-    color:black;
-    text-decoration:none;
-    display:block;
-    width: 180px;
+    background-color: rgb(205, 203, 203);
+    color: black;
+    text-decoration: none;
+    width: 213px;
     border-radius: 5px;
-    margin: 0px 6px 3px 6px;
     cursor: pointer;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    font-weight: bolder;
 }
+
 .nav li span p:hover {
     background-color:#434343;
     color:white;
@@ -137,10 +155,69 @@ ul, ol {
     z-index: 50;
     min-width: 140px;
     padding: 0px;
-    margin-left: -166px;
-    margin-top: 51px;
+    margin-left: -13.8%;
+    margin-top: 3.1%;
+    width: 17%;
 }
 
 .nav li:hover > ul {
     display:block;
+}
+
+.viewCartNav{
+    display: flex;
+    flex-direction: column;
+    width: 107%;
+    overflow-y: scroll;
+    height: 216px;
+
+}
+.viewCartNav::-webkit-scrollbar-button{
+    scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
+}
+
+
+.viewCartNav img{
+    width: 50px;    
+    background-color: grey;
+    height: 50px; 
+    border:2px solid #b7b6b6;
+    border-radius: 10px;
+}
+
+.viewCartNav div{
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    width: 93%;
+}
+
+.titlecart{
+    border-radius: 7px;
+    width: 58%;
+    margin: auto;
+    font-weight: 200;
+    font-size: inherit;
+}
+
+.background{
+    background-color: #b7b6b6;
+    border-radius: 10px;
+}
+
+.background .span1{
+    background-color:#b7b6b6;
+}
+.background .span1:hover{
+    background-color: #b7b6b6;
+}
+
+span.userName{
+    background-color: #0000 !important;
+    color: white !important;
+    }
+    
+span.userName:hover{
+    background-color: #0000 !important;
+    color: white !important;
 }

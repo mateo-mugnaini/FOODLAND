@@ -53,7 +53,7 @@ const Footer = () =>{
                 <div name="Menupages" className="menuPages">
                 <h2>Menu</h2>
                     <Link to="/" name=""  className="linksMenu">Home</Link>
-                    <Link to="/productSearch" name=""  className="linksMenu">Products</Link>
+                    <Link to="/allProducts" name=""  className="linksMenu">Products</Link>
                     <Link to="/" name=""  className="linksMenu">Contacs us</Link>
                     <Link to="/about" name=""   className="linksMenu">About</Link>
                 </div>
