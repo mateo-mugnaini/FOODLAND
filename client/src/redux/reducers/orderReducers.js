@@ -23,6 +23,7 @@ const initialState = {
     totalOrder: 0,
   },
   myOrders: [],
+  OrdersAdmin: [],
 };
 
 const ordersReducer = (state = initialState, action) => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Axios from "axios"
 import {
   updateProduct,
   getDetail,
@@ -20,70 +21,69 @@ const EditProductForm = () => {
   const categories = useSelector((state) => state.products.categories);
   const dispatch = useDispatch();
 
+
+  const [errorUpload, setErrorUpload] = useState("");
+  const [successUpload, setSuccessUpload] = useState("");
+  const [errors, setErrors] = useState({});
+
+  
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getDetail(decodedName));
   }, [dispatch, decodedName]);
 
   const [formData, setFormData] = useState({
-    // active: true,
     name: "",
     slug: "",
     image: "",
-    images: [],
     imageCategory: "",
     brand: "",
     category: "",
     description: "",
     price: 0,
     stock: 0,
+    active: false,
   });
 
   useEffect(() => {
     setFormData({
-      // active: product?.active,
       name: product?.name,
       slug: product?.slug,
       image: product?.image,
-      images: product?.images,
       imageCategory: product?.imageCategory,
       brand: product?.brand,
       category: product?.category,
       description: product?.description,
       price: product?.price,
       stock: product?.stock,
+      active: product?.active,
     });
-    // console.log(product.id, product._id);
   }, [product]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+    const newValue = type === "checkbox" ? checked : value;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData, product);
     try {
       dispatch(updateProduct(formData, product._id));
-      // await axios
-      //   .put(`${URL}/api/products/${product._id}`, formData)
-      //   .then((res) => console.log(res));
       setFormData({
-        // active: "",
         name: "",
         slug: "",
         image: "",
-        images: [],
         imageCategory: "",
         brand: "",
         category: "",
         description: "",
         price: 0,
         stock: 0,
+        active: false,
       });
       swal({
         title: "Cambio exitoso",
@@ -96,14 +96,37 @@ const EditProductForm = () => {
           popup: "animate__animated animate__fadeOutUp",
         },
       });
-
       setTimeout(() => {
-        window.location.replace("/products");
+        window.location.replace("/");
       }, 2000);
     } catch (err) {
       console.log(err);
     }
   };
+
+    //Traigo el token del usuario
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+
+    try {
+      const { data } = await Axios.post(`${URL}/api/upload`, bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      console.log(data.url);
+      setFormData({ ...product, image: data.url });
+      setSuccessUpload("Image loaded successfully to Cloudinary");
+    } catch (error) {
+      setErrorUpload(error.message);
+    }
+  }
 
   return (
     <div className="formProductContainer">
@@ -140,33 +163,20 @@ const EditProductForm = () => {
         </div>
         {/* ================== * IMAGE * ================== */}
         <div className="labelContainer">
-          <label htmlFor="image" className="label">
-            Image:
+          <label className="label">
+            Image
+            <input
+              className="input"
+              type="file"
+              onChange={uploadFileHandler}
+              name="image"
+            />
           </label>
-          <input
-            className="input"
-            type="text"
-            id="image"
-            name="image"
-            placeholder="Insert a new image"
-            value={formData.image}
-            onChange={handleChange}
-          />
-        </div>
-        {/* ================== * IMAGES * ================== */}
-        <div className="labelContainer">
-          <label htmlFor="images" className="label">
-            Images:
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="images"
-            name="images"
-            placeholder="Insert a new images"
-            value={formData.images}
-            onChange={handleChange}
-          />
+          {errorUpload && errorUpload}
+          {successUpload && successUpload}
+          {errors["image"]?.isValidation ? null : (
+            <p className="errorFormCP">{errors?.image?.message}</p>
+          )}
         </div>
         {/* ================== * BRAND * ================== */}
         <div className="labelContainer">
@@ -186,7 +196,7 @@ const EditProductForm = () => {
         {/* ================== * CATEGORIA * ================== */}
         <div className="labelContainer">
           <label className="label">
-            Category
+            Category:
             <select
               className="input"
               name="category"
@@ -244,21 +254,19 @@ const EditProductForm = () => {
             onChange={handleChange}
           />
         </div>
-        {/* ================== * ACTIVADO * ================== */}
+        {/* ================== * ACTIVATED * ================== */}
         <div className="labelContainer">
-          <label className="label">
-            Active / Disactive
-            <select
-              className="input"
-              name="active"
-              value={formData?.active}
-              onChange={(e) => handleChange(e)}
-            >
-              <option value="0">Active / Desactive</option>
-              <option value={true}> Active</option>
-              <option value={false}> Desactive</option>
-            </select>
+          <label htmlFor="active" className="label">
+            Is Activated?
           </label>
+          <input
+            className="checkbox"
+            type="checkbox"
+            id="active"
+            name="active"
+            checked={formData.active}
+            onChange={handleChange}
+          />
         </div>
         <div className="btnContainer">
           <button className="btn" type="submit">

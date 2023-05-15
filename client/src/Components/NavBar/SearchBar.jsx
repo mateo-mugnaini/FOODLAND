@@ -22,7 +22,7 @@ const SearchBar = () => {
     );
 
     if (filteredProducts.length > 0){
-        dispatch(setFilterState(false))
+        // dispatch(setFilterState(false))
         dispatch(setProduct(filteredProducts));
         navigate("/categories/allProducts");
     } else {

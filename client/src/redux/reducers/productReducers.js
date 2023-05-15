@@ -74,7 +74,7 @@ const productsReducer = (state = initialState, action) => {
     case HANDLE_SORTS:
       const auxToOrder = state.products;
 
-      console.log(action.payload);
+      // console.log(action.payload);
 
       const toOrder = auxToOrder.map((product) => {
         const normalizedPrice = parseFloat(
@@ -261,22 +261,27 @@ const productsReducer = (state = initialState, action) => {
   }
 };
 
-
-export const productReviewCreateReducer = (state = {}, action) => {
-	switch (action.type) {
-		case PRODUCT_REVIEW_CREATE_REQUEST:
-			return { loading: true };
-		case PRODUCT_REVIEW_CREATE_SUCCESS:
-			return { loading: false, success: true, review: action.payload };
-		case PRODUCT_REVIEW_CREATE_FAIL:
-			return { loading: false, error: action.payload };
-		case PRODUCT_REVIEW_CREATE_RESET:
-			return {};
-		default:
-			return state;
-	}
+export const productReviewCreateReducer = (
+  state = {
+    loading: false,
+    success: false,
+    error: "",
+    review: {},
+  },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_REVIEW_CREATE_REQUEST:
+      return { loading: true };
+    case PRODUCT_REVIEW_CREATE_SUCCESS:
+      return { loading: false, success: true, review: action.payload };
+    case PRODUCT_REVIEW_CREATE_FAIL:
+      return { loading: false, error: action.payload };
+    case PRODUCT_REVIEW_CREATE_RESET:
+      return { loading: false, success: false, error: "", review: [] };
+    default:
+      return state;
+  }
 };
 
-
 export default productsReducer;
-

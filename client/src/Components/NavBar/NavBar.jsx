@@ -10,18 +10,16 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 //IMPORT ESTILOS
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
-import useLocalStore from "../../hooks/useLocalStore";
-import { useEffect,  } from "react";
+import { useEffect } from "react";
 
 const NavBar = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { logout, user, isAuthenticated } = useAuth0();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
-  const [cart] = useLocalStore("Carrito", []);
+  const cart = useSelector(({ cart: { cart: cartState } }) => cartState);
 
   const logoSvg = logo;
 
@@ -35,7 +33,7 @@ const NavBar = () => {
     e.preventDefault();
     dispatch(signout());
     logout();
-    navigate("/")
+    navigate("/");
   };
 
   return (
@@ -48,8 +46,8 @@ const NavBar = () => {
       {/* -----------Cart & Login Icons on Nav--------------*/}
       <div id="header" className="headerNavList">
         <ul className="nav">
- {/* -----------Cart list--------------*/}
- {!userInfo?.isAdmin && (
+          {/* -----------Cart list--------------*/}
+          {!userInfo?.isAdmin && (
             <li>
               <img
                 src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png"
@@ -60,7 +58,6 @@ const NavBar = () => {
                 <li>
                   <Link to="/MyCart">
                     <span>
-
                       <div className="viewCartNav">
                         {!cart
                           ? "Add products"
@@ -73,7 +70,6 @@ const NavBar = () => {
                             ))}
                       </div>
                     </span>
-
                   </Link>
                 </li>
                 <li>
