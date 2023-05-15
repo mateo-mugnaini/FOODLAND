@@ -23,6 +23,7 @@ const UserOrders = () => {
   // Obtener las compras de la página actual
   const currentOrders = orders.slice(indexOfFirstItem, indexOfLastItem);
 
+  console.log(currentOrders);
   // Calcular el total de páginas
   const totalPages = Math.ceil(orders.length / itemsPerPage);
 
@@ -72,7 +73,8 @@ const UserOrders = () => {
         <table>
           <thead>
             <tr>
-              <th className="thStock1">Name</th>
+              <th className="thStock1">Date</th>
+              <th className="thStock2">Name</th>
               <th className="thStock2">Price</th>
               <th className="thStock2">Amount</th>
               <th className="thStock2">Total Price</th>
@@ -92,6 +94,10 @@ const UserOrders = () => {
             ) : (
               currentOrders.map((order) => (
                 <tr key={order._id}>
+                  <td>
+                    {order.createdAt}
+                    <hr /> {/* Línea separadora entre compras */}
+                  </td>
                   <td>
                     {order.orderItems.map((item) => (
                       <div key={item._id}>
