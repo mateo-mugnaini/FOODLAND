@@ -126,12 +126,12 @@ export const get_users = (token) => {
   };
 };
 
-export const put_user = ({ id, isAdmin, token }) => {
+export const put_user = ({ id,token, isAdmin=false,active=true,}) => {
   return async (dispatch) => {
     try {
       const updateUser = await Axios.put(
         `${URL}/api/users/${id}`,
-        { isAdmin },
+        { isAdmin, active },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -253,11 +253,11 @@ export const update_users = (_id, isAdmin, user, token) => {
   };
 };
 
-export const ban_user = ({id, activ,token}) => {
+export const ban_user = ({ id,token, isAdmin=false,active=false,}) => {
   return async (dispatch) => {
     try {
       const updateActive = await Axios.put(`${URL}/api/users/${id}`,
-        {active:activ},
+        {isAdmin, active},
         {headers: { Authorization: `Bearer ${token}` },
       });
       dispatch({
@@ -274,23 +274,3 @@ export const ban_user = ({id, activ,token}) => {
   };
 };
 
-export const delete_user = ({admin, token, id}) =>{
-  return async (dispatch) => {
-    try {
-      const deleteduser = await Axios.delete(`${URL}/api/users/${id}`,
-        // {isAdmin:admin},
-        {headers: { Authorization: `Bearer ${token}` },
-      });
-      dispatch({
-        type: USER_DELETE,
-        payload: deleteduser.data,
-      });
-    } catch (error) {
-      console.log(error);
-      dispatch({
-        type: USER_DELETE,
-        payload: error,
-      });
-    }
-  };
-};

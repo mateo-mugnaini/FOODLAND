@@ -3,7 +3,7 @@ import "./Users.css"
 //IMPORT REACT:
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_users, put_user , ban_user, set_users, sort_user, delete_user} from "../../redux/actions/userActions";
+import { get_users, put_user , ban_user, set_users, sort_user} from "../../redux/actions/userActions";
 import Swal from "sweetalert2";
 import swal from "sweetalert";
 
@@ -85,7 +85,7 @@ const ListUsers = () => {
   
     if (result.isConfirmed) {
       setIsLoading(true);
-      await dispatch(ban_user({id:u._id , activ:false, token}));
+      await dispatch(ban_user({id:u._id , token, isAdmin:u.isAdmin ,active:false, }));
       await dispatch(get_users(token));
       setIsLoading(false);
   
@@ -110,7 +110,7 @@ const ListUsers = () => {
   
     if (result.isConfirmed) {
       setIsLoading(true);
-      await dispatch(ban_user({id:u._id , activ:true, token}));
+      await dispatch(ban_user({id:u._id , token, isAdmin:u.isAdmin ,active:true,}));
       await dispatch(get_users(token));
       setIsLoading(false);
   
