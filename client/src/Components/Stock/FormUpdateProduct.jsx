@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Axios from "axios"
 import {
   updateProduct,
   getDetail,
@@ -20,6 +21,12 @@ const EditProductForm = () => {
   const categories = useSelector((state) => state.products.categories);
   const dispatch = useDispatch();
 
+
+  const [errorUpload, setErrorUpload] = useState("");
+  const [successUpload, setSuccessUpload] = useState("");
+  const [errors, setErrors] = useState({});
+
+  
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getDetail(decodedName));
@@ -29,7 +36,6 @@ const EditProductForm = () => {
     name: "",
     slug: "",
     image: "",
-    images: [],
     imageCategory: "",
     brand: "",
     category: "",
@@ -44,7 +50,6 @@ const EditProductForm = () => {
       name: product?.name,
       slug: product?.slug,
       image: product?.image,
-      images: product?.images,
       imageCategory: product?.imageCategory,
       brand: product?.brand,
       category: product?.category,
@@ -72,7 +77,6 @@ const EditProductForm = () => {
         name: "",
         slug: "",
         image: "",
-        images: [],
         imageCategory: "",
         brand: "",
         category: "",
@@ -99,6 +103,30 @@ const EditProductForm = () => {
       console.log(err);
     }
   };
+
+    //Traigo el token del usuario
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+
+    try {
+      const { data } = await Axios.post(`${URL}/api/upload`, bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      console.log(data.url);
+      setFormData({ ...product, image: data.url });
+      setSuccessUpload("Image loaded successfully to Cloudinary");
+    } catch (error) {
+      setErrorUpload(error.message);
+    }
+  }
 
   return (
     <div className="formProductContainer">
@@ -135,33 +163,20 @@ const EditProductForm = () => {
         </div>
         {/* ================== * IMAGE * ================== */}
         <div className="labelContainer">
-          <label htmlFor="image" className="label">
-            Image:
+          <label className="label">
+            Image
+            <input
+              className="input"
+              type="file"
+              onChange={uploadFileHandler}
+              name="image"
+            />
           </label>
-          <input
-            className="input"
-            type="text"
-            id="image"
-            name="image"
-            placeholder="Insert a new image"
-            value={formData.image}
-            onChange={handleChange}
-          />
-        </div>
-        {/* ================== * IMAGES * ================== */}
-        <div className="labelContainer">
-          <label htmlFor="images" className="label">
-            Images:
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="images"
-            name="images"
-            placeholder="Insert new images"
-            value={formData.images}
-            onChange={handleChange}
-          />
+          {errorUpload && errorUpload}
+          {successUpload && successUpload}
+          {errors["image"]?.isValidation ? null : (
+            <p className="errorFormCP">{errors?.image?.message}</p>
+          )}
         </div>
         {/* ================== * BRAND * ================== */}
         <div className="labelContainer">
