@@ -180,7 +180,6 @@ export default function PlaceOrderScreen() {
             orderItems: cart.map((product) => ({ ...product, slug: "prueba" })),
             shippingAddress,
             paymentMethod,
-            // paymentResult, <<<< no lo pide el back
             itemsPrice,
             shippingPrice,
             taxPrice,
