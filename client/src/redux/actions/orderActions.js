@@ -79,3 +79,27 @@ export const getOrders = (order) => async (dispatch, getState) => {
     });
   }
 };
+
+export const getOrdersAdmin = (order) => async (dispatch, getState) => {
+  dispatch({ type: action.GET_ORDERS_REQUEST, payload: order });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const response = await axios.get(`${URL}/api/orders`, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    dispatch({
+      type: action.GET_ORDERS_SUCCESS,
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: action.GET_ORDERS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
