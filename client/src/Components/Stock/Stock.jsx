@@ -27,8 +27,6 @@ const Stock = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
-  const aux = currentProducts?.map((e) => e = e.active);
-  console.log(aux);
 
   // Calcular el número total de páginas
   const totalPages = Math.ceil(productList?.length / productsPerPage);
