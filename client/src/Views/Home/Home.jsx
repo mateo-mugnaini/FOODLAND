@@ -10,6 +10,7 @@ import StockViews from "../Stock/StockViews";
 import CreateProduct from "../CreateProduct/CreateProduct";
 import ListUsers from "../../Components/ListUser-Admin/Users";
 import UserProfile from "../UserProfile/UserProfile";
+import OrdersAdmin from "../../Components/OdersAdmin/OrdersAdmin";
 import { signout } from "../../redux/actions/userActions";
 
 
@@ -24,6 +25,7 @@ const Home = () => {
   const [showOverview, setShowOverview] = useState(true); // Estado estadisticas
   const [showUser, setShowUser] = useState(false); // Estado ver usuarios
   const [showProfile, setShowProfile] = useState(false); // Estado mi perfil
+  const [showOrders, setShowOrders] = useState(false); // Estado mis ventas
 
   const handleImageLoad = () => {
     setImagesLoaded(true);
@@ -43,6 +45,7 @@ const Home = () => {
     setShowOverview(false);
     setshowHomeClient(false);
     setShowProfile(false);
+    setShowOrders(false)
   };
   /* =================== CREATE PRODUCT ===================*/
   const handleShowCreateProduct = () => {
@@ -53,6 +56,8 @@ const Home = () => {
     setShowOverview(false);
     setshowHomeClient(false);
     setShowProfile(false);
+    setShowOrders(false)
+
   };
   /* =================== VER USUARIOS ===================*/
   const handleShowUser = () => {
@@ -63,6 +68,8 @@ const Home = () => {
     setShowOverview(false);
     setshowHomeClient(false);
     setShowProfile(false);
+    setShowOrders(false)
+
   };
 
   /* =================== VER ESTADISTICAS ===================*/
@@ -74,6 +81,8 @@ const Home = () => {
     setShowOverview(true);
     setshowHomeClient(false);
     setShowProfile(false);
+    setShowOrders(false)
+
   };
 
   /* =================== VER HOME CLIENTES ===================*/
@@ -85,6 +94,8 @@ const Home = () => {
     setShowOverview(false);
     setshowHomeClient(true);
     setShowProfile(false);
+    setShowOrders(false)
+
   };
 
   /* =================== VER MI PERFIL ===================*/
@@ -96,6 +107,18 @@ const Home = () => {
     setShowOverview(false);
     setshowHomeClient(false);
     setShowProfile(true);
+    setShowOrders(false)
+  };
+  /* =================== VER MI PERFIL ===================*/
+  const handleShowOrders = () => {
+    setSelectedButton("showHomeClient");
+    setShowCreateProduct(false);
+    setShowStock(false);
+    setShowUser(false);
+    setShowOverview(false);
+    setshowHomeClient(false);
+    setShowProfile(false);
+    setShowOrders(true)
   };
 
   /* =================== LOG OUT ===================*/
@@ -160,6 +183,15 @@ const Home = () => {
             >
               Users
             </button>
+            {/* =================== BTN MY ORDERS ===================*/}
+            <button
+              className={`btnPagAdm ${
+                selectedButton === "showProfile" ? "selected" : ""
+              }`}
+              onClick={handleShowOrders}
+            >
+              My orders
+            </button>
             {/* =================== BTN MYPROFILE ===================*/}
             <button
               className={`btnPagAdm ${
@@ -181,6 +213,7 @@ const Home = () => {
           {showUser && <ListUsers/>} {/* VER USERS */}
           {showOverview && <CreateProduct />} {/* VER OVERVIEW */}
           {showProfile && <UserProfile />} {/* VER MYPROFILE */}
+          {showOrders && <OrdersAdmin />} {/* VER MIS VENTAS */}
         </div>
       </div>
     );
