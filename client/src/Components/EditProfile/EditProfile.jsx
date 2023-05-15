@@ -28,7 +28,56 @@ const EditProfile = () => {
 		  dispatch(update_users(userInfo._id, userInfo.isAdmin, editedUser, userInfo.token));
 		}
 	};
-	
+	if (userInfo.isAdmin){
+		return(
+			<div className="EditProfileContainer">
+        <form className="formRegister" onSubmit={submitHandler}>
+				{loading && <Loader></Loader>}
+				{error && <MessageBox variant="danger">{error}</MessageBox>}
+				<div className="labelCreateUser">
+					<label htmlFor="email" className="labelCreateUser">
+						New email address
+					</label>
+					<input
+						type="email"
+						id="email"
+						placeholder="Enter email"
+						onChange={(e) => setEmail(e.target.value)}
+					></input>
+				</div>
+				<div className="labelCreateUser">
+					<label htmlFor="password" className="labelCreateUser">
+						New password
+					</label>
+					<input
+						type="password"
+						id="password"
+						placeholder="Enter password"
+						onChange={(e) => setPassword(e.target.value)}
+					></input>
+				</div>
+				<div className="labelCreateUser">
+					<label htmlFor="confirmPassword" className="labelCreateUser">
+						Confirm new password
+					</label>
+					<input
+						type="password"
+						id="confirmPassword"
+						placeholder="Confirm password"
+						onChange={(e) => setConfirmPassword(e.target.value)}
+					></input>
+				</div>
+				<div>
+					<label />
+					<button className="primary" type="submit">
+						Update
+					</button>
+					<label />
+				</div>
+			</form>
+    </div>
+		)
+	} else
 return(
     <div className="EditProfileContainer">
         <form className="formRegister" onSubmit={submitHandler}>
