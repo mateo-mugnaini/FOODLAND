@@ -14,7 +14,7 @@ export const cartReducer = (state = initialState, action) => {
     case DELETE_CART:
       return {
         ...state,
-        cart: initialState,
+        cart: localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")):[],
       };
 
     default:
