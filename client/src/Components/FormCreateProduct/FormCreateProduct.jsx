@@ -1,8 +1,11 @@
 /* ========================* IMPORT GENERALES  *======================== */
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {Link} from "react-router-dom"
-import axios from "axios";
+import { createProduct } from "../../redux/actions/productActions";
+// import {Link} from "react-router-dom"
+// import axios from "axios";
+import swal from "sweetalert";
+import Axios from "axios";
 
 /* ========================* IMPORT VALIDACIONES  *======================== */
 import {
@@ -24,9 +27,8 @@ import "../FormCreateProduct/FormCreateProduct.css";
 import { getAllCategories } from "../../redux/actions/productActions";
 
 function FormCreateProduct() {
-
-// const URL = "http://localhost:5000";
-const URL = "https://foodland-production.up.railway.app";
+  const URL = "http://localhost:5000";
+  //const URL = "https://foodland-production.up.railway.app";
 
   /* ========================* ESTADO LOCAL  *======================== */
   const [product, setProduct] = useState({
@@ -37,7 +39,12 @@ const URL = "https://foodland-production.up.railway.app";
     brand: "",
     stock: 0,
     description: "",
+    image: "",
   });
+
+  // const [image, setImage] = useState("");
+  const [errorUpload, setErrorUpload] = useState("");
+  const [successUpload, setSuccessUpload] = useState("");
 
   const [errors, setErrors] = useState({});
 
@@ -72,21 +79,44 @@ const URL = "https://foodland-production.up.railway.app";
   // };
 
   /* ========================* FUNCION PARA QUE SE ENVIEN *======================== */
-  async function handleSubmit(event) {
-    event.preventDefault();
-    // if (product.category === "New category" && product.category !== "") {
-    //   await axios.post("http://localhost:5000/api/categories", {
-    //     name: product.category,
-    //   });
-    //   dispatch(addCategory({ name: product.category }));
-    //   setProduct({
-    //     ...product,
-    //     category: product.category,
-    //   });
-    // }
-    await axios.post(`${URL}/api/products`, product);
-    window.alert("El producto ha sido creado con éxito!!");
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log(formData, product);
+    try {
+      dispatch(createProduct(product));
+      // await axios
+      //   .put(`${URL}/api/products/${product._id}`, formData)
+      //   .then((res) => console.log(res));
+      setProduct({
+        // active: "",
+        name: "",
+        slug: "",
+        price: 0,
+        category: "",
+        brand: "",
+        stock: 0,
+        description: "",
+        image: "",
+      });
+      swal({
+        title: "The product was created successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.products.categories);
@@ -95,14 +125,34 @@ const URL = "https://foodland-production.up.railway.app";
     dispatch(getAllCategories());
   }, [dispatch]);
 
+  //Traigo el token del usuario
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
+  //Funcion para subir la imagen
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+
+    try {
+      const { data } = await Axios.post(`${URL}/api/upload`, bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      console.log(data.url);
+      setProduct({ ...product, image: data.url });
+      setSuccessUpload("Image loaded successfully to Cloudinary");
+    } catch (error) {
+      setErrorUpload(error.message);
+    }
+  };
+
   return (
     /* ================== * CONTENEDOR GENERAL * ================== */
     <div className="formProductContainer">
-      <div className="btnHomeContainer">
-      <Link to="/">
-      <button className="btnHome" >HOME</button>
-      </Link>
-      </div>
       {/* ================== * CONTENEDOR FORMULARIO * ================== */}
       <form className="formCreate" onSubmit={handleSubmit}>
         {/* ================== * NOMBRE * ================== */}
@@ -117,7 +167,9 @@ const URL = "https://foodland-production.up.railway.app";
               name="name"
             />
           </label>
-          {errors["name"]?.isValidation ? null : <p  className="errorFormCP">{errors?.name?.message}</p>}
+          {errors["name"]?.isValidation ? null : (
+            <p className="errorFormCP">{errors?.name?.message}</p>
+          )}
         </div>
         {/* ================== * SLUG * ================== */}
         <div className="labelContainer">
@@ -131,7 +183,9 @@ const URL = "https://foodland-production.up.railway.app";
               name="slug"
             />
           </label>
-          {errors["slug"]?.isValidation ? null : <p  className="errorFormCP">{errors?.slug?.message}</p>}
+          {errors["slug"]?.isValidation ? null : (
+            <p className="errorFormCP">{errors?.slug?.message}</p>
+          )}
         </div>
         {/* ================== * PRECIO * ================== */}
         <div className="labelContainer">
@@ -146,7 +200,8 @@ const URL = "https://foodland-production.up.railway.app";
             />
           </label>
           {errors["price"]?.isValidation ? null : (
-            <p  className="errorFormCP">{errors?.price?.message}</p>)}
+            <p className="errorFormCP">{errors?.price?.message}</p>
+          )}
         </div>
         {/* ================== * CATEGORIA * ================== */}
         <div className="labelContainer">
@@ -167,7 +222,7 @@ const URL = "https://foodland-production.up.railway.app";
             </select>
           </label>
           {errors["category"]?.isValidation ? null : (
-            <p  className="errorFormCP">{errors?.category?.message}</p>
+            <p className="errorFormCP">{errors?.category?.message}</p>
           )}
         </div>
         {/* ================== * MARCA * ================== */}
@@ -183,7 +238,7 @@ const URL = "https://foodland-production.up.railway.app";
             />
           </label>
           {errors["brand"]?.isValidation ? null : (
-            <p  className="errorFormCP">{errors?.brand?.message}</p>
+            <p className="errorFormCP">{errors?.brand?.message}</p>
           )}
         </div>
         {/* ================== * IMAGEN * ================== */}
@@ -192,12 +247,13 @@ const URL = "https://foodland-production.up.railway.app";
             Image
             <input
               className="input"
-              type="text"
-              value={product.image}
-              onChange={(e) => handleChange(e, ()=> ({isValidation: true, message: "",}))}
+              type="file"
+              onChange={uploadFileHandler}
               name="image"
             />
           </label>
+          {errorUpload && errorUpload}
+          {successUpload && successUpload}
           {errors["image"]?.isValidation ? null : (
             <p className="errorFormCP">{errors?.image?.message}</p>
           )}
@@ -215,7 +271,7 @@ const URL = "https://foodland-production.up.railway.app";
             />
           </label>
           {errors["stock"]?.isValidation ? null : (
-            <p  className="errorFormCP">{errors?.stock?.message}</p>
+            <p className="errorFormCP">{errors?.stock?.message}</p>
           )}
         </div>
         {/* ================== * DESCRIPCION * ================== */}
@@ -230,7 +286,7 @@ const URL = "https://foodland-production.up.railway.app";
             />
           </label>
           {errors["description"]?.isValidation ? null : (
-            <p  className="errorFormCP">{errors?.description?.message}</p>
+            <p className="errorFormCP">{errors?.description?.message}</p>
           )}
         </div>
         {/* ================== * Vista Previa * ================== */}

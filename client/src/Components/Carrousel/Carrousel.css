@@ -9,12 +9,12 @@
 .carrousel img {
   width: 81%;
   height: 200px;
+  object-fit: contain;
 }
 .carrousel div {
     background-color: #cdcdcd5c;
     display: flex;
-align-items: center;
-
+    align-items: center;
 }
 .slick-prev:before,
 .slick-next:before {

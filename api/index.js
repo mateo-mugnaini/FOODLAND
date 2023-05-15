@@ -7,6 +7,7 @@ import Product from "./src/routes/products.js";
 import orderRouter from "./src/routes/order.js";
 import cors from "cors";
 import path from "path";
+import uploadRouter from "./src/routes/uploadRoute.js";
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ mongoose
     console.log(err.message);
   });
 
+app.use("/api/upload", uploadRouter);  
 app.use("/api/products", Product);
 app.use("/api/seed", seedRouter);
 app.use("/api/users", userRouter);
@@ -45,5 +47,5 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server iss running at http://localhost:${port}`);
 });
