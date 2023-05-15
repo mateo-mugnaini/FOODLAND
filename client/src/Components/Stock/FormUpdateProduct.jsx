@@ -26,7 +26,6 @@ const EditProductForm = () => {
   }, [dispatch, decodedName]);
 
   const [formData, setFormData] = useState({
-    // active: true,
     name: "",
     slug: "",
     image: "",
@@ -37,11 +36,11 @@ const EditProductForm = () => {
     description: "",
     price: 0,
     stock: 0,
+    active: false,
   });
 
   useEffect(() => {
     setFormData({
-      // active: product?.active,
       name: product?.name,
       slug: product?.slug,
       image: product?.image,
@@ -52,28 +51,24 @@ const EditProductForm = () => {
       description: product?.description,
       price: product?.price,
       stock: product?.stock,
+      active: product?.active,
     });
-    // console.log(product.id, product._id);
   }, [product]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+    const newValue = type === "checkbox" ? checked : value;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData, product);
     try {
       dispatch(updateProduct(formData, product._id));
-      // await axios
-      //   .put(`${URL}/api/products/${product._id}`, formData)
-      //   .then((res) => console.log(res));
       setFormData({
-        // active: "",
         name: "",
         slug: "",
         image: "",
@@ -84,6 +79,7 @@ const EditProductForm = () => {
         description: "",
         price: 0,
         stock: 0,
+        active: false,
       });
       swal({
         title: "Cambio exitoso",
@@ -96,9 +92,8 @@ const EditProductForm = () => {
           popup: "animate__animated animate__fadeOutUp",
         },
       });
-
       setTimeout(() => {
-        window.location.replace("/products");
+        window.location.replace("/");
       }, 2000);
     } catch (err) {
       console.log(err);
@@ -163,7 +158,7 @@ const EditProductForm = () => {
             type="text"
             id="images"
             name="images"
-            placeholder="Insert a new images"
+            placeholder="Insert new images"
             value={formData.images}
             onChange={handleChange}
           />
@@ -186,7 +181,7 @@ const EditProductForm = () => {
         {/* ================== * CATEGORIA * ================== */}
         <div className="labelContainer">
           <label className="label">
-            Category
+            Category:
             <select
               className="input"
               name="category"
@@ -244,21 +239,19 @@ const EditProductForm = () => {
             onChange={handleChange}
           />
         </div>
-        {/* ================== * ACTIVADO * ================== */}
+        {/* ================== * ACTIVATED * ================== */}
         <div className="labelContainer">
-          <label className="label">
-            Active / Disactive
-            <select
-              className="input"
-              name="active"
-              value={formData?.active}
-              onChange={(e) => handleChange(e)}
-            >
-              <option value="0">Active / Desactive</option>
-              <option value={true}> Active</option>
-              <option value={false}> Desactive</option>
-            </select>
+          <label htmlFor="active" className="label">
+            Is Activated?
           </label>
+          <input
+            className="checkbox"
+            type="checkbox"
+            id="active"
+            name="active"
+            checked={formData.active}
+            onChange={handleChange}
+          />
         </div>
         <div className="btnContainer">
           <button className="btn" type="submit">

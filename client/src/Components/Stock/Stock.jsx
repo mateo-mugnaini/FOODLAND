@@ -27,8 +27,6 @@ const Stock = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
-  const aux = currentProducts?.map((e) => e = e.active);
-  console.log(aux);
 
   // Calcular el número total de páginas
   const totalPages = Math.ceil(productList?.length / productsPerPage);
@@ -72,19 +70,17 @@ const Stock = () => {
             <th className="thStock2">Stock</th>
             <th className="thStock2">Brand</th>
             <th className="thStock2">Price</th>
-            {/* <th className="thStock2">A / D</th> */}
             <th className="thStock3">Actions</th>
           </tr>
         </thead>
         <tbody>
           {currentProducts?.map((p) => (
             <tr key={p._id}>
-              <td>{p.name}</td>
-              <td>{p.category}</td>
-              <td>{p.stock}</td>
-              <td>{p.brand}</td>
-              <td>usd${p.price}</td>
-              {/* <td>{p.active ="TRUE" || !p.active === "FALSE"}</td> */}
+              <td className={p.active ? "" : "inactive"}>{p.name}</td>
+              <td className={p.active ? "" : "inactive"}>{p.category}</td>
+              <td className={p.active ? "" : "inactive"}>{p.stock}</td>
+              <td className={p.active ? "" : "inactive"}>{p.brand}</td>
+              <td className={p.active ? "" : "inactive"}>usd${p.price}</td>
               <td>
                 <Link to={`/editproduct/${p._id}`}>Editar</Link>
               </td>
