@@ -106,7 +106,7 @@ function Reviews() {
             </form>
           ) : (
             <MessageBox>
-              Please <Link to="/signin">Sign In</Link> to write a review
+              Please <Link to="/login">Sign In</Link> to write a review
             </MessageBox>
           )}
         </li>
