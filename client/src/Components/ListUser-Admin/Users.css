@@ -18,29 +18,6 @@
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.324);
   }
   
-
-  .thStock1{
-      background-color: #4CAF50;
-      color: white;
-      font-size: 18px;
-      padding: 10px;
-      /* border-top-right-radius: 20px; */
-      border-top-left-radius: 20px;  
-  }
-  .thStock2{
-      background-color: #4CAF50;
-      color: white;
-      font-size: 18px;
-      padding: 10px;
-  }
-  .thStock3{
-      background-color: #4CAF50;
-      color: white;
-      font-size: 18px;
-      padding: 10px;
-      border-top-right-radius: 20px;
-  }
-
   
   .stockList td {
   font-size: 16px;
