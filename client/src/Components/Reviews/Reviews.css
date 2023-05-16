@@ -20,7 +20,7 @@
 }
 
 .containerReviews .NotSign{
-    width: 400px;
+    width: 80%;
     margin: auto;
     border-radius: 20px;
     box-shadow: 3px 4px 12px rgb(0 0 0 / 62%);
@@ -32,7 +32,7 @@
     border-radius: 20px;
     width: -moz-fit-content;
     margin: auto;
-    width: 400px;
+    width: 80%;
 }
 
 .NotSign form div label{
@@ -42,12 +42,14 @@
 }
 select#rating{
     border-radius: 20px;
+    width: 20%;
 }
 
 textarea#comment{
     border-radius: 5px;
     font-size: 16px;
-    height: 100px;
+    height: 120px;
+    width: 80%;
 }
 
 button.primary{
