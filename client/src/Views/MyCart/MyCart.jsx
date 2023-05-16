@@ -6,11 +6,13 @@ import useLocalStore from "../../hooks/useLocalStore";
 //IMPORT COMPONENTS:
 import CheckOut from "../../Components/Checkout/CheckOut"
 import CartItem from "../../Components/CartItem/CartItem";
+import { useDispatch } from "react-redux";
+import { updateCart as updateCartRedux } from "../../redux/actions/cartActions";
 
 function MyCart() {
   const [cart, setCart] = useLocalStore("Carrito", []);
   const [total, setTotal] = useState(0);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const newTotal = cart.reduce((acc, product) => acc + product.price * product.quantity, 0);
     setTotal(newTotal);
@@ -25,11 +27,13 @@ function MyCart() {
       }
     });
     setCart(updatedCart);
+    dispatch(updateCartRedux(updatedCart));
   };
 
   const removeItem = (productId) => {
     const updatedCart = cart.filter((product) => product.id !== productId);
     setCart(updatedCart);
+    dispatch(updateCartRedux(updatedCart));
   };
 
   return (

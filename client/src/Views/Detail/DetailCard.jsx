@@ -10,6 +10,7 @@ import {getDetail} from "../../redux/actions"
 import useLocalStore from "../../hooks/useLocalStore";
 import Reviews from "../../Components/Reviews/Reviews";
 import swal from "sweetalert";
+import { updateCart } from "../../redux/actions/cartActions";
 
 const DetailCard = () => {
   const { id } = useParams();
@@ -38,12 +39,17 @@ const DetailCard = () => {
         const updatedQuantity = existingItem.quantity + quantity;
   
         setCart([...updatedCart, { ...existingItem, quantity: updatedQuantity , slug:existingItem.slug || existingItem.name}]);
+        dispatch(updateCart([
+          ...updatedCart,
+          { ...existingItem, quantity: updatedQuantity , slug:existingItem.slug || existingItem.name},
+        ]));
         swal({
           text:"product added to cart!",
           icon: "success",
         });
       } else {
         setCart([...Cart, { id, name: product.name, description: product.description, price: product.price, image: product.image, quantity ,slug:product.slug || product.name}]);
+        dispatch(updateCart([...Cart, { id, name: product.name, description: product.description, price: product.price, image: product.image, quantity ,slug:product.slug || product.name}]));
         swal({
           text:"product added to cart!",
           icon: "success",
