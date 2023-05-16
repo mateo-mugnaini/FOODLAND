@@ -153,7 +153,8 @@ const ListUsers = () => {
     }
     
     const handleSelectsearch = (event) =>{
-      dispatch(sort_user({value:event.target.value, users}))
+       if(event.target.value=== "all") dispatch(get_users(token))
+       else dispatch(sort_user({value:event.target.value, users}))
     }
 
     // const deleteuser = async (u) => {
@@ -224,11 +225,10 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
                 /></button></label>
                     <label>
                       <select onChange={handleSelectsearch} className="sortList">
-                        <option value="all">Sort by:</option>
+                        <option value="">Sort by:</option>
+                        <option value="all"> All</option>
                         <option value="NameAsc" >Fullname A-Z</option>
                         <option value="NameDsc" >Fullname Z-A</option>
-                        {/* <option value="IdAsc" >ID ↑</option>
-                        <option value="IsDsc" >ID ↓</option> */}
                         <option value="EmailAsc" >Email A-Z</option>
                         <option value="EmailDsc" >Email Z-A</option>
                         <option value="Users" >Users</option>

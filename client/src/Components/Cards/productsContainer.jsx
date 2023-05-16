@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from "react-redux"
 import Filters from "./Filters"
 import Loader from "../Loader/Loader"
 import ProductCard from "./productCard"
+import swal from "sweetalert"
 
 //IMPORT ACTIONS
 import { handle_sorts, getByCategory, getAllProducts } from "../../redux/actions/productActions";
@@ -70,6 +71,10 @@ const ProductsContainer = () => {
       cart[existingItem].quantity += 1;
       setCart(cart);
       dispatch(updateCart(cart))
+      swal({
+        text:"product added to cart!",
+        icon: "success",
+      });
     } else {
       setCart([
         ...cart,
@@ -79,6 +84,10 @@ const ProductsContainer = () => {
         ...cart,
         { id, name, price, image, description, quantity: 1, slug },
       ]));
+      swal({
+        text:"product added to cart!",
+        icon: "success",
+      });
     }
   };
 
