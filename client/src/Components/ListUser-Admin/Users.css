@@ -136,3 +136,12 @@ button.red:hover{
    color: black;
     width: 72px; 
    }
+
+button.black{
+    background-color: black;
+    color:white;
+}
+button.black:hover{
+    background-color: rgb(66, 66, 66);
+    color:white;
+}
