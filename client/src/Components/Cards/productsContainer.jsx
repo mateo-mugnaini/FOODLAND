@@ -30,7 +30,7 @@ const ProductsContainer = () => {
 
   // Paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 10;
+  const productsPerPage = 9;
   const maxPages = 10; // Número máximo de páginas a mostrar en la paginación
 
   // Calcular índices de productos a mostrar en la página actual
