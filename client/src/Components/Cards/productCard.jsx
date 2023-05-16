@@ -14,7 +14,7 @@ const ProductCard = ({
   slug,
   funtionOnchange,
   stock,
-  active
+  active,
 }) => {
 // console.log("este es el stock",stock);
 
