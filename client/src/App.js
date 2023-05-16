@@ -17,6 +17,7 @@ import PlaceOrderScreen from "./Views/Order/placeOrderScreen";
 import UserProfile from "./Views/UserProfile/UserProfile";
 import UserOrders from "./Components/UserOrders/UserOrders";
 import Error404 from "./Components/Error/error404";
+import LogIn from "./Views/Login/login2";
 
 function App() {
   const location = useLocation();
@@ -33,6 +34,12 @@ function App() {
         <Route
           path="/login"
           element={<SigninScreen />}
+          name="Login"
+          key="Login"
+        ></Route>
+        <Route
+          path="/log-in"
+          element={<LogIn />}
           name="Login"
           key="Login"
         ></Route>
@@ -119,7 +126,7 @@ function App() {
           name="detailOrder"
           key="detailOrder"
         ></Route>
-        <Route path="*" element={<Error404/>}></Route>
+        <Route path="*" element={<Error404 />}></Route>
       </Routes>
 
       <Footer />

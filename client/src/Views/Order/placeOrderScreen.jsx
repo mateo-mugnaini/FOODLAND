@@ -311,7 +311,7 @@ export default function PlaceOrderScreen() {
                 <h2>User</h2>
                 <div className="bottons">
                   <p>You need to be logged in to continue</p>
-                  <Link to="/login">
+                  <Link to="/log-in">
                     <button>Login</button>
                   </Link>
                   {"or "}
