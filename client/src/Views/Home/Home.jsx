@@ -19,7 +19,6 @@ const Home = () => {
 
   /* =================== ESTADOS PARA COMPONENTES ===================*/
   const [selectedButton, setSelectedButton] = useState(""); // Estado para almacenar el botón seleccionado
-  const [showHomeClient, setshowHomeClient] = useState(false); //Estado del Home del user
   const [showStock, setShowStock] = useState(false); //Estado ver el Stock
   const [showCreateProduct, setShowCreateProduct] = useState(false); //Estado para crear producto
   const [showOverview, setShowOverview] = useState(true); // Estado estadisticas
@@ -43,7 +42,6 @@ const Home = () => {
     setShowCreateProduct(false);
     setShowUser(false);
     setShowOverview(false);
-    setshowHomeClient(false);
     setShowProfile(false);
     setShowOrders(false)
   };
@@ -54,7 +52,6 @@ const Home = () => {
     setShowStock(false);
     setShowUser(false);
     setShowOverview(false);
-    setshowHomeClient(false);
     setShowProfile(false);
     setShowOrders(false)
 
@@ -66,7 +63,6 @@ const Home = () => {
     setShowStock(false);
     setShowUser(true);
     setShowOverview(false);
-    setshowHomeClient(false);
     setShowProfile(false);
     setShowOrders(false)
 
@@ -79,25 +75,10 @@ const Home = () => {
     setShowStock(false);
     setShowUser(false);
     setShowOverview(true);
-    setshowHomeClient(false);
     setShowProfile(false);
     setShowOrders(false)
 
   };
-
-  /* =================== VER HOME CLIENTES ===================*/
-  const handleShowHomeClient = () => {
-    setSelectedButton("showHomeClient");
-    setShowCreateProduct(false);
-    setShowStock(false);
-    setShowUser(false);
-    setShowOverview(false);
-    setshowHomeClient(true);
-    setShowProfile(false);
-    setShowOrders(false)
-
-  };
-
   /* =================== VER MI PERFIL ===================*/
   const handleShowProfile = () => {
     setSelectedButton("showHomeClient");
@@ -105,7 +86,6 @@ const Home = () => {
     setShowStock(false);
     setShowUser(false);
     setShowOverview(false);
-    setshowHomeClient(false);
     setShowProfile(true);
     setShowOrders(false)
   };
@@ -116,7 +96,6 @@ const Home = () => {
     setShowStock(false);
     setShowUser(false);
     setShowOverview(false);
-    setshowHomeClient(false);
     setShowProfile(false);
     setShowOrders(true)
   };
@@ -146,15 +125,6 @@ const Home = () => {
               onClick={handleShowOverview}
             >
               Overview
-            </button>
-            {/* =================== BTN HOME CLIENT ===================*/}
-            <button
-              className={`btnPagAdm ${
-                selectedButton === "showHomeClient" ? "selected" : ""
-              }`}
-              onClick={handleShowHomeClient}
-            >
-              Home Client
             </button>
             {/* =================== BTN STOCK ===================*/}
             <button
@@ -207,7 +177,6 @@ const Home = () => {
               Log out
             </button>
           </div>
-          {showHomeClient && <CategoryContainer />} {/* VER HOME CLIENTE */}
           {showStock && <StockViews />} {/* VER STOCK */}
           {showCreateProduct && <CreateProduct />} {/* VER CREATE PRODUCT */}
           {showUser && <ListUsers/>} {/* VER USERS */}
