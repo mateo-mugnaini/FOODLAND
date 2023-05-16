@@ -12,7 +12,6 @@ import "./UserOrders.css";
 const UserOrders = () => {
   /* ========================* State Orders  *======================== */
   const orders = useSelector((state) => state.order?.myOrders);
-  console.log(orders);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrders());
@@ -65,6 +64,9 @@ const UserOrders = () => {
   for (let i = paginationStart; i <= paginationEnd; i++) {
     paginationPages.push(i);
   }
+  const aux2 = currentOrders?.map((e) => e);
+  const idProducto = aux2;
+  console.log(idProducto);
 
   /* ========================* DATE *======================== */
   const formatDate = (dateString) => {
@@ -114,16 +116,16 @@ const UserOrders = () => {
                     <hr /> {/* Línea separadora entre compras */}
                   </td>
                   {/*  ========================* Productos  *======================== */}
-                  <Link to={`/detail/${encodeURI(id)}`}>
                   <td>
-                    {order.orderItems.map((item) => (
-                      <div key={item._id}>
-                        <p>{item.name}</p>
-                      </div>
-                    ))}
+                    <Link to={`/detail/${order._id}`}>
+                      {order.orderItems.map((item) => (
+                        <div key={item._id}>
+                          <p>{item.name}</p>
+                        </div>
+                      ))}
+                    </Link>
                     <hr /> {/* Línea separadora entre compras */}
                   </td>
-                  </Link>
                   {/*  ========================* Precio Unitario  *======================== */}
                   <td>
                     {order.orderItems.map((item) => (
