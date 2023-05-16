@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { PRODUCT_REVIEW_CREATE_RESET } from "../../redux/constants/productConstants";
 import { createReview } from "../../redux/actions/productActions";
+import "./Reviews.css"
 
 function Reviews() {
   // const params = useParams();
@@ -48,8 +49,8 @@ function Reviews() {
   };
 
   return (
-    <div>
-      <h2 id="reviews">Reviews</h2>
+    <div name="containerReviews" className="containerReviews">
+      <h1 id="reviews">Reviews</h1>
       {product?.reviews?.length === 0 && (
         <MessageBox>There are no customer reviews</MessageBox>
       )}
@@ -62,7 +63,8 @@ function Reviews() {
             <p>{review.comment}</p>
           </li>
         ))}
-        <li>
+        </ul>
+        <li className="NotSign">
           {userInfo?._id ? (
             <form className="form" onSubmit={submitHandler}>
               <div>
@@ -110,7 +112,7 @@ function Reviews() {
             </MessageBox>
           )}
         </li>
-      </ul>
+      
     </div>
   );
 }
