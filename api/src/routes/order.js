@@ -4,6 +4,7 @@ import Order from "../models/order.js";
 import { isAuth, isAdmin } from "../middlewares/middlewares.js";
 import User from "../models/user.js";
 import Product from "../models/product.js";
+import nodemailer from "nodemailer";
 
 const orderRouter = express.Router();
 
@@ -43,17 +44,17 @@ const mailOptions = {
 	  }
 	}) */
 
-/* CONFIGURACION PARA ENVIO DE MAILS 
+//CONFIGURACION PARA ENVIO DE MAILS
 
 let transporter = nodemailer.createTransport({
-	host: "smtp.gmail.com",
-	port: 587,
-	secure: false, 
-	auth: {
-	  user: "foodland.henry@gmail.com", 
-	  pass: "eofcyzqwebqksbvu", 
-	},
-  }); */
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "foodland.henry@gmail.com",
+    pass: "eofcyzqwebqksbvu",
+  },
+});
 
 //Ruta para que el Admin reciba todas las órdenes de compra
 orderRouter.get(
@@ -81,7 +82,6 @@ orderRouter.post(
       totalPrice: req.body.totalPrice,
       user: req.user._id,
     });
-
     const order = await newOrder.save();
     res.status(201).send({ message: "New Order Created", order });
   })
@@ -199,6 +199,42 @@ orderRouter.put(
       };
 
       const updatedOrder = await order.save();
+      const descriptionOrder = updatedOrder.orderItems
+        .map((product) => {
+          return `${product.name}: cantidad: ${product.quantity}, Precio unitario: ${product.price}.`;
+        })
+        .join("\n");
+      const mailOptions = {
+        from: "foodland.henry@gmail.com",
+        to: req.body.email,
+        subject: "CONFIRMACION DE PAGO DE SU PEDIDO",
+        html: `
+		  <h2> Estimado ${updatedOrder.shippingAddress.fullName} </h2>
+		
+		  <p>Gracias por elegir Supermercado XYZ. Nos complace confirmar que hemos recibido el pago de su pedido. A continuación, te proporcionamos los detalles de tu pedido: </p>
+		  <br/>
+		  <p> Número de pedido: ${updatedOrder._id} </p>
+		  <p>Fecha del pago pedido: ${updatedOrder.paymentResult.update_time} </p>
+		  <p>Dirección de entrega: ${updatedOrder.shippingAddress.address}, en la ciudad ${updatedOrder.shippingAddress.city} </p>
+		  
+		  <h3>Detalles del pedido:</h3>
+		  
+		  ${descriptionOrder}
+		 
+		  <p>Total del pedido: ${updatedOrder.totalPrice} </p>
+		  
+		  <p> Método de pago: ${updatedOrder.paymentMethod} </p>
+		  
+		  <p>Si tienes alguna pregunta o necesitas realizar alguna modificación en tu pedido, no dudes en comunicarte con nuestro servicio de atención al cliente al [número de contacto] o responder a este correo electrónico. Estaremos encantados de asistirte.</p>
+			`,
+      };
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("email sent succesfuly ");
+        }
+      });
       res.send({ message: "Order Paid", order: updatedOrder });
     } else {
       res.status(404).send({ message: "Order Not Found" });

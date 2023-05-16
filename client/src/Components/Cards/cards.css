@@ -183,7 +183,21 @@
         margin-top: 7%;
         margin-bottom: 2%;
     }
+    .product .addButton2 {
+        height: 35px;
+        width: 70%;
+        background-color: #b21616;
+        margin-top: 7%;
+        margin-bottom: 2%;
+        border: transparent;
+        font-size: 15px;
+        font-weight: 500;
+        border-radius: 7px;
+        box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.623);
+        color: white;
+    }
     
+
     .product .addButton:hover {
         box-shadow: 3px 4px 18px rgba(0, 0, 0, 0.774);
     }

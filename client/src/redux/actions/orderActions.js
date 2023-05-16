@@ -6,6 +6,7 @@ import {
   ORDER_COMPLETE_PAY,
 } from "../constants/orderConstants";
 import axios from "axios";
+import swal from "sweetalert";
 
 const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
 
@@ -42,6 +43,7 @@ export const createOrder = (order, token) => async (dispatch) => {
     if (data.message === "New Order Created") {
       dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
       window.localStorage.removeItem("Carrito");
+      
     }
   } catch (error) {
     dispatch({
@@ -54,7 +56,21 @@ export const createOrder = (order, token) => async (dispatch) => {
   }
 };
 
-export const orderPay = () => ({ type: ORDER_COMPLETE_PAY });
+export const orderPay = () => async (dispatch) => {
+  dispatch({type: ORDER_COMPLETE_PAY});
+  swal({
+    title: "Successful purchase!",
+    text:`The proof of purchase has been sent to your email, with it you can check the delivery status.`,
+    icon: "success",
+    confirmButtonText: "OK",
+    showClass: {
+      popup: "animate__animated animate__fadeInDown",
+    },
+    hideClass: {
+      popup: "animate__animated animate__fadeOutUp",
+    },
+  })
+};
 
 export const getOrders = (order) => async (dispatch, getState) => {
   dispatch({ type: action.GET_ORDERS_REQUEST, payload: order });
@@ -69,6 +85,7 @@ export const getOrders = (order) => async (dispatch, getState) => {
       type: action.GET_ORDERS_SUCCESS,
       payload: response.data,
     });
+
   } catch (error) {
     dispatch({
       type: action.GET_ORDERS_FAIL,

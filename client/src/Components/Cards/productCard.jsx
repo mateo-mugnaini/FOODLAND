@@ -12,9 +12,11 @@ const ProductCard = ({
   description,
   numReviews,
   slug,
-  funtionOnchange
+  funtionOnchange,
+  stock,
+  active,
 }) => {
-
+// console.log("este es el stock",stock);
 
   return (
     <div className="productCard">
@@ -26,9 +28,9 @@ const ProductCard = ({
           <Rating rating={rating} numReviews={numReviews} />
         </Link>
         {/* <button className='addButton'>ADD TO CART</button> */}
-        <button className="addButton" onClick={(e) => funtionOnchange(e, id,{id,name,price,image,rating,description,numReviews,slug})}>
+        {stock > 0 && active ? <button className="addButton" onClick={(e) => funtionOnchange(e, id,{id,name,price,image,rating,description,numReviews,slug})}>
           ADD TO CART
-        </button>
+        </button>:<button disabled={true} className="addButton2">No Stock</button>}
       </div>
     </div>
   );

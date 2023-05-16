@@ -7,11 +7,10 @@ import {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
   GET_USERS,
-  USER_DELETE_REQUEST,
-  USER_DELETE_SUCCESS,
-  USER_DELETE_FAIL,
+  USER_BAN,
   SET_USERS,
   SORT_USER,
+  USER_DELETE,
 } from "../constants/userConstants";
 
 //Reducer para usuario que se loguea
@@ -56,33 +55,29 @@ export const users = (
           users: action.payload,
           listLoading: false,
         };
-      case USER_DELETE_REQUEST:
-        return {
-          ...state,
-          loading: true,
-        };
-      case USER_DELETE_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          deletedUser: action.payload,
-        };
-      case USER_DELETE_FAIL:
-        return {
-          ...state,
-          loading: false,
-          error: action.payload,
-        };
+        case USER_BAN:
+          return{
+            ...state,
+            users:action.payload,
+          }
         case SET_USERS:
           return{
             ...state,
             users:action.payload,
+            listLoading: false,
           }
         case SORT_USER: 
         return{
           ...state,
           users:action.payload,
+          listLoading: false,
         }
+        case USER_DELETE:
+          return{
+            ...state,
+            users:action.payload,
+            listLoading: false,         
+          }
       default:
         return state;
     }

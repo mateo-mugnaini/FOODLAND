@@ -15,6 +15,8 @@ export default function PlaceOrderScreen() {
   const [cart] = useLocalStore("Carrito", []);
   const totalstate = useLocalStore("resumen",[])
   const { userInfo } = useSelector((state) => state.userSignin);
+
+  console.log({ userInfo });
   const {
     orders: { totalPrice: amount, active },
   } = useSelector((state) => state.order);
@@ -59,18 +61,6 @@ export default function PlaceOrderScreen() {
   // ========== ShippingAdress ========
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    if (!userInfo || !userInfo._id)
-      swal({
-        title: "You need to be logged in to complete the purchase",
-        icon: "warning",
-        confirmButtonText: "OK",
-        showClass: {
-          popup: "animate__animated animate__fadeInDown",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutUp",
-        },
-      });
   };
 
   const handleShipping = (event) =>{
@@ -159,8 +149,14 @@ export default function PlaceOrderScreen() {
       });
       return;
     } 
-    else if( shippingInfo === false){
-      swal({
+    else if( shippingDiv && (
+      !shippValue.name ||
+      !shippValue.lastname ||
+      !shippValue.address ||
+      !shippValue.postalCode ||
+      !shippValue.city ||
+      !shippValue.country))
+      {swal({
         title: "you need to complete shipping information",
         icon: "warning",
         confirmButtonText: "OK",
@@ -172,8 +168,7 @@ export default function PlaceOrderScreen() {
         },
       });
       return;
-    }
-    else {
+    }else {
       dispatch(
         createOrder(
           {
@@ -273,7 +268,8 @@ export default function PlaceOrderScreen() {
                     }
                   ></input>
                 </label>
-                Shipping Address:<select onChange={handleShipping}>
+                  Shipping Address:
+                <select onChange={handleShipping} value={shippingDiv ? "On" : "Off"}>
                   <option value="Off">Same</option>
                   <option value="On">Diferent</option>
                 </select>
@@ -315,7 +311,7 @@ export default function PlaceOrderScreen() {
                 <h2>User</h2>
                 <div className="bottons">
                   <p>You need to be logged in to continue</p>
-                  <Link to="/login">
+                  <Link to="/log-in">
                     <button>Login</button>
                   </Link>
                   {"or "}
@@ -381,7 +377,7 @@ export default function PlaceOrderScreen() {
             type="button"
             onClick={placeOrderHandler}
             className="PlaceOrder"
-            disabled={cart.length === 0}
+            disabled={cart.length === 0 || userInfo === null}
           >
             Place Order
           </button>
