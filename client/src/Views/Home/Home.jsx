@@ -117,65 +117,56 @@ const Home = () => {
             <div className="messageHome">
               <h1>Hi! {userInfo.name}</h1>
             </div>
+            <div className="listAdmContainerGeneral" >
+            <ul className="listAdmContainer">
             {/* =================== BTN OVERVIEW ===================*/}
-            <button
-              className={`btnPagAdm ${
+              <li className={`listAdm ${
                 selectedButton === "ShowOverview" ? "selected" : ""
               }`}
-              onClick={handleShowOverview}
-            >
-              Overview
-            </button>
+              onClick={handleShowOverview} >Overview</li>
             {/* =================== BTN STOCK ===================*/}
-            <button
-              className={`btnPagAdm ${
+              <li 
+               className={`listAdm ${
                 selectedButton === "showStock" ? "selected" : ""
               }`}
-              onClick={handleShowStock}
-            >
-              Stock
-            </button>
+              onClick={handleShowStock}> Stock </li>
             {/* =================== BTN CREATE PRODUCT ===================*/}
-            <button
-              className={`btnPagAdm ${
+              <li className={`listAdm ${
                 selectedButton === "showCreateProduct" ? "selected" : ""
               }`}
               onClick={handleShowCreateProduct}
-            >
-              Create Product
-            </button>
+            >  Create Product </li>
             {/* =================== BTN USERS ===================*/}
-            <button
-              className={`btnPagAdm ${
+              <li className={`listAdm ${
                 selectedButton === "showUser" ? "selected" : ""
               }`}
               onClick={handleShowUser}
-            >
-              Users
-            </button>
+            > Users </li>
             {/* =================== BTN MY ORDERS ===================*/}
-            <button
-              className={`btnPagAdm ${
+            <li
+              className={`listAdm ${
                 selectedButton === "showProfile" ? "selected" : ""
               }`}
               onClick={handleShowOrders}
             >
               My orders
-            </button>
+            </li>
             {/* =================== BTN MYPROFILE ===================*/}
-            <button
-              className={`btnPagAdm ${
+            <li
+              className={`listAdm ${
                 selectedButton === "showProfile" ? "selected" : ""
               }`}
               onClick={handleShowProfile}
             >
               My profile
-            </button>
+            </li>
             {/* =================== BTN LOGOUT ===================*/}
-            <button onClick={signOutHandler} className="btnPagAdmOut">
+            <li onClick={signOutHandler} className="listAdm2">
               {" "}
               Log out
-            </button>
+            </li>
+            </ul>
+            </div>
           </div>
           {showStock && <StockViews />} {/* VER STOCK */}
           {showCreateProduct && <CreateProduct />} {/* VER CREATE PRODUCT */}
