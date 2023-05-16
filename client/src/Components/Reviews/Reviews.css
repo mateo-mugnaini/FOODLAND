@@ -1,3 +1,7 @@
+.containerReviews{
+    margin-bottom: 2%;
+}
+
 .containerReviews ul{
     display: flex;
     flex-direction: row;

@@ -95,7 +95,8 @@ const DetailCard = () => {
         <h1>{product.name}</h1>
         <h4>({product.price} x 1K )</h4>
         <h2>${product.price}</h2>
-        <span ><Rating rating={product.rating} numReviews={product.numReviews}/></span>
+        <span>{product.description}</span>
+        <span><Rating rating={product.rating} numReviews={product.numReviews}/></span>
         <div className="contadorr">
         <button onClick={() => setQuantity(quantity - 1)}  disabled={quantity <= 1}>-</button>
             <p>{quantity}</p>
@@ -104,7 +105,7 @@ const DetailCard = () => {
         
           <div className="buttonsDetails">
           
-         {product.active && product.stock>0 ? <button className="addButton" onClick={handleAddToCart}>Add Product</button>:<button className="addButton" disabled={true}>No Stock</button>}
+         {product.active && product.stock>0 ? <button className="addButton" onClick={handleAddToCart}>Add Product</button>:<button className="addButton2" disabled={true}>No Stock</button>}
          {product.active && product.stock>0 ? <button className="BuyNow"onClick={handleAddToCart}><Link to="/MyCart">Buy Now</Link></button>:null}
 
           </div>
