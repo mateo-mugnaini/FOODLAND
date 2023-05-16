@@ -75,7 +75,7 @@ function Profile() {
           ) : (
             <>
               <EditProfile />
-              <button className='exitEditMode-btn' onClick={() => setIsEditing(false)}>Exit Edit Mode</button>
+              <button className='exitEditMode-btn' onClick={() => setIsEditing(false)}>X</button>
             </>
           )}
         </div>
