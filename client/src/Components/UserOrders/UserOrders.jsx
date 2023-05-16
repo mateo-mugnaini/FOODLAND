@@ -66,7 +66,9 @@ const UserOrders = () => {
   }
   const aux2 = currentOrders?.map((e) => e);
   const idProducto = aux2;
-  console.log(idProducto);
+  // console.log(orders)
+  // console.log(idProducto);
+
 
   /* ========================* DATE *======================== */
   const formatDate = (dateString) => {
@@ -117,13 +119,15 @@ const UserOrders = () => {
                   </td>
                   {/*  ========================* Productos  *======================== */}
                   <td>
-                    <Link to={`/detail/${order._id}`}>
+                    
                       {order.orderItems.map((item) => (
-                        <div key={item._id}>
+                        <Link to={`/detail/${item.product}`}>
+                          <div key={item._id}>
                           <p>{item.name}</p>
-                        </div>
+                        </div>        
+                        </Link>
                       ))}
-                    </Link>
+            
                     <hr /> {/* Línea separadora entre compras */}
                   </td>
                   {/*  ========================* Precio Unitario  *======================== */}
