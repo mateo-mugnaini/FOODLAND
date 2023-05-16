@@ -31,8 +31,8 @@ const NavBar = () => {
 
   const signOutHandler = (e) => {
     e.preventDefault();
-    // dispatch(signout());
-    logout();
+    dispatch(signout());
+    // logout();
     navigate("/");
   };
 
