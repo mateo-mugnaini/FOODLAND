@@ -114,6 +114,7 @@ const UserOrders = () => {
                     <hr /> {/* Línea separadora entre compras */}
                   </td>
                   {/*  ========================* Productos  *======================== */}
+                  <Link to={`/detail/${encodeURI(id)}`}>
                   <td>
                     {order.orderItems.map((item) => (
                       <div key={item._id}>
@@ -122,6 +123,7 @@ const UserOrders = () => {
                     ))}
                     <hr /> {/* Línea separadora entre compras */}
                   </td>
+                  </Link>
                   {/*  ========================* Precio Unitario  *======================== */}
                   <td>
                     {order.orderItems.map((item) => (
