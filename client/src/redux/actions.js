@@ -83,14 +83,14 @@ export const getDetail = (id) => {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products/slug/${id}`);
 
-      console.log(response.data);
+      // console.log(response.data);
       dispatch({
         type: action.DETAIL_PRODUCT,
         payload: response.data,
       });
       dispatch(ready());
     } catch (error) {
-      console.log(error, "WWWW");
+      // console.log(error, "WWWW");
       dispatch({
         type: action.DETAIL_PRODUCT,
         payload: error,
@@ -126,7 +126,7 @@ export const getByCategory = (category) => {
         dispatch(ready());
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       dispatch({
         type: action.GET_BY_CATEGORY,
         payload: error,
@@ -165,7 +165,7 @@ export const resultSearch = (result) => {
         payload: result,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 };

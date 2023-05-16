@@ -88,7 +88,6 @@ const ProductsContainer = () => {
       dispatch(getAllProducts())
       dispatch(getByCategory(categoriesId));  
        }
-  
   }, [dispatch]);
 if (userInfo?.isAdmin){
   return(<div className="productsContainer">
@@ -125,20 +124,22 @@ if (userInfo?.isAdmin){
   {display ? (
     <Loader />
   ) : (        
-      Array.isArray(aux) ? (
-        aux?.map((e) => {
-          const id= e['_id'];
+      Array.isArray(aux) && aux[0].stock ? (
+        aux.map((product) => {
+          const id= product['_id'];
           return(
           <ProductCard
           key={id}
           id={id}
-          name={e.name}
-          price={e.price}
-          image={e.image}
-          description={e.description}
-          rating={e.rating}
-          numReviews={e.numReviews}
-          slug={e.slug}
+          name={product.name}
+          price={product.price}
+          image={product.image}
+          description={product.description}
+          rating={product.rating}
+          numReviews={product.numReviews}
+          slug={product.slug}
+          stock={product.stock}
+          active={product.active}
           funtionOnchange={AddProductoToCart}
           />
         )})
@@ -225,6 +226,8 @@ return (
               rating={e.rating}
               numReviews={e.numReviews}
               slug={e.slug}
+              stock={e.stock}
+              active={e.active}
               funtionOnchange={AddProductoToCart}
               />
             )})
