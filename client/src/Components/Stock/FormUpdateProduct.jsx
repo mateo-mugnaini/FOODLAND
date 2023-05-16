@@ -87,7 +87,7 @@ const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
         active: false,
       });
       swal({
-        title: "Cambio exitoso",
+        title: "Successful change",
         icon: "success",
         confirmButtonText: "OK",
         showClass: {

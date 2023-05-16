@@ -63,7 +63,7 @@ margin-top: 0;
 
 .addButton{
     height: 35px;
-    width: 26%;
+    width: 300px;
     background-color: #54B216;
     margin: 4% 0 5% ;
     border: transparent;
@@ -85,16 +85,17 @@ margin-top: 0;
 .returnButton:hover {
     background-color: rgba(95, 95, 95, 0.226);
 }
-.contador {
+.contadorr {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 18%;
     margin-top: 2%;
     margin-bottom: 2%;
+    margin-left: 100px;
  }
 
- .contador button {
+ .contadorr button {
     width: 35px;
     height: 35px;
     display: flex;
@@ -109,6 +110,37 @@ margin-top: 0;
 
  }
 
- .contador button:hover {
+ .contadorr button:hover {
     background-color:#54B216
  }
+
+ .buttonsDetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+ }
+
+ .BuyNow{
+    height: 35px;
+    width: 300px;
+    background-color: rgb(26, 102, 1);
+    margin: 4% 0 5% ;
+    border: transparent;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 7px;
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.623);
+    color: #54B216;
+ }
+
+.BuyNow a{
+    background-color: rgb(26, 102, 1);
+    display: flex;
+    justify-content: center;
+    height: 35px;
+    width: 297px;
+    align-items: center;
+    color: white;
+    margin-left: -4px;
+    border-radius: inherit;
+}
