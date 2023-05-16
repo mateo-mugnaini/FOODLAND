@@ -33,6 +33,7 @@ const NavBar = () => {
 		e.preventDefault();
 		if (isAuthenticated) {
 			logout();
+			dispatch(signout());
 		} else {
 			dispatch(signout());
 		}
