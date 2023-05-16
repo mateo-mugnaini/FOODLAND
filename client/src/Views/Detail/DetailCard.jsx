@@ -96,8 +96,8 @@ const DetailCard = () => {
             <button onClick={() => setQuantity(quantity + 1)}>+</button>
             </div>
           <div className="buttonsDetails">
-         <button className="addButton" onClick={handleAddToCart}>Add Product</button>
-         <button className="BuyNow"onClick={handleAddToCart}><Link to="/MyCart">Buy Now</Link></button>
+         {product.active && product.stock>0 ? <button className="addButton" onClick={handleAddToCart}>Add Product</button>:<button className="addButton" disabled={true}>No Stock</button>}
+         {product.active && product.stock>0 ? <button className="BuyNow"onClick={handleAddToCart}><Link to="/MyCart">Buy Now</Link></button>:null}
           </div>
         <button className='returnButton' onClick={showLegalInfo}>Returns & Exchanges →</button>
       </div>
