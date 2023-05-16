@@ -181,7 +181,7 @@ const Home = () => {
               }`}
               onClick={handleShowUser}
             >
-              Users
+              User List
             </button>
             {/* =================== BTN MY ORDERS ===================*/}
             <button
@@ -190,7 +190,7 @@ const Home = () => {
               }`}
               onClick={handleShowOrders}
             >
-              My orders
+              Sales Order List
             </button>
             {/* =================== BTN MYPROFILE ===================*/}
             <button
