@@ -15,6 +15,8 @@ export default function PlaceOrderScreen() {
   const [cart] = useLocalStore("Carrito", []);
   const totalstate = useLocalStore("resumen",[])
   const { userInfo } = useSelector((state) => state.userSignin);
+
+  console.log({ userInfo });
   const {
     orders: { totalPrice: amount, active },
   } = useSelector((state) => state.order);
@@ -375,7 +377,7 @@ export default function PlaceOrderScreen() {
             type="button"
             onClick={placeOrderHandler}
             className="PlaceOrder"
-            disabled={cart.length === 0}
+            disabled={cart.length === 0 || userInfo === null}
           >
             Place Order
           </button>
