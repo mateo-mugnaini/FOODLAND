@@ -99,7 +99,7 @@ const DetailCard = () => {
          <button className="addButton" onClick={handleAddToCart}>Add Product</button>
          <button className="BuyNow"onClick={handleAddToCart}><Link to="/MyCart">Buy Now</Link></button>
           </div>
-        <button className='returnButton' onClick={showLegalInfo}>Cambios y devoluciones →</button>
+        <button className='returnButton' onClick={showLegalInfo}>Returns & Exchanges →</button>
       </div>
 
     </div>

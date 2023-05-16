@@ -74,6 +74,11 @@ margin-top: 0;
     color: white;
 }
 
+
+.addButton:hover{
+    background-color: #78b64f;
+}
+
 .returnButton{
     height: 35px;
     width: 37%;
@@ -107,7 +112,6 @@ margin-top: 0;
     background-color: rgba(146, 146, 146, 0.096);
     border: transparent;
     box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.623);
-
  }
 
  .contadorr button:hover {
@@ -143,4 +147,7 @@ margin-top: 0;
     color: white;
     margin-left: -4px;
     border-radius: inherit;
+}
+.BuyNow a:hover{
+    background-color: rgb(67, 111, 52);
 }
