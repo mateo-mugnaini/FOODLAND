@@ -6,6 +6,7 @@ height: 100px;
 .ContainterFooter{
     background-color: black;
     color: white;
+    padding-bottom: 16px;
     /* position: fixed;
     bottom: 0;
     left: 0;
@@ -82,4 +83,8 @@ height: 100px;
     padding-top: 11px;
     padding-bottom: 8px;
 }
-    
+
+.Linke{
+    height: 15px;
+    width: 15px;
+}

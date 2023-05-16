@@ -13,17 +13,16 @@
 .containerHomeAdm{
     display: flex;
     flex-direction: row;
-    /* align-items: top; */     
 }
 .admBtnContainer{
     display: flex;
     flex-direction: column;
     justify-content: center;
     justify-content: flex-start;
-    background-color: gray;
-    margin: 10px;
+    background-color: #30925e;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.324);
+    margin: 2% 1%;
     border-radius: 20px;
-
 }
 
 .btnPagAdm{
@@ -34,10 +33,6 @@
     font-size: 20px;
     cursor: pointer;
     margin: 20px;
-}
-
-.messageHome{
-    color: white;
 }
 
 .btnPagAdmOut{

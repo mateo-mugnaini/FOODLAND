@@ -96,5 +96,13 @@
     font-size: 15px;
     color: green;
     border: transparent;
-    
+}
+
+.exitEditMode-btn{
+    position: relative;
+    top: -240px;
+    left: 10px;
+    background-color: red;
+    border: none;
+    color: white;
 }

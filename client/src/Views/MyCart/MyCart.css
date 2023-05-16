@@ -449,3 +449,31 @@
     font-weight: bolder;
     font-size: 30px;
   }
+
+  .contador {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 18%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+ }
+
+ .contador button {
+  padding: 10px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    color: rgb(51, 51, 51);
+    background-color: rgba(146, 146, 146, 0.096);
+    border: transparent;
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.623);
+ }
+
+ .contador button:hover {
+    background-color:#54B216
+ }

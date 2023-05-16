@@ -72,22 +72,22 @@ const productsReducer = (state = initialState, action) => {
         product: action.payload,
       };
     case HANDLE_SORTS:
-      const auxToOrder = state.products;
+      const toOrder = state.products;
 
       // console.log(action.payload);
 
-      const toOrder = auxToOrder.map((product) => {
-        const normalizedPrice = parseFloat(
-          product.price.toString().replace(".", "")
-        );
-        const normalizedName = product.name.replace(/[0-9/]+/g, "");
+      // const toOrder = auxToOrder.map((product) => {
+      //   const normalizedPrice = parseFloat(
+      //     product.price.toString().replace(".", "")
+      //   );
+      //   const normalizedName = product.name.replace(/[0-9/]+/g, "");
 
-        return {
-          ...product,
-          price: normalizedPrice,
-          name: normalizedName.trim(),
-        };
-      });
+      //   return {
+      //     ...product,
+      //     price: normalizedPrice,
+      //     name: normalizedName.trim(),
+      //   };
+      // });
 
       if (action.payload === "desc") {
         const arrOrdenado = toOrder.sort(function (a, b) {
@@ -136,19 +136,19 @@ const productsReducer = (state = initialState, action) => {
 
     //========================== SORT HOME / PRODUCTS SEARCH =============
     case HANDLE_SORTS2:
-      const auxToOrder2 = state.AllProducts;
+      const toOrder2 = state.AllProducts;
 
-      const toOrder2 = auxToOrder2.map((product) => {
-        const normalizedPrice = parseFloat(
-          product.price.toString().replace(".", "")
-        ); // Le quito los puntos a los precios
-        const normalizedName = product.name.replace(/[0-9/]+/g, ""); // Omitir dígitos y caracteres de fracción en el nombre del producto
-        return {
-          ...product,
-          price: normalizedPrice,
-          name: normalizedName.trim(), // Trimeo el nombre del producto para eliminar cualquier espacio en blanco extra
-        };
-      });
+      // const toOrder2 = auxToOrder2.map((product) => {
+      //   const normalizedPrice = parseFloat(
+      //     product.price.toString().replace(".", "")
+      //   ); // Le quito los puntos a los precios
+      //   const normalizedName = product.name.replace(/[0-9/]+/g, ""); // Omitir dígitos y caracteres de fracción en el nombre del producto
+      //   return {
+      //     ...product,
+      //     price: normalizedPrice,
+      //     name: normalizedName.trim(), // Trimeo el nombre del producto para eliminar cualquier espacio en blanco extra
+      //   };
+      // });
 
       if (action.payload === "desc") {
         const arrOrdenado2 = toOrder2.sort(function (a, b) {
