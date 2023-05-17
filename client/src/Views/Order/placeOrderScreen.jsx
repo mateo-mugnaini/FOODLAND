@@ -91,7 +91,7 @@ export default function PlaceOrderScreen() {
           })
         }else{
             swal({
-              title: "you need to complete all information",
+              title: "You need to complete all the information",
               icon: "warning",
               confirmButtonText: "OK",
               showClass: {
@@ -110,7 +110,7 @@ export default function PlaceOrderScreen() {
     e.preventDefault();
     if(cart.length === 0){
       swal({
-        title: "You need add products firts!!",
+        title: "You need to add products first!",
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {
@@ -124,7 +124,7 @@ export default function PlaceOrderScreen() {
     }
     else if (!userInfo || !userInfo._id) {
       swal({
-        title: "You need to be logged in to complete the purchase",
+        title: "You need to be logged in to complete your purchase",
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {
@@ -144,7 +144,7 @@ export default function PlaceOrderScreen() {
       !value.city
     ) {
       swal({
-        title: "you need to complete all information",
+        title: "You need to complete all the information",
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {
@@ -164,7 +164,7 @@ export default function PlaceOrderScreen() {
       !shippValue.city ||
       !shippValue.country))
       {swal({
-        title: "you need to complete shipping information",
+        title: "You need to complete your shipping information",
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {
@@ -293,8 +293,10 @@ export default function PlaceOrderScreen() {
                   <input type="text" value={shippValue.lastname}
                     onChange={(event) => setShippValue({ ...shippValue, lastname: event.target.value })} />
                   </label>
+
                   <label> Adress:
-                  <input type="text" value={ shippValue.address}
+                  <input type="text" value={shippValue.address}
+
                     onChange={(event) => setShippValue({ ...shippValue, address: event.target.value })} />
                   </label>
                   <label>City:
