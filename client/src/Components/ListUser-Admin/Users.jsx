@@ -225,12 +225,17 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
                 /></button></label>
                     <label>
                       <select onChange={handleSelectsearch} className="sortList">
-                        <option value="">Sort by:</option>
-                        <option value="all"> All</option>
+                        <option value="" disabled>Sort by:</option>
                         <option value="NameAsc" >Fullname A-Z</option>
                         <option value="NameDsc" >Fullname Z-A</option>
                         <option value="EmailAsc" >Email A-Z</option>
                         <option value="EmailDsc" >Email Z-A</option>
+                        </select>
+                        </label>
+                        <label>
+                          <select onChange={handleSelectsearch} className="sortList">
+                        <option value="" disabled >Filter by:</option>
+                        <option value="all"> All</option>
                         <option value="Users" >Users</option>
                         <option value="Admin" >Admin</option>
                         <option value="bann">Banned</option>

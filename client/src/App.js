@@ -18,6 +18,7 @@ import UserProfile from "./Views/UserProfile/UserProfile";
 import UserOrders from "./Components/UserOrders/UserOrders";
 import Error404 from "./Components/Error/error404";
 import LogIn from "./Views/Login/login2";
+import HomeAdmin from "./Components/HomeAdmin/HomeAdmin";
 
 function App() {
   const location = useLocation();
@@ -107,8 +108,8 @@ function App() {
           key="products"
         ></Route>
         <Route
-          path="/OrdersAdm"
-          element={""}
+          path="/H0me"
+          element={<HomeAdmin />}
           name="OrdersAdm"
           key="OrdersAdm"
         ></Route>
