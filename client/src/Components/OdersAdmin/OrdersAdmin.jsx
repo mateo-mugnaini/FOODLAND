@@ -62,7 +62,7 @@ const OrdersAdmin = () => {
   for (let i = paginationStart; i <= paginationEnd; i++) {
     paginationPages.push(i);
   }
-  console.log(currentOrders);
+  // console.log(currentOrders);
 
   return (
     <div className="TableAdminOrders">
