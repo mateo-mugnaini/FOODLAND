@@ -57,7 +57,7 @@ const Payment = ({ total} ) => {
         };
         // console.log(order);
         // dispatch(total_order(order));
-        console.log(order)
+        // console.log(order)
         setcheck(order)
         
         /* ======== Redireccion ==== */
