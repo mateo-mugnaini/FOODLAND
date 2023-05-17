@@ -13,7 +13,8 @@ import swal from "sweetalert";
 
 const EditProductForm = () => {
 
-const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
+  const URL = "https://foodland-production.up.railway.app/";
+
   
 
   const { id } = useParams();
