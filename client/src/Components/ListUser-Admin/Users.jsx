@@ -211,11 +211,10 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
   // console.log(users)
 
   return (
-    <div name="containerListUser">
+    <div name="containerListUser" className="containerListUser">
 
-
-        <div name="containerFilters">
-        <h1>List User</h1>
+        <div name="containerFilters" className="containerFilters">
+        <h1 className="svTitle2">List User</h1>
               <label><input name="searchUser" type="text" onChange={handleOnChange } placeholder="Search users" className="searchListUsers"/>
               <button type="submit" onClick={handleSearch} className="searchUser">
                 <img

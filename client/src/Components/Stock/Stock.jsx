@@ -64,7 +64,7 @@ const Stock = () => {
 
   // Paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 10;
+  const productsPerPage = 11;
   const maxPages = 10; // Número máximo de páginas a mostrar en la paginación
 
   // Calcular índices de productos a mostrar en la página actual
@@ -109,7 +109,7 @@ const Stock = () => {
 
   return (
     <div className="ContainerStockList">
-      <div name="search&Sort&Filters">
+      <div name="search&Sort&Filters" className="searchFilters">
         <label>
           <input
             name="searchUser"
