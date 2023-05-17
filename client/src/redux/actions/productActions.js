@@ -269,3 +269,64 @@ export const createProduct = (product) => async (dispatch, getState) => {
   }
 };
 
+
+/*============ Acciones para la barra de busqueda en la lista de stock(Admin)=================*/
+
+
+
+// Ordenar los productos:
+export const sort_products = ({value, productList}) =>{
+  let productsort;
+  
+  if (value === "NameAsc") {
+    productsort = productList.sort(function (a, b) {
+      if (a.name < b.name) {
+        return -1;
+      } else if (a.name > b.name) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  else if (value === "NameDsc") {
+    productsort = productList.sort(function (a, b) {
+      if (a.name < b.name) {
+        return 1;
+      } else if (a.name > b.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  else if (value === 'StockAsc') {
+    productsort = productList.products.sort((a, b) => a.stock - b.stock);
+  } else if (value === 'StockDsc') {
+    productsort = productList.products.sort((a, b) => b.stock - a.stock);
+  }
+  else if (value === "Active"){
+  productsort = productList
+    .sort(function (a,b){
+      return a.active === b.active ? 0 : a.active ? -1 : 1;
+    })
+    .filter(function(p){
+      return p.active === true;
+    })
+    .slice()
+  }
+  else if (value === "Desactive"){
+    productsort = productList
+    .sort(function (a,b){
+      return a.active === b.active ? 0 : a.active ? 1 :-1;
+    })
+    .filter(function(p){
+      return p.active === false;
+    })
+    .slice()
+  }
+  return{
+    type: action.SORT_PRODUCTS_ADMIN,
+    payload: productsort,
+    }
+};

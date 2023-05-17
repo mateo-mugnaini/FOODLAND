@@ -140,24 +140,20 @@ const Home = () => {
               <li className={`listAdm ${
                 selectedButton === "showUser" ? "selected" : ""
               }`}
-              onClick={handleShowUser}
-            > Users </li>
+              onClick={handleShowUser}> Users </li>
             {/* =================== BTN MY ORDERS ===================*/}
             <li
               className={`listAdm ${
                 selectedButton === "showProfile" ? "selected" : ""
               }`}
-              onClick={handleShowOrders}
-            >
-              My orders
-            </li>
+              onClick={handleShowOrders}> My orders</li>
+
             {/* =================== BTN MYPROFILE ===================*/}
             <li
               className={`listAdm ${
                 selectedButton === "showProfile" ? "selected" : ""
               }`}
-              onClick={handleShowProfile}
-            >
+              onClick={handleShowProfile}>
               My profile
             </li>
             {/* =================== BTN LOGOUT ===================*/}
