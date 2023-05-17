@@ -119,7 +119,7 @@ if (nuevoArray.length > 0) {
 
 //setear para los productos mas y menos vendidos
  setBlueData(productosMasVendidos)
- setGreenData(productosMasVendidos)
+ setGreenData(productosMenosVendidos)
 
  // ------------------- TERCER CHART -------------
 
@@ -157,12 +157,12 @@ if (nuevoArray.length > 0) {
     </div>
     </div>
     <div className='chart3'>
-    <h3>Cantidad de usuarios registrados desde el 09-05-2023</h3>
+    <h3>Number of registered users since 05-09-2023</h3>
    
 <XYPlot width={650} height={300} xType="ordinal">
       <HorizontalGridLines />
        <XAxis/> 
-      <YAxis title="Tiempo (dias)" />
+      <YAxis title="Time (days)" />
       <VerticalBarSeries data={data2} />
     </XYPlot>
 </div>
