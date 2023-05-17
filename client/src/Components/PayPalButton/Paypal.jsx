@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux'
 import React, { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 
-const URL = "https://foodland-production.up.railway.app/";
+const URL = "https://foodland-production.up.railway.app";
 
 
 function Paypal({order}) {

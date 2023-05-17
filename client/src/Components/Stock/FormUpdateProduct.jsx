@@ -13,7 +13,7 @@ import swal from "sweetalert";
 
 const EditProductForm = () => {
 
-  const URL = "https://foodland-production.up.railway.app/";
+  const URL = "https://foodland-production.up.railway.app";
 
   
 
