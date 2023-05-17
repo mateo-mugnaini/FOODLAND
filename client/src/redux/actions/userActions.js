@@ -164,7 +164,7 @@ export const sort_user = ({ value, users }) => {
   if (value === "all") {
     datasort = users;
   } else if (value === "NameAsc") {
-    datasort = users.slice().sort(function (a, b) {
+    datasort = users?.slice().sort(function (a, b) {
       if (a.name < b.name) {
         return -1;
       } else if (a.name > b.name) {
@@ -174,7 +174,7 @@ export const sort_user = ({ value, users }) => {
       }
     });
   } else if (value === "NameDsc") {
-    datasort = users.slice().sort(function (a, b) {
+    datasort = users?.slice().sort(function (a, b) {
       if (a.name < b.name) {
         return 1;
       } else if (a.name > b.name) {
@@ -186,7 +186,7 @@ export const sort_user = ({ value, users }) => {
   } else if (value === "bann") {
     datasort = users.filter((u) => u.active === false);
   } else if (value === "EmailAsc") {
-    datasort = users.slice().sort(function (a, b) {
+    datasort = users?.slice().sort(function (a, b) {
       if (a.email < b.email) {
         return -1;
       } else if (a.email > b.email) {
@@ -196,7 +196,7 @@ export const sort_user = ({ value, users }) => {
       }
     });
   } else if (value === "EmailDsc") {
-    datasort = users.slice().sort(function (a, b) {
+    datasort = users?.slice().sort(function (a, b) {
       if (a.email < b.email) {
         return 1;
       } else if (a.email > b.email) {
@@ -207,20 +207,20 @@ export const sort_user = ({ value, users }) => {
     });
   } else if (value === "Users") {
     datasort = users
-      .slice()
-      .sort(function (a, b) {
+      ?.slice()
+      ?.sort(function (a, b) {
         return a.isAdmin === b.isAdmin ? 0 : a.isAdmin ? -1 : 1;
       })
-      .filter(function (u) {
+      ?.filter(function (u) {
         return !u.isAdmin;
       });
   } else if (value === "Admin") {
     datasort = users
-      .slice()
-      .sort(function (a, b) {
+      ?.slice()
+      ?.sort(function (a, b) {
         return a.isAdmin === b.isAdmin ? 0 : a.isAdmin ? -1 : 1;
       })
-      .filter(function (u) {
+      ?.filter(function (u) {
         return u.isAdmin;
       });
   }

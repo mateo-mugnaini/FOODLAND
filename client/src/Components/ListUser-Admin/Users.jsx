@@ -190,7 +190,7 @@ const ListUsers = () => {
   // Calcular índices de usuarios a mostrar en la página actual
 const indexOfLastUser = currentPage * usersPerPage;
 const indexOfFirstUser = indexOfLastUser - usersPerPage;
-const currentUsers = Array.isArray(users) ? users.slice(indexOfFirstUser, indexOfLastUser) : [];
+const currentUsers = Array.isArray(users) ? users?.slice(indexOfFirstUser, indexOfLastUser) : [];
 
 // Calcular el número total de páginas
 const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);

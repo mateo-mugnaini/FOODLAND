@@ -24,7 +24,7 @@ const UserOrders = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage; // Calcular el índice del último elemento de la página actual
   const indexOfFirstItem = indexOfLastItem - itemsPerPage; // Calcular el índice del primer elemento de la página actual
-  const currentOrders = orders.slice(indexOfFirstItem, indexOfLastItem); // Obtener las compras de la página actual
+  const currentOrders = orders?.slice(indexOfFirstItem, indexOfLastItem); // Obtener las compras de la página actual
   const totalPages = Math.ceil(orders.length / itemsPerPage); // Calcular el total de páginas
 
   /* ========================* Functions Paginated *======================== */

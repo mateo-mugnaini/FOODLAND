@@ -21,7 +21,7 @@ const OrdersAdmin = () => {
   // Calcular el índice del primer elemento de la página actual
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   // Obtener las compras de la página actual
-  const currentOrders = orders.slice(indexOfFirstItem, indexOfLastItem);
+  const currentOrders = orders?.slice(indexOfFirstItem, indexOfLastItem);
 
   // Calcular el total de páginas
   const totalPages = Math.ceil(orders.length / itemsPerPage);
