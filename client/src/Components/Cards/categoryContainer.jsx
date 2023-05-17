@@ -11,7 +11,11 @@ import { setFilterState } from "../../redux/actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
 // import Carrousel from "../Carrousel/Carrousel";
 import oferta1 from "../../Imgs/oferta1.jpeg";
+
+import Chart from "../Charts/Charts";
+
 import { Link } from "react-router-dom";
+
 
 
 const CategoryContainer = () => {
@@ -38,7 +42,9 @@ const CategoryContainer = () => {
 
   return (
     <div className="categoryContainer">
-            <h1>Find all our products right here</h1>
+
+      <h1>Find all our products right here</h1>
+
       <div className="breadcrumbContainer">
         <div className="breadcrumb">
           

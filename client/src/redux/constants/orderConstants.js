@@ -1,4 +1,5 @@
 /* ========== Creacion de ordenes ================= */
+
 const POST_ORDER = "POST_ORDER"; //ENVIA LA ORDEN A LA BD
 const TOTAL_ORDER = "TOTAL_ORDER"; //Actualiza el total de la orden de compra
 const ORDER_CREATE_REQUEST = "ORDER_CREATE_REQUEST";
@@ -21,4 +22,5 @@ module.exports = {
   GET_ORDERS_SUCCESS,
   GET_ORDERS_FAIL,
   GET_ORDERS_REQUEST,
+
 };

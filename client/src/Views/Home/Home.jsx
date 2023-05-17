@@ -12,7 +12,7 @@ import ListUsers from "../../Components/ListUser-Admin/Users";
 import UserProfile from "../UserProfile/UserProfile";
 import OrdersAdmin from "../../Components/OdersAdmin/OrdersAdmin";
 import { signout } from "../../redux/actions/userActions";
-
+import Chart from "../../Components/Charts/Charts";
 
 const Home = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -167,7 +167,7 @@ const Home = () => {
           {showStock && <StockViews />} {/* VER STOCK */}
           {showCreateProduct && <CreateProduct />} {/* VER CREATE PRODUCT */}
           {showUser && <ListUsers/>} {/* VER USERS */}
-          {showOverview && <CreateProduct />} {/* VER OVERVIEW */}
+          {showOverview &&  <Chart/> } {/* VER OVERVIEW */}
           {showProfile && <UserProfile />} {/* VER MYPROFILE */}
           {showOrders && <OrdersAdmin />} {/* VER MIS VENTAS */}
         </div>

@@ -129,9 +129,13 @@ const ProductsContainer = () => {
     return (
       <div className="productsContainer">
         <div className="select_and_breadcrumb">
-        <NavLink to="/">
-            <button className="btnAdminHome2">Back</button>
-          </NavLink>
+
+          <Link to="/">
+            <button className="btnHome">BACK TO HOME</button>
+           
+          </Link>
+
+
           <div className="breadcrumb">
             <NavLink to="/">Categories</NavLink>
             <p>/</p>
@@ -144,13 +148,13 @@ const ProductsContainer = () => {
             </NavLink>
           </div>
           <select className="selectInput" onChange={handleSorts}>
-            <option value="">Ordenar por</option>
+            <option value="">Sort by</option>
             <option value="asc">A-Z</option>
             <option value="desc">Z-A</option>
-            <option value="higher_price">Mayor precio</option>
-            <option value="lower_price">Menor precio </option>
-            <option value="best_score">Mayor puntuado</option>
-            <option value="worst_score">Menor puntuado </option>
+            <option value="higher_price">Higher price</option>
+            <option value="lower_price">Loweer price </option>
+            <option value="best_score">Top rated</option>
+            <option value="worst_score">Less rated </option>
           </select>
         </div>
         <div className="filter_and_products">
@@ -182,7 +186,7 @@ const ProductsContainer = () => {
                   );
                 })
               ) : (
-                <p>Sin productos</p>
+                <p>There are no products</p>
               )}
             </div>
             {/* Paginado */}
@@ -235,13 +239,13 @@ const ProductsContainer = () => {
             </NavLink>
           </div>
           <select className="selectInput" onChange={handleSorts}>
-            <option value="">Ordenar por</option>
+            <option value="">Sort by</option>
             <option value="asc">A-Z</option>
             <option value="desc">Z-A</option>
-            <option value="higher_price">Mayor precio</option>
-            <option value="lower_price">Menor precio </option>
-            <option value="best_score">Mayor puntuado</option>
-            <option value="worst_score">Menor puntuado </option>
+            <option value="higher_price">Higher price</option>
+            <option value="lower_price">Loweer price </option>
+            <option value="best_score">Top rated</option>
+            <option value="worst_score">Less rated </option>
           </select>
         </div>
         <div className="filter_and_products">

@@ -79,6 +79,14 @@ function Profile() {
           </div>
         </div>
         <div className='right'>
+
+          <h1>Name: {userInfo?.name} </h1>
+          <h3><span>Email address: </span> {userInfo.email}</h3>
+          {/* <h3><span>Address: </span>{userData.address}</h3> */}
+          {/* <h3><span>Phone number: </span> {userData.phone}</h3> */}
+          {!isEditing ? (
+            <button className='editProfile-btn' onClick={handleEditProfile}>Edit profile</button>
+
           <h3>Here you can find your personal information.</h3>
           <h2>Shipping Address:</h2>
           {!edit ? (
@@ -89,6 +97,7 @@ function Profile() {
               <label>Country: <input value={shippingAddress.country} disabled></input></label><br></br>
               <button onClick={() => setEdit(true)}>Edit Shipping Information</button>
             </div>
+
           ) : (
             <div className='ContainerShipping'>
 
