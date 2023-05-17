@@ -36,7 +36,7 @@ const Stock = () => {
       setFilteredProducts(filtered);
     } else {
       swal({
-        title: "User not found",
+        title: "Product not found",
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {

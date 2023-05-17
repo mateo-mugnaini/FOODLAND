@@ -97,7 +97,7 @@ const ProductsContainer = () => {
       setCart(cart);
       dispatch(updateCart(cart));
       swal({
-        text: "product added to cart!",
+        text: "Product added to cart!",
         icon: "success",
       });
     } else {
@@ -112,7 +112,7 @@ const ProductsContainer = () => {
         ])
       );
       swal({
-        text: "product added to cart!",
+        text: "Product added to cart!",
         icon: "success",
       });
     }
@@ -152,7 +152,7 @@ const ProductsContainer = () => {
             <option value="asc">A-Z</option>
             <option value="desc">Z-A</option>
             <option value="higher_price">Higher price</option>
-            <option value="lower_price">Loweer price </option>
+            <option value="lower_price">Lower price </option>
             <option value="best_score">Top rated</option>
             <option value="worst_score">Less rated </option>
           </select>
@@ -243,7 +243,7 @@ const ProductsContainer = () => {
             <option value="asc">A-Z</option>
             <option value="desc">Z-A</option>
             <option value="higher_price">Higher price</option>
-            <option value="lower_price">Loweer price </option>
+            <option value="lower_price">Lower price </option>
             <option value="best_score">Top rated</option>
             <option value="worst_score">Less rated </option>
           </select>

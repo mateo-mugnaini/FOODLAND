@@ -102,7 +102,7 @@ function Profile() {
             <div className='ContainerShipping'>
 
                 <label>
-                  Adress:
+                  Address:
                   <input
                     type="text"
                     value={shippInfo.address}
