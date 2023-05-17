@@ -11,13 +11,19 @@ import { setFilterState } from "../../redux/actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
 // import Carrousel from "../Carrousel/Carrousel";
 import oferta1 from "../../Imgs/oferta1.jpeg";
+
 import Chart from "../Charts/Charts";
+
+import { Link } from "react-router-dom";
+
 
 
 const CategoryContainer = () => {
   /* IMPORT STATES */
 
   const { categories } = useSelector((state) => state.products);
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
   const localCategories = categories.sort((a, b) => {
     if (a._id < b._id) return -1;
@@ -36,15 +42,22 @@ const CategoryContainer = () => {
 
   return (
     <div className="categoryContainer">
+
       <h1>Find all our products right here</h1>
-    
+
       <div className="breadcrumbContainer">
         <div className="breadcrumb">
+          
           <NavLink active="true" to="/">
             Categories
           </NavLink>
         </div>
       </div>
+      {userInfo?.isAdmin && ( // Verifica si el usuario es un administrador
+          <NavLink to="/">
+            <button className="btnAdminHome">Back</button>
+          </NavLink>
+        )}
       <div className="CardContainerCat">
         <NavLink to={"/categories/allProducts"}>
           <div className="CategoryCard">

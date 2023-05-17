@@ -4,6 +4,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { register } from "../../redux/actions/userActions";
 import Loader from "../Loader/Loader";
 import MessageBox from "../Error/messageBox";
+import Swal from 'sweetalert2'
+import legalPopup from "../../Texts/legalPopup.txt"
 import "./registerScreen.css";
 
 function RegisterScreen(props) {
@@ -31,6 +33,19 @@ function RegisterScreen(props) {
 			dispatch(register(name, email, password));
 		}
 	};
+
+	const showLegalInfo = () => {
+		fetch(legalPopup)
+		  .then((response) => response.text())
+		  .then((data) => {
+			Swal.fire({
+			  title: 'Supermarket Purchase Agreement',
+			  text: data,
+			  confirmButtonText: 'OK'
+			})
+		  });
+	
+	  }
 
 	useEffect(() => {
 		if (userInfo) {
@@ -95,6 +110,9 @@ function RegisterScreen(props) {
 						required
 						onChange={(e) => setConfirmPassword(e.target.value)}
 					></input>
+				</div>
+				<div>
+					<label><input type="checkbox" onClick={()=>showLegalInfo()} required></input>accept the terms and conditions</label>
 				</div>
 				<div>
 					<label />

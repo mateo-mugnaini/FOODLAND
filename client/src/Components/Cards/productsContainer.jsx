@@ -129,10 +129,13 @@ const ProductsContainer = () => {
     return (
       <div className="productsContainer">
         <div className="select_and_breadcrumb">
+
           <Link to="/">
             <button className="btnHome">BACK TO HOME</button>
            
           </Link>
+
+
           <div className="breadcrumb">
             <NavLink to="/">Categories</NavLink>
             <p>/</p>
@@ -162,7 +165,7 @@ const ProductsContainer = () => {
             <div className="products">
               {display ? (
                 <Loader />
-              ) : Array.isArray(currentProducts) && currentProducts[0].stock ? (
+              ) : Array.isArray(currentProducts) && currentProducts[0]?.stock ? (
                 currentProducts.map((product) => {
                   const id = product["_id"];
                   return (
