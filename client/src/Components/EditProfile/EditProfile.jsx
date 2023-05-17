@@ -9,8 +9,6 @@ import Swal from "sweetalert2";
 
 const EditProfile = ({handlecancel}) => {
 
-
-	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -33,7 +31,7 @@ const EditProfile = ({handlecancel}) => {
 			button: "ok"
 		  });
 		} else {
-		  const editedUser = { name, password };
+		  const editedUser = { password };
 		  Swal.fire({
 			title: 'Are you sure?',
 			text: `Do you want to update the password?`,
@@ -63,7 +61,7 @@ const EditProfile = ({handlecancel}) => {
 	if (userInfo.isAdmin){
 		return(
 			<div className="EditProfileContainer">
-        <form className="formRegister" onSubmit={submitHandler}>
+        <form className="formRegister1" onSubmit={submitHandler}>
 				{loading && <Loader></Loader>}
 				{error && <MessageBox variant="danger">{error}</MessageBox>}
 
@@ -90,7 +88,9 @@ const EditProfile = ({handlecancel}) => {
 					></input>
 				</div>
 				<div>
-					<label />
+					<label /> <button className="cancelbuton" type="submit" onClick={()=>cancelUpdate()}>
+						Cancel
+					</button>
 					<button className="primary" type="submit">
 						Update
 					</button>
@@ -106,17 +106,6 @@ return(
 				{loading && <Loader></Loader>}
 				{error && <MessageBox variant="danger">{error}</MessageBox>}
 
-				<div className="labelCreateUser">
-					<label htmlFor="name" className="labelCreateUser">
-						New name
-					</label>
-					<input
-						type="text"
-						id="name"
-						placeholder="Enter name"
-						onChange={(e) => setName(e.target.value)}
-					></input>
-				</div>
 				<div className="labelCreateUser">
 					<label htmlFor="password" className="labelCreateUser">
 						New password
@@ -141,6 +130,9 @@ return(
 				</div>
 				<div>
 					<label />
+					<button className="cancelbuton" type="submit" onClick={()=>cancelUpdate()}>
+						Cancel
+					</button>
 					<button className="primary" type="submit">
 						Update
 					</button>

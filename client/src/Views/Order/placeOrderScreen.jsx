@@ -16,7 +16,7 @@ export default function PlaceOrderScreen() {
   const totalstate = useLocalStore("resumen",[])
   const { userInfo } = useSelector((state) => state.userSignin);
 
-  console.log({ userInfo });
+  // console.log({ userInfo });
   const {
     orders: { totalPrice: amount, active },
   } = useSelector((state) => state.order);
@@ -32,7 +32,8 @@ export default function PlaceOrderScreen() {
 
   const [shippingDiv, setshippingDiv] = useState(false);  //Esto es para que aparezca o no el div
   const [shippingInfo, setshippingInfo] = useState(false); // Este es como validador
-  const [shippValue, setShippValue] = useState({         //Este chequea que todo este lleno
+  const [shippigUserLocalStore, setShippingUserLocalStore] = useLocalStore("Shipping", []);
+  const [shippValue, setShippValue] = useState({   
     name:"",
     lastname:"",
     address: "",
@@ -82,6 +83,12 @@ export default function PlaceOrderScreen() {
         shippValue.country !== "" 
         )
           {setshippingInfo(true);
+          setShippingUserLocalStore({
+            address: shippValue.address,
+            postalCode:shippValue.postalCode,
+            city: shippValue.city,
+            country: shippValue.country,
+          })
         }else{
             swal({
               title: "you need to complete all information",
@@ -287,7 +294,7 @@ export default function PlaceOrderScreen() {
                     onChange={(event) => setShippValue({ ...shippValue, lastname: event.target.value })} />
                   </label>
                   <label> Adress:
-                  <input type="text" value={shippValue.address}
+                  <input type="text" value={ shippValue.address}
                     onChange={(event) => setShippValue({ ...shippValue, address: event.target.value })} />
                   </label>
                   <label>City:
