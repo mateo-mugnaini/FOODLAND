@@ -115,6 +115,11 @@ let transporter = nodemailer.createTransport({
 userRouter.post(
 	"/signup",
 	expressAsyncHandler(async (req, res) => {
+		const existingUser = await User.findOne({ email: req.body.email });
+		if (existingUser) {
+			res.status(400).send({ message: "You have already been registered. Please Sign In with GOOGLE." });
+			return;
+		}
 		const user = new User({
 			name: req.body.name,
 			email: req.body.email,
