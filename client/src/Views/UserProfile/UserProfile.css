@@ -10,20 +10,24 @@
 }
 
 .profileCard {
-    
     display: flex;
     flex-direction: row;
     width: 70%;
-    margin-top: 8%;
-    margin-bottom: 4%;
+    margin-bottom: 4%; 
     align-self: center;
+    border-radius: 20px;
+    padding: 1%;
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.336);
 }
 .profileCard .left {
   background-color: rgba(128, 128, 128, 0.062);
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  border-radius: 22px 0px 0px 22px;
+  justify-content: center;
 }
 .left p {font-size: 13px; padding: 5px;  border-radius: 4px; margin-top: 5%;border: 1px solid rgba(155, 114, 80, 0.541)}
 
@@ -33,7 +37,7 @@
 }
 .profileCard .right {
     
-    width: 65%;
+    width:57%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -105,4 +109,80 @@
     background-color: red;
     border: none;
     color: white;
+}
+
+.Banner1{
+    height: 5em;
+    width: auto;
+}
+
+.left h1 span{
+    color:green;
+    font-weight: 500;
+    vertical-align: super;
+
+}
+.left h3 span{
+    color:green;
+    font-weight: 500;
+    vertical-align: super;
+
+}
+
+.PaypalLogo{
+    width: 35%;
+    border-radius: 20px;
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.336);
+    padding:0 3% 0 3%;
+    display: flex;
+    align-self: center;
+    margin-right: 27%;
+}
+
+.ContainerShipping{
+    display: grid;
+    place-items: flex-end;
+    margin: auto 12%;
+}
+
+.ContainerShipping label{
+    font-size: 20px;
+    color:green;
+}
+
+.ContainerShipping label input{
+    border-radius: 10px;
+    border:1px solid grey;
+    font-size: 15px;
+}
+
+.ContainerShipping button{
+    background-color: green;
+    color:white;
+    border: 2px solid green;
+    border-radius: 7px;
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.336);
+    height: 30px;
+}
+.ContainerShipping button:hover{
+    background-color: rgb(71, 131, 71);
+}
+
+.Hi{
+    color: rgba(0, 0, 0, 0.38);
+    font-family: "Yanone Kaffeesatz";
+    letter-spacing:0.5px;
+    font-style:oblique;
+}
+
+.butonEdit{
+    background-color: green;
+    color:white;
+    border: 2px solid green;
+    border-radius: 7px;
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.336);
+    height: 30px;
+}
+.butonEdit:hover{
+    background-color: rgb(71, 131, 71);
 }
