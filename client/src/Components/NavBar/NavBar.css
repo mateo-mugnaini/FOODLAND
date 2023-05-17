@@ -226,4 +226,5 @@ span.userName:hover{
     font-size: 109%;
     color: white;
     margin-right: 2em;
+    text-decoration: none;
 }
