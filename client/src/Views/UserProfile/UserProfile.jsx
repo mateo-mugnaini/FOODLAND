@@ -66,7 +66,7 @@ function Profile() {
           </div>
         </div>
         <div className='right'>
-          <h1>Nombre: {userInfo?.name} </h1>
+          <h1>Name: {userInfo?.name} </h1>
           <h3><span>Email address: </span> {userInfo.email}</h3>
           {/* <h3><span>Address: </span>{userData.address}</h3> */}
           {/* <h3><span>Phone number: </span> {userData.phone}</h3> */}

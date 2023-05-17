@@ -80,7 +80,7 @@ const Filters = () => {
       <label>Filter by rating:</label>
       <Rating onClick={handleRating} /> 
       <button type="submit" className="butonFilter" onClick={handleSubmit}>
-        Filtrar
+        Filter
       </button>
     </fieldset>
   </div>

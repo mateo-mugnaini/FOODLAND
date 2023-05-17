@@ -1,0 +1,94 @@
+.chartContainer {
+    width: 78%;
+    display: flex;
+    margin-top: 4%;
+    align-items: center;
+    flex-direction: column;
+}
+.chart1{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    background-color: rgba(207, 212, 212, 0.342);
+    box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.chart1-text ul {
+    width: 100%;
+}
+.chart1-text li {
+    font-size: 26px;
+    margin-bottom: 4%;
+    font-family: "Yanone Kaffeesatz";
+}
+.chart1-text h2 {
+
+    margin-bottom: 10%;
+    font-size: 35px;
+    font-family: "Yanone Kaffeesatz";
+}
+.chart2{  
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(207, 212, 212, 0.342);
+    box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    margin-top: 5%;
+}
+  
+.card{
+    width: 100%;
+    display: inline-block;
+    width: 80%;
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card p, h4 {
+    margin: 0;
+}
+.sliderMasVendidos img {
+    width: 110px;
+}
+
+.sliderMasVendidos span {
+    font-size: 32px;
+    font-family: "Yanone Kaffeesatz";
+    font-weight: 700;
+}
+
+
+.chart3 {
+    margin-top: 4%;
+    background-color: rgba(207, 212, 212, 0.342);
+    box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.chart3 h3 {
+    font-size: 32px;
+    font-family: "Yanone Kaffeesatz";
+}
+
+.chart2 .slick-list{
+    margin-left: 9%;
+}
+
+.chart2 .slick-slider.slick-initialized {
+ margin-top: 3%;
+ margin-bottom: 4%;
+ display: flex;
+ flex-direction: column;
+}
