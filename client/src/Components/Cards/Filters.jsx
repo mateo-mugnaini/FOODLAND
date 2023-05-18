@@ -89,7 +89,12 @@ const Filters = () => {
       <button type="submit" className="butonFilter" onClick={handleSubmit}>
         Filter
       </button>
+
+      {
+         window.location.pathname !== '/categories/allProducts' &&
       <button type="submit" onClick={handlerReset} className="ResetFilter">Reset</button>     
+      }
+
       </label>
 
     </fieldset>

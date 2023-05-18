@@ -120,11 +120,12 @@ const ProductsContainer = () => {
 
   useEffect(() => {
     // si esta en true me despacha la accion que me trae los prod por
-    if (filterState) {
+    if (filterState && window.location.pathname !== '/categories/allProducts') {
       dispatch(getAllProducts());
       dispatch(getByCategory(categoriesId));
     }
-  }, [dispatch]);
+   },[dispatch, filterState, categoriesId]);
+
   if (userInfo?.isAdmin) {
     return (
       <div className="productsContainer">
