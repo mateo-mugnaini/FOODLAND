@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { RadialChart , XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries,LabelSeries} from 'react-vis';
 import { getOrdersAdmin } from '../../redux/actions/orderActions';
 import { getAllProducts } from '../../redux/actions/productActions';
 import {get_users} from "../../redux/actions/userActions"
@@ -7,6 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import "./Charts.css"
 import moment from 'moment';
 import Slider from "react-slick";
+import { Pie } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale,BarElement,Title);
 
 const Chart = () => {
   const dispatch = useDispatch();
@@ -16,20 +29,84 @@ const Chart = () => {
   const { userInfo } = useSelector((state) => state.userSignin);
   const token = userInfo.token;
   const [data, setData] = useState([]);
-  const [data2,setData2] = useState([]);
   const [greenData, setGreenData] = useState([]);
   const [blueData, setBlueData] = useState([]);
-    const [CantPorCat,  setCantPorCat] = useState({});
 
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3
-      };
+
+  // config primer chart
+
+  const dataChart1 = {
+    labels: Object.keys(data),
+    datasets: [
+      {
+        label: '# of Votes',
+        data: Object.values(data),
+        backgroundColor: [
+          '#be5cff57',
+          '#4cee0c55',
+          '#eed80e68',
+          '#0ac2f076',
+          '#4bc0c084',
+          '#0e79ddb0',
+          '#665de27b',
+          '#36ebdc7b',
+          '#df061873',
+         
+        ],
+        borderColor: [
+          '#be5cff',
+          '#4cee0c',
+          '#eed80e',
+          '#0ac2f0',
+          'rgba(75, 192, 192, 1)',
+          '#0e79dd',
+          '#655de2',
+          '#36ebdc',
+          '#df0618',
+          
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   
-  const BarSeries = VerticalBarSeries;
+  //config chart2
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position:'top'
+      },
+    },
+  };
+  const keys = Object.keys(data);
+
+const labels = users.map((user) => user.name);
+
+const dataChart2 = {
+  labels,
+  datasets: [
+    {
+      label: `Registered user in day `,
+      data: users.map((user) => moment(user.createdAt).diff(moment('2023-05-09'), 'days')),
+      backgroundColor: 'rgba(69, 236, 47, 0.5)',
+    },
+   
+  ],
+};
+
+
+  // config carrousel
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  };
 
 
   useEffect(() => {
@@ -69,18 +146,10 @@ nuevoArray.forEach(producto => {
   }
 });
 console.log(cantidadPorCategoria)
-const sortedData = Object.entries(cantidadPorCategoria)
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, 5);
 
-const newData = sortedData.map(([category, count]) => {
-  const angle = (count / nuevoArray.length) * 360;
-  return { angle, label: category };
-});
-    setData(newData);
-    setCantPorCat(cantidadPorCategoria)
-
-
+  setData(cantidadPorCategoria);
+    
+  
   // ------------ SECOND CHART  -------------- 
 
 
@@ -121,51 +190,32 @@ if (nuevoArray.length > 0) {
  setBlueData(productosMasVendidos)
  setGreenData(productosMenosVendidos)
 
- // ------------------- TERCER CHART -------------
-
- const Data2 = users.map((user, index) => (
-    {
-    x: index + 1, // Utiliza el nombre del usuario en el eje X
-    y: moment(user.createdAt).diff(moment('2023-05-9'), 'days') 
-  }));
-
- setData2(Data2) ;
-
   }, [allProducts, myOrders]);
 
 
   return (
     <div className='chartContainer'>
+    
     <div className='chart1'>
-    <RadialChart
-      data={data}
-      width={450}
-      height={450}
-      showLabels
-      labelsRadiusMultiplier={0.7}
-    />
-    <div className='chart1-text'>
-        <h2>Best-selling categories</h2>
-        <ul>
-        {Object.entries(CantPorCat).map(([key, value]) => (
-        <li key={key}>
-      <strong>{key}: </strong>
-      {value}
-    </li>
-  ))}
-</ul>
+      <div>
+      <Pie data={dataChart1} style={{width:"450px", height:"450px"}}/>
+      </div>  
+     <div className='chart1_text'>
+     <p>Sales index by category</p>
+     <ul>
+      {keys.map((key) => (
+        <li >
+          {key} :<span> {data[key]}</span>
+        </li>
+      ))}
+    </ul>
+     </div>
     </div>
-    </div>
+
     <div className='chart3'>
-    <h3>Number of registered users since 05-09-2023</h3>
-   
-<XYPlot width={650} height={300} xType="ordinal">
-      <HorizontalGridLines />
-       <XAxis/> 
-      <YAxis title="Time (days)" />
-      <VerticalBarSeries data={data2} />
-    </XYPlot>
-</div>
+     <p>Number of registered users since '05-09-2023' = <span>{users.length}</span></p> 
+    <Bar options={options} data={dataChart2} />
+    </div>
 
     <div className='chart2'>
     <div className='sliderMasVendidos'>
@@ -177,7 +227,7 @@ if (nuevoArray.length > 0) {
       <div className="card">
         <h4>{category}</h4>
         <p>{name}</p>
-        <h4>{quantity}</h4>
+        <span>{quantity}</span>
         <img src={image} alt={name} />
       </div>
     </div>
@@ -192,7 +242,7 @@ if (nuevoArray.length > 0) {
       <div className="card">
         <h4>{category}</h4>
         <p>{name}</p>
-        <h4>{quantity}</h4>
+        <span>{quantity}</span>
         <img src={image} alt={name} />
     </div>
     </div>
@@ -206,4 +256,6 @@ if (nuevoArray.length > 0) {
   );
 };
 
+
 export default Chart;
+

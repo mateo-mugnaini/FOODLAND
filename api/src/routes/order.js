@@ -56,6 +56,33 @@ let transporter = nodemailer.createTransport({
   },
 });
 
+const mailOptions = {
+  from:"foodland.henry@gmail.com",
+  to:"sofiaperone62@gmail.com",
+  subject:"CONFIRMACION DE REGISTRO FOODLAND",
+  html: `
+  <h2> Estimado [Nombre del Cliente] </h2>
+
+  <p>Gracias por elegir Supermercado XYZ. Nos complace confirmar que hemos recibido tu pedido y estamos procesándolo. A continuación, te proporcionamos los detalles de tu pedido: </p>
+  
+  <p> Número de pedido: #123456 </p>
+  <p>Fecha del pedido: [Fecha del pedido] </p>
+  <p>Dirección de entrega: [Dirección de entrega] </p>
+  
+  <h3>Detalles del pedido:</h3>
+  
+  <p>Producto 1: Cantidad: [Cantidad], Precio unitario: [Precio] </p>
+  <p>Producto 2: Cantidad: [Cantidad], Precio unitario: [Precio] </p>
+  <p> Producto 3: Cantidad: [Cantidad], Precio unitario: [Precio] </p>
+  ...
+  <p>Total del pedido: [Total] </p>
+  
+  <p> Método de pago: [Método de pago seleccionado] </p>
+  
+  <p>Si tienes alguna pregunta o necesitas realizar alguna modificación en tu pedido, no dudes en comunicarte con nuestro servicio de atención al cliente al [número de contacto] o responder a este correo electrónico. Estaremos encantados de asistirte.</p>
+    `,
+  };
+
 //Ruta para que el Admin reciba todas las órdenes de compra
 orderRouter.get(
   "/",
@@ -72,39 +99,7 @@ orderRouter.post(
   "/",
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const mailOptions = {
-      from:"foodland.henry@gmail.com",
-      to:"sofiaperone62@gmail.com",
-      subject:"CONFIRMACION DE REGISTRO FOODLAND",
-      html: `
-      <h2> Estimado [Nombre del Cliente] </h2>
-    
-      <p>Gracias por elegir Supermercado XYZ. Nos complace confirmar que hemos recibido tu pedido y estamos procesándolo. A continuación, te proporcionamos los detalles de tu pedido: </p>
-      
-      <p> Número de pedido: #123456 </p>
-      <p>Fecha del pedido: [Fecha del pedido] </p>
-      <p>Dirección de entrega: [Dirección de entrega] </p>
-      
-      <h3>Detalles del pedido:</h3>
-      
-      <p>Producto 1: Cantidad: [Cantidad], Precio unitario: [Precio] </p>
-      <p>Producto 2: Cantidad: [Cantidad], Precio unitario: [Precio] </p>
-      <p> Producto 3: Cantidad: [Cantidad], Precio unitario: [Precio] </p>
-      ...
-      <p>Total del pedido: [Total] </p>
-      
-      <p> Método de pago: [Método de pago seleccionado] </p>
-      
-      <p>Si tienes alguna pregunta o necesitas realizar alguna modificación en tu pedido, no dudes en comunicarte con nuestro servicio de atención al cliente al [número de contacto] o responder a este correo electrónico. Estaremos encantados de asistirte.</p>
-        `,
-      };
-      transporter.sendMail(mailOptions, function(error,info){
-        if (error){
-        console.log(error)
-        } else{
-        console.log("email sent succesfuly ")
-        }
-      });
+   
     const newOrder = new Order({
       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x.id })),
       shippingAddress: req.body.shippingAddress,
@@ -117,6 +112,49 @@ orderRouter.post(
     });
     const order = await newOrder.save();
     res.status(201).send({ message: "New Order Created", order });
+  })
+);
+
+orderRouter.post(
+  "/email",
+  expressAsyncHandler(async (req, res) => {
+    console.log(req.body.email)
+    const orderItems = req.body.orderItems
+    const formattedItems = orderItems.map(item => `<p>${item.name}: Cantidad: ${item.quantity}, Precio unitario: ${item.price}</p>`);
+    const mailOptions = {
+      from:"foodland.henry@gmail.com",
+      to:req.body.email , 
+      subject:"CONFIRMACION DE REGISTRO FOODLAND",
+      html: `
+      <h2> Estimado ${req.body.name} </h2>
+    
+      <p>Gracias por elegir Supermercado XYZ. Nos complace confirmar que hemos recibido tu pedido y estamos procesándolo. A continuación, te proporcionamos los detalles de tu pedido: </p>
+      
+      <p> Número de pedido: #123456 </p>
+
+      <p>Dirección de entrega: ${req.body.shippingAddress} </p>
+      
+      <h3>Detalles del pedido:</h3>
+      
+    ${formattedItems}
+      ...
+      <p>Total del pedido:$ ${req.body.totalPrice} </p>
+      
+      <p> Método de pago: ${req.body.paymentMethod} </p>
+      
+      <p>Si tienes alguna pregunta o necesitas realizar alguna modificación en tu pedido, no dudes en comunicarte con nuestro servicio de atención al cliente al [número de contacto] o responder a este correo electrónico. Estaremos encantados de asistirte.</p>
+        `,
+      };
+    
+      transporter.sendMail(mailOptions, function(error,info){
+        if (error){
+        console.log(error)
+        } else{
+        console.log("email sent succesfuly ")
+        }
+      })
+   
+    res.status(201).send({ message: "sent" });
   })
 );
 
