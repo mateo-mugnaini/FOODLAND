@@ -127,6 +127,7 @@
     .filter_and_products{
         display: flex;
         margin-top: 2%;
+        height: 84em;
     }
     
     .CardContainerProd {
@@ -166,13 +167,19 @@
             box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
             border-radius: 10px;
             text-decoration: none;
+            height: 360px;
         }
     
     .product h3 {
         color: #484848;
         font-weight: 500;
         margin-bottom: 0;
+        height: 49px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: initial;
         }
+
     .product p {    
         color: red;
         margin-bottom: 4%;
@@ -204,6 +211,7 @@
     
     .product img {
         width: 130px;
+        height: 127px;
     }
     
     /*
@@ -216,6 +224,7 @@
     /* ---------- FILTROS ---------*/
     fieldset{
         margin-top: 4%;
+        border-radius: 5px;
         border-radius: 15px;
         background-color: rgb(173 173 173 / 30%);
         box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
@@ -246,12 +255,17 @@
     }
     
     .butonFilter{
-    background-color: #4e7d48;
-    color: white;
-    border-radius: 20px;
-    border:2px solid  #4e7d48;
+     background-color: #4e7d48;
+     color: white;
+     border-radius: 20px;
+     border: 2px solid #4e7d48;
+     box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
     }
-        
+    
+    .butonFilter:hover{
+        background-color: #87a983;
+    }
+
     .ResetFilter{
         background-color: #504d4d;
         color: white;
@@ -262,10 +276,7 @@
     .ResetFilter:hover{
         background-color:#898686;
     }
-    .butonFilter:hover{
-        background-color: #87a983;
-    }
-    
+   
     /* ------- PAGINADO ------------ */
     
     .btnPag{ 
