@@ -127,6 +127,7 @@
     .filter_and_products{
         display: flex;
         margin-top: 2%;
+        height: 84em;
     }
     
     .CardContainerProd {
@@ -224,7 +225,7 @@
     fieldset{
         margin-top: 4%;
         border-radius: 5px;
-        background-color: rgb(173 173 173 / 52%);
+        background-color: rgb(173 173 173 / 30%);
         box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
         border: none;
         display: flex;
@@ -257,8 +258,13 @@
      background-color: #4e7d48;
      color: white;
      border-radius: 20px;
+     border: 2px solid #4e7d48;
+     box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
     }
     
+    .butonFilter:hover{
+        background-color: #87a983;
+    }
     
     /* ------- PAGINADO ------------ */
     
