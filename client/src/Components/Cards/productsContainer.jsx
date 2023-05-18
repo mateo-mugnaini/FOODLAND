@@ -128,9 +128,8 @@ const ProductsContainer = () => {
 
   if (userInfo?.isAdmin) {
     return (
-      <><div className="productsContainer">
+      <div className="productsContainer">
         <div className="select_and_breadcrumb">
-        </Link>
         <div className="breadcrumb">
           <NavLink to="/">Categories</NavLink>
           <p>/</p>
@@ -213,7 +212,7 @@ const ProductsContainer = () => {
               </button>
             </div>
           </div>
-        </div></>
+        </div>
       </div>
     );
   } else
