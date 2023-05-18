@@ -59,11 +59,13 @@ const CategoryContainer = () => {
           </NavLink>
         )}
       <div className="CardContainerCat">
-        <NavLink to={"/categories/allProducts"}>
+        {/* <NavLink to={"/categories/allProducts"}>
           <div className="CategoryCard">
             <h3>All products</h3>
             <img src={oferta1} alt="imagen de categoria" />
           </div>
+        </NavLink> */}
+        {localCategories.map((e) => (
         </NavLink>
         {localCategories.map((e) => (
           <NavLink key={e._id} to={`/categories/${e._id}`}>

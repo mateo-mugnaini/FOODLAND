@@ -80,7 +80,7 @@ const UserOrders = () => {
   };
 
   return (
-    <div>
+    <div classname="containerListOrdUser">
       <div>
         <h1>My order history</h1>
       </div>
