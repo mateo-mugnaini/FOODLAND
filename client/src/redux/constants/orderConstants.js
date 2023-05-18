@@ -1,4 +1,5 @@
 /* ========== Creacion de ordenes ================= */
+
 const POST_ORDER = "POST_ORDER"; //ENVIA LA ORDEN A LA BD
 const TOTAL_ORDER = "TOTAL_ORDER"; //Actualiza el total de la orden de compra
 const ORDER_CREATE_REQUEST = "ORDER_CREATE_REQUEST";
@@ -9,6 +10,7 @@ const ORDER_COMPLETE_PAY = "ORDER_COMPLETE_PAY";
 const GET_ORDERS_SUCCESS = "GET_ORDERS_SUCCESS";
 const GET_ORDERS_FAIL = "GET_ORDERS_FAIL";
 const GET_ORDERS_REQUEST = "GET_ORDERS_REQUEST";
+const SEND_EMAIL ="SEND_EMAIL"
 
 module.exports = {
   POST_ORDER,
@@ -21,4 +23,5 @@ module.exports = {
   GET_ORDERS_SUCCESS,
   GET_ORDERS_FAIL,
   GET_ORDERS_REQUEST,
+  SEND_EMAIL
 };

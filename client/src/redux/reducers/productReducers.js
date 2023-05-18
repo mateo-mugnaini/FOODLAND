@@ -23,6 +23,7 @@ import {
   PRODUCT_CREATE_REQUEST,
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_CREATE_FAIL,
+  SORT_PRODUCTS_ADMIN,
 } from "../constants/productConstants";
 
 const initialState = {
@@ -279,8 +280,10 @@ export const productReviewCreateReducer = (
       return { loading: false, error: action.payload };
     case PRODUCT_REVIEW_CREATE_RESET:
       return { loading: false, success: false, error: "", review: [] };
-    default:
+      default:
       return state;
+      case SORT_PRODUCTS_ADMIN:
+      return{ loading:false, Allproducts:action.payload}
   }
 };
 

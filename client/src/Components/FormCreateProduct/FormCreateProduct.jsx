@@ -197,6 +197,7 @@ function FormCreateProduct() {
               value={product.price}
               onChange={(e) => handleChange(e, ValidatePrice)}
               name="price"
+              min={0.1}
             />
           </label>
           {errors["price"]?.isValidation ? null : (
@@ -268,6 +269,7 @@ function FormCreateProduct() {
               value={product.stock}
               onChange={(e) => handleChange(e, ValidateStock)}
               name="stock"
+              min={1}
             />
           </label>
           {errors["stock"]?.isValidation ? null : (
@@ -292,7 +294,7 @@ function FormCreateProduct() {
         {/* ================== * Vista Previa * ================== */}
         <div className="vistaPrevia">
           <div className="vsTitulo">
-            <h1>Vista Previa</h1>
+            <h1>Product preview</h1>
           </div>
           <div className="vsContent">
             <div>
@@ -301,7 +303,7 @@ function FormCreateProduct() {
               <h2>{product.category}</h2>
               <h2>{product.brand}</h2>
             </div>
-            <img className="vsImg" src={product.image} />
+            <img className="vsImg" src={product.image}/>
           </div>
         </div>
         {/* ================== * BOTON DE CREAR * ================== */}

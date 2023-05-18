@@ -11,7 +11,7 @@
   }
   
   .stockList table {
-  width: 100%;
+    width: 89%;
   border-collapse: collapse;
   text-align: center;
   border-radius: 20px;
@@ -144,4 +144,18 @@ button.black{
 button.black:hover{
     background-color: rgb(66, 66, 66);
     color:white;
+}
+
+.containerListUser{
+width: 68%;
+}
+
+.containerFilters{
+    width: 115%;
+}
+
+.svTitle2{
+    font-family: "Yanone Kaffeesatz";
+    font-size: 57px;
+
 }

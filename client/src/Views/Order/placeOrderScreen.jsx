@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./placeOrderScreen.css";
 import useLocalStore from "../../hooks/useLocalStore";
-import { createOrder } from "../../redux/actions/orderActions";
+import { createOrder, sendEmail } from "../../redux/actions/orderActions";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import ButtonPayPal from "../../Components/PayPalButton/PaypalButton";
@@ -16,7 +16,7 @@ export default function PlaceOrderScreen() {
   const totalstate = useLocalStore("resumen",[])
   const { userInfo } = useSelector((state) => state.userSignin);
 
-  console.log({ userInfo });
+ // console.log({ userInfo });
   const {
     orders: { totalPrice: amount, active },
   } = useSelector((state) => state.order);
@@ -32,7 +32,8 @@ export default function PlaceOrderScreen() {
 
   const [shippingDiv, setshippingDiv] = useState(false);  //Esto es para que aparezca o no el div
   const [shippingInfo, setshippingInfo] = useState(false); // Este es como validador
-  const [shippValue, setShippValue] = useState({         //Este chequea que todo este lleno
+  const [shippigUserLocalStore, setShippingUserLocalStore] = useLocalStore("Shipping", []);
+  const [shippValue, setShippValue] = useState({   
     name:"",
     lastname:"",
     address: "",
@@ -82,9 +83,15 @@ export default function PlaceOrderScreen() {
         shippValue.country !== "" 
         )
           {setshippingInfo(true);
+          setShippingUserLocalStore({
+            address: shippValue.address,
+            postalCode:shippValue.postalCode,
+            city: shippValue.city,
+            country: shippValue.country,
+          })
         }else{
             swal({
-              title: "you need to complete all information",
+              title: "You need to complete all the information",
               icon: "warning",
               confirmButtonText: "OK",
               showClass: {
@@ -103,7 +110,7 @@ export default function PlaceOrderScreen() {
     e.preventDefault();
     if(cart.length === 0){
       swal({
-        title: "You need add products firts!!",
+        title: "You need to add products first!",
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {
@@ -117,7 +124,7 @@ export default function PlaceOrderScreen() {
     }
     else if (!userInfo || !userInfo._id) {
       swal({
-        title: "You need to be logged in to complete the purchase",
+        title: "You need to be logged in to complete your purchase",
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {
@@ -137,7 +144,7 @@ export default function PlaceOrderScreen() {
       !value.city
     ) {
       swal({
-        title: "you need to complete all information",
+        title: "You need to complete all the information",
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {
@@ -157,7 +164,7 @@ export default function PlaceOrderScreen() {
       !shippValue.city ||
       !shippValue.country))
       {swal({
-        title: "you need to complete shipping information",
+        title: "You need to complete your shipping information",
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {
@@ -184,6 +191,10 @@ export default function PlaceOrderScreen() {
           userInfo.token
         )
       );
+      // este dispatch hay que ubicarlo en el boton de paypal
+      dispatch(sendEmail({name:userInfo.name, email:userInfo.email, totalPrice:totalPrice, shippingAddress:shippingAddress.address,
+      paymentMethod:paymentMethod, orderItems:cart.map((product) => ({ ...product, slug: "prueba" }))})) 
+      
     }
   };
 
@@ -286,8 +297,10 @@ export default function PlaceOrderScreen() {
                   <input type="text" value={shippValue.lastname}
                     onChange={(event) => setShippValue({ ...shippValue, lastname: event.target.value })} />
                   </label>
+
                   <label> Adress:
                   <input type="text" value={shippValue.address}
+
                     onChange={(event) => setShippValue({ ...shippValue, address: event.target.value })} />
                   </label>
                   <label>City:

@@ -34,6 +34,10 @@ const PRODUCT_REVIEW_CREATE_RESET = 'PRODUCT_REVIEW_CREATE_RESET'
 
 const SET_FILTER_STATE = "SET_FILTER_STATE";
 
+/* ===================== LIST STOCK ===================== */
+const SORT_PRODUCTS_ADMIN = "SORT_PRODUCTS_ADMIN" // Ordena los productos.
+
+
 module.exports = {
   LOADING,
   READY,
@@ -61,5 +65,5 @@ module.exports = {
   PRODUCT_CREATE_REQUEST,
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_CREATE_FAIL,
-
+  SORT_PRODUCTS_ADMIN,
 };

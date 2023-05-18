@@ -62,12 +62,12 @@ const OrdersAdmin = () => {
   for (let i = paginationStart; i <= paginationEnd; i++) {
     paginationPages.push(i);
   }
-  console.log(currentOrders);
+  // console.log(currentOrders);
 
   return (
     <div className="TableAdminOrders">
       <div>
-        <h1>My order history</h1>
+        <h1 className="svTitle2">My order history</h1>
       </div>
       <div className="orderTableAdmin">
         <table className="tablaAdmin">
@@ -82,55 +82,48 @@ const OrdersAdmin = () => {
             </tr>
           </thead>
           <tbody>
-            {currentOrders.length === 0 ? (
-              <tr>
-                <td colSpan="6">
-                  <p>
-                    Todavía no tienes órdenes, continúa comprando{" "}
-                    <Link to="/">aquí</Link>.
-                  </p>
-                </td>
-              </tr>
-            ) : (
-              currentOrders.map((order) => (
-                <tr key={order._id}>
-                  <td>
-                  <p className="A"> 
-                    {order.shippingAddress.fullName}
-                    </p>
-                    <hr /> {/* Línea separadora entre compras */}
-                  </td>
-                  <td>
-                    {order.orderItems.map((item) => (
-                      <div key={item._id}>
-                        <p>{item.name}</p>
-                      </div>
-                    ))}
-                    <hr /> {/* Línea separadora entre compras */}
-                  </td>
-                  <td>
-                    {order.orderItems.map((item) => (
-                      <p>usd$ {item.price}</p>
-                    ))}
-                    <hr /> {/* Línea separadora entre compras */}
-                  </td>
-                  <td>
-                    {order.orderItems.map((item) => (
-                      <p>{item.quantity}</p>
-                    ))}
-                    <hr /> {/* Línea separadora entre compras */}
-                  </td>
-                  <td>
-                    usd$ {order.totalPrice}
-                    <hr /> {/* Línea separadora entre compras */}
-                  </td>
-                  <td>{order.isDelivered ? "Delivered" : "Not Delivered"}
-                  <hr /> {/* Línea separadora entre compras */}
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
+  {currentOrders.length === 0 ? (
+    <tr>
+      <td colSpan="6">
+        <p>
+          Todavía no tienes órdenes, continúa comprando{" "}
+          <Link to="/">aquí</Link>.
+        </p>
+      </td>
+    </tr>
+  ) : (
+    currentOrders.map((order, index) => (
+      <React.Fragment key={order._id}>
+        <tr>
+          <td>
+            <p className="A">{order.shippingAddress.fullName}</p>
+          </td>
+          <td className="restriccion">
+            {order.orderItems.slice(0, 4).map((item) => (
+              <div key={item._id}>
+                <p className="productListOrder">{item.name}</p>
+              </div>
+            ))}
+          </td>
+          <td >
+            {order.orderItems.slice(0, 4).map((item) => (
+              <p className="productListOrder">usd$ {item.price}</p>
+            ))}
+          </td>
+          <td>
+            {order.orderItems.slice(0, 4).map((item) => (
+              <p className="productListOrder">{item.quantity}</p>
+            ))}
+          </td>
+          <td>usd$ {order.totalPrice}</td>
+          <td>{order.isDelivered ? "Delivered" : "Not Delivered"}</td>
+        </tr>
+        {index < currentOrders.length - 1 && <tr><td colSpan="6"><hr /></td></tr>}
+      </React.Fragment>
+    ))
+  )}
+</tbody>
+
         </table>
       </div>
       {/* Paginado */}

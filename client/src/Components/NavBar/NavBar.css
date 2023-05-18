@@ -221,3 +221,10 @@ span.userName:hover{
     background-color: #0000 !important;
     color: white !important;
 }
+
+.btnHomeAdmin{
+    font-size: 109%;
+    color: white;
+    margin-right: 2em;
+    text-decoration: none;
+}

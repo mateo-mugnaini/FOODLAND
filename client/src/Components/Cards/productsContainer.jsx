@@ -97,7 +97,7 @@ const ProductsContainer = () => {
       setCart(cart);
       dispatch(updateCart(cart));
       swal({
-        text: "product added to cart!",
+        text: "Product added to cart!",
         icon: "success",
       });
     } else {
@@ -112,7 +112,7 @@ const ProductsContainer = () => {
         ])
       );
       swal({
-        text: "product added to cart!",
+        text: "Product added to cart!",
         icon: "success",
       });
     }
@@ -129,9 +129,13 @@ const ProductsContainer = () => {
     return (
       <div className="productsContainer">
         <div className="select_and_breadcrumb">
+
           <Link to="/">
             <button className="btnHome">BACK TO HOME</button>
+           
           </Link>
+
+
           <div className="breadcrumb">
             <NavLink to="/">Categories</NavLink>
             <p>/</p>
@@ -144,13 +148,13 @@ const ProductsContainer = () => {
             </NavLink>
           </div>
           <select className="selectInput" onChange={handleSorts}>
-            <option value="">Ordenar por</option>
+            <option value="">Sort by</option>
             <option value="asc">A-Z</option>
             <option value="desc">Z-A</option>
-            <option value="higher_price">Mayor precio</option>
-            <option value="lower_price">Menor precio </option>
-            <option value="best_score">Mayor puntuado</option>
-            <option value="worst_score">Menor puntuado </option>
+            <option value="higher_price">Higher price</option>
+            <option value="lower_price">Lower price </option>
+            <option value="best_score">Top rated</option>
+            <option value="worst_score">Less rated </option>
           </select>
         </div>
         <div className="filter_and_products">
@@ -161,7 +165,7 @@ const ProductsContainer = () => {
             <div className="products">
               {display ? (
                 <Loader />
-              ) : Array.isArray(currentProducts) && currentProducts[0].stock ? (
+              ) : Array.isArray(currentProducts) && currentProducts[0]?.stock ? (
                 currentProducts.map((product) => {
                   const id = product["_id"];
                   return (
@@ -182,7 +186,7 @@ const ProductsContainer = () => {
                   );
                 })
               ) : (
-                <p>Sin productos</p>
+                <p>There are no products</p>
               )}
             </div>
             {/* Paginado */}
@@ -235,13 +239,13 @@ const ProductsContainer = () => {
             </NavLink>
           </div>
           <select className="selectInput" onChange={handleSorts}>
-            <option value="">Ordenar por</option>
+            <option value="">Sort by</option>
             <option value="asc">A-Z</option>
             <option value="desc">Z-A</option>
-            <option value="higher_price">Mayor precio</option>
-            <option value="lower_price">Menor precio </option>
-            <option value="best_score">Mayor puntuado</option>
-            <option value="worst_score">Menor puntuado </option>
+            <option value="higher_price">Higher price</option>
+            <option value="lower_price">Lower price </option>
+            <option value="best_score">Top rated</option>
+            <option value="worst_score">Less rated </option>
           </select>
         </div>
         <div className="filter_and_products">

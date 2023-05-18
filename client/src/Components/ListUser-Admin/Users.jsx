@@ -211,11 +211,10 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
   // console.log(users)
 
   return (
-    <div name="containerListUser">
+    <div name="containerListUser" className="containerListUser">
 
-
-        <div name="containerFilters">
-        <h1>List User</h1>
+        <div name="containerFilters" className="containerFilters">
+        <h1 className="svTitle2">List User</h1>
               <label><input name="searchUser" type="text" onChange={handleOnChange } placeholder="Search users" className="searchListUsers"/>
               <button type="submit" onClick={handleSearch} className="searchUser">
                 <img
@@ -225,12 +224,17 @@ const totalUsers = Math.ceil((users?.length || 0) / usersPerPage);
                 /></button></label>
                     <label>
                       <select onChange={handleSelectsearch} className="sortList">
-                        <option value="">Sort by:</option>
-                        <option value="all"> All</option>
+                        <option value="" disabled>Sort by:</option>
                         <option value="NameAsc" >Fullname A-Z</option>
                         <option value="NameDsc" >Fullname Z-A</option>
                         <option value="EmailAsc" >Email A-Z</option>
                         <option value="EmailDsc" >Email Z-A</option>
+                        </select>
+                        </label>
+                        <label>
+                          <select onChange={handleSelectsearch} className="sortList">
+                        <option value="" disabled >Filter by:</option>
+                        <option value="all"> All</option>
                         <option value="Users" >Users</option>
                         <option value="Admin" >Admin</option>
                         <option value="bann">Banned</option>

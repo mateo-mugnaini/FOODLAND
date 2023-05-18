@@ -1,12 +1,22 @@
 import React from "react";
-import "./rating.css"
+import "./RatingFilter.css"
+import { useState } from "react";
 
 function Rating(props) {
-	const { rating, numReviews, caption } = props;
+	const { rating, caption, onClick } = props;
+	const [selectedRating, setSelectedRating] = useState(null);
+
+	const handleRating = (selectedRating) => {
+		setSelectedRating(selectedRating);
+		onClick(selectedRating);
+	  };
 
 	return (
-		<div className="rating">
-			<span >
+		<div className="ratingg">
+			<span
+			className={selectedRating >= 1 ? 'selected' : ''}
+			onClick={() => handleRating(1)}
+			>
 				<i
 					className={
 						rating >= 1
@@ -17,7 +27,10 @@ function Rating(props) {
 					}
 				></i>
 			</span>
-			<span >
+			<span
+			className={selectedRating >= 2 ? 'selected' : ''}
+			onClick={() => handleRating(2)}
+			>
 				<i
 					className={
 						rating >= 2
@@ -28,7 +41,10 @@ function Rating(props) {
 					}
 				></i>
 			</span>
-			<span >
+			<span
+			className={selectedRating >= 3 ? 'selected' : ''}
+			onClick={() => handleRating(3)}
+			>
 				<i
 					className={
 						rating >= 3
@@ -39,7 +55,10 @@ function Rating(props) {
 					}
 				></i>
 			</span>
-			<span >
+			<span
+			className={selectedRating >= 4 ? 'selected' : ''}
+			onClick={() => handleRating(4)}
+			>
 				<i
 					className={
 						rating >= 4
@@ -50,7 +69,10 @@ function Rating(props) {
 					}
 				></i>
 			</span>
-			<span >
+			<span
+			className={selectedRating >= 5 ? 'selected' : ''}
+			onClick={() => handleRating(5)}
+			>
 				<i
 					className={
 						rating >= 5

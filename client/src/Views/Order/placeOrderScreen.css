@@ -1,6 +1,7 @@
 
 .ShippingOrder{
     display: flex;
+    padding: 7%;
 }
 .columna{
     width: -webkit-fill-available;

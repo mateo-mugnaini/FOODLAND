@@ -12,7 +12,7 @@
   object-fit: contain;
 }
 .carrousel div {
-    background-color: #cdcdcd5c;
+  background-color: #cdcdcdfa;
     display: flex;
     align-items: center;
 }

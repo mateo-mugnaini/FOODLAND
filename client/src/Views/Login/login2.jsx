@@ -6,8 +6,9 @@ import img1 from "../../Imgs/LogIn-Registro/Img1.png";
 import img2 from "../../Imgs/LogIn-Registro/Img2.png";
 import { signin } from "../../redux/actions/userActions";
 import Loader from "../../Components/Loader/Loader";
-import MessageBox from "../../Components/Error/messageBox";
+//import MessageBox from "../../Components/Error/messageBox";
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -30,10 +31,13 @@ export default function LogIn() {
   };
 
   useEffect(() => {
+    if(error){
+      Swal.fire(error)
+    }
     if (userInfo) {
       navigate(redirect);
     }
-  }, [userInfo, navigate, redirect]);
+  }, [userInfo, navigate, redirect, error]);
 
   const imgA = img1;
   const imgB = img2;
@@ -50,7 +54,7 @@ export default function LogIn() {
           <h1>Sign In</h1>
         </div>
         {loading && <Loader />}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        {/* {error && <MessageBox variant="danger">{error}</MessageBox>} */}
         <div>
           <label htmlFor="email">Email address</label>
           <input

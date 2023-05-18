@@ -12,14 +12,13 @@ import ListUsers from "../../Components/ListUser-Admin/Users";
 import UserProfile from "../UserProfile/UserProfile";
 import OrdersAdmin from "../../Components/OdersAdmin/OrdersAdmin";
 import { signout } from "../../redux/actions/userActions";
-
+import Chart from "../../Components/Charts/Charts";
 
 const Home = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   /* =================== ESTADOS PARA COMPONENTES ===================*/
   const [selectedButton, setSelectedButton] = useState(""); // Estado para almacenar el botón seleccionado
-  const [showHomeClient, setshowHomeClient] = useState(false); //Estado del Home del user
   const [showStock, setShowStock] = useState(false); //Estado ver el Stock
   const [showCreateProduct, setShowCreateProduct] = useState(false); //Estado para crear producto
   const [showOverview, setShowOverview] = useState(true); // Estado estadisticas
@@ -43,7 +42,6 @@ const Home = () => {
     setShowCreateProduct(false);
     setShowUser(false);
     setShowOverview(false);
-    setshowHomeClient(false);
     setShowProfile(false);
     setShowOrders(false)
   };
@@ -54,7 +52,6 @@ const Home = () => {
     setShowStock(false);
     setShowUser(false);
     setShowOverview(false);
-    setshowHomeClient(false);
     setShowProfile(false);
     setShowOrders(false)
 
@@ -66,7 +63,6 @@ const Home = () => {
     setShowStock(false);
     setShowUser(true);
     setShowOverview(false);
-    setshowHomeClient(false);
     setShowProfile(false);
     setShowOrders(false)
 
@@ -79,25 +75,10 @@ const Home = () => {
     setShowStock(false);
     setShowUser(false);
     setShowOverview(true);
-    setshowHomeClient(false);
     setShowProfile(false);
     setShowOrders(false)
 
   };
-
-  /* =================== VER HOME CLIENTES ===================*/
-  const handleShowHomeClient = () => {
-    setSelectedButton("showHomeClient");
-    setShowCreateProduct(false);
-    setShowStock(false);
-    setShowUser(false);
-    setShowOverview(false);
-    setshowHomeClient(true);
-    setShowProfile(false);
-    setShowOrders(false)
-
-  };
-
   /* =================== VER MI PERFIL ===================*/
   const handleShowProfile = () => {
     setSelectedButton("showHomeClient");
@@ -105,7 +86,6 @@ const Home = () => {
     setShowStock(false);
     setShowUser(false);
     setShowOverview(false);
-    setshowHomeClient(false);
     setShowProfile(true);
     setShowOrders(false)
   };
@@ -116,7 +96,6 @@ const Home = () => {
     setShowStock(false);
     setShowUser(false);
     setShowOverview(false);
-    setshowHomeClient(false);
     setShowProfile(false);
     setShowOrders(true)
   };
@@ -138,80 +117,57 @@ const Home = () => {
             <div className="messageHome">
               <h1>Hi! {userInfo.name}</h1>
             </div>
+            <div className="listAdmContainerGeneral" >
+            <ul className="listAdmContainer">
             {/* =================== BTN OVERVIEW ===================*/}
-            <button
-              className={`btnPagAdm ${
+              <li className={`listAdm ${
                 selectedButton === "ShowOverview" ? "selected" : ""
               }`}
-              onClick={handleShowOverview}
-            >
-              Overview
-            </button>
-            {/* =================== BTN HOME CLIENT ===================*/}
-            <button
-              className={`btnPagAdm ${
-                selectedButton === "showHomeClient" ? "selected" : ""
-              }`}
-              onClick={handleShowHomeClient}
-            >
-              Home Client
-            </button>
+              onClick={handleShowOverview} >Overview</li>
             {/* =================== BTN STOCK ===================*/}
-            <button
-              className={`btnPagAdm ${
+              <li 
+               className={`listAdm ${
                 selectedButton === "showStock" ? "selected" : ""
               }`}
-              onClick={handleShowStock}
-            >
-              Stock
-            </button>
+              onClick={handleShowStock}> Stock </li>
             {/* =================== BTN CREATE PRODUCT ===================*/}
-            <button
-              className={`btnPagAdm ${
+              <li className={`listAdm ${
                 selectedButton === "showCreateProduct" ? "selected" : ""
               }`}
               onClick={handleShowCreateProduct}
-            >
-              Create Product
-            </button>
+            >  Create Product </li>
             {/* =================== BTN USERS ===================*/}
-            <button
-              className={`btnPagAdm ${
+              <li className={`listAdm ${
                 selectedButton === "showUser" ? "selected" : ""
               }`}
-              onClick={handleShowUser}
-            >
-              Users
-            </button>
+              onClick={handleShowUser}> Users </li>
             {/* =================== BTN MY ORDERS ===================*/}
-            <button
-              className={`btnPagAdm ${
+            <li
+              className={`listAdm ${
                 selectedButton === "showProfile" ? "selected" : ""
               }`}
-              onClick={handleShowOrders}
-            >
-              My orders
-            </button>
+              onClick={handleShowOrders}> My orders</li>
+
             {/* =================== BTN MYPROFILE ===================*/}
-            <button
-              className={`btnPagAdm ${
+            <li
+              className={`listAdm ${
                 selectedButton === "showProfile" ? "selected" : ""
               }`}
-              onClick={handleShowProfile}
-            >
+              onClick={handleShowProfile}>
               My profile
-            </button>
+            </li>
             {/* =================== BTN LOGOUT ===================*/}
-            <button onClick={signOutHandler} className="btnPagAdmOut">
+            <li onClick={signOutHandler} className="listAdm2">
               {" "}
               Log out
-            </button>
+            </li>
+            </ul>
+            </div>
           </div>
-          {showHomeClient && <CategoryContainer />} {/* VER HOME CLIENTE */}
           {showStock && <StockViews />} {/* VER STOCK */}
           {showCreateProduct && <CreateProduct />} {/* VER CREATE PRODUCT */}
           {showUser && <ListUsers/>} {/* VER USERS */}
-          {showOverview && <CreateProduct />} {/* VER OVERVIEW */}
+          {showOverview &&  <Chart/> } {/* VER OVERVIEW */}
           {showProfile && <UserProfile />} {/* VER MYPROFILE */}
           {showOrders && <OrdersAdmin />} {/* VER MIS VENTAS */}
         </div>

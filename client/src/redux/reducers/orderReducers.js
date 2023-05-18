@@ -7,6 +7,7 @@ import {
   GET_ORDERS_FAIL,
   GET_ORDERS_SUCCESS,
   GET_ORDERS_REQUEST,
+  SEND_EMAIL
 } from "../constants/orderConstants";
 
 const initialState = {
@@ -28,6 +29,10 @@ const initialState = {
 
 const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SEND_EMAIL:
+      return {
+        ...state
+      }
     case TOTAL_ORDER:
       return {
         ...state,
