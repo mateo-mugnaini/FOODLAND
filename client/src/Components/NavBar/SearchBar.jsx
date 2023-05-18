@@ -10,10 +10,16 @@ import { useNavigate } from "react-router-dom";
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
   const AllProducts = useSelector(state => state.products.AllProducts.products);
-
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const HandlerOnChange = (e) =>{
+      if(e.target.value === "") 
+      {setSearchValue(e.target.value) 
+        navigate("/")}
+      else setSearchValue(e.target.value)
+  }
 
   const handleSearch = () => {
     
@@ -46,7 +52,7 @@ const SearchBar = () => {
       <input
         type="text"
         value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+        onChange={(e) => HandlerOnChange(e) }
         className="Search"
         placeholder="Search products ..."
       ></input>

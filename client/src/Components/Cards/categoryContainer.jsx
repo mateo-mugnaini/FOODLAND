@@ -25,6 +25,7 @@ const CategoryContainer = () => {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
+  console.log(categories)
   const localCategories = categories.sort((a, b) => {
     if (a._id < b._id) return -1;
     if (a._id > b._id) return 1;
@@ -59,12 +60,12 @@ const CategoryContainer = () => {
           </NavLink>
         )}
       <div className="CardContainerCat">
-        <NavLink to={"/categories/allProducts"}>
+        {/* <NavLink to={"/categories/allProducts"}>
           <div className="CategoryCard">
             <h3>All products</h3>
             <img src={oferta1} alt="imagen de categoria" />
           </div>
-        </NavLink>
+        </NavLink> */}
         {localCategories.map((e) => (
           <NavLink key={e._id} to={`/categories/${e._id}`}>
             <CategoryCard key={e._id} name={e._id} image={e.imageCategory} />
