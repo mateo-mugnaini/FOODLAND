@@ -8,7 +8,7 @@ import {
 import axios from "axios";
 import swal from "sweetalert";
 
-const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
+const URL = "https://foodland-production.up.railway.app";
 
 // //  ============ Actualizo el total de la orden ======================
 export const total_order = (order) => {
@@ -61,7 +61,6 @@ export const createOrder = (order, token) => async (dispatch) => {
     if (data.message === "New Order Created") {
       dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
       window.localStorage.removeItem("Carrito");
-      
     }
   } catch (error) {
     dispatch({
@@ -76,10 +75,10 @@ export const createOrder = (order, token) => async (dispatch) => {
 
 
 export const orderPay = () => async (dispatch) => {
-  dispatch({type: ORDER_COMPLETE_PAY});
+  dispatch({ type: ORDER_COMPLETE_PAY });
   swal({
     title: "Successful purchase!",
-    text:`The proof of purchase has been sent to your email, with it you can check the delivery status.`,
+    text: `The proof of purchase has been sent to your email, with it you can check the delivery status.`,
     icon: "success",
     confirmButtonText: "OK",
     showClass: {
@@ -88,7 +87,7 @@ export const orderPay = () => async (dispatch) => {
     hideClass: {
       popup: "animate__animated animate__fadeOutUp",
     },
-  })
+  });
 };
 
 export const getOrders = (order) => async (dispatch, getState) => {
@@ -104,7 +103,6 @@ export const getOrders = (order) => async (dispatch, getState) => {
       type: action.GET_ORDERS_SUCCESS,
       payload: response.data,
     });
-
   } catch (error) {
     dispatch({
       type: action.GET_ORDERS_FAIL,

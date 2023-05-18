@@ -2,7 +2,8 @@ import axios from "axios";
 
 import * as action from "../constants/productConstants"; // Import para traer todas las actions-types
 
-const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
+// const URL = process.env.REACT_APP_URL ?? "http://localhost:5000";
+const URL = "https://foodland-production.up.railway.app";
 
 /* ========================*  LOADER *======================== */
 export function loading() {
@@ -24,6 +25,7 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/api/products`);
+      console.log(response);
       if (response.data)
         dispatch({
           type: action.GET_ALL_PRODUCTS,
@@ -213,38 +215,36 @@ export const updateProduct = (product, _id) => async (dispatch, getState) => {
   }
 };
 
-
 //==============CREATE REVIEWS===================================//
-export const createReview =
-	(productId, review,token) => async (dispatch) => {
-		// console.log("id", productId)
-		// console.log("review", review)
+export const createReview = (productId, review, token) => async (dispatch) => {
+  // console.log("id", productId)
+  // console.log("review", review)
 
-    dispatch({ type: action.PRODUCT_REVIEW_CREATE_REQUEST });
-		// const {
-		// 	userSignin: { userInfo },
-		// } = getState();
-    // console.log("token",userInfo.token)
-		try {
-			const { data } = await axios.post(
-				`${URL}/api/products/${productId}/reviews`,
-				review,
-				{
-					headers: { Authorization: `Bearer ${token}` },
-				}
-			);
-			dispatch({
-				type: action.PRODUCT_REVIEW_CREATE_SUCCESS,
-				payload: data.review,
-			});
-		} catch (error) {
-			const message =
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message;
-			dispatch({ type: action.PRODUCT_REVIEW_CREATE_FAIL, payload: message });
-		}
-	};
+  dispatch({ type: action.PRODUCT_REVIEW_CREATE_REQUEST });
+  // const {
+  // 	userSignin: { userInfo },
+  // } = getState();
+  // console.log("token",userInfo.token)
+  try {
+    const { data } = await axios.post(
+      `${URL}/api/products/${productId}/reviews`,
+      review,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    dispatch({
+      type: action.PRODUCT_REVIEW_CREATE_SUCCESS,
+      payload: data.review,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: action.PRODUCT_REVIEW_CREATE_FAIL, payload: message });
+  }
+};
 //========================* CREATE PRODUCT *==============//
 
 export const createProduct = (product) => async (dispatch, getState) => {
@@ -278,6 +278,7 @@ export const createProduct = (product) => async (dispatch, getState) => {
 export const sort_products = ({value, productList}) =>{
   let productsort;
   
+
   if (value === "NameAsc") {
     productsort = productList.sort(function (a, b) {
       if (a.name < b.name) {
@@ -290,6 +291,7 @@ export const sort_products = ({value, productList}) =>{
     });
   }
   else if (value === "NameDsc") {
+
     productsort = productList.sort(function (a, b) {
       if (a.name < b.name) {
         return 1;
@@ -329,4 +331,5 @@ export const sort_products = ({value, productList}) =>{
     type: action.SORT_PRODUCTS_ADMIN,
     payload: productsort,
     }
+
 };
