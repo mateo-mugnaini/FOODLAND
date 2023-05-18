@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&family=Yanone+Kaffeesatz:wght@300;400;700&display=swap ');
 
 .formProductContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 80%;
-    margin: 0 auto;
-    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.247);
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 78%;
+  margin: 0 auto;
+  box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 60px;
+  background-color: #ededed;
   }
   
   .formCreate {
@@ -39,7 +40,7 @@
   .input {
     padding: 10px;
     font-size: 18px;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 1px solid #ccc;
     width: 300px;
     max-width: 100%;
@@ -103,4 +104,33 @@
   text-align: center;
   margin-top: -10px;
   margin-bottom: -20px;
+}
+
+.labelContainer label{
+  color:green;
+  font-weight: 500;
+}
+.labelContainer1 .input{
+  width: 85%;
+}
+
+.labelContainer1 label{
+width: 55%;
+color:green;
+font-weight: 500;
+}
+
+.labelContainer1{
+  display: flex;
+  width: 300px;
+}
+
+.errorFormCP1{
+  color: red;
+    font-size: 12px;
+    bottom: -70px;
+    position: relative;
+    width: inherit;
+    left: -95px;
+    height: fit-content;
 }

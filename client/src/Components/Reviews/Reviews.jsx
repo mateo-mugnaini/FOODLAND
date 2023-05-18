@@ -7,6 +7,7 @@ import Loader from "../Loader/Loader";
 import { PRODUCT_REVIEW_CREATE_RESET } from "../../redux/constants/productConstants";
 import { createReview } from "../../redux/actions/productActions";
 import "./Reviews.css"
+import Swal from "sweetalert2";
 
 function Reviews() {
   // const params = useParams();
@@ -29,10 +30,11 @@ function Reviews() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-  	if (successReviewCreate) {
-  		window.alert("Review Submitted Successfully");
-  		dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
-  	}
+    if (successReviewCreate) {
+      Swal.fire("Review Submitted Successfully"); 
+      dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
+      window.location.reload()
+    }
   }, [dispatch, successReviewCreate]);
 
   const submitHandler = (e) => {
@@ -42,9 +44,9 @@ function Reviews() {
         createReview(product._id, { rating, comment, name: userInfo.name },userInfo.token)
       );
       setRating("");
-  		setComment("");
+      setComment("");
     } else {
-      alert("Please enter comment and rating");
+      Swal.fire("Please enter comment and rating"); 
     }
   };
 

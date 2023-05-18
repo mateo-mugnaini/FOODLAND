@@ -166,13 +166,19 @@
             box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
             border-radius: 10px;
             text-decoration: none;
+            height: 360px;
         }
     
     .product h3 {
         color: #484848;
         font-weight: 500;
         margin-bottom: 0;
+        height: 49px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: initial;
         }
+
     .product p {    
         color: red;
         margin-bottom: 4%;
@@ -204,6 +210,7 @@
     
     .product img {
         width: 130px;
+        height: 127px;
     }
     
     /*

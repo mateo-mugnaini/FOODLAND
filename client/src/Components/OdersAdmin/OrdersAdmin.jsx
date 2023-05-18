@@ -82,7 +82,6 @@ const OrdersAdmin = () => {
             </tr>
           </thead>
           <tbody>
-Update2-ProfileUser/admin
   {currentOrders.length === 0 ? (
     <tr>
       <td colSpan="6">
