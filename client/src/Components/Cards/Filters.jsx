@@ -1,9 +1,10 @@
 import "./cards.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, getByCategory, setProduct } from "../../redux/actions";
-import { useParams } from "react-router-dom";
-import Rating from "../Rating/rating";
+import {  getAllProducts, setProduct } from "../../redux/actions";
+import Swal from 'sweetalert2';
+
+import Rating from "./RatingFilter"
 
 const Filters = () => {
  
@@ -23,8 +24,8 @@ const Filters = () => {
     } else if (name === "max") {
       setMaxPrice(value);
     }
-    console.log("minPrice:", minPrice);
-    console.log("maxPrice:", maxPrice);
+    // console.log("minPrice:", minPrice);
+    // console.log("maxPrice:", maxPrice);
   };
 
 
@@ -33,10 +34,12 @@ const Filters = () => {
 
   const handleRating = (selectedRating) => {
     setRating(selectedRating);
-    console.log("example", selectedRating)
+    // console.log("example", selectedRating)
   };
   
-
+  const handlerReset = () =>{
+    window.location.reload()
+  }
   
   const handleSubmit = () => {
     const filteredProducts = products.filter((product) => {
@@ -44,11 +47,20 @@ const Filters = () => {
         product.price >= parseInt(minPrice) &&
         product.price <= parseInt(maxPrice) &&
         (rating === null || product.rating === rating)
-      )
+      );
     });
-    console.log(filteredProducts);
-    dispatch(setProduct(filteredProducts)); 
-    
+  
+    if (filteredProducts.length === 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'No products found',
+        text: 'There are no products with the selected rating.',
+        confirmButtonText: 'OK',
+      })
+      return
+    }
+  
+    dispatch(setProduct(filteredProducts));
   };
 
   return (
@@ -71,17 +83,15 @@ const Filters = () => {
           name="max"
         />
       </div>
-      <button type="submit" className="butonFilter" onClick={handleSubmit}>
-        Filter
-      </button>
-    </fieldset>
-  
-    <fieldset>
       <label>Filter by rating:</label>
-      <Rating onClick={handleRating} /> 
+      <Rating onClick={handleRating} /> <br></br>
+      <label>
       <button type="submit" className="butonFilter" onClick={handleSubmit}>
         Filter
       </button>
+      <button type="submit" onClick={handlerReset} className="ResetFilter">Reset</button>     
+      </label>
+
     </fieldset>
   </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./placeOrderScreen.css";
 import useLocalStore from "../../hooks/useLocalStore";
-import { createOrder } from "../../redux/actions/orderActions";
+import { createOrder, sendEmail } from "../../redux/actions/orderActions";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import ButtonPayPal from "../../Components/PayPalButton/PaypalButton";
@@ -16,7 +16,7 @@ export default function PlaceOrderScreen() {
   const totalstate = useLocalStore("resumen",[])
   const { userInfo } = useSelector((state) => state.userSignin);
 
-  // console.log({ userInfo });
+ // console.log({ userInfo });
   const {
     orders: { totalPrice: amount, active },
   } = useSelector((state) => state.order);
@@ -191,6 +191,10 @@ export default function PlaceOrderScreen() {
           userInfo.token
         )
       );
+      // este dispatch hay que ubicarlo en el boton de paypal
+      dispatch(sendEmail({name:userInfo.name, email:userInfo.email, totalPrice:totalPrice, shippingAddress:shippingAddress.address,
+      paymentMethod:paymentMethod, orderItems:cart.map((product) => ({ ...product, slug: "prueba" }))})) 
+      
     }
   };
 

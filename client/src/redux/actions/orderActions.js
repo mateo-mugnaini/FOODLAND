@@ -32,6 +32,24 @@ export const post_order = (order, token) => async () => {
   }
 };
 
+//============ POST EMAIL ============== //
+
+export const sendEmail = (usuario) => {
+  return async (dispatch) => {
+    console.log(usuario)
+    try {
+      const response = await axios.post(`${URL}/api/orders/email`, usuario);
+      console.log(response.data);
+
+      dispatch({
+        type: action.SEND_EMAIL,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 //==================== CREATE ORDER ================//
 
 export const createOrder = (order, token) => async (dispatch) => {
@@ -55,6 +73,7 @@ export const createOrder = (order, token) => async (dispatch) => {
     });
   }
 };
+
 
 export const orderPay = () => async (dispatch) => {
   dispatch({type: ORDER_COMPLETE_PAY});

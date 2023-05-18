@@ -156,7 +156,7 @@
         gap: 30px;
     
     }
-    
+
     
     /* ---- PRODUCTS CARDS ----- */
     
@@ -225,6 +225,7 @@
     fieldset{
         margin-top: 4%;
         border-radius: 5px;
+        border-radius: 15px;
         background-color: rgb(173 173 173 / 30%);
         box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
         border: none;
@@ -250,7 +251,6 @@
         margin-left: 2%;
     }
     .Range{
-        
         border-radius: 5px;
     }
     
@@ -265,7 +265,18 @@
     .butonFilter:hover{
         background-color: #87a983;
     }
-    
+
+    .ResetFilter{
+        background-color: #504d4d;
+        color: white;
+        border-radius: 20px;
+        border: 2px solid #504d4d;
+        box-shadow: 3px 4px 12px rgb(0 0 0 / 25%);
+    }
+    .ResetFilter:hover{
+        background-color:#898686;
+    }
+   
     /* ------- PAGINADO ------------ */
     
     .btnPag{ 
