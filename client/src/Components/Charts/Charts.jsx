@@ -262,3 +262,4 @@ if (nuevoArray.length > 0) {
 
 
 export default Chart;
+
