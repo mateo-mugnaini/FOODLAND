@@ -121,10 +121,18 @@
     color: rgba(0, 0, 0, 0.87);
 }
 
+
 .sliderMasVendidos .slick-slider.slick-initialized{
     margin-top: 2%;
 }
 
 .sliderMasVendidos .slick-slider .slick-track, .slick-slider .slick-list {margin-left: 3%; margin-bottom: 0%;}
+
+
+.slick-slider.slick-initialized{
+    margin-top: 2%;
+}
+
+.slick-slider .slick-track, .slick-slider .slick-list {margin-left: 3%; margin-bottom: 2%;}
 
 
