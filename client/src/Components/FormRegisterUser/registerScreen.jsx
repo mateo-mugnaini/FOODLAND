@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { register } from "../../redux/actions/userActions";
 import Loader from "../Loader/Loader";
-import MessageBox from "../Error/messageBox";
-import Swal from 'sweetalert2'
-import legalPopup from "../../Texts/legalPopup.txt"
+//import MessageBox from "../Error/messageBox";
+import Swal from "sweetalert2";
+import legalPopup from "../../Texts/legalPopup.txt";
 import "./registerScreen.css";
 
 function RegisterScreen(props) {
@@ -36,22 +36,24 @@ function RegisterScreen(props) {
 
 	const showLegalInfo = () => {
 		fetch(legalPopup)
-		  .then((response) => response.text())
-		  .then((data) => {
-			Swal.fire({
-			  title: 'Supermarket Purchase Agreement',
-			  text: data,
-			  confirmButtonText: 'OK'
-			})
-		  });
-	
-	  }
+			.then((response) => response.text())
+			.then((data) => {
+				Swal.fire({
+					title: "Supermarket Purchase Agreement",
+					text: data,
+					confirmButtonText: "OK",
+				});
+			});
+	};
 
 	useEffect(() => {
+		if (error) {
+			Swal.fire(error);
+		}
 		if (userInfo) {
 			navigate(redirect);
 		}
-	}, [userInfo, navigate, redirect]);
+	}, [userInfo, navigate, redirect, error]);
 
 	return (
 		<div className="formRegisterContainer">
@@ -61,7 +63,7 @@ function RegisterScreen(props) {
 				</div>
 
 				{loading && <Loader></Loader>}
-				{error && <MessageBox variant="danger">{error}</MessageBox>}
+				{/* {error && <MessageBox variant="danger">{error}</MessageBox>} */}
 
 				<div className="labelCreateUser">
 					<label htmlFor="name" className="labelCreateUser">
@@ -112,7 +114,14 @@ function RegisterScreen(props) {
 					></input>
 				</div>
 				<div>
-					<label><input type="checkbox" onClick={()=>showLegalInfo()} required></input>accept the terms and conditions</label>
+					<label>
+						<input
+							type="checkbox"
+							onClick={() => showLegalInfo()}
+							required
+						></input>
+						accept the terms and conditions
+					</label>
 				</div>
 				<div>
 					<label />
