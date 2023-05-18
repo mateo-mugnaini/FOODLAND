@@ -37,6 +37,7 @@ const Stock = () => {
     } else {
       swal({
         title: "Product not found",
+
         icon: "warning",
         confirmButtonText: "OK",
         showClass: {
@@ -109,7 +110,9 @@ const Stock = () => {
 
   return (
     <div className="ContainerStockList">
+
       <div name="search&Sort&Filters" className="searchFilters">
+
         <label>
           <input
             name="searchUser"

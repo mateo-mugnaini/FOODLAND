@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./paypal.css";
 import { deleteCart } from "../../redux/actions/cartActions";
-const URL = process.env.REACT_APP_URL ?? "http://localhost:5000/api/orders/";
+const URL = "https://foodland-production.up.railway.app/api/orders/";
 // This values are the props in the UI
 // const amount = "2";
 // const currency = "USD";
