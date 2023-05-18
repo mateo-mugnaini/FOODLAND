@@ -29,13 +29,18 @@ function Reviews() {
 
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     if (successReviewCreate) {
       Swal.fire("Review Submitted Successfully"); 
       dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
       window.location.reload()
     }
-  }, [dispatch, successReviewCreate]);
+    if (errorReviewCreate){
+      Swal.fire(errorReviewCreate)
+      dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });      
+    }
+  }, [dispatch, successReviewCreate, errorReviewCreate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -67,7 +72,7 @@ function Reviews() {
         ))}
         </ul>
         <li className="NotSign">
-          {userInfo?._id ? (
+          { userInfo?._id ?  (
             <form className="form" onSubmit={submitHandler}>
               <div>
                 <h2>Write a customer review</h2>
@@ -102,10 +107,7 @@ function Reviews() {
                 </button>
               </div>
               <div>
-                {loadingReviewCreate && <Loader/>}
-                {errorReviewCreate && (
-                  <MessageBox variant="danger">{errorReviewCreate}</MessageBox>
-                )}
+                {loadingReviewCreate && <Loader/>}                
               </div>
             </form>
           ) : (
