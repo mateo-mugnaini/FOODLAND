@@ -13,9 +13,6 @@ import { useSelector, useDispatch } from "react-redux";
 import oferta1 from "../../Imgs/oferta1.jpeg";
 import { Link } from "react-router-dom";
 
-import Chart from "../Charts/Charts";
-
-import { Link } from "react-router-dom";
 
 
 
@@ -64,8 +61,7 @@ const CategoryContainer = () => {
             <img src={oferta1} alt="imagen de categoria" />
           </div>
         </NavLink> */}
-        {localCategories.map((e) => (
-        </NavLink>
+
         {localCategories?.map((e) => (
           <NavLink key={e._id} to={`/categories/${e._id}`}>
             <CategoryCard key={e._id} name={e._id} image={e.imageCategory} />

@@ -73,11 +73,11 @@ const Payment = ({ total} ) => {
       <hr></hr>
       <h2>Total: <span>${total.toFixed(2)}</span></h2>
       <h2>Taxes 15%<span>${(total * 0.15).toFixed(2)}</span></h2>
-      <h3>Coupon:</h3>
+      <h3 style={{marginBottom:"6px"}}>Coupon:</h3>
       <input type="text" placeholder="Add discount coupon" onChange={handleCoupon}></input>
       <p>{errorMessage}</p>
-      <h2>Total Order: <span>${totalCont.totalOrder.toFixed(2)}</span></h2>
-      <Link to="/placeorder"><button onClick={handleCartToOrder}>Buy now</button></Link>
+      <h3>Total Order: <span>${totalCont.totalOrder.toFixed(2)}</span></h3>
+      <Link to="/placeorder"><button style={{marginTop:"0px"}} onClick={handleCartToOrder}>Buy now</button></Link>
     </div>
   );
 };

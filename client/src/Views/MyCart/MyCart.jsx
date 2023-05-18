@@ -72,7 +72,7 @@ function MyCart() {
           <CheckOut total={total}/>
       </div>
       <div name="Container Button back" className="ButonReturn">
-        <p>Did you forget something?...</p>
+        <p>Did you forget something?</p>
         <button className="butonBack">
           <Link to="/">Keep buying</Link>
         </button>

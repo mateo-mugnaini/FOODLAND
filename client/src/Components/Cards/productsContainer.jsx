@@ -130,7 +130,6 @@ const ProductsContainer = () => {
     return (
       <div className="productsContainer">
         <div className="select_and_breadcrumb">
-          </Link>
           <div className="breadcrumb">
             <NavLink to="/">Categories</NavLink>
             <p>/</p>

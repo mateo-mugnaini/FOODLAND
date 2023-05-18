@@ -7,15 +7,17 @@
     flex-direction: column;
     width: 25%;
     height: fit-content;
+    align-items: center;
 }
 
 .ContainerPayment h1{
     background-color: black;
-    color:white;
-    margin:0px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    padding: 27px;
+    color: white;
+    font-size: 26px;
+    padding: 18px;
+    border-radius: 7px;
+    margin-top: 0%;
+    margin-bottom: 4%;
 }
 
 .ContainerPayment hr{
@@ -28,7 +30,16 @@
     display: flex;
     justify-content: space-between;
     margin: 7px 50px 0px 50px;
+    font-weight: 400;
+    font-size:23px;
+    margin: 2%;
     }
+
+    .ContainerPayment h3{
+        
+        font-size:24px
+        }
+    
 
 .ContainerPayment h2 span{
 color: green;
@@ -45,11 +56,16 @@ color: green;
     cursor: pointer;
     margin: inherit;
     padding: 20px;
-    font-size: 25px;
-    border-radius: 20px;
+    font-size: 22px;
+    border-radius: 15px;
     border: 2px solid rgb(29, 121, 29);
     width: 224px;
     align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 18px;
+    margin-bottom: 6%;
 
 }
 
