@@ -128,37 +128,30 @@ const ProductsContainer = () => {
 
   if (userInfo?.isAdmin) {
     return (
-      <div className="productsContainer">
+      <><div className="productsContainer">
         <div className="select_and_breadcrumb">
-
-          <Link to="/">
-            <button className="btnHome">BACK TO HOME</button>
-           
-          </Link>
-
-
-          <div className="breadcrumb">
-            <NavLink to="/">Categories</NavLink>
-            <p>/</p>
-            <NavLink
-              active="true"
-              onClick={() => dispatch(getByCategory(categoriesId))}
-              to={`/categories/${categoriesId}`}
-            >
-              {categoriesId}
-            </NavLink>
-          </div>
-          <select className="selectInput" onChange={handleSorts}>
-            <option value="">Sort by</option>
-            <option value="asc">A-Z</option>
-            <option value="desc">Z-A</option>
-            <option value="higher_price">Higher price</option>
-            <option value="lower_price">Lower price </option>
-            <option value="best_score">Top rated</option>
-            <option value="worst_score">Less rated </option>
-          </select>
+        </Link>
+        <div className="breadcrumb">
+          <NavLink to="/">Categories</NavLink>
+          <p>/</p>
+          <NavLink
+            active="true"
+            onClick={() => dispatch(getByCategory(categoriesId))}
+            to={`/categories/${categoriesId}`}
+          >
+            {categoriesId}
+          </NavLink>
         </div>
-        <div className="filter_and_products">
+        <select className="selectInput" onChange={handleSorts}>
+          <option value="">Sort by</option>
+          <option value="asc">A-Z</option>
+          <option value="desc">Z-A</option>
+          <option value="higher_price">Higher price</option>
+          <option value="lower_price">Lower price </option>
+          <option value="best_score">Top rated</option>
+          <option value="worst_score">Less rated </option>
+        </select>
+      </div><div className="filter_and_products">
           <div className="sidebar">
             <Filters />
           </div>
@@ -182,8 +175,7 @@ const ProductsContainer = () => {
                       slug={product.slug}
                       stock={product.stock}
                       active={product.active}
-                      funtionOnchange={AddProductoToCart}
-                    />
+                      funtionOnchange={AddProductoToCart} />
                   );
                 })
               ) : (
@@ -221,7 +213,7 @@ const ProductsContainer = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div></>
       </div>
     );
   } else

@@ -29,6 +29,10 @@
   border-radius: 22px 0px 0px 22px;
   justify-content: center;
 }
+
+.profileCard .left h1,h3 {
+    display: flex;
+}
 .left p {font-size: 13px; padding: 5px;  border-radius: 4px; margin-top: 5%;border: 1px solid rgba(155, 114, 80, 0.541)}
 
 .profileCard .left img {
@@ -126,6 +130,7 @@
     color:green;
     font-weight: 500;
     vertical-align: super;
+    margin-right: 2%;
 
 }
 
@@ -135,19 +140,20 @@
     box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.336);
     padding:0 3% 0 3%;
     display: flex;
-    align-self: center;
+    align-self: flex-start;
     margin-right: 27%;
 }
 
 .ContainerShipping{
-    display: grid;
-    place-items: flex-end;
-    margin: auto 12%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .ContainerShipping label{
     font-size: 20px;
     color:green;
+    margin-bottom: 1%;
 }
 
 .ContainerShipping label input{

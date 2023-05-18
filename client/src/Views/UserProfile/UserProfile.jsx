@@ -64,8 +64,8 @@ function Profile() {
       <div className='profileCard'>
 
         <div className='left'>
-          <h1><span>Name:</span> {userInfo?.name} </h1>
-          <h3><span>Email: </span> {userInfo.email}</h3>
+          <h1><span>Name: </span>{userInfo?.name} </h1>
+          <h3><span>Email: </span>{userInfo.email}</h3>
           <label><input disabled value={userInfo._id}></input></label><br/>
           {!isEditing ? (
             <button className="butonEdit" onClick={handleEditProfile}>Change Password</button>

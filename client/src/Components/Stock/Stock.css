@@ -122,8 +122,11 @@
 
     .svContainer{
         width: 90%;
+        margin-top: 2%;
+
     }
 
     .searchFilters{
         width: 120%;
     }
+    .searchFilters label {margin: 1%;}
