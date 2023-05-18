@@ -74,7 +74,7 @@ function MyCart() {
       <div name="Container Button back" className="ButonReturn">
         <p>Did you forget something?...</p>
         <button className="butonBack">
-          <Link to="/">keep buying</Link>
+          <Link to="/">Keep buying</Link>
         </button>
 
       </div>

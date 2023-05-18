@@ -103,8 +103,8 @@ const UserOrders = () => {
               <tr>
                 <td colSpan="6">
                   <p>
-                    Todavía no tienes órdenes, continúa comprando{" "}
-                    <Link to="/">aquí</Link>.
+                    You haven't bought anything yet, continue buying{" "}
+                    <Link to="/">Here</Link>.
                   </p>
                 </td>
               </tr>
