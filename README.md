@@ -1,5 +1,7 @@
 # Bienvenidos a FoodLand 🛒!!
 
+WEB: https://foodlandmarket.vercel.app/ (actualmente se encuentra fuera de servicio)
+
 FoodLand es un ecommerce de un supermercado, por el momento cuenta con versiones WEB.
 Desarrollamos este proyecto junto a mis compañeros de grupo para la evaluación final del bootcamp Henry.
 
