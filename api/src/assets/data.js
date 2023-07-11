@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 
+
 const data = {
   users: [
     {
@@ -839,8 +840,7 @@ const data = {
       description: "Pepsi Cola Soda Pop, 12 oz Cans, 24 Pack",
       image:
         "https://i5.walmartimages.com/asr/d95d7098-6f69-4c53-8ca6-1884f9d4f931.6948722d416c7de1f5ee17dc8c8a2a6b.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
-      imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      imageCategory: "https://tinypic.host/image/2mqBv",
       stock: 420,
       isDeleted: false,
       comments: [],
@@ -858,7 +858,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/a551d4e6-b4d5-4bd3-aa8b-852e9fbedbe9.b0141eabb6f296a0fa9591c595da9207.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 320,
       isDeleted: false,
       comments: [],
@@ -876,7 +876,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/a22848d7-950e-4420-98ed-263ec24d7414.df7b17f74f0ba8a87e8b7fad8b48a875.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 220,
       isDeleted: false,
       comments: [],
@@ -894,7 +894,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/c0de7c16-4fa6-470e-a718-8ae5106e3f48.f9062a2625d993466c892f28accc347b.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 120,
       isDeleted: false,
       comments: [],
@@ -912,7 +912,7 @@ const data = {
       image:
         "https://jumboargentina.vtexassets.com/arquivos/ids/770379-800-auto?v=638126985947370000&width=800&height=auto&aspect=true",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 520,
       isDeleted: false,
       comments: [],
@@ -931,7 +931,7 @@ const data = {
       image:
         "https://jumboargentina.vtexassets.com/arquivos/ids/770869-800-auto?v=638128606141830000&width=800&height=auto&aspect=true",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+        "https://tinypic.host/image/2mqBv",
       stock: 620,
       isDeleted: false,
       comments: [],
@@ -949,7 +949,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/439b18f2-73ee-47a3-b10a-69af727648a2.e307aec509603f579fc909f36dc06246.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 20,
       isDeleted: false,
       comments: [],
@@ -968,7 +968,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/ac505fd7-19b4-48ec-b141-991302e50d0d.ba4809db45d1a2ec670f04761f729c31.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 320,
       isDeleted: false,
       comments: [],
@@ -987,7 +987,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/da081097-79e5-4c85-bacf-0d5ab685e8ad.b2356a6b64950986278058142cf098da.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 20,
       isDeleted: false,
       comments: [],
@@ -1005,7 +1005,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/3c855216-9335-4231-991a-30269b4e7f85.0c0de8b5d888f09ce53206a3015571eb.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 20,
       isDeleted: false,
       comments: [],
@@ -1024,7 +1024,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/9f0f07f8-6e04-4ae0-8263-45431d53d70f.db003c3ecf170be2b638cc259ffe4a4c.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 20,
       isDeleted: false,
       comments: [],
@@ -1042,7 +1042,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/1f6f4549-6a91-4577-86bf-18bbbd8671d9.71611842da4b01eaaf325475f94f1edc.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 20,
       isDeleted: false,
       comments: [],
@@ -1060,7 +1060,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/d0e70ef6-7598-4724-a5a0-2f6d494aacdd.eaec65eb0ce6c7331f2c049da3e54241.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 20,
       isDeleted: false,
       comments: [],
@@ -1079,7 +1079,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/e72cc87e-9035-45be-b723-16b705f6e4d6.674ce2716cb3494d88ebd3bdfd04d497.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 20,
       isDeleted: false,
       comments: [],
@@ -1097,7 +1097,7 @@ const data = {
       image:
         "https://i5.walmartimages.com/asr/4c0a2b47-1fc7-4fb8-93d1-d3c24a3e0e30.f7db7145b0ebd37576c5da27c729d241.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:
-        "https://bpm.sandiegoses.com/pages/img/blog/16390815601603889152.png",
+      "https://tinypic.host/image/2mqBv",
       stock: 20,
       isDeleted: false,
       comments: [],
@@ -2600,7 +2600,7 @@ const data = {
       slug: "BAKER DEPOT 17 oz Plastic Tumblers",
       price: 18.2,
       description:
-        "BAKER DEPOT 17 oz Plastic Tumblers Drinking Glasses Clear Acrylic Cups Wine Glassware Beverage Drinkware Tumbler for Poolside Party",
+        "BAKER DEPOT 17 oz Plastic Tumblers Drinking Glasses Clear Acrylic Cups Wine Glassware Drinkware Tumbler for Poolside Party",
       image:
         "https://i5.walmartimages.com/asr/bebac04f-1a79-4101-a0d1-7be759f5034f.66f92853868c30790609db3c91ee2239.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       imageCategory:

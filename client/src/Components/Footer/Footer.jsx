@@ -3,6 +3,11 @@ import { Link } from "react-router-dom"
 import logofoot from "../../Imgs/LogosSVG/logo-color.png"
 //IMPORT STYLES:
 import "./Footer.css"
+//IMPORT ICONS:
+import IG from "../../Imgs/Icons/LogoIG.png"
+import Hen from "../../Imgs/Icons/logoOG.png"
+import FB from "../../Imgs/Icons/LogoFB.png"
+import WA from "../../Imgs/Icons/LogoWa.png"
 //IMPORT :
 const linked = "https://cdn.icon-icons.com/icons2/2415/PNG/512/linkedin_original_logo_icon_146435.png"
 
@@ -73,10 +78,10 @@ const Footer = () =>{
                     </form>  */}
 
                     <h3>¡Find us on our social networks!</h3>
-                    <img name="iconFooterSocial" className="iconFooterSocial" alt="FBIcon" src="https://tinypic.host/images/2023/04/27/facebook.png"/>
-                    <img name="iconFooterSocial" className="iconFooterSocial" alt="IGICon" src="https://tinypic.host/images/2023/04/27/instagram.png"/>
-                    <img name="iconFooterSocial" className="iconFooterSocial" alt="WAICon" src="https://tinypic.host/images/2023/04/27/whatsapp.png"/>
-                    <a href="https://www.soyhenry.com/"><img src="https://tinypic.host/images/2023/04/26/logoOG.png" name="LogoHenry" alt="LogoHenry" className="LogoHenry"></img></a>
+                    <img name="iconFooterSocial" className="iconFooterSocial" alt="FBIcon" src={FB}/>
+                    <img name="iconFooterSocial" className="iconFooterSocial" alt="IGICon" src={IG}/>
+                    <img name="iconFooterSocial" className="iconFooterSocial" alt="WAICon" src={WA}/>
+                    <a href="https://www.soyhenry.com/"><img src={Hen} name="LogoHenry" alt="LogoHenry" className="LogoHenry"></img></a>
                 </div>
             </div>
         </div>

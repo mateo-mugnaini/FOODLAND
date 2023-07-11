@@ -135,10 +135,10 @@ userRouter.post(
         <p>Hola ${req.body.name},</p>
         <p>¡Gracias por registrarte en nuestro supermercado! Tu cuenta ha sido creada exitosamente con el mail ${req.body.email}.</p>
         <p>Estamos emocionados de tenerte como parte de nuestra comunidad. Esperamos que disfrutes de nuestras ofertas y servicios.</p>
-		<br/>
+		<br></br>
 		<h2> Aprovechá este código de descuento, para tu proxima compra:</h2> 
 		<h1>  => "Foodland"</h1>
-		<br/>
+		<br></br>
         <p>¡Bienvenido y feliz compra!</p>
         <p>Equipo del Supermercado</p>
         

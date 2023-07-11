@@ -3,6 +3,7 @@ import "./CartItem.css";
 import { Link } from "react-router-dom";
 import useLocalStore from "../../hooks/useLocalStore";
 import Swal from "sweetalert2";
+import Delete from "../../Imgs/Icons/butonDelete.png"
 
 function CartItem({ product, updateQuantity, removeItem, updateCartTotal, total }) {
   const [quantity, setQuantity] = useState(product.quantity || 1);
@@ -61,7 +62,7 @@ function CartItem({ product, updateQuantity, removeItem, updateCartTotal, total 
         <h2>${(product.price * quantity).toFixed(2)}</h2>
       </li>
       <li className="cart_del_col">
-        <img src="https://tinypic.host/images/2023/05/05/butonDelete.png" alt="deleteButton" onClick={removeItemHandler} />
+        <img src={Delete} alt="deleteButton" onClick={removeItemHandler} />
       </li>
     </ul>
   );

@@ -6,11 +6,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProduct } from "../../redux/actions/productActions";
 import { useNavigate } from "react-router-dom";
+import Lupa from "../../Imgs/Icons/lupa2.png";
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
   const AllProducts = useSelector(state => state.products.AllProducts.products);
-
+  const IconLupa = Lupa;
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ const SearchBar = () => {
       ></input>
       <button onClick={handleSearch} className="butonSearch">
         <img
-          src="https://tinypic.host/images/2023/04/27/lupa2.png"
+          src={IconLupa}
           alt="iconLupa"
           className="Lup"
         />

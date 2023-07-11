@@ -6,6 +6,8 @@ import logo from "../../Imgs/LogosSVG/logo-no-background.png";
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Car from "../../Imgs/Icons/carrito.png"
+import User from "../../Imgs/Icons/People-removebg-preview.png"
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -16,6 +18,8 @@ const NavBar = () => {
 
   const cart = useSelector(({ cart: { cart: cartState } }) => cartState);
   const logoSvg = logo;
+  const iconCar= Car;
+  const iconUser = User;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -47,7 +51,7 @@ const NavBar = () => {
           {!userInfo?.isAdmin && (
             <li>
               <img
-                src="https://tinypic.host/images/2023/04/27/carrito-removebg-preview.png"
+                src={iconCar}
                 alt="iconsWidget"
                 className="iconsNav1"
               />
@@ -86,7 +90,7 @@ const NavBar = () => {
           )}
       <li>
         <img
-          src="https://tinypic.host/images/2023/04/27/People-removebg-preview.png"
+          src={iconUser}
           alt="iconsLogin"
           className="iconsNav2"
         />
